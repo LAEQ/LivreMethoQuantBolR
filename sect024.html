@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.4 Notion de distribution | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
+  <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.4 Notion de distribution | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://laeq.github.io/LivreStatistique_website/" />
+  <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
+  <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.4 Notion de distribution | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  
+  <meta name="twitter:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="twitter:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
+
+<meta name="author" content="Philippe Apparicio et Jérémy Gelb" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sect023.html"/>
+<link rel="next" href="sect025.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/d3-4.13.0/d3.min.js"></script>
+<script src="libs/d3-tip-0.8.1/index.js"></script>
+<link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
+<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/quizlib.min.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d'R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
+<li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
+<li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
+<li class="chapter" data-level="" data-path="sect003B.html"><a href="sect003B.html"><i class="fa fa-check"></i>Comment utiliser les données du livre pour reproduire les exemples?</a></li>
+<li class="chapter" data-level="" data-path="sect004.html"><a href="sect004.html"><i class="fa fa-check"></i>Structure du livre</a></li>
+<li class="chapter" data-level="" data-path="sect005.html"><a href="sect005.html"><i class="fa fa-check"></i>Pourquoi faut-il programmer en sciences sociales?</a></li>
+<li class="chapter" data-level="" data-path="sect006.html"><a href="sect006.html"><i class="fa fa-check"></i>Remerciements</a></li>
+<li class="chapter" data-level="" data-path="sect007.html"><a href="sect007.html"><i class="fa fa-check"></i>Dédicace toute spéciale à Cargo et Ambrée</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
+<li class="part"><span><b>I Découverte de R</b></span></li>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a><ul>
+<li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
+<li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
+<li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
+<li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
+<li class="chapter" data-level="1.3.4" data-path="sect013.html"><a href="sect013.html#sect0134"><i class="fa fa-check"></i><b>1.3.4</b> Principaux types de données</a></li>
+<li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
+<li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="sect016.html"><a href="sect016.html"><i class="fa fa-check"></i><b>1.5</b> Code R bien structuré</a></li>
+<li class="chapter" data-level="1.6" data-path="sect017.html"><a href="sect017.html"><i class="fa fa-check"></i><b>1.6</b> Enregistrement des résultats</a></li>
+<li class="chapter" data-level="1.7" data-path="sect018.html"><a href="sect018.html"><i class="fa fa-check"></i><b>1.7</b> Session de travail</a></li>
+<li class="chapter" data-level="1.8" data-path="sect019.html"><a href="sect019.html"><i class="fa fa-check"></i><b>1.8</b> Conclusion et ressources pertinentes</a></li>
+<li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a><ul>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
+<li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
+<li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
+<li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
+<li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
+<li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
+<li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
+<li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
+<li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
+<li class="chapter" data-level="2.5.4" data-path="sect025.html"><a href="sect025.html#sect0254"><i class="fa fa-check"></i><b>2.5.4</b> Paramètres de forme</a></li>
+<li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
+<li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
+<li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a><ul>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
+<li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
+<li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
+<li class="chapter" data-level="3.1.4" data-path="sect031.html"><a href="sect031.html#utilisation-des-thèmes"><i class="fa fa-check"></i><b>3.1.4</b> Utilisation des thèmes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
+<li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
+<li class="chapter" data-level="3.2.4" data-path="sect032.html"><a href="sect032.html#sect0324"><i class="fa fa-check"></i><b>3.2.4</b> Graphique en ligne</a></li>
+<li class="chapter" data-level="3.2.5" data-path="sect032.html"><a href="sect032.html#sect0325"><i class="fa fa-check"></i><b>3.2.5</b> Boîte à moustaches</a></li>
+<li class="chapter" data-level="3.2.6" data-path="sect032.html"><a href="sect032.html#sect0326"><i class="fa fa-check"></i><b>3.2.6</b> Graphique en violon</a></li>
+<li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
+<li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
+<li class="chapter" data-level="3.3.4" data-path="sect033.html"><a href="sect033.html#sect0334"><i class="fa fa-check"></i><b>3.3.4</b> Carte proportionnelle</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="sect034.html"><a href="sect034.html"><i class="fa fa-check"></i><b>3.4</b> Cartes</a></li>
+<li class="chapter" data-level="3.5" data-path="sect035.html"><a href="sect035.html"><i class="fa fa-check"></i><b>3.5</b> Exportation des graphiques</a></li>
+<li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
+</ul></li>
+<li class="part"><span><b>III Analyses bivariées</b></span></li>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a><ul>
+<li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sect043.html"><a href="sect043.html#sect0434"><i class="fa fa-check"></i><b>4.3.4</b> Corrélations robustes (<em>Biweight midcorrelation</em>, <em>Percentage bend correlation</em> et la corrélation <em>pi</em> de Shepherd)</a></li>
+<li class="chapter" data-level="4.3.5" data-path="sect043.html"><a href="sect043.html#sect0435"><i class="fa fa-check"></i><b>4.3.5</b> Significativité des coefficients de corrélation</a></li>
+<li class="chapter" data-level="4.3.6" data-path="sect043.html"><a href="sect043.html#sect0436"><i class="fa fa-check"></i><b>4.3.6</b> Corrélation partielle</a></li>
+<li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
+<li class="chapter" data-level="4.4.4" data-path="sect044.html"><a href="sect044.html#sect0444"><i class="fa fa-check"></i><b>4.4.4</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.4.5" data-path="sect044.html"><a href="sect044.html#sect0445"><i class="fa fa-check"></i><b>4.4.5</b> Comment rapporter une régression linéaire simple</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a><ul>
+<li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
+<li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
+<li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
+<li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a><ul>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
+<li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
+<li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="6.2.4" data-path="sect062.html"><a href="sect062.html#sect0624"><i class="fa fa-check"></i><b>6.2.4</b> Comment rapporter les résultats d’une ANOVA et du test de Kruskal-Wallis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sect063.html"><a href="sect063.html"><i class="fa fa-check"></i><b>6.3</b> Conclusion sur la troisième partie</a></li>
+<li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>IV Modèles de régression</b></span></li>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
+<li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
+<li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
+<li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
+<li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
+<li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
+<li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
+<li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
+<li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
+<li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
+<li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
+<li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
+<li class="chapter" data-level="7.7.4" data-path="sect077.html"><a href="sect077.html#sect0774"><i class="fa fa-check"></i><b>7.7.4</b> Graphiques pour les effets marginaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a><ul>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
+<li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
+<li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
+<li class="chapter" data-level="8.1.4" data-path="sect081.html"><a href="sect081.html#sect0814"><i class="fa fa-check"></i><b>8.1.4</b> Résidus et déviance</a></li>
+<li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
+<li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
+<li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
+<li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
+<li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
+<li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
+<li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
+<li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
+<li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
+<li class="chapter" data-level="8.4.4" data-path="sect085.html"><a href="sect085.html#sect0854"><i class="fa fa-check"></i><b>8.4.4</b> Modèle GLM avec une distribution bêta</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
+<li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a><ul>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
+<li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
+<li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
+<li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
+<li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
+<li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a><ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
+<li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
+<li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
+<li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
+<li class="chapter" data-level="10.4.4" data-path="sect104.html"><a href="sect104.html#sect10414"><i class="fa fa-check"></i><b>10.4.4</b> Modèle complet avec une interaction</a></li>
+<li class="chapter" data-level="10.4.5" data-path="sect104.html"><a href="sect104.html#sect1045"><i class="fa fa-check"></i><b>10.4.5</b> Comparaison des quatre modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a><ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
+<li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
+<li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
+<li class="chapter" data-level="11.1.4" data-path="sect111.html"><a href="sect111.html#sect1114"><i class="fa fa-check"></i><b>11.1.4</b> Non linéarité avec des <em>splines</em></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
+<li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
+<li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
+<li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
+<li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="sect116.html"><a href="sect116.html"><i class="fa fa-check"></i><b>11.6</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="11.7" data-path="sect117.html"><a href="sect117.html"><i class="fa fa-check"></i><b>11.7</b> GAMM</a></li>
+<li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a><ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
+<li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
+<li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
+<li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a><ul>
+<li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
+<li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
+<li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
+<li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
+<li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
+<li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
+<li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
+<li class="chapter" data-level="13.4.4" data-path="sect134.html"><a href="sect134.html#sect1344"><i class="fa fa-check"></i><b>13.4.4</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="13.4.5" data-path="sect134.html"><a href="sect134.html#sect1346"><i class="fa fa-check"></i><b>13.4.5</b> Extensions en logique floue : <em>c-means</em>, <em>c-medoids</em></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
+<li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>14</b> Annexes</a><ul>
+<li class="chapter" data-level="14.1" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14.1</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="14.2" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>14.2</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="14.3" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>14.3</b> Table des valeurs critiques de <em>t</em></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d’R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sect024" class="section level2">
+<h2><span class="header-section-number">2.4</span> Notion de distribution</h2>
+<div class="bloc_objectif">
+<p>Dans cette section, nous abordons un concept central de la statistique : les distributions. Prenez le temps de lire cette section à tête reposée et assurez-vous de bien comprendre chaque idée avant de passer à la suivante. N’hésitez pas à y revenir plusieurs fois si nécessaire, car la compréhension de ces concepts est essentielle pour utiliser adéquatement les méthodes que nous abordons dans ce livre.</p>
+</div>
+<div id="définition-générale" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Définition générale</h3>
+<p>En probabilité, nous nous intéressons aux résultats d’expériences. Du point de vue de la théorie des probabilités, lancer un dé, mesurer la pollution atmosphérique, compter le nombre de collisions à une intersection, et demander à une personne d’évaluer son sentiment de sécurité sur une échelle de 1 à 10 sont autant d’expériences pouvant produire des résultats.</p>
+<p><strong>Une distribution est un modèle mathématique permettant d’associer pour chaque résultat possible d’une expérience la probabilité d’obtenir ce résultat</strong>. D’un point de vue pratique, si nous disposons de la distribution régissant l’expérience : « mesurer la concentration d’ozone à Montréal à 13 h en été », nous pouvons calculer la probabilité de mesurer une valeur inférieure à 15 μg/m<sup>3</sup>.</p>
+<div class="bloc_attention">
+<p><strong>Loi de probabilité et distribution</strong></p>
+<p>L’utilisation que nous faisons ici du terme « distribution » est un anglicisme (éhonté diront certaines personnes). En effet, en français, la définition précédente est plus proche du terme « loi de probabilité ». Cependant, la quasi-totalité de la documentation sur R est en anglais et, dans la pratique, ces deux termes ont tendance à se confondre. Nous avons donc fait le choix de poursuivre avec ce terme dans le reste du livre.</p>
+</div>
+<p>Une distribution est toujours définie dans un intervalle en dehors duquel elle n’est définie; les valeurs dans cet intervalle sont appelées <strong>l’espace d’échantillonnage</strong>. Il s’agit donc des valeurs possibles que peut produire l’expérience. La somme des probabilités de l’ensemble des valeurs de l’espace d’échantillonnage est 1 (100 %). Intuitivement, cela signifie que si nous réalisons l’expérience, nous obtenons nécessairement un résultat, et que la somme des probabilités est répartie entre tous les résultats possibles de l’expérience. En langage mathématique, nous disons que l’intégrale de la fonction de densité d’une distribution est 1 dans son intervalle de définition.</p>
+<p>Prenons un exemple concret avec l’expérience suivante : tirer à pile ou face avec une pièce de monnaie non truquée. Si l’on souhaite décrire la probabilité d’obtenir pile ou face, nous pouvons utiliser une distribution qui aura comme espace d’échantillonnage [pile; face] et ces deux valeurs auront chacune comme probabilité 0,5. Il est facile d’étendre cet exemple au cas d’un dé à six faces. La distribution de probabilité décrivant l’expérience « lancer le dé » a pour espace d’échantillonnage [1,2,3,4,5,6], chacune de ces valeurs étant associée à la probabilité de 1/6.</p>
+<p>Chacune des deux expériences précédentes est régie par une distribution appartenant à la famille des distributions <strong>discrètes</strong>. Elles servent à représenter des expériences dont le nombre de valeurs possibles est fini. Par opposition, la seconde famille de distributions regroupe les distributions <strong>continues</strong>, décrivant des expériences dont le nombre de résultats possibles est en principe infini. Par exemple, mesurer la taille d’une personne adulte sélectionnée au hasard peut produire en principe un nombre infini de valeurs. Les distributions sont utiles pour décrire les résultats potentiels d’une expérience. Reprenons notre exemple du dé. Nous savons que chaque face a une chance sur six d’être tirée au hasard. Nous pouvons représenter cette distribution avec un graphique (figure <a href="sect024.html#fig:fig251">2.3</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig251"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig251-1.png" alt="Distribution théorique d'un lancer de dé" width="50%" />
+<p class="caption">
+Figure 2.3: Distribution théorique d’un lancer de dé
+</p>
+</div>
+<p>Nous avons donc sous les yeux un modèle statistique décrivant le comportement attendu d’un dé, soit sa distribution <strong>théorique</strong>. Cependant, si nous effectuons dix fois l’expérience (nous collectons donc un échantillon), nous obtiendrons une distribution différente de cette distribution théorique (figure <a href="sect024.html#fig:fig252">2.4</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig252"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig252-1.png" alt="Distribution empirique d'un lancer de dé (n=10)" width="50%" />
+<p class="caption">
+Figure 2.4: Distribution empirique d’un lancer de dé (n=10)
+</p>
+</div>
+<p>Il s’agit de la distribution <strong>empirique</strong>. Chaque échantillon aura sa propre distribution empirique. Cependant, comme le prédit la loi des grands nombres : si une expérience est répétée un grand nombre de fois, la probabilité empirique d’un résultat se rapproche de la probabilité théorique à mesure que le nombre de répétitions augmente. Du point de vue de la théorie des probabilités, chaque échantillon correspond à un ensemble de tirages aléatoires effectués à partir de la distribution théorique du phénomène étudié.</p>
+<div style="page-break-after: always;"></div>
+<p>Pour nous en convaincre, collectons trois échantillons de lancer de dé de respectivement 30, 100 et 1000 observations (figure <a href="sect024.html#fig:fig253">2.5</a>). Comme le montre la figure <a href="sect024.html#fig:fig252">2.4</a>, nous connaissons la distribution théorique qui régit cette expérience.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig253"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig253-1.png" alt="Distribution empirique d'un lancer de dé" width="70%" />
+<p class="caption">
+Figure 2.5: Distribution empirique d’un lancer de dé
+</p>
+</div>
+<p>Nous constatons bien qu’au fur et à mesure que la taille de l’échantillon augmente, nous tendons vers la distribution théorique.</p>
+<p>Cette relation a été étudiée pour la première fois au XVIII<sup>e</sup> siècle par le mathématicien Daniel Bernoulli, qui a montré que la probabilité que la moyenne d’une distribution empirique soit éloignée de la moyenne de la distribution théorique dont elle est tirée diminuait lorsque nous augmentons le nombre des tirages et donc la taille de l’échantillon. Un autre mathématicien, Siméon-Denis Poisson, a fait connaître cette relation sous le nom de « loi des grands nombres ».</p>
+<p>Les distributions théoriques sont utilisées pour modéliser des phénomènes réels et sont à la base de presque tous les tests statistiques d’inférence fréquentiste ou bayésienne. En pratique, la question que nous nous posons le plus souvent est : quelle distribution théorique peut le mieux décrire le phénomène empirique à l’étude? Pour répondre à cette question, deux approches sont possibles :</p>
+<ul>
+<li>Considérant la littérature existante sur le sujet, les connaissances accumulées et la nature de la variable étudiée, sélectionner des distributions théoriques pouvant vraisemblablement correspondre au phénomène mesuré.</li>
+<li>Comparer visuellement ou à l’aide de tests statistiques la distribution empirique de la variable et diverses distributions théoriques pour trouver la plus adaptée.</li>
+</ul>
+<p>Idéalement, le choix d’une distribution théorique devrait reposer sur ces deux méthodes combinées.</p>
+</div>
+<div id="anatomie-dune-distribution" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Anatomie d’une distribution</h3>
+<p>Une distribution (ou loi de probabilité) est une fonction. Il est possible de la représenter à l’aide d’une formule mathématique (appelée <strong>fonction de masse</strong> pour les distributions discrètes et <strong>fonction de densité</strong> pour les distributions continues) associant chaque résultat possible de l’expérience régie par la distribution à la probabilité d’observer ce résultat. Prenons un premier exemple concret avec la distribution théorique associée au lancer de pièce de monnaie : la distribution de <strong>Bernoulli</strong>. Sa formule est la suivante :</p>
+
+<p><span class="math display" id="eq:Bernoulli">\[\begin{equation} f(x ; p)=\left\{\begin{array}{ll}
+q=1-p &amp; \text { si } x=0 \\
+p &amp; \text { si } x=1
+\end{array}\right.
+\tag{2.1}
+\end{equation}\]</span>
+</p>
+<p>avec <em>p</em> la probabilité d’obtenir <span class="math inline">\(x = 1\)</span> (pile), et <span class="math inline">\(1 – p\)</span> la probabilité d’avoir <span class="math inline">\(x = 0\)</span> (face). La distribution de Bernoulli ne dépend que d’un paramètre : <em>p</em>. Avec différentes valeurs de <em>p</em>, nous pouvons obtenir différentes formes pour la distribution de Bernoulli. Si <em>p</em> = 1/2, la distribution de Bernoulli décrit parfaitement l’expérience : obtenir pile à un lancer de pièce de monnaie. Si <em>p</em> = 1/6, elle décrit alors l’expérience : obtenir 4 (tout comme n’importe quelle valeur de 1 à 6) à un lancer de dé. Pour un exemple plus appliqué, la distribution de Bernoulli est utilisée en analyse spatiale pour étudier la concentration d’accidents de la route ou de crimes en milieu urbain. À chaque endroit du territoire, il est possible de calculer la probabilité qu’un tel évènement ait lieu ou non en modélisant les données observées au moyen de la loi de Bernoulli.
+La distribution continue la plus simple à décrire est certainement la distribution <strong>uniforme</strong>. Il s’agit d’une distribution un peu spéciale puisqu’elle attribue la même probabilité à toutes ses valeurs dans son espace d’échantillonnage. Elle est définie sur l’intervalle <span class="math inline">\([-\infty; +\infty]\)</span> et a la fonction de densité suivante :</p>
+
+<p><span class="math display" id="eq:Uniforme">\[\begin{equation} f(x ; \mathrm{a} ; \mathrm{b})=\left\{\begin{array}{cc}
+\frac{1}{a-b} &amp; \text { si } a \geq x \geq b \\
+0 &amp; \text { sinon }
+\end{array}\right.
+\tag{2.2}
+\end{equation}\]</span>
+</p>
+<p>La fonction de densité de la distribution uniforme a donc deux paramètres, <em>a</em> et <em>b</em>, représentant respectivement les valeurs maximale et minimale au-delà desquelles les valeurs ont une probabilité 0 d’être obtenues. Pour avoir une meilleure intuition de ce que décrit une fonction de densité, il est intéressant de la représenter avec un graphique (figure <a href="sect024.html#fig:fig254">2.6</a>). Notez que sur ce graphique, l’axe des ordonnées n’indique pas précisément la probabilité associée à chaque valeur, car celle-ci est infinitésimale. Il sert uniquement à représenter la valeur de la fonction de densité de la distribution pour chaque valeur de x.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig254"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig254-1.png" alt="Distributions uniformes continues" width="60%" />
+<p class="caption">
+Figure 2.6: Distributions uniformes continues
+</p>
+</div>
+<p>Nous observons clairement que toutes les valeurs de <em>x</em> entre <em>a</em> et <em>b</em> ont la même probabilité pour chacune de trois distributions uniformes présentées dans le graphique. Plus l’étendue est grande (<span class="math inline">\(a-b\)</span>), plus l’espace d’échantillonnage est grand et plus la probabilité totale est répartie dans cet espace. Cette distribution est donc idéale pour décrire un phénomène pour lequel chaque valeur a autant de chance de se produire qu’une autre. Prenons pour exemple un cas fictif avec un jeu de hasard qui vous proposerait la situation suivante : en tirant sur la manette d’une machine à sous, un nombre est tiré aléatoirement entre -60 et +50. Si le nombre est négatif, vous perdez de l’argent et inversement si le nombre est positif. Nous pouvons représenter cette situation avec une distribution uniforme continue et l’utiliser pour calculer quelques informations essentielles :</p>
+<ol style="list-style-type: decimal">
+<li>Selon cette distribution, quelle est la probabilité de gagner de l’argent lors d’un tirage (x &gt; 0)?</li>
+<li>Quelle est la probabilité de perdre de l’argent (x &lt; 0)?</li>
+<li>Si je perds moins de 30 $ au premier tirage, quelle est la probabilité que j’ai de récupérer au moins ma mise au second tirage (x &gt; 30)?</li>
+</ol>
+<p>Il est assez facile de calculer ces probabilités en utilisant la fonction <code>punif</code> dans R. Concrètement, cela permet de calculer l’intégrale de la fonction de masse sur un intervalle donné.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="sect024.html#cb226-1"></a><span class="co"># Probabilité d&#39;obtenir une valeur supérieure ou égale à 0</span></span>
+<span id="cb226-2"><a href="sect024.html#cb226-2"></a><span class="kw">punif</span>(<span class="dv">0</span>,<span class="dt">min =</span> <span class="dv">-60</span>, <span class="dt">max =</span> <span class="dv">50</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5454545</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="sect024.html#cb228-1"></a><span class="co"># Probabilité d&#39;obtenir une valeur inférieure à 0</span></span>
+<span id="cb228-2"><a href="sect024.html#cb228-2"></a><span class="kw">punif</span>(<span class="dv">0</span>,<span class="dt">min =</span> <span class="dv">-60</span>, <span class="dt">max =</span> <span class="dv">50</span>, <span class="dt">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.4545455</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="sect024.html#cb230-1"></a><span class="co"># Probabilité d&#39;obtenir une valeur supérieure à 30</span></span>
+<span id="cb230-2"><a href="sect024.html#cb230-2"></a><span class="kw">punif</span>(<span class="dv">30</span>, <span class="dt">min =</span> <span class="dv">-60</span>, <span class="dt">max =</span> <span class="dv">50</span>,<span class="dt">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.1818182</code></pre>
+<p>Les paramètres permettent donc d’ajuster la fonction de masse ou de densité d’une distribution afin de lui permettre de prendre des formes différentes. Certains paramètres changent la localisation de la distribution (la déplacer vers la droite ou la gauche de l’axe des X), d’autres changent son degré de dispersion (distribution pointue ou aplatie) ou encore sa forme (symétrie). Les différents paramètres d’une distribution correspondent donc à sa carte d’identité et donnent une idée précise sur sa nature.</p>
+<div class="bloc_aller_loin">
+<p><strong>Fonction de répartition, de survie et d’intensité</strong></p>
+<p>Si les fonctions de densité ou de masse d’une distribution sont le plus souvent utilisée pour décrire une distribution, d’autres types de fonctions peuvent également être employées et disposent de propriétés intéressantes.</p>
+<ol style="list-style-type: decimal">
+<li>La fonction de répartition : il s’agit d’une fonction décrivant le cumul de probabilités d’une distribution. Cette fonction a un minimum de zéro qui est obtenu pour la plus petite valeur de l’espace d’échantillonnage de la distribution, et un maximum d’un pour la plus grande valeur de ce même espace. Formellement, la fonction de répartition (<span class="math inline">\(F\)</span>) est l’intégrale de la fonction de densité (<span class="math inline">\(f\)</span>).</li>
+</ol>
+<p><span class="math display">\[F(x) = \int_{-\infty}^{x}f(u)du\]</span>
+2. La fonction de survie : soit l’inverse additif de la fonction de répartition (<span class="math inline">\(R\)</span>)</p>
+<p><span class="math display">\[R(x) = 1-F(x)\]</span>
+3. La fonction de d’intensité, soit le quotient de la fonction de densité et de la fonction de survie (<span class="math inline">\(D\)</span>).
+<span class="math display">\[D(x) = \frac{f(x)}{D(x)}\]</span>
+Ces fonctions jouent notamment un rôle central dans la modélisation des phénomènes qui régissent la survenue des événements, par exemple la mort, les accidents de la route ou les bris d’équipement.</p>
+</div>
+</div>
+<div id="principales-distributions" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Principales distributions</h3>
+<p>Il existe un très grand nombre de distributions théoriques et parmi elles, de nombreuses sont en fait des cas spéciaux d’autres distributions. Pour un petit aperçu du « bestiaire », vous pouvez faire un saut à la page <a href="http://www.math.wm.edu/~leemis/chart/UDR/UDR.html" target="_blank"><em>Univariate Distribution Relationships</em></a>, qui liste près de 80 distributions.</p>
+<p>Nous nous concentrons ici sur une sélection de dix-huit distributions très répandues en sciences sociales. La figure <a href="sect024.html#fig:figdistribs">2.7</a> présente graphiquement leurs fonctions de masse et de densité présentées dans cette section. Notez que ces graphiques correspondent tous à une forme possible de chaque distribution. En modifiant leurs paramètres, il est possible de produire une figure très différente. Les distributions discrètes sont représentées avec des graphiques en barre, et les distributions continues avec des graphiques de densité.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:figdistribs"></span>
+<img src="images/distributions/all_distributions.png" alt="Dix-huit distributions essentielles, figure inspirée de Sean (2018)" width="95%" />
+<p class="caption">
+Figure 2.7: Dix-huit distributions essentielles, figure inspirée de <span class="citation">Sean (<a href="#ref-SeanOwendist" role="doc-biblioref">2018</a>)</span>
+</p>
+</div>
+<div id="distribution-uniforme-discrète" class="section level4">
+<h4><span class="header-section-number">2.4.3.1</span> Distribution uniforme discrète</h4>
+<p>Nous avons déjà abordé cette distribution dans les exemples précédents. Elle permet de décrire un phénomène dont tous les résultats possibles ont exactement la même probabilité de se produire. L’exemple classique est bien sûr un lancer de dé.</p>
+</div>
+<div id="distribution-de-bernoulli" class="section level4">
+<h4><span class="header-section-number">2.4.3.2</span> Distribution de Bernoulli</h4>
+<p>La distribution de Bernoulli permet de décrire une expérience pour laquelle deux résultats sont possibles. Son espace d’échantillonnage est donc <span class="math inline">\([0; 1]\)</span>. Sa fonction de masse est la suivante :</p>
+
+<p><span class="math display" id="eq:BernoulliB">\[\begin{equation} f(x ; p)=\left\{\begin{array}{ll}
+q=1-p &amp; \text { si } x=0 \\
+p &amp; \text { si } x=1
+\end{array}\right.
+\tag{2.3}
+\end{equation}\]</span>
+</p>
+<p>avec <em>p</em> la probabilité d’obtenir <span class="math inline">\(x = 1\)</span> (réussite) et donc <span class="math inline">\(1 – p\)</span> la probabilité d’avoir <span class="math inline">\(x = 0\)</span> (échec). La distribution de Bernoulli ne dépend que d’un paramètre : <em>p</em>, contrôlant la probabilité de réussite de l’expérience. Notez que si <span class="math inline">\(p = 1/2\)</span>, alors la distribution de Bernoulli est également une distribution uniforme. Un exemple d’application de la distribution de Bernoulli en études urbaines est la modélisation de la survie d’un ou d’une cycliste (1 pour survie, 0 pour décès) lors d’une collision avec un véhicule motorisé, selon une vitesse donnée.</p>
+</div>
+<div id="distribution-binomiale" class="section level4">
+<h4><span class="header-section-number">2.4.3.3</span> Distribution binomiale</h4>
+<p>La distribution binomiale est utilisée pour caractériser la somme de variables aléatoires (expériences) suivant chacune une distribution de Bernoulli. Un exemple simple est l’accumulation des lancers d’une pièce de monnaie. Si nous comptons le nombre de fois où nous obtenons pile, cette expérience est décrite par une distribution binomiale. Son espace d’échantillonnage est donc <span class="math inline">\([0; +\infty[\)</span> (limité aux nombres entiers). Sa fonction de masse est la suivante :</p>
+
+<p><span class="math display" id="eq:Binomial">\[\begin{equation} 
+    f(x ; n )=\binom{n}{x}p^x(1-p)^{n-x}
+\tag{2.4}
+\end{equation}\]</span>
+</p>
+<p>avec <em>x</em> le nombre de tirages réussis sur <em>n</em> essais avec une probabilité <em>p</em> de réussite à chaque tirage (figure <a href="sect024.html#fig:fig256">2.8</a>). Pour reprendre l’exemple précédent concernant les accidents de la route, une distribution binomiale permettrait de représenter la distribution du nombre de cyclistes ayant survécu sur dix personnes à vélo impliquées dans un accident avec une voiture à une intersection.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig256"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig256-1.png" alt="Distribution binomiale" width="95%" />
+<p class="caption">
+Figure 2.8: Distribution binomiale
+</p>
+</div>
+</div>
+<div id="distribution-géométrique" class="section level4">
+<h4><span class="header-section-number">2.4.3.4</span> Distribution géométrique</h4>
+<p>La distribution géométrique permet de représenter le nombre de tirages qu’il faut faire avec une distribution de Bernoulli avant d’obtenir une réussite. Par exemple, avec un lancer de dé, l’idée serait de compter le nombre de lancers nécessaires avant de tomber sur un 6. Son espace d’échantillonnage est donc <span class="math inline">\([1; +\infty[\)</span> (limité aux nombres entiers). Sa distribution de masse est la suivante :</p>
+
+<p><span class="math display" id="eq:geometrique">\[\begin{equation} f(x; p)= (1-p)^xp
+\tag{2.5}
+\end{equation}\]</span>
+</p>
+<p>avec <em>x</em> le nombre de tentatives avant d’obtenir une réussite, <span class="math inline">\(f(x)\)</span> la probabilité que le premier succès n’arrive qu’après <em>x</em> tentatives et <em>p</em> la probabilité de réussite à chaque tentative (figure <a href="sect024.html#fig:fig257">2.9</a>). Cette distribution est notamment utilisée en marketing pour modéliser le nombre d’appels nécessaires avant de réussir une vente.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig257"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig257-1.png" alt="Distribution géométrique" width="95%" />
+<p class="caption">
+Figure 2.9: Distribution géométrique
+</p>
+</div>
+</div>
+<div id="distribution-binomiale-négative" class="section level4">
+<h4><span class="header-section-number">2.4.3.5</span> Distribution binomiale négative</h4>
+<p>La distribution binomiale négative est proche de la distribution géométrique. Elle permet de représenter le nombre de tentatives nécessaires afin d’obtenir un nombre <em>n</em> de réussites <span class="math inline">\([1; +\infty[\)</span> (limité aux nombres entiers positifs). Sa formule est la suivante :</p>
+
+<p><span class="math display" id="eq:binomialnegative">\[\begin{equation} f(x; n; p)=\left(\begin{array}{c}
+x+n-1 \\
+n
+\end{array}\right) p^{n}(1-p)^{x}
+\tag{2.6}
+\end{equation}\]</span>
+</p>
+<p>avec <em>x</em> le nombre de tentatives avant d’obtenir <em>n</em> réussites et <em>p</em> la probabilité d’obtenir une réussite à chaque tentative (figure <a href="sect024.html#fig:fig258">2.10</a>). Cette distribution pourrait être utilisée pour modéliser le nombre de questionnaires <em>x</em> à envoyer pour une enquête pour obtenir au moins <em>n</em> réponses, sachant que la probabilité d’une réponse est <em>p</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig258"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig258-1.png" alt="Distribution binomiale négative" width="95%" />
+<p class="caption">
+Figure 2.10: Distribution binomiale négative
+</p>
+</div>
+</div>
+<div id="distribution-de-poisson" class="section level4">
+<h4><span class="header-section-number">2.4.3.6</span> Distribution de Poisson</h4>
+<p>La distribution de Poisson est utilisée pour modéliser des comptages. Son espace d’échantillonnage est donc <span class="math inline">\([0; +\infty[\)</span> (limité aux nombres entiers positifs). Par exemple, il est possible de compter à une intersection le nombre de collisions entre des automobilistes et des cyclistes sur une période donnée. Cet exemple devrait vous faire penser à la distribution binomiale vue plus haut. En effet, il est possible de noter chaque rencontre entre une voiture et un ou une cycliste et de considérer que leur collision est une « réussite » (0 : pas d’accidents, 1 : accident). Cependant, ce type de données est fastidieux à collecter comparativement au simple comptage des accidents. La distribution de Poisson a une fonction de densité avec un seul paramètre généralement noté <span class="math inline">\(\lambda\)</span> (lambda) et est décrite par la formule suivante :</p>
+
+<p><span class="math display" id="eq:poisson">\[\begin{equation} f(x; \lambda)=\frac{\lambda^{x}}{x !} e^{-\lambda}
+\tag{2.7}
+\end{equation}\]</span>
+</p>
+<p>avec <em>x</em> le nombre de cas, <em>f(x)</em> la probabilité d’obtenir <em>x</em> sachant <span class="math inline">\(\lambda\)</span>. <span class="math inline">\(\lambda\)</span> peut être vu comme le taux moyen d’occurrences (nombre d’évènements divisé par la durée totale de l’expérience). Il permet à la fois de caractériser le centre et la dispersion de la distribution. Notez également que plus le paramètre <span class="math inline">\(\lambda\)</span> augmente, plus la distribution de Poisson tend vers une distribution normale.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig259"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig259-1.png" alt="Distribution de Poisson" width="95%" />
+<p class="caption">
+Figure 2.11: Distribution de Poisson
+</p>
+</div>
+</div>
+<div id="sectpoissonzero" class="section level4">
+<h4><span class="header-section-number">2.4.3.7</span> Distribution de Poisson avec excès de zéros</h4>
+<p>Il arrive régulièrement qu’une variable de comptage mesurée produise un très grand nombre de zéros. Prenons pour exemple le nombre de seringues de drogue injectable par tronçon de rue ramassées sur une période d’un mois. À l’échelle de toute une ville, un très grand nombre de tronçons n’auront tout simplement aucune seringue et dans ce contexte, la distribution classique de Poisson n’est pas adaptée. Nous lui préfèrons alors une autre distribution : la distribution de Poisson avec excès de zéros (ou distribution de Pólya) qui inclut un paramètre contrôlant la forte présence de zéros. Sa fonction de densité est la suivante :</p>
+
+<p><span class="math display" id="eq:poissonzi">\[\begin{equation} f(x; \lambda; p)=(1-p)\frac{\lambda^{x}}{x !} e^{-\lambda}
+\tag{2.8}
+\end{equation}\]</span>
+</p>
+<p>Plus exactement, la distribution de Poisson avec excès de zéro (<em>zero-inflated</em> en anglais) est une combinaison de deux processus générant des zéros. En effet, un zéro peut être produit par la distribution de Poisson proprement dite (aussi appelé vrai zéro) ou alors par le processus générant les zéros excédentaires dans le jeu de données, capturé par la probabilité <em>p</em> (faux zéro). <em>p</em> est donc le paramètre contrôlant la probabilité d’obtenir un zéro, indépendamment du phénomène étudié.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig259b"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig259b-1.png" alt="Distribution de Poisson avec excès de zéros" width="95%" />
+<p class="caption">
+Figure 2.12: Distribution de Poisson avec excès de zéros
+</p>
+</div>
+</div>
+<div id="distribution-gaussienne" class="section level4">
+<h4><span class="header-section-number">2.4.3.8</span> Distribution gaussienne</h4>
+<p>Plus communément appelée la distribution normale, la distribution gaussienne est utilisée pour représenter des variables continues centrées sur leur moyenne. Son espace d’échantillonnage est <span class="math inline">\(]-\infty; +\infty[\)</span>. Cette distribution joue un rôle central en statistique. Selon la formule consacrée, cette distribution résulte de la superposition d’un très grand nombre de petits effets fortuits indépendants. C’est ce qu’exprime formellement le théorème central limite qui montre que la somme d’un grand nombre de variables aléatoires tend généralement vers une distribution normale. Autrement dit, lorsque nous répétons une même expérience et que nous conservons les résultats de ces expériences, la distribution du résultat de ces expériences tend vers la normalité. Cela s’explique par le fait qu’en moyenne, chaque répétition de l’expérience produit le même résultat, mais qu’un ensemble de petits facteurs aléatoires viennent ajouter de la variabilité dans les données collectées. Prenons un exemple concret : si nous plantons une centaine d’arbres simultanément dans un parc avec un degré d’ensoleillement identique et que nous leur apportons les mêmes soins pendant dix ans, la distribution de leurs tailles suivra une distribution normale. Un ensemble de facteurs aléatoires (composition du sol, exposition au vent, aléas génétiques, passage de nuages, etc.) auront affecté différemment chaque arbre, ajoutant ainsi un peu de hasard dans leur taille finale. Cette dernière est cependant davantage affectée par des paramètres majeurs (comme l’espèce, l’ensoleillement, l’arrosage, etc.), et est donc centrée autour d’une moyenne.
+La fonction de densité de la distribution normale est la suivante :</p>
+
+<p><span class="math display" id="eq:gaussien">\[\begin{equation} f(x ; \mu ; \sigma)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{2}}
+\tag{2.9}
+\end{equation}\]</span>
+</p>
+<p>avec <em>x</em> une valeur dont nous souhaitons connaître la probabilité, <em>f(x)</em> sa probabilité, <span class="math inline">\(\mu\)</span> (mu) la moyenne de la distribution normale (paramètre de localisation) et <span class="math inline">\(\sigma\)</span> (sigma) son écart-type (paramètre de dispersion). Cette fonction suit une courbe normale ayant une forme de cloche. Notez que :</p>
+<ul>
+<li>68,2 % de la masse de la distribution normale est comprise dans l’intervalle <span class="math inline">\([\mu- \sigma≤x≤ \mu+ \sigma]\)</span></li>
+<li>95,4 % dans l’intervalle <span class="math inline">\([\mu- 2\sigma≤x≤ \mu+ 2\sigma]\)</span></li>
+<li>99,7 % dans l’intervalle <span class="math inline">\([\mu- 3\sigma≤x≤ \mu+ 3\sigma]\)</span></li>
+</ul>
+<p>Autrement dit, dans le cas d’une distribution normale, il est très invraisemblable d’observer des données situées à plus de trois écarts types de la moyenne. Ces différentes égalités sont vraies <strong>quelles ques soient les valeurs de la moyenne et de l’écart-type</strong>.
+Notez ici que lorsque <span class="math inline">\(\mu = 0\)</span> et <span class="math inline">\(\sigma = 1\)</span>, nous obtenons la loi normale générale (ou centrée réduite) (section <a href="sect025.html#sect02552">2.5.5.2</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig260"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig260-1.png" alt="Distribution gaussienne" width="70%" />
+<p class="caption">
+Figure 2.13: Distribution gaussienne
+</p>
+</div>
+</div>
+<div id="distribution-gaussienne-asymétrique" class="section level4">
+<h4><span class="header-section-number">2.4.3.9</span> Distribution gaussienne asymétrique</h4>
+<p>La distribution normale asymétrique (<em>skew-normal</em>) est une extension de la distribution gaussienne permettant de lever la contrainte de symétrie de la simple distribution gaussienne. Son espace d’échantillonnage est donc <span class="math inline">\(]-\infty; +\infty[\)</span>. Sa fonction de densité est la suivante :</p>
+
+<p><span class="math display" id="eq:skewgaussien">\[\begin{equation} f(x;\xi;\omega;\alpha) = \frac{2}{\omega \sqrt{2 \pi}} e^{-\frac{(x-\xi)^{2}}{2 \omega^{2}}} \int_{-\infty}^{\alpha\left(\frac{x-\xi}{\omega}\right)} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t
+\tag{2.10}
+\end{equation}\]</span>
+</p>
+<p>avec <span class="math inline">\(\xi\)</span> (xi) le paramètre de localisation, <span class="math inline">\(\omega\)</span> (omega) le paramètre de dispersion (ou d’échelle) et <span class="math inline">\(\alpha\)</span> (alpha) le paramètre de forme (contrôlant le degré de symétrie). Si <span class="math inline">\(\alpha = 0\)</span>, alors la distribution normale asymétrique est une distribution normale ordinaire. Ce type de distribution est très utile lorsque nous souhaitons modéliser une variable pour laquelle nous savons que des valeurs plus extrêmes s’observeront d’un côté ou de l’autre de la distribution. Les revenus totaux annuels des personnes ou des ménages sont de très bons exemples puisqu’ils sont distribués généralement avec une asymétrie positive : bien qu’une moyenne existe, il y a généralement plus de personnes ou de ménages avec des revenus très faibles que de personnes ou de ménages avec des revenus très élevés.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig261"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig261-1.png" alt="Distribution gaussienne asymétrique" width="70%" />
+<p class="caption">
+Figure 2.14: Distribution gaussienne asymétrique
+</p>
+</div>
+</div>
+<div id="distribution-log-normale" class="section level4">
+<h4><span class="header-section-number">2.4.3.10</span> Distribution log-normale</h4>
+<p>Au même titre que la distribution normale asymétrique, la distribution log-normale est une version asymétrique de la distribution normale. Son espace d’échantillonnage est <span class="math inline">\(]0; +\infty[\)</span>. Cela signifie que cette distribution ne peut décrire que des données continues et positives. Sa fonction de densité est la suivante :
+
+<span class="math display" id="eq:loggaussien">\[\begin{equation} f(x ; \mu ; \sigma)=\frac{1}{x \sigma \sqrt{2 \pi}} e^{-\left(\frac{(\ln x-\mu)^{2}}{2 \sigma^{2}}\right)}
+\tag{2.11}
+\end{equation}\]</span>
+</p>
+<p>À la différence la distribution <em>skew-normal</em>, la distribution log-normale ne peut avoir qu’une asymétrie positive (étirée vers la droite). Elle est cependant intéressante puisqu’elle ne compte que deux paramètres (<span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma\)</span>), ce qui la rend plus facile à ajuster. À nouveau, une distribution log-normale peut être utilisée pour décrire les revenus totaux annuels des individus ou des ménages ou les revenus d’emploi. Elle est aussi utilisée en économie sur les marchés financiers pour représenter les cours des actions et des biens (ces derniers ne pouvant pas être inférieurs à 0).</p>
+<div class="figure" style="text-align: center"><span id="fig:fig262"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig262-1.png" alt="Distribution log-gaussienne" width="70%" />
+<p class="caption">
+Figure 2.15: Distribution log-gaussienne
+</p>
+</div>
+<p>Plus spécifiquement, la distribution log-normale est une transformation de la distribution normale. Comme son nom l’indique, elle permet de décrire le logarithme d’une variable aléatoire suivant une distribution normale.</p>
+</div>
+<div id="sect024311" class="section level4">
+<h4><span class="header-section-number">2.4.3.11</span> Distribution de Student</h4>
+<p>La distribution de Student joue un rôle important en statistique. Elle est par exemple utilisée lors du test <em>t</em> pour calculer le degré de significativité du test. Comme la distribution gaussienne, la distribution de Student a une forme de cloche, est centrée sur sa moyenne et définie sur <span class="math inline">\(]-\infty; +\infty[\)</span>. Elle se distingue de la distribution normale principalement par le rôle que joue son troisième paramètre, <span class="math inline">\(\nu\)</span> : le nombre de degrés de liberté, contrôlant le poids des queues de la distribution. Une petite valeur de <span class="math inline">\(\nu\)</span> signifie que la distribution a des « queues plus lourdes » (<em>heavy tails</em> en anglais). Entendez par-là que les valeurs extrêmes ont une plus grande probabilité d’occurrence :</p>
+
+<p><span class="math display" id="eq:student">\[\begin{equation} p(x ; \nu ; \hat{\mu} ; \hat{\sigma})=\frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\Gamma\left(\frac{\nu}{2}\right) \sqrt{\pi \nu} \hat{\sigma}}\left(1+\frac{1}{\nu}\left(\frac{x-\hat{\mu}}{\hat{\sigma}}\right)^{2}\right)^{-\frac{\nu+1}{2}}
+\tag{2.12}
+\end{equation}\]</span>
+</p>
+<p>avec <span class="math inline">\(\mu\)</span> le paramètre de localisation, <span class="math inline">\(\sigma\)</span> le paramètre de dispersion (qui n’est cependant pas un écart-type comme pour la distribution normale) et <span class="math inline">\(\nu\)</span> le nombre de degrés de liberté. Plus <span class="math inline">\(\nu\)</span> est grand, plus la distribution de Student tend vers une distribution normale. Ici, la lettre grecque <span class="math inline">\(\Gamma\)</span> représente la fonction mathématique gamma (à ne pas confondre avec la distribution Gamma). Un exemple d’application en études urbaines est l’exposition au bruit environnemental de cyclistes. Cette distribution s’approcherait certainement d’une distribution normale, mais les cyclistes croisent régulièrement des secteurs peu bruyants (parcs, rues résidentielles, etc.) et des secteurs très bruyants (artères majeures, zones industrielles, etc.), plus souvent que ce que prévoit une distribution normale, justifiant le choix d’une distribution de Student.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig263"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig263-1.png" alt="Distribution de Student" width="70%" />
+<p class="caption">
+Figure 2.16: Distribution de Student
+</p>
+</div>
+</div>
+<div id="distribution-de-cauchy" class="section level4">
+<h4><span class="header-section-number">2.4.3.12</span> Distribution de Cauchy</h4>
+<p>La distribution de Cauchy est également une distribution symétrique définie sur l’intervalle <span class="math inline">\(]-\infty; +\infty[\)</span>. Elle a comme particularité d’être plus aplatie que la distribution de Student (d’avoir des queues potentiellement plus lourdes). Elle est notamment utilisée pour modéliser des phénomènes extrêmes comme les précipitations maximales annuelles, les niveaux d’inondations maximaux annuels ou les seuils critiques de perte pour les portefeuilles financiers. Il est également intéressant de noter que le quotient de deux variables indépendantes normalement distribuées suit une distribution de Cauchy. Sa fonction de densité est la suivante :</p>
+
+<p><span class="math display" id="eq:cauchy">\[\begin{equation} \frac{1}{\pi \gamma}\left[\frac{\gamma^{2}}{\left(x-x_{0}\right)^{2}+\gamma^{2}}\right]
+\tag{2.13}
+\end{equation}\]</span>
+</p>
+<p>Elle dépend donc de deux paramètres : <span class="math inline">\(x_0\)</span>, le paramètre de localisation indiquant le pic de la distribution et <span class="math inline">\(\gamma\)</span>, un paramètre de dispersion.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig264"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig264-1.png" alt="Distribution de Cauchy" width="70%" />
+<p class="caption">
+Figure 2.17: Distribution de Cauchy
+</p>
+</div>
+</div>
+<div id="distribution-du-khi-deux" class="section level4">
+<h4><span class="header-section-number">2.4.3.13</span> Distribution du khi-deux</h4>
+<p>La distribution du khi-deux est utilisée dans de nombreux tests statistiques. Par exemple, le test du khi-deux de Pearson est utilisé pour comparer les écarts au carré entre des fréquences attendues et observées de deux variables qualitatives.
+La distribution du khi-deux décrit plus généralement la somme des carrés d’un nombre <em>k</em> de variables indépendantes normalement distribuées. Il est assez rare de modéliser un phénomène à l’aide d’une distribution du khi-deux, mais son omniprésence dans les tests statistiques justifie qu’elle soit mentionnée ici. Cette distribution est définie sur l’intervalle <span class="math inline">\([0; +\infty[\)</span> et a pour fonction de densité :</p>
+
+<p><span class="math display" id="eq:chi2">\[\begin{equation} f(x;k) = \frac{1}{2^{k / 2} \Gamma(k / 2)} x^{k / 2-1} e^{-x / 2}
+\tag{2.14}
+\end{equation}\]</span>
+</p>
+<p>La distribution du khi-deux n’a qu’un paramètre <em>k</em>, représentant donc le nombre de variables mises au carré et dont nous faisons la somme pour obtenir la distribution du khi-deux.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig265"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig265-1.png" alt="Distribution du khi-deux" width="70%" />
+<p class="caption">
+Figure 2.18: Distribution du khi-deux
+</p>
+</div>
+</div>
+<div id="distribution-exponentielle" class="section level4">
+<h4><span class="header-section-number">2.4.3.14</span> Distribution exponentielle</h4>
+<p>La distribution exponentielle est une version continue de la distribution géométrique. Pour cette dernière, nous nous intéressons au nombre de tentatives nécessaires pour obtenir un résultat positif, soit une dimension discrète. Pour la distribution exponentielle, cette dimension discrète est remplacée par une dimension continue. L’exemple le plus intuitif est sûrement le cas du temps. Dans ce cas, la distribution exponentielle sert à modéliser le temps d’attente nécessaire pour qu’un évènement se produise. Il peut aussi s’agir d’une force que nous appliquons jusqu’à ce qu’un matériau cède. Cette distribution est donc définie sur l’intervalle [0; +<span class="math inline">\(\infty\)</span>[ et a pour fonction de densité :</p>
+
+<p><span class="math display" id="eq:exponentiel">\[\begin{equation} f(x;\lambda) = \lambda e^{-\lambda x}
+\tag{2.15}
+\end{equation}\]</span>
+</p>
+<div class="figure" style="text-align: center"><span id="fig:fig266"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig266-1.png" alt="Distribution exponentielle" width="70%" />
+<p class="caption">
+Figure 2.19: Distribution exponentielle
+</p>
+</div>
+<p>La distribution exponentielle est conceptuellement proche de la distribution de Poisson. La distribution de Poisson régit le nombre des événements qui surviennent au cours d’un laps de temps donné. La distribution exponentielle peur servir à modéliser le temps qui s’écoule entre deux événements.</p>
+</div>
+<div id="sect024315" class="section level4">
+<h4><span class="header-section-number">2.4.3.15</span> Distribution Gamma</h4>
+<p>La distribution Gamma peut être vue comme la généralisation d’un grand nombre de distributions. Ainsi, la distribution exponentielle et du khi-deux peuvent être vues comme des cas particuliers de la distribution Gamma. Cette distribution est définie sur l’intervalle ]0; +<span class="math inline">\(\infty\)</span>[ (notez que le 0 est exclu) et sa fonction de densité est la suivante :</p>
+
+<p><span class="math display" id="eq:gamma">\[\begin{equation} f(x ; \alpha; \beta)=\frac{\beta^{\alpha} x^{\alpha-1} e^{-\beta x}}{\Gamma(\alpha)}
+\tag{2.16}
+\end{equation}\]</span>
+</p>
+<p>Elle comprend donc deux paramètres : <span class="math inline">\(\alpha\)</span> et <span class="math inline">\(\beta\)</span>. Le premier est le paramètre de forme et le second un paramètre d’échelle (à l’inverse d’un paramètre de dispersion, plus sa valeur est petite, plus la distribution est dispersée). Notez que cette distribution ne dispose pas d’un paramètre de localisation. Du fait de sa flexibilité, cette distribution est largement utilisée, que ce soit dans la modélisation des temps d’attente avant un évènement, de la taille des réclamations d’assurance, des quantités de précipitations, etc.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig267"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig267-1.png" alt="Distribution Gamma" width="70%" />
+<p class="caption">
+Figure 2.20: Distribution Gamma
+</p>
+</div>
+</div>
+<div id="sect024316" class="section level4">
+<h4><span class="header-section-number">2.4.3.16</span> Distribution bêta</h4>
+<p>La distribution bêta est définie sur l’intervalle [0; 1], elle est donc énormément utilisée pour modéliser des variables étant des proportions ou des probabilités.</p>
+<p>La distribution bêta a été élaborée pour modéliser la superposition d’un très grand nombre de petits effets fortuits qui ne sont pas indépendants et notamment pour étudier l’effet de la réalisation d’un événement aléatoire sur la probabilité des tirages subséquents. Elle a aussi une utilité pratique en statistique, car elle peut être combinée avec d’autres distributions (distribution bêta-binomiale, bêta-negative-binomiale, etc.). Un autre usage plus rare mais intéressant est la modélisation de la fraction du temps représentée par une tâche dans le temps nécessaire à la réalisation de deux tâches de façon séquentielle. Cela est dû au fait que la distribution d’une distribution Gamma <em>g1</em> divisée par la somme de <em>g1</em> et d’une autre distribution Gamma <em>g2</em> suit une distribution bêta. Un exemple concret est, par exemple, la fraction du temps effectué à pied dans un déplacement multimodal. La distribution de bêta a la fonction de densité suivante :</p>
+
+<p><span class="math display" id="eq:beta">\[\begin{equation} f(x;\alpha;\beta) = \frac{1}{\mathrm{B}(\alpha, \beta)} x^{\alpha-1}(1-x)^{\beta-1}
+\tag{2.17}
+\end{equation}\]</span>
+</p>
+<p>Elle a donc deux paramètres <span class="math inline">\(\alpha\)</span> et <span class="math inline">\(\beta\)</span> contrôlant tous les deux la forme de la distribution. Cette caractéristique lui permet d’avoir une très grande flexibilité et même d’adopter des formes bimodales. <span class="math inline">\(B\)</span> correspond à la fonction mathématique Beta : ne pas la confondre avec la distribution Beta et le paramètre Beta (<span class="math inline">\(\beta\)</span>) de cette même distribution.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig268"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig268-1.png" alt="Distribution bêta" width="70%" />
+<p class="caption">
+Figure 2.21: Distribution bêta
+</p>
+</div>
+</div>
+<div id="distribution-de-weibull" class="section level4">
+<h4><span class="header-section-number">2.4.3.17</span> Distribution de Weibull</h4>
+<p>La distribution de Weibull est directement liée à la distribution exponentielle, cette dernière étant en fait un cas particulier de distribution Weibull. Elle sert donc souvent à modéliser une quantité <em>x</em> (souvent le temps) à accumuler pour qu’un évènement se produise. La distribution de Weibull est définie sur l’intervalle [0; +<span class="math inline">\(\infty\)</span>[ et a la fonction de densité suivante :</p>
+
+<p><span class="math display" id="eq:weibull">\[\begin{equation} f(x;\lambda) = \frac{k}{\lambda} (\frac{x}{\lambda})^{k-1} e^{-(\frac{x}{\lambda})^k}
+\tag{2.18}
+\end{equation}\]</span>
+</p>
+<p><span class="math inline">\(\lambda\)</span> est le paramètre de dispersion (analogue à celui d’une distribution exponentielle classique) et <em>k</em> le paramètre de forme. Pour bien comprendre le rôle de <em>k</em>, prenons un exemple : la propagation d’un champignon d’un arbre à son voisin. Si <span class="math inline">\(k&lt;1\)</span>, le risque instantané que l’évènement modélisé se produise diminue avec le temps (en d’autres termes, plus le temps passe, plus petite devient la probabilité d’être contaminé). Si <span class="math inline">\(k=1\)</span>, alors le risque instantané que l’évènement se produise reste identique dans le temps (la loi de Weibull se résume alors à une loi exponentielle). Si <span class="math inline">\(k &gt; 1\)</span>, alors le risque instantané que l’évènement se produise augmente avec le temps (la probabilité pour un arbre d’être contaminé s’il ne l’a pas déjà été — pas seulement le risque cumulé — augmente en fonction du temps). La distribution de Weibull est très utilisée en analyse de survie, en météorologie, en ingénierie des matériaux et dans la théorie des valeurs extrêmes.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig269"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig269-1.png" alt="Distribution de Weibull" width="70%" />
+<p class="caption">
+Figure 2.22: Distribution de Weibull
+</p>
+</div>
+</div>
+<div id="distribution-pareto" class="section level4">
+<h4><span class="header-section-number">2.4.3.18</span> Distribution Pareto</h4>
+<p>Cette distribution a été élaborée par Vilfredo Pareto pour donner une forme mathématique à ce qui porte aujourd’hui le nom de principe de Pareto et que nous exprimons souvent de manière imagée — dans une société donnée, 20 % des individus possèdent 80 % de la richesse —, mais qui est plus justement exprimée en écrivant que, de manière générale, dans toute société, la plus grande partie du capital est détenue par une petite fraction de la population. Elle est définie sur l’intervalle <span class="math inline">\([x_m; +\infty[\)</span> avec la fonction de densité suivante :</p>
+
+<p><span class="math display" id="eq:pareto">\[\begin{equation} f(x;x_m;k) = (\frac{x_m}{x})^k
+\tag{2.19}
+\end{equation}\]</span>
+</p>
+<p>Elle comprend donc deux paramètres, <span class="math inline">\(x_m\)</span> étant un paramètre de localisation (décalant la distribution vers la droite ou vers la gauche) et <span class="math inline">\(k\)</span> un paramètre de forme. Plus <span class="math inline">\(k\)</span> augmente, plus la probabilité prédite par la distribution décroît rapidement.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig270"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/fig270-1.png" alt="Distribution de Pareto" width="70%" />
+<p class="caption">
+Figure 2.23: Distribution de Pareto
+</p>
+</div>
+<p>Au-delà de la question de la répartition de la richesse, la distribution de Pareto peut également être utilisée pour décrire la répartition de la taille des villes <span class="citation">(Reed <a href="#ref-William_pareto_ville" role="doc-biblioref">2002</a>)</span>, <a href="https://medium.com/@worstonlinedater/tinder-experiments-ii-guys-unless-you-are-really-hot-you-are-probably-better-off-not-wasting-your-2ddf370a6e9a" target="_blank">la popularité des hommes sur Tinder</a> ou la taille des fichiers échangés sur Internet <span class="citation">(Reed et Jorgensen <a href="#ref-William_pareto" role="doc-biblioref">2004</a>)</span>. Pour ces trois exemples, nous avons les situations suivantes : de nombreuses petites villes, profils peu attractifs, petits fichiers échangés et à l’inverse très peu de grandes villes, profils très attractifs, gros fichiers échangés.</p>
+<p>La loi de Pareto est liée à la loi exponentielle. Si une variable aléatoire suit une loi de Pareto, le logarithme du quotient de cette variable et de son paramètre de localisation est une variable aléatoire qui suit une loi exponentielle.</p>
+</div>
+<div id="cas-particuliers" class="section level4">
+<h4><span class="header-section-number">2.4.3.19</span> Cas particuliers</h4>
+<p>Sachez également qu’il existe des distributions « plus exotiques » que nous n’abordons pas ici, mais auxquelles vous pourriez être confrontés un jour :</p>
+<ul>
+<li><p>Les distributions sphériques, servant à décrire des données dont le 0 est équivalent à la valeur maximale. Par exemple, des angles puisque 0 et 360 degrés sont identiques.</p></li>
+<li><p>Les distributions composées (<em>mixture distributions</em>), permettant de modéliser des phénomènes issus de la superposition de plusieurs distributions. Par exemple, la distribution de la taille de l’ensemble des êtres humains est en réalité une superposition de deux distributions gaussiennes, une pour chaque sexe, puisque ces deux distributions n’ont pas la même moyenne ni le même écart-type.</p></li>
+<li><p>Les distributions multivariées permettant de décrire des phénomènes multidimensionnels. Par exemple, la réussite des élèves en français et en mathématique pourrait être modélisée par une distribution gaussienne bivariée plutôt que deux distributions distinctes. Ce choix serait pertinent si nous présumons que ces deux variables sont corrélées plutôt qu’indépendantes.</p></li>
+<li><p>Les distributions censurées décrivant des variables pour lesquelles les données sont issues d’un tirage « censuré ». En d’autres termes, la variable étudiée varie sur une certaine étendue, mais du fait du processus de tirage (collecte des données), les valeurs au-delà de certaines limites sont censurées. Un bon exemple est la mesure de la pollution sonore avec un capteur incapable de détecter des niveaux sonores en dessous de 55 décibels. Il arrive parfois en ville que les niveaux sonores descendent plus bas que ce seuil, mais les données collectées ne le montrent pas. Dans ce contexte, il est important d’utiliser des versions censurées des distributions présentées précédemment. Les observations au-delà de la limite sont conservées dans l’analyse, mais nous ne disposons que d’une information partielle à leur égard (elles sont au-delà de la limite).</p></li>
+<li><p>Les distributions tronquées, souvent confondues avec les distributions censurées, décrivent des situations où des données au-delà d’une certaine limite sont impossibles à collecter et retirées simplement de l’analyse.</p></li>
+</ul>
+</div>
+</div>
+<div id="conclusion-sur-les-distributions" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> Conclusion sur les distributions</h3>
+<p>Voilà qui conclut cette exploration des principales distributions à connaître. L’idée n’est bien sûr pas de toutes les retenir par cœur (et encore moins les formules mathématiques), mais plutôt de se rappeler dans quels contextes elles peuvent être utiles. Vous aurez certainement besoin de le relire cette section avant d’aborder le chapitre <a href="chap08.html#chap08">8</a> portant sur les modèles linéaires généralisés (GLM).
+Wikipédia dispose d’informations très détaillées sur chaque distribution si vous avez besoin d’informations complémentaires. Pour un tour d’horizon plus exhaustif des distributions, vous pouvez aussi faire un tour sur les projets <a href="https://sites.google.com/site/probonto/screenshots" target="_blank">ProbOnto</a> et <a href="https://blog.wolfram.com/2013/02/01/the-ultimate-univariate-probability-distribution-explorer/" target="_blank"><em>the ultimate probability distribution explorer</em></a>.</p>
+</div>
+</div>
+<h3>R&eacute;f&eacute;rences</h3>
+<div id="refs" class="references">
+<div id="ref-William_pareto_ville">
+<p>Reed, William J. 2002. « On the rank-Size distribution for human settlements ». <em>Journal of Regional Science</em> 42 (1): 1‑17. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247">https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247</a>.</p>
+</div>
+<div id="ref-William_pareto">
+<p>Reed, William J. et Murray Jorgensen. 2004. « The souble Pareto-Lognormal sistribution: A new parametric model for size distributions ». <em>Communications in Statistics - Theory and Methods</em> 33 (8). Taylor &amp; Francis: 1733‑1753. <a href="https://doi.org/10.1081/STA-120037438">https://doi.org/10.1081/STA-120037438</a>.</p>
+</div>
+<div id="ref-SeanOwendist">
+<p>Sean, Owen. 2018. « Common probability distributions ». <a href="https://medium.com/@srowen/common-probability-distributions-347e6b945ce4">https://medium.com/@srowen/common-probability-distributions-347e6b945ce4</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sect023.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sect025.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["MethodesQuantitScSocialesBolR.pdf"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12.2 Analyses en composantes principales (ACP) | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
+  <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12.2 Analyses en composantes principales (ACP) | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://laeq.github.io/LivreStatistique_website/" />
+  <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
+  <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12.2 Analyses en composantes principales (ACP) | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  
+  <meta name="twitter:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="twitter:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
+
+<meta name="author" content="Philippe Apparicio et Jérémy Gelb" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sect121.html"/>
+<link rel="next" href="sect123.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/d3-4.13.0/d3.min.js"></script>
+<script src="libs/d3-tip-0.8.1/index.js"></script>
+<link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
+<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/quizlib.min.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d'R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
+<li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
+<li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
+<li class="chapter" data-level="" data-path="sect003B.html"><a href="sect003B.html"><i class="fa fa-check"></i>Comment utiliser les données du livre pour reproduire les exemples?</a></li>
+<li class="chapter" data-level="" data-path="sect004.html"><a href="sect004.html"><i class="fa fa-check"></i>Structure du livre</a></li>
+<li class="chapter" data-level="" data-path="sect005.html"><a href="sect005.html"><i class="fa fa-check"></i>Pourquoi faut-il programmer en sciences sociales?</a></li>
+<li class="chapter" data-level="" data-path="sect006.html"><a href="sect006.html"><i class="fa fa-check"></i>Remerciements</a></li>
+<li class="chapter" data-level="" data-path="sect007.html"><a href="sect007.html"><i class="fa fa-check"></i>Dédicace toute spéciale à Cargo et Ambrée</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
+<li class="part"><span><b>I Découverte de R</b></span></li>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a><ul>
+<li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
+<li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
+<li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
+<li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
+<li class="chapter" data-level="1.3.4" data-path="sect013.html"><a href="sect013.html#sect0134"><i class="fa fa-check"></i><b>1.3.4</b> Principaux types de données</a></li>
+<li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
+<li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="sect016.html"><a href="sect016.html"><i class="fa fa-check"></i><b>1.5</b> Code R bien structuré</a></li>
+<li class="chapter" data-level="1.6" data-path="sect017.html"><a href="sect017.html"><i class="fa fa-check"></i><b>1.6</b> Enregistrement des résultats</a></li>
+<li class="chapter" data-level="1.7" data-path="sect018.html"><a href="sect018.html"><i class="fa fa-check"></i><b>1.7</b> Session de travail</a></li>
+<li class="chapter" data-level="1.8" data-path="sect019.html"><a href="sect019.html"><i class="fa fa-check"></i><b>1.8</b> Conclusion et ressources pertinentes</a></li>
+<li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a><ul>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
+<li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
+<li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
+<li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
+<li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
+<li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
+<li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
+<li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
+<li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
+<li class="chapter" data-level="2.5.4" data-path="sect025.html"><a href="sect025.html#sect0254"><i class="fa fa-check"></i><b>2.5.4</b> Paramètres de forme</a></li>
+<li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
+<li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
+<li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a><ul>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
+<li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
+<li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
+<li class="chapter" data-level="3.1.4" data-path="sect031.html"><a href="sect031.html#utilisation-des-thèmes"><i class="fa fa-check"></i><b>3.1.4</b> Utilisation des thèmes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
+<li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
+<li class="chapter" data-level="3.2.4" data-path="sect032.html"><a href="sect032.html#sect0324"><i class="fa fa-check"></i><b>3.2.4</b> Graphique en ligne</a></li>
+<li class="chapter" data-level="3.2.5" data-path="sect032.html"><a href="sect032.html#sect0325"><i class="fa fa-check"></i><b>3.2.5</b> Boîte à moustaches</a></li>
+<li class="chapter" data-level="3.2.6" data-path="sect032.html"><a href="sect032.html#sect0326"><i class="fa fa-check"></i><b>3.2.6</b> Graphique en violon</a></li>
+<li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
+<li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
+<li class="chapter" data-level="3.3.4" data-path="sect033.html"><a href="sect033.html#sect0334"><i class="fa fa-check"></i><b>3.3.4</b> Carte proportionnelle</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="sect034.html"><a href="sect034.html"><i class="fa fa-check"></i><b>3.4</b> Cartes</a></li>
+<li class="chapter" data-level="3.5" data-path="sect035.html"><a href="sect035.html"><i class="fa fa-check"></i><b>3.5</b> Exportation des graphiques</a></li>
+<li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
+</ul></li>
+<li class="part"><span><b>III Analyses bivariées</b></span></li>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a><ul>
+<li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sect043.html"><a href="sect043.html#sect0434"><i class="fa fa-check"></i><b>4.3.4</b> Corrélations robustes (<em>Biweight midcorrelation</em>, <em>Percentage bend correlation</em> et la corrélation <em>pi</em> de Shepherd)</a></li>
+<li class="chapter" data-level="4.3.5" data-path="sect043.html"><a href="sect043.html#sect0435"><i class="fa fa-check"></i><b>4.3.5</b> Significativité des coefficients de corrélation</a></li>
+<li class="chapter" data-level="4.3.6" data-path="sect043.html"><a href="sect043.html#sect0436"><i class="fa fa-check"></i><b>4.3.6</b> Corrélation partielle</a></li>
+<li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
+<li class="chapter" data-level="4.4.4" data-path="sect044.html"><a href="sect044.html#sect0444"><i class="fa fa-check"></i><b>4.4.4</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.4.5" data-path="sect044.html"><a href="sect044.html#sect0445"><i class="fa fa-check"></i><b>4.4.5</b> Comment rapporter une régression linéaire simple</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a><ul>
+<li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
+<li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
+<li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
+<li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a><ul>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
+<li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
+<li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="6.2.4" data-path="sect062.html"><a href="sect062.html#sect0624"><i class="fa fa-check"></i><b>6.2.4</b> Comment rapporter les résultats d’une ANOVA et du test de Kruskal-Wallis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sect063.html"><a href="sect063.html"><i class="fa fa-check"></i><b>6.3</b> Conclusion sur la troisième partie</a></li>
+<li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>IV Modèles de régression</b></span></li>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
+<li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
+<li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
+<li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
+<li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
+<li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
+<li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
+<li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
+<li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
+<li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
+<li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
+<li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
+<li class="chapter" data-level="7.7.4" data-path="sect077.html"><a href="sect077.html#sect0774"><i class="fa fa-check"></i><b>7.7.4</b> Graphiques pour les effets marginaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a><ul>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
+<li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
+<li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
+<li class="chapter" data-level="8.1.4" data-path="sect081.html"><a href="sect081.html#sect0814"><i class="fa fa-check"></i><b>8.1.4</b> Résidus et déviance</a></li>
+<li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
+<li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
+<li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
+<li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
+<li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
+<li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
+<li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
+<li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
+<li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
+<li class="chapter" data-level="8.4.4" data-path="sect085.html"><a href="sect085.html#sect0854"><i class="fa fa-check"></i><b>8.4.4</b> Modèle GLM avec une distribution bêta</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
+<li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a><ul>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
+<li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
+<li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
+<li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
+<li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
+<li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a><ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
+<li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
+<li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
+<li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
+<li class="chapter" data-level="10.4.4" data-path="sect104.html"><a href="sect104.html#sect10414"><i class="fa fa-check"></i><b>10.4.4</b> Modèle complet avec une interaction</a></li>
+<li class="chapter" data-level="10.4.5" data-path="sect104.html"><a href="sect104.html#sect1045"><i class="fa fa-check"></i><b>10.4.5</b> Comparaison des quatre modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a><ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
+<li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
+<li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
+<li class="chapter" data-level="11.1.4" data-path="sect111.html"><a href="sect111.html#sect1114"><i class="fa fa-check"></i><b>11.1.4</b> Non linéarité avec des <em>splines</em></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
+<li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
+<li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
+<li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
+<li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="sect116.html"><a href="sect116.html"><i class="fa fa-check"></i><b>11.6</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="11.7" data-path="sect117.html"><a href="sect117.html"><i class="fa fa-check"></i><b>11.7</b> GAMM</a></li>
+<li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a><ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
+<li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
+<li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
+<li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a><ul>
+<li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
+<li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
+<li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
+<li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
+<li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
+<li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
+<li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
+<li class="chapter" data-level="13.4.4" data-path="sect134.html"><a href="sect134.html#sect1344"><i class="fa fa-check"></i><b>13.4.4</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="13.4.5" data-path="sect134.html"><a href="sect134.html#sect1346"><i class="fa fa-check"></i><b>13.4.5</b> Extensions en logique floue : <em>c-means</em>, <em>c-medoids</em></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
+<li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>14</b> Annexes</a><ul>
+<li class="chapter" data-level="14.1" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14.1</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="14.2" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>14.2</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="14.3" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>14.3</b> Table des valeurs critiques de <em>t</em></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d’R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sect122" class="section level2">
+<h2><span class="header-section-number">12.2</span> Analyses en composantes principales (ACP)</h2>
+<p>D’emblée, notez qu’il existe deux types d’analyse en composantes principales (ACP) (<em>Principal Component Analysis, PCA</em> en anglais) :</p>
+<ul>
+<li><strong>l’ACP non normée</strong> dans laquelle les variables quantitatives du tableau sont uniquement centrées (moyenne = 0).</li>
+<li><strong>l’ACP normée</strong> dans laquelle les variables quantitatives du tableau sont préalablement centrées réduites (moyenne = 0 et variance = 1; section <a href="sect025.html#sect02552">2.5.5.2</a>).</li>
+</ul>
+<p>Puisque les variables d’un tableau sont souvent exprimées dans des unités de mesure différentes ou avec des ordres de grandeur différents (intervalles et écarts-types bien différents), l’utilisation de l’ACP normée est bien plus courante. Elle est d’ailleurs l’option par défaut dans les fonctions R permettant de calculer une ACP. Par conséquent, nous détaillons dans cette section uniquement l’ACP normée.</p>
+<p>Autrement dit, le recours à une ACP non normée est plus rare et s’applique uniquement à la situation suivante : toutes les variables du tableau sont mesurées dans la même unité (par exemple, en pourcentage); il pourrait être ainsi judicieux de conserver leurs variances respectives.</p>
+<div id="sect1221" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> Recherche d’une simplification</h3>
+<p>L’ACP permet d’explorer et de résumer un tableau constitué uniquement de variables quantitatives (figure <a href="sect122.html#fig:AnalysesFactoriellesTabACPFig">12.2</a>), et ce, de trois façons : 1) en montrant les ressemblances entre les individus (observations), 2) en révélant les liaisons entre les variables quantitatives et 3) en résumant l’ensemble des variables du tableau par des variables synthétiques nommées composantes principales.</p>
+<div class="figure" style="text-align: center"><span id="fig:AnalysesFactoriellesTabACPFig"></span>
+<img src="images/analysesfactorielles/AnalysesFactoriellesTabACP.png" alt="Tableau pour une ACP" width="60%" />
+<p class="caption">
+Figure 12.2: Tableau pour une ACP
+</p>
+</div>
+<p><strong>Ressemblance entre les individus</strong>. Concrètement, deux individus se ressemblent si leurs valeurs respectives pour les <em>p</em> variables du tableau sont similaires. Cette proximité/ressemblance est évaluée à partir de la distance euclidienne (équation <a href="sect122.html#eq:ACPdistEuc">(12.1)</a>). La notion de distance fait l’objet d’une section à part entière (section <a href="sect132.html#sect132">13.2</a>) que vous pouvez consulter dès à présent si elle ne vous est pas familière.</p>
+
+<p><span class="math display" id="eq:ACPdistEuc">\[\begin{equation}
+d^2(a,b) = \sum_{j=1}^p(x_{aj}-x_{bj})^2
+\tag{12.1}
+\end{equation}\]</span>
+</p>
+<p>Prenons un exemple fictif avec trois individus (<em>i</em>, <em>j</em> et <em>k</em>) ayant des valeurs pour trois variables préalablement centrées réduites (V1 à V3) (tableau <a href="sect122.html#tab:distanceACPindi">12.2</a>). La proximité entre les paires de points est évaluée comme suit :</p>
+<p><span class="math display">\[d^2(i,j)=(-\mbox{1,15}-\mbox{0,49})^2+(-\mbox{1,15}-\mbox{0,58})^2+(\mbox{0,83}+\mbox{1,11})^2=\mbox{9,44}\]</span>
+<span class="math display">\[d^2(i,k)=(-\mbox{1,15}+\mbox{0,66})^2+(-\mbox{1,15}-\mbox{0,58})^2+(\mbox{0,83}-\mbox{0,28})^2=\mbox{5,98}\]</span></p>
+<p><span class="math display">\[d^2(j,k)= (\mbox{0,49}+\mbox{0,66})^2+(\mbox{0,58}-\mbox{0,58})^2+(-\mbox{1,11}-\mbox{0,28})^2=\mbox{1,97}\]</span></p>
+<p>Nous pouvons en conclure que <em>i</em> est plus proche de <em>k</em> que de <em>j</em>, mais aussi que la paire de points les plus proches est (<em>i</em>,<em>k</em>). En d’autres termes, les deux observations <em>i</em> et <em>k</em> sont les plus similaires du jeu de données selon la distance euclidienne.</p>
+<table>
+<caption>
+<span id="tab:distanceACPindi">Tableau 12.2: </span>Données fictives
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Variables centrées réduites
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;">
+Individu
+</th>
+<th style="text-align:center;">
+V1
+</th>
+<th style="text-align:center;">
+V2
+</th>
+<th style="text-align:center;">
+V3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+i
+</td>
+<td style="text-align:center;">
+-1,15
+</td>
+<td style="text-align:center;">
+-1,15
+</td>
+<td style="text-align:center;">
+0,83
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+j
+</td>
+<td style="text-align:center;">
+0,49
+</td>
+<td style="text-align:center;">
+0,58
+</td>
+<td style="text-align:center;">
+-1,11
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+k
+</td>
+<td style="text-align:center;">
+0,66
+</td>
+<td style="text-align:center;">
+0,58
+</td>
+<td style="text-align:center;">
+0,28
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Liaisons entre les variables</strong>. Dans une ACP normée, les liaisons entre les variables deux à deux sont évaluées avec le coefficient de corrélation (section <a href="sect043.html#sect0431">4.3.1</a>), soit la moyenne du produit des deux variables centrées réduites (équation <a href="sect122.html#eq:ACPcor">(12.2)</a>). Notez que dans une ACP non normée, plus rarement utilisée, les liaisons sont évaluées avec la covariance puisque les variables sont uniquement centrées (équation <a href="sect122.html#eq:ACPcov">(12.3)</a>).</p>
+
+<p><span class="math display" id="eq:ACPcor">\[\begin{equation}
+r_{xy} = \frac{\sum_{i=1}^n (x_{i}-\bar{x})(y_{i}-\bar{y})}{n\sqrt{\sum_{i=1}^n(x_i - \bar{x})^2(y_i - \bar{y})^2}}=\sum_{i=1}^n\frac{Zx_iZy_i}{n}
+\tag{12.2}
+\end{equation}\]</span>
+</p>
+
+<p><span class="math display" id="eq:ACPcov">\[\begin{equation}
+cov(x,y) = \frac{\sum_{i=1}^n (x_{i}-\bar{x})(y_{i}-\bar{y})}{n}
+\tag{12.3}
+\end{equation}\]</span>
+</p>
+<p><strong>Composantes principales</strong>. Au chapitre 4, nous avons abordé deux méthodes pour identifier des relations linéaires entre des variables continues normalement distribuées :</p>
+<ul>
+<li>la corrélation de Pearson (section <a href="sect043.html#sect043">4.3</a>), qu’il est possible d’illustrer graphiquement à partir d’un nuage de points;</li>
+<li>la régression linéaire simple (section <a href="sect044.html#sect044">4.4</a>), permettant de résumer la relation linéaire entre deux variables avec une droite de régression de type <span class="math inline">\(Y=a+bX\)</span>.</li>
+</ul>
+<p>Brièvement, plus deux variables sont corrélées (positivement ou négativement), plus le nuage de points qu’elles forment est allongé et plus les points sont proches de la droite de régression (figure <a href="sect122.html#fig:liaisons2Vars">12.3</a>, partie <strong>a</strong>). À l’inverse, plus la liaison entre les deux variables normalement distribuées est faible, plus le nuage prend la forme d’un cercle et plus les points du nuage sont éloignés de la droite de régression (figure <a href="sect122.html#fig:liaisons2Vars">12.3</a>, partie <strong>b</strong>). Puisqu’en ACP normée, les variables sont centrées réduites, le centre de gravité du nuage de points est (<em>x</em>=0, <em>y</em>=0) et il est toujours traversé par la droite de régression. Finalement, nous avons vu que la méthode des moindres carrés ordinaires (MCO) permet de déterminer cette droite en minimisant les distances entre les valeurs observées et celles projetées orthogonalement sur cette droite (valeurs prédites). Dans le cas de deux variables uniquement, l’axe factoriel principal/la composante principale est donc la droite qui résume le mieux la liaison entre les deux variables (en rouge). L’axe 2 représente la seconde plus importante composante (axe, dimension) et il est orthogonal (perpendiculaire) au premier axe (en bleu).</p>
+<div class="figure" style="text-align: center"><span id="fig:liaisons2Vars"></span>
+<img src="images/analysesfactorielles/bivariePlanFacto.png" alt="Corrélation, allongement du nuage de points et axes factoriels" width="100%" />
+<p class="caption">
+Figure 12.3: Corrélation, allongement du nuage de points et axes factoriels
+</p>
+</div>
+<p>Imaginez maintenant trois variables pour lesquelles vous désirez identifier un axe, une droite qui résume le mieux les liaisons entre elles. Visuellement, vous passez d’un nuage de points en deux dimensions (2D) à un nuage en dimensions (3D). Si les corrélations entre les trois variables sont très faibles, alors le nuage prend la forme d’un ballon de soccer (football en Europe). Par contre, plus ces liaisons sont fortes, plus la forme est allongée comme un ballon de rugby et plus les points sont proches de l’axe traversant le ballon.</p>
+<p>Ajouter une autre variable revient alors à ajouter une quatrième dimension qu’il est impossible de visualiser, même pour les plus fervents adaptes de science-fiction. Pourtant, le problème reste le même : identifier, dans un plan en <em>p</em> dimensions (variables), les axes factoriels – les composantes principales – qui concourent le plus à résumer les liaisons entre les variables continues préalablement centrées réduites, et ce, en utilisation la méthode des moindres carrés ordinaires.</p>
+<div class="bloc_attention">
+<p>Les termes <strong>composantes principales</strong> et <strong>axes factoriels</strong> sont des synonymes employés pour référer aux nouvelles variables synthétiques produites par l’ACP et résumant l’information du tableau intitial.</p>
+</div>
+</div>
+<div id="sect1222" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> Aides à l’interprétation</h3>
+<p>Pour illustrer les aides à l’interprétation de l’ACP, nous utilisons un jeu de données spatiales tiré d’un article sur l’agglomération lyonnaise en France <span class="citation">(Gelb et Apparicio <a href="#ref-2021_4" role="doc-biblioref">2021</a><a href="#ref-2021_4" role="doc-biblioref">b</a>)</span>. Ce jeu de données comprend dix variables, dont quatre environnementales (EN) et six socioéconomiques (SE), pour les îlots regroupés pour l’information statistique (IRIS) de l’agglomération lyonnaise (tableau <a href="sect122.html#tab:dataacp">12.3</a> et figure <a href="sect122.html#fig:datacartoacp">12.4</a>). Sur ces dix variables, nous calculons une <strong>ACP normée</strong>.</p>
+<div style="page-break-after: always;"></div>
+<table>
+<caption>
+<span id="tab:dataacp">Tableau 12.3: </span>Statistiques descriptives pour le jeu de données utilisé pour l’ACP
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Nom
+</th>
+<th style="text-align:left;">
+Intitulé
+</th>
+<th style="text-align:center;">
+Type
+</th>
+<th style="text-align:right;">
+Moy.
+</th>
+<th style="text-align:right;">
+E.-T.
+</th>
+<th style="text-align:right;">
+Min.
+</th>
+<th style="text-align:right;">
+Max.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lden
+</td>
+<td style="text-align:left;">
+Bruit routier (Lden dB(A))
+</td>
+<td style="text-align:center;">
+EN
+</td>
+<td style="text-align:right;">
+55,6
+</td>
+<td style="text-align:right;">
+4,9
+</td>
+<td style="text-align:right;">
+33,9
+</td>
+<td style="text-align:right;">
+71,7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NO2
+</td>
+<td style="text-align:left;">
+Dioxyde d’azote (ug/m<sup>3</sup>)
+</td>
+<td style="text-align:center;">
+EN
+</td>
+<td style="text-align:right;">
+28,7
+</td>
+<td style="text-align:right;">
+7,9
+</td>
+<td style="text-align:right;">
+12,0
+</td>
+<td style="text-align:right;">
+60,2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PM25
+</td>
+<td style="text-align:left;">
+Particules fines (PM<span class="math inline">\(_{2,5}\)</span>)
+</td>
+<td style="text-align:center;">
+EN
+</td>
+<td style="text-align:right;">
+16,8
+</td>
+<td style="text-align:right;">
+2,1
+</td>
+<td style="text-align:right;">
+11,3
+</td>
+<td style="text-align:right;">
+21,9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VegHautPrt
+</td>
+<td style="text-align:left;">
+Canopée (%)
+</td>
+<td style="text-align:center;">
+EN
+</td>
+<td style="text-align:right;">
+18,7
+</td>
+<td style="text-align:right;">
+10,1
+</td>
+<td style="text-align:right;">
+1,7
+</td>
+<td style="text-align:right;">
+53,8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct0_14
+</td>
+<td style="text-align:left;">
+Moins de 15 ans (%)
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+18,5
+</td>
+<td style="text-align:right;">
+5,7
+</td>
+<td style="text-align:right;">
+0,0
+</td>
+<td style="text-align:right;">
+54,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_65
+</td>
+<td style="text-align:left;">
+65 ans et plus (%)
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+16,2
+</td>
+<td style="text-align:right;">
+5,9
+</td>
+<td style="text-align:right;">
+0,0
+</td>
+<td style="text-align:right;">
+45,1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_Img
+</td>
+<td style="text-align:left;">
+Immigrants (%)
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+14,5
+</td>
+<td style="text-align:right;">
+9,1
+</td>
+<td style="text-align:right;">
+0,0
+</td>
+<td style="text-align:right;">
+59,8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TxChom1564
+</td>
+<td style="text-align:left;">
+Taux de chômage
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+14,8
+</td>
+<td style="text-align:right;">
+8,1
+</td>
+<td style="text-align:right;">
+0,0
+</td>
+<td style="text-align:right;">
+98,8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_brevet
+</td>
+<td style="text-align:left;">
+Personnes à faible scolarité (%)
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+23,5
+</td>
+<td style="text-align:right;">
+12,6
+</td>
+<td style="text-align:right;">
+0,0
+</td>
+<td style="text-align:right;">
+100,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NivVieMed
+</td>
+<td style="text-align:left;">
+Médiane du niveau de vie (Euros)
+</td>
+<td style="text-align:center;">
+SE
+</td>
+<td style="text-align:right;">
+21 804,5
+</td>
+<td style="text-align:right;">
+4 922,5
+</td>
+<td style="text-align:right;">
+11 324,0
+</td>
+<td style="text-align:right;">
+38 707,0
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:datacartoacp"></span>
+<img src="images/analysesfactorielles/Figure3Data.png" alt="Cartographie des dix variables utilisées pour l'ACP" width="100%" />
+<p class="caption">
+Figure 12.4: Cartographie des dix variables utilisées pour l’ACP
+</p>
+</div>
+<div class="bloc_objectif">
+<p><strong>Trois étapes pour bien analyser une ACP et comprendre la signification des axes factoriels :</strong></p>
+<ol style="list-style-type: decimal">
+<li>Interprétation des résultats des valeurs propres pour identifier le nombre d’axes (de composantes principales) à retenir. L’enjeu est de garder un nombre d’axes limité qui résume le mieux le tableau initial (réduction des données).</li>
+<li>Analyse des résultats pour les variables (coordonnées factorielles, cosinus carrés et contributions sur les axes retenus).</li>
+<li>Analyse des résultats pour les individus (coordonnées factorielles, cosinus carrés et contributions sur les axes retenus).</li>
+</ol>
+<p>Les deux dernières étapes permettent de comprendre la signification des axes retenus et de les qualifier. Cette étape d’interprétation est essentielle en sciences sociales. En effet, nous avons vu dans l’introduction du chapitre que les méthodes factorielles permettent de résumer l’information d’un tableau en quelques nouvelles variables synthétiques, souvent considérées comme des variables latentes dans le jeu de données. Il convient alors de bien comprendre ces variables synthétiques (latentes), si nous souhaitons les utiliser dans une autre analyse subséquente (par exemple, les introduire dans une régression).</p>
+</div>
+<div id="sect12221" class="section level4">
+<h4><span class="header-section-number">12.2.2.1</span> Résultats de l’ACP pour les valeurs propres</h4>
+<p>À titre de rappel, une ACP normée est réalisée sur des variables préalablement centrées réduites (équation <a href="sect122.html#eq:scorezacpnormee">(12.4)</a>), ce qui signifie que pour chaque variable :</p>
+<ul>
+<li>Nous soustrayons à chaque valeur la moyenne de la variable correspondante (centrage); la moyenne est donc égale à 0.</li>
+<li>Nous divisons cette différence par l’écart-type de la variable correspondante (réduction); la variance est égale à 1.</li>
+</ul>
+
+<p><span class="math display" id="eq:scorezacpnormee">\[\begin{equation}  
+z= \frac{x_i-\mu}{\sigma}
+\tag{12.4}
+\end{equation}\]</span>
+</p>
+<p>Par conséquent, la variance totale (ou inertie totale) d’un tableau sur lequel est calculée une ACP normée est égale au nombre de variables qu’il comprend. Puisque nous l’appliquons ici à dix variables, la variance totale du tableau à réduire – c’est-à-dire à résumer en <em>K</em> nouvelles variables synthétiques, composantes principales, axes factoriels – est donc égale à 10. Trois mesures reportées au tableau <a href="sect122.html#tab:dataacpValeurPropres">12.4</a> permettent d’analyser les valeurs propres :</p>
+<ul>
+<li><span class="math inline">\(\mbox{VP}_k\)</span>, la valeur propre (<em>eigenvalue</em> en anglais) de l’axe <em>k</em>, c’est-à-dire la quantité de variance du tableau initial résumé par l’axe.</li>
+<li><span class="math inline">\(\mbox{VP}_k / \mbox{P}\)</span> avec <em>P</em> étant le nombre de variables que comprend le tableau initial. Cette mesure représente ainsi le pourcentage de la variance totale du tableau résumé par l’axe <em>k</em>, autrement dit la quantité d’informations du tableau initial résumée par l’axe, la composante principale <em>k</em>. Cela nous permet ainsi d’évaluer le pouvoir explicatif de l’axe.</li>
+<li>Le pourcentage cumulé pour les axes.</li>
+</ul>
+<table>
+<caption>
+<span id="tab:dataacpValeurPropres">Tableau 12.4: </span>Résultats de l’ACP pour les valeurs propres
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Composante
+</th>
+<th style="text-align:right;">
+Valeur propre
+</th>
+<th style="text-align:right;">
+Pourcentage
+</th>
+<th style="text-align:right;">
+Pourc. cumulé
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3,543
+</td>
+<td style="text-align:right;">
+35,425
+</td>
+<td style="text-align:right;">
+35,425
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2,760
+</td>
+<td style="text-align:right;">
+27,596
+</td>
+<td style="text-align:right;">
+63,021
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1,042
+</td>
+<td style="text-align:right;">
+10,422
+</td>
+<td style="text-align:right;">
+73,443
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0,751
+</td>
+<td style="text-align:right;">
+7,511
+</td>
+<td style="text-align:right;">
+80,954
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0,606
+</td>
+<td style="text-align:right;">
+6,059
+</td>
+<td style="text-align:right;">
+87,013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0,388
+</td>
+<td style="text-align:right;">
+3,880
+</td>
+<td style="text-align:right;">
+90,893
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0,379
+</td>
+<td style="text-align:right;">
+3,788
+</td>
+<td style="text-align:right;">
+94,681
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0,244
+</td>
+<td style="text-align:right;">
+2,441
+</td>
+<td style="text-align:right;">
+97,122
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0,217
+</td>
+<td style="text-align:right;">
+2,167
+</td>
+<td style="text-align:right;">
+99,289
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0,071
+</td>
+<td style="text-align:right;">
+0,711
+</td>
+<td style="text-align:right;">
+100,000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Avant d’analyser en détail le tableau <a href="sect122.html#tab:dataacpValeurPropres">12.4</a>, notez que la somme des valeurs propres de toutes les composantes de l’ACP est toujours égale au nombre de variables du tableau initial. Aussi, la quantité de variance expliquée (les valeurs propres) décroît de la composante 1 à la composante <em>K</em>.</p>
+<p><strong>Combien d’axes d’une ACP faut-il retenir?</strong> Pour répondre à cette question, deux approches sont possibles :</p>
+<ul>
+<li><strong>Approche statistique</strong> (avec le critère de Kaiser <span class="citation">(<a href="#ref-kaiser1960application" role="doc-biblioref">1960</a>)</span>). Nous retenons uniquement les composantes qui présentent une valeur propre supérieure à 1. Rappelez-vous qu’en ACP normée, les variables sont préalablement centrées réduites, et donc que leur variance respective est égale à 1. Par conséquent, une composante ayant une valeur propre inférieure à 1 a un pouvoir explicatif inférieur à celui d’une variable. À la lecture du tableau, nous retenons les trois premières composantes si nous appliquons ce critère.</li>
+<li><strong>Approche empirique</strong> basée sur la lecture des pourcentages et des pourcentages cumulés. Nous pouvons retenir uniquement les deux premières composantes. En effet, ces deux premiers facteurs résument près des deux tiers de la variance totale du tableau (63,02 %). Cela démontre bien que l’ACP, comme les autres méthodes factorielles, est bien une méthode de réduction de données puisque nous résumons dix variables avec deux nouvelles variables synthétiques (axes, composantes principales). Pour faciliter le choix du nombre d’axes, il est fortement conseillé de construire des histogrammes à partir des valeurs propres, des pourcentages et des pourcentages cumulés (figure <a href="sect122.html#fig:acpgraphvp">12.5</a>). Or, à la lecture de ces graphiques, nous constatons que la variance expliquée chute drastiquement après les deux premières composantes. Par conséquent, nous pouvons retenir uniquement les deux premiers axes.</li>
+</ul>
+<div class="bloc_astuce">
+<p><strong>Lecture du diagramme des valeurs propres</strong></p>
+<p>Plus les variables incluses dans l’ACP sont corrélées entre elles, plus l’ACP est intéressante : plus les valeurs propres des premiers axes sont fortes et plus il y a des sauts importants dans le diagramme des valeurs propres. À l’inverse, lorsque les variables incluses dans l’ACP sont peu corrélées entre elles, il n’y a pas de sauts importants dans l’histogramme, autrement dit les valeurs propres sont uniformément décroissantes.</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:acpgraphvp"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpgraphvp-1.png" alt="Graphiques personnalisés pour les valeurs propres pour l'ACP" width="75%" />
+<p class="caption">
+Figure 12.5: Graphiques personnalisés pour les valeurs propres pour l’ACP
+</p>
+</div>
+</div>
+<div id="sect12222" class="section level4">
+<h4><span class="header-section-number">12.2.2.2</span> Résultats de l’ACP pour les variables</h4>
+<p>Pour qualifier les axes, quatre mesures sont disponibles pour les variables :</p>
+<ul>
+<li><strong>Les coordonnées factorielles des variables</strong> sont simplement les coefficients de corrélation de Pearson des variables sur l’axe <em>k</em> et varient ainsi de -1 à 1 (relire au besoin la section <a href="sect043.html#sect043">4.3</a>). Pour qualifier un axe, il convient alors de repérer les variables les plus corrélées positivement et négativement sur l’axe, autrement dit, de repérer les variables situées aux extrémités l’axe.</li>
+<li><strong>Les cosinus carrés des variables</strong> (Cos<sup>2</sup>) (appelés aussi les qualités de représentation des variables sur un axe) permettent de repérer le ou les axes qui concourent le plus à donner un sens à la variable. Ils sont en fait les coordonnées des variables mises au carré. La somme des cosinus carrés d’une variable sur tous les axes de l’ACP est donc égale à 1 (sommation en ligne).
+<strong>La qualité de représentation d’une variable sur les <em>n</em> premiers axes</strong> est simplement la somme des cosinus carrés d’une variable sur les axes retenus. Par exemple, pour la variable <code>Lden</code>, la qualité de représentation de la variable sur le premier axe est égale : <span class="math inline">\(\mbox{0,42}^2=\mbox{0,17}\)</span>. Pour cette même variable, la qualité de la <code>Lden</code> sur les trois premiers axes est égale à : <span class="math inline">\(\mbox{0,17}+\mbox{0,32}+\mbox{0,26}=\mbox{0,75}\)</span>.</li>
+<li><strong>Les contributions des variables</strong> permettent de repérer celles qui participent le plus à la formation d’un axe. Elles s’obtiennent en divisant les cosinus carrés par la valeur propre de l’axe multiplié par 100. La somme des contributions des variables pour un axe donné est donc égale à 100 (sommation en colonne). Par exemple, pour la variable <code>Lden</code>, la contribution sur le premier axe est égale : <span class="math inline">\(\mbox{0,174} / \mbox{3,543} \times \mbox{100}= \mbox{4,920 }%\)</span>.</li>
+</ul>
+<p>Les résultats de l’ACP pour les variables sont présentés au tableau <a href="sect122.html#tab:dataacpCoordVars">12.5</a>.</p>
+<table>
+<caption>
+<span id="tab:dataacpCoordVars">Tableau 12.5: </span>Résultats de l’ACP pour les variables
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Coordonnées
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Cosinus carrés
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Contributions
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+Qualité
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lden
+</td>
+<td style="text-align:right;">
+0,42
+</td>
+<td style="text-align:right;">
+0,57
+</td>
+<td style="text-align:right;">
+0,51
+</td>
+<td style="text-align:right;">
+0,17
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+<td style="text-align:right;">
+0,26
+</td>
+<td style="text-align:right;">
+0,75
+</td>
+<td style="text-align:right;">
+4,92
+</td>
+<td style="text-align:right;">
+11,64
+</td>
+<td style="text-align:right;">
+24,80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NO2
+</td>
+<td style="text-align:right;">
+0,15
+</td>
+<td style="text-align:right;">
+0,93
+</td>
+<td style="text-align:right;">
+0,19
+</td>
+<td style="text-align:right;">
+0,02
+</td>
+<td style="text-align:right;">
+0,86
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+0,92
+</td>
+<td style="text-align:right;">
+0,66
+</td>
+<td style="text-align:right;">
+31,07
+</td>
+<td style="text-align:right;">
+3,54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PM25
+</td>
+<td style="text-align:right;">
+0,19
+</td>
+<td style="text-align:right;">
+0,92
+</td>
+<td style="text-align:right;">
+0,03
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+0,84
+</td>
+<td style="text-align:right;">
+0,00
+</td>
+<td style="text-align:right;">
+0,87
+</td>
+<td style="text-align:right;">
+1,01
+</td>
+<td style="text-align:right;">
+30,36
+</td>
+<td style="text-align:right;">
+0,12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VegHautPrt
+</td>
+<td style="text-align:right;">
+-0,40
+</td>
+<td style="text-align:right;">
+-0,42
+</td>
+<td style="text-align:right;">
+0,40
+</td>
+<td style="text-align:right;">
+0,16
+</td>
+<td style="text-align:right;">
+0,18
+</td>
+<td style="text-align:right;">
+0,16
+</td>
+<td style="text-align:right;">
+0,50
+</td>
+<td style="text-align:right;">
+4,63
+</td>
+<td style="text-align:right;">
+6,35
+</td>
+<td style="text-align:right;">
+15,46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct0_14
+</td>
+<td style="text-align:right;">
+0,55
+</td>
+<td style="text-align:right;">
+-0,53
+</td>
+<td style="text-align:right;">
+0,08
+</td>
+<td style="text-align:right;">
+0,30
+</td>
+<td style="text-align:right;">
+0,28
+</td>
+<td style="text-align:right;">
+0,01
+</td>
+<td style="text-align:right;">
+0,59
+</td>
+<td style="text-align:right;">
+8,61
+</td>
+<td style="text-align:right;">
+10,28
+</td>
+<td style="text-align:right;">
+0,55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_65
+</td>
+<td style="text-align:right;">
+-0,41
+</td>
+<td style="text-align:right;">
+-0,27
+</td>
+<td style="text-align:right;">
+0,72
+</td>
+<td style="text-align:right;">
+0,17
+</td>
+<td style="text-align:right;">
+0,07
+</td>
+<td style="text-align:right;">
+0,51
+</td>
+<td style="text-align:right;">
+0,75
+</td>
+<td style="text-align:right;">
+4,73
+</td>
+<td style="text-align:right;">
+2,66
+</td>
+<td style="text-align:right;">
+49,26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_Img
+</td>
+<td style="text-align:right;">
+0,87
+</td>
+<td style="text-align:right;">
+-0,09
+</td>
+<td style="text-align:right;">
+0,11
+</td>
+<td style="text-align:right;">
+0,76
+</td>
+<td style="text-align:right;">
+0,01
+</td>
+<td style="text-align:right;">
+0,01
+</td>
+<td style="text-align:right;">
+0,78
+</td>
+<td style="text-align:right;">
+21,56
+</td>
+<td style="text-align:right;">
+0,29
+</td>
+<td style="text-align:right;">
+1,08
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TxChom1564
+</td>
+<td style="text-align:right;">
+0,77
+</td>
+<td style="text-align:right;">
+-0,09
+</td>
+<td style="text-align:right;">
+-0,07
+</td>
+<td style="text-align:right;">
+0,60
+</td>
+<td style="text-align:right;">
+0,01
+</td>
+<td style="text-align:right;">
+0,00
+</td>
+<td style="text-align:right;">
+0,61
+</td>
+<td style="text-align:right;">
+16,89
+</td>
+<td style="text-align:right;">
+0,27
+</td>
+<td style="text-align:right;">
+0,45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pct_brevet
+</td>
+<td style="text-align:right;">
+0,73
+</td>
+<td style="text-align:right;">
+-0,43
+</td>
+<td style="text-align:right;">
+0,22
+</td>
+<td style="text-align:right;">
+0,53
+</td>
+<td style="text-align:right;">
+0,19
+</td>
+<td style="text-align:right;">
+0,05
+</td>
+<td style="text-align:right;">
+0,77
+</td>
+<td style="text-align:right;">
+14,94
+</td>
+<td style="text-align:right;">
+6,81
+</td>
+<td style="text-align:right;">
+4,61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NivVieMed
+</td>
+<td style="text-align:right;">
+-0,88
+</td>
+<td style="text-align:right;">
+0,09
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+0,78
+</td>
+<td style="text-align:right;">
+0,01
+</td>
+<td style="text-align:right;">
+0,00
+</td>
+<td style="text-align:right;">
+0,79
+</td>
+<td style="text-align:right;">
+22,06
+</td>
+<td style="text-align:right;">
+0,28
+</td>
+<td style="text-align:right;">
+0,14
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyse de la première composante principale (valeur propre de 3,54, 35,43 %)</strong></p>
+<ul>
+<li><p>À la lecture des contributions, il est clair que quatre variables contribuent grandement à la formation de l’axe 1 : <code>NivVieMed</code> (22,06 %),
+<code>Pct_Img</code> (21,56 %), <code>TxChom1564</code> (16,89 %) et <code>Pct_brevet</code> (14,94 %). Il convient alors d’analyser en détail leurs coordonnées factorielles et leurs cosinus carrés.</p></li>
+<li><p>À la lecture des coordonnées factorielles, nous constatons que trois variables socioéconomiques sont fortement corrélées positivement avec l’axe 1, soit le <em>pourcentage d’immigrants</em> (0,87), le <em>taux de chômage</em> (0,77) et le <em>pourcentage de personnes avec une faible scolarité</em> (0,73). À l’autre extrémité, la <em>médiane du niveau de vie</em> (en Euros) est négativement corrélée avec l’axe 1. Comment interpréter ce résultat? Premièrement, cela signifie que plus la valeur de l’axe 1 est positive et élevée, plus celles des trois variables (<code>Pct_Img</code>,<code>TxChom1564</code> et <code>Pct_brevet</code>) sont aussi élevées (corrélations positives) et plus la valeur de <code>NivVieMed</code> est faible (corrélation négative). Inversement, plus la valeur de l’axe 1 est négative et faible, les valeurs de <code>Pct_Img</code>, <code>TxChom1564</code> et <code>Pct_brevet</code> sont faibles et plus celle de <code>NivVieMed</code> est forte. Deuxièmement, cela signifie que les trois variables (<code>Pct_Img</code>,<code>TxChom1564</code> et <code>Pct_brevet</code>) sont fortement corrélées positivement entre elles puisqu’elles se situent sur la même extrémité de l’axe et qu’elles sont toutes trois négativement corrélées avec la variable <code>NivVieMed</code>. Cela peut être rapidement confirmé avec la matrice de corrélation entre les dix variables (tableau <a href="sect122.html#tab:dataacpMatriceCorr">12.6</a>).</p></li>
+<li><p>À la lecture des cosinus carrés de l’axe 1, nous constatons que plus des trois quarts de la dispersion/de l’information des variables <code>NivVieMed</code> (0,78) et <code>Pct_Img</code> (0,76) est concentrée sur l’axe 1.</p></li>
+</ul>
+<table>
+<caption>
+<span id="tab:dataacpMatriceCorr">Tableau 12.6: </span>Matrice de corrélation de Pearson entre les variables utilisées pour l’ACP
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+A
+</th>
+<th style="text-align:right;">
+B
+</th>
+<th style="text-align:right;">
+C
+</th>
+<th style="text-align:right;">
+D
+</th>
+<th style="text-align:right;">
+E
+</th>
+<th style="text-align:right;">
+F
+</th>
+<th style="text-align:right;">
+G
+</th>
+<th style="text-align:right;">
+H
+</th>
+<th style="text-align:right;">
+I
+</th>
+<th style="text-align:right;">
+J
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A. Lden
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0,62
+</td>
+<td style="text-align:right;">
+0,49
+</td>
+<td style="text-align:right;">
+-0,23
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+-0,09
+</td>
+<td style="text-align:right;">
+0,28
+</td>
+<td style="text-align:right;">
+0,19
+</td>
+<td style="text-align:right;">
+0,14
+</td>
+<td style="text-align:right;">
+-0,26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B. NO2
+</td>
+<td style="text-align:right;">
+0,62
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0,90
+</td>
+<td style="text-align:right;">
+-0,28
+</td>
+<td style="text-align:right;">
+-0,34
+</td>
+<td style="text-align:right;">
+-0,21
+</td>
+<td style="text-align:right;">
+0,07
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+-0,25
+</td>
+<td style="text-align:right;">
+-0,04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C. PM25
+</td>
+<td style="text-align:right;">
+0,49
+</td>
+<td style="text-align:right;">
+0,90
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+-0,39
+</td>
+<td style="text-align:right;">
+-0,34
+</td>
+<td style="text-align:right;">
+-0,26
+</td>
+<td style="text-align:right;">
+0,12
+</td>
+<td style="text-align:right;">
+0,07
+</td>
+<td style="text-align:right;">
+-0,25
+</td>
+<td style="text-align:right;">
+-0,10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D. VegHautPrt
+</td>
+<td style="text-align:right;">
+-0,23
+</td>
+<td style="text-align:right;">
+-0,28
+</td>
+<td style="text-align:right;">
+-0,39
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+<td style="text-align:right;">
+-0,22
+</td>
+<td style="text-align:right;">
+-0,18
+</td>
+<td style="text-align:right;">
+-0,14
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E. Pct0_14
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+-0,34
+</td>
+<td style="text-align:right;">
+-0,34
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+-0,12
+</td>
+<td style="text-align:right;">
+0,46
+</td>
+<td style="text-align:right;">
+0,36
+</td>
+<td style="text-align:right;">
+0,54
+</td>
+<td style="text-align:right;">
+-0,45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F. Pct_65
+</td>
+<td style="text-align:right;">
+-0,09
+</td>
+<td style="text-align:right;">
+-0,21
+</td>
+<td style="text-align:right;">
+-0,26
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+<td style="text-align:right;">
+-0,12
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+-0,24
+</td>
+<td style="text-align:right;">
+-0,30
+</td>
+<td style="text-align:right;">
+0,00
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G. Pct_Img
+</td>
+<td style="text-align:right;">
+0,28
+</td>
+<td style="text-align:right;">
+0,07
+</td>
+<td style="text-align:right;">
+0,12
+</td>
+<td style="text-align:right;">
+-0,22
+</td>
+<td style="text-align:right;">
+0,46
+</td>
+<td style="text-align:right;">
+-0,24
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0,66
+</td>
+<td style="text-align:right;">
+0,64
+</td>
+<td style="text-align:right;">
+-0,73
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H. TxChom1564
+</td>
+<td style="text-align:right;">
+0,19
+</td>
+<td style="text-align:right;">
+0,04
+</td>
+<td style="text-align:right;">
+0,07
+</td>
+<td style="text-align:right;">
+-0,18
+</td>
+<td style="text-align:right;">
+0,36
+</td>
+<td style="text-align:right;">
+-0,30
+</td>
+<td style="text-align:right;">
+0,66
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0,47
+</td>
+<td style="text-align:right;">
+-0,62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I. Pct_brevet
+</td>
+<td style="text-align:right;">
+0,14
+</td>
+<td style="text-align:right;">
+-0,25
+</td>
+<td style="text-align:right;">
+-0,25
+</td>
+<td style="text-align:right;">
+-0,14
+</td>
+<td style="text-align:right;">
+0,54
+</td>
+<td style="text-align:right;">
+0,00
+</td>
+<td style="text-align:right;">
+0,64
+</td>
+<td style="text-align:right;">
+0,47
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+-0,67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J. NivVieMed
+</td>
+<td style="text-align:right;">
+-0,26
+</td>
+<td style="text-align:right;">
+-0,04
+</td>
+<td style="text-align:right;">
+-0,10
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+<td style="text-align:right;">
+-0,45
+</td>
+<td style="text-align:right;">
+0,32
+</td>
+<td style="text-align:right;">
+-0,73
+</td>
+<td style="text-align:right;">
+-0,62
+</td>
+<td style="text-align:right;">
+-0,67
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyse de la deuxième composante principale (valeur propre de 2,76, 27,60 %)</strong></p>
+<ul>
+<li>À la lecture des contributions, trois variables environnementales contribuent à la formation de l’axe 2 : principalement, celles sur la pollution de l’air (<code>NO2</code> = 31,07 % et <code>PM25</code> = 30,36 %) et secondairement, celle sur le bruit routier (<code>Lden</code> = 11,64 %).</li>
+<li>À la lecture des coordonnées factorielles, ces trois variables sont fortement corrélées positivement avec l’axe 2 : <code>NO2</code> (0,93), <code>PM25</code> (0,92) et <code>Lden</code> (0,57). À l’autre extrémité de l’axe, la variable <code>Pct0_14</code> est négativement, mais pas fortement, corrélée (-0,53). La lecture de la matrice de corrélation au tableau <a href="sect122.html#tab:dataacpMatriceCorr">12.6</a> confirme que ces trois variables environnementales sont fortement corrélées positivement entre elles (par exemple, un coefficient de corrélation de Pearson de 0,90 entre <code>NO2</code> et <code>PM25</code>).</li>
+<li>À la lecture des cosinus carrés de l’axe 2, nous constatons que près de 90 % de la dispersion/de l’information des variables <code>NO2</code> (0,86) et <code>PM25</code> (0,84) est concentrée sur l’axe 2.</li>
+</ul>
+<p><strong>Analyse de la troisième composante principale (valeur propre de 1,042, 10,42 %)</strong></p>
+<ul>
+<li>Le <em>pourcentage de personnes âgées</em> (<code>Pct_65</code>) contribue principalement à la formation de l’axe 3 avec lequel il est corrélé positivement (contribution de 49,26 % et coordonnée factorielle de 0,72). S’en suit la variable <code>Lden</code>, qui joue un rôle beaucoup moins important (contribution de 24,80 % et coordonnée factorielle de 0,51).</li>
+</ul>
+<div class="bloc_astuce">
+<p><strong>Lien entre la valeur propre d’un axe et le nombre de variables contribuant à sa formation</strong></p>
+<p>Vous auvez compris que plus la valeur propre d’un axe est forte, plus il y a potentiellement de variables qui concourent à sa formation. Cela explique que pour la troisième composante, qui a une faible valeur propre (1,042), seule une variable contribue significativement à sa formation.</p>
+</div>
+<p><strong>Analyse de la qualité de représentation des variables sur les premiers axes de l’ACP</strong></p>
+<p>À titre de rappel, la qualité est simplement la somme des cosinus carrés d’une variable sur les axes retenus. Si nous retenons trois axes, les six variables qui sont le mieux résumées – et qui ont donc le plus d’influence sur les résultats de l’ACP – sont  : <code>NO2</code> (0,92), <code>PM25</code> (0,87), <code>NivVieMed</code> (0,79), <code>Pct_Img</code> (0,78), <code>Pct_brevet</code> (0,77) et <code>Lden</code> (0,75).</p>
+<p><strong>Qualification, dénomination d’axes factoriels</strong></p>
+<p>L’analyse des coordonnées, des contributions et des cosinus carrés doit vous permettre de formuler un intitulé pour chacun des axes retenus. Nous vous proposons les intitulés suivants :</p>
+<ul>
+<li><em>Niveau de défavorisation socioéconomique</em> (axe 1). Plus la valeur de l’axe est élevé, plus le niveau de défavorisation de l’entité spatiale (IRIS) est élevé.</li>
+<li><em>Qualité environnementale</em> (axe 2). Plus la valeur de l’axe est forte, plus les niveaux de pollution atmosphérique (dioxyde d’azote et particules fines) et de bruit (Lden) sont élevés.</li>
+</ul>
+<p><strong>Recours à des graphiques pour analyser les résultats de l’ACP pour des variables</strong></p>
+<p>Plus le nombre de variables utilisées pour calculer l’ACP est important, plus l’analyse des coordonnées factorielles, des cosinus carrés et des contributions reportés dans un tableau devient fastidieuse. Puisque l’ACP a été calculée sur dix variables, l’analyse des valeurs du tableau <a href="sect122.html#tab:dataacpCoordVars">12.5</a> a été assez facile et rapide. Imaginez maintenant que nous réalisons une ACP sur une centaine de variables, la taille du tableau des résultats pour les variables sera considérable… Par conséquent, il est recommandé de construire plusieurs graphiques qui facilitent l’analyse des résultats pour les variables.</p>
+<p>Par exemple, à la figure <a href="sect122.html#fig:acpgraphvarscoords">12.6</a>, nous avons construit des graphiques avec les coordonnées factorielles sur les trois premiers axes de l’ACP. En un coup d’œil, il est facile de repérer les variables les plus corrélées positivement ou négativement avec chacun d’entre eux.
+Aussi, il est fréquent de construire un nuage de points avec les coordonnées des variables sur les deux premiers axes factoriels, soit un graphique communément appelé <strong>nuage de points des variables sur le premier plan factoriel</strong> sur lequel est représenté le cercle des corrélations (figure <a href="sect122.html#fig:acp1erplanfactVars">12.7</a>). Bien entendu, cet exercice peut être fait avec d’autres axes factoriels (les axes 3 et 4 par exemple).</p>
+<div class="figure" style="text-align: center"><span id="fig:acpgraphvarscoords"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpgraphvarscoords-1.png" alt="Coordonnées factorielles des variables" width="100%" />
+<p class="caption">
+Figure 12.6: Coordonnées factorielles des variables
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:acp1erplanfactVars"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acp1erplanfactVars-1.png" alt="Premier plan factoriel de l'ACP pour les variables" width="75%" />
+<p class="caption">
+Figure 12.7: Premier plan factoriel de l’ACP pour les variables
+</p>
+</div>
+</div>
+<div id="sect12223" class="section level4">
+<h4><span class="header-section-number">12.2.2.3</span> Résultats de l’ACP pour les individus</h4>
+<p>Comme pour les variables, nous retrouvons les mêmes mesures pour les individus : les coordonnées factorielles, les cosinus carrés et les contributions. Les coordonnées factorielles des individus sont les projections orthogonales des observations sur l’axe. Puisqu’en ACP normée, les variables utilisées pour l’ACP sont centrées réduites, la moyenne des coordonnées factorielles des individus pour un axe est toujours égale à zéro. En revanche, contrairement aux coordonnées factorielles pour les variables, les coordonnées pour les individus ne varient pas de -1 à 1! Les cosinus carrés quantifient à quel point chaque axe représente chaque individu. Enfin, les contributions quantifient l’apport de chaque individu à la formation d’un axe.</p>
+<p>Si le jeu de données comprend peu d’observations, il est toujours possible de créer un <strong>nuage de points des individus sur le premier plan factoriel</strong> sur lequel vous pouvez ajouter les étiquettes permettant d’identifier les observations (figure <a href="sect122.html#fig:acp1erplanfactIndiv">12.8</a>). Ce graphique est rapidement illisible lorsque le nombre d’observations est important. Il peut rester utile si certaines des observations du jeu de données doivent faire l’objet d’une analyse spécifique.</p>
+<div class="figure" style="text-align: center"><span id="fig:acp1erplanfactIndiv"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acp1erplanfactIndiv-1.png" alt="Premier plan factoriel pour les individus" width="75%" />
+<p class="caption">
+Figure 12.8: Premier plan factoriel pour les individus
+</p>
+</div>
+<p>Lorsque les observations sont des unités spatiales, il est très intéressant de cartographier les coordonnées factorielles des individus (figure <a href="sect122.html#fig:acp1erplanfactIndiv">12.8</a>). À la lecture de la carte choroplèthe de gauche (axe 1), nous pouvons constater que le niveau de défavorisation socioéconomique est élevé dans l’est (IRIS en vert), et inversement, très faible à l’ouest de l’agglomération (IRIS en rouge). À la lecture de la carte de droite (axe 2), sans surprise, la partie centrale de l’agglomération est caractérisée par des niveaux de pollution atmosphérique et de bruit routier bien plus élevés qu’en périphérie.</p>
+<div class="figure" style="text-align: center"><span id="fig:acpcartoindiv"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpcartoindiv-1.png" alt="Cartographie des coordonnées factorielles des individus" width="100%" />
+<p class="caption">
+Figure 12.9: Cartographie des coordonnées factorielles des individus
+</p>
+</div>
+<div class="bloc_aller_loin">
+<p>Nous abordons ici plusieurs autres éléments intéressants de l’ACP.</p>
+<p><strong>Ajout de variables ou d’individus supplémentaires</strong></p>
+<p>Premièrement, il est possible d’ajouter des variables continues ou des individus supplémentaires qui n’ont pas été pris en compte dans le calcul de l’ACP (figure <a href="sect122.html#fig:acpvarindcorrsuppl">12.10</a>). Concernant les variables continues supplémentaires, il s’agit simplement de calculer leurs corrélations avec les axes retenus de l’ACP. Concernant les individus, il s’agit de les projeter sur les axes factoriels. Pour plus d’informations sur le sujet, consultez les excellents ouvrages de Ludovic Lebart, Alain Morineau et Marie Piron <span class="citation">(<a href="#ref-lebart1995statistique" role="doc-biblioref">1995</a>, 42‑45)</span> ou encore de Jérôme Pagès <span class="citation">(<a href="#ref-pages2013analyse" role="doc-biblioref">2013</a>, 22‑24)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:acpvarindcorrsuppl"></span>
+<img src="images/analysesfactorielles/AcpIndVarSuppl.png" alt="Variables et individus supplémentaires pour l'ACP" width="28%"  />
+<p class="caption">
+Figure 12.10: Variables et individus supplémentaires pour l’ACP
+</p>
+</div>
+<p><strong>Pondération des individus et des variables</strong></p>
+<p>Deuxièmement, il est possible de pondérer à la fois les individus et, plus rarement, les variables lors du calcul de l’ACP.</p>
+<p><strong>Analyse en composantes principales non paramétrique</strong></p>
+<p>Troisièmement, il est possible de calculer une ACP sur des variables préalablement transformées en rang (section <a href="sect025.html#sect02552">2.5.5.2</a>). Cela peut être justifié lorsque les variables sont très anormalement distribuées en raison de valeurs extrêmes. Les coordonnées factorielles pour les variables sont alors le coefficient de Spearman (section <a href="sect043.html#sect0433">4.3.3</a>) et non de Pearson. Aussi, les variables sont centrées non pas sur leurs moyennes respectives, mais sur leurs médianes. Pour plus d’informations sur cette approche, consultez de nouveau Lebart et al. <span class="citation">(<a href="#ref-lebart1995statistique" role="doc-biblioref">1995</a>, 51‑52)</span>.</p>
+<p><strong>Analyse en composantes principales robuste</strong></p>
+<p>Finalement, d’autres méthodes plus avancées qu’une ACP non paramétrique peuvent être utilisées afin d’obtenir des composantes principales qui ne sont pas influencées par des valeurs extrêmes : les ACP robustes <span class="citation">(Rivest et Plante <a href="#ref-rivest1988analyse" role="doc-biblioref">1988</a>; Hubert, Rousseeuw et Vanden Branden <a href="#ref-hubert2005robpca" role="doc-biblioref">2005</a>)</span> qui peuvent être mises en œuvre, entre autres avec le <em>package</em> <code>roscpca</code>.</p>
+</div>
+</div>
+</div>
+<div id="sect1223" class="section level3">
+<h3><span class="header-section-number">12.2.3</span> Mise en œuvre dans R</h3>
+<p>Plusieurs <em>packages</em> permettent de calculer une ACP dans R, notamment <code>psych</code> (fonction <code>principal</code>), <code>ade4</code> (fonction <code>dudi.pca</code>) et <code>FactoMineR</code> (fonction <code>PCA</code>). Ce dernier est certainement le plus abouti. De plus, il permet également de calculer une analyse des correspondances (AFC), une analyse des correspondances multiples (ACM) et une analyse factorielle de données mixtes (AFDM). Nous utilisons donc <code>FactoMineR</code> pour mettre en œuvre les trois types de méthodes factorielles abordées dans ce chapitre (ACP, AFC et ACM). Pour l’ACP, nous exploitons un jeu de données issu du <em>package</em> <code>geocmeans</code> qu’il faut préalablement charger à l’aide des lignes de code suivantes.</p>
+<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1081-1"><a href="sect122.html#cb1081-1"></a><span class="kw">library</span>(geocmeans)</span>
+<span id="cb1081-2"><a href="sect122.html#cb1081-2"></a><span class="kw">data</span>(LyonIris)</span>
+<span id="cb1081-3"><a href="sect122.html#cb1081-3"></a>Data &lt;-<span class="st"> </span>LyonIris<span class="op">@</span>data[<span class="kw">c</span>(<span class="st">&quot;CODE_IRIS&quot;</span>,<span class="st">&quot;Lden&quot;</span>,<span class="st">&quot;NO2&quot;</span>,<span class="st">&quot;PM25&quot;</span>,<span class="st">&quot;VegHautPrt&quot;</span>,</span>
+<span id="cb1081-4"><a href="sect122.html#cb1081-4"></a>                        <span class="st">&quot;Pct0_14&quot;</span>,<span class="st">&quot;Pct_65&quot;</span>,<span class="st">&quot;Pct_Img&quot;</span>,</span>
+<span id="cb1081-5"><a href="sect122.html#cb1081-5"></a>                        <span class="st">&quot;TxChom1564&quot;</span>,<span class="st">&quot;Pct_brevet&quot;</span>,<span class="st">&quot;NivVieMed&quot;</span>)]</span></code></pre></div>
+<div id="sect12231" class="section level4">
+<h4><span class="header-section-number">12.2.3.1</span> Calcul et exploration d’une ACP avec <code>FactoMineR</code></h4>
+<p>Pour calculer l’ACP, il suffit d’utiliser la fonction <code>PCA</code> de <code>FactoMineR</code>, puis la fonction <code>summary(MonACP)</code> qui renvoie les résultats de l’ACP pour :</p>
+<ul>
+<li>Les valeurs propres (section <code>Eigenvalues</code>) pour les composantes principales (<code>Dim.1</code> à <code>Dim.n</code>) avec leur variance expliquée brute (<code>Variance</code>) en pourcentage (<code>% of var.</code>) et en pourcentage cumulé (<code>Cumulative % of var.</code>).</li>
+<li>Les dix premières observations (section <code>Individuals</code>) avec les coordonnées factorielles (<code>Dim.1</code> à <code>Dim.n</code>), les contributions (<code>ctr</code>) et les cosinus carrés (<code>cos2</code>). Pour accéder aux résultats pour toutes les observations, utilisez les fonctions <code>res.acp$ind</code> ou encore <code>res.acp$ind$coord</code> (uniquement les coordonnées factorielles), <code>res.acp$ind$contrib</code> (uniquement les contributions) et <code>res.acp$ind$cos2</code> (uniquement les cosinus carrés).</li>
+<li>Les variables (section <code>Variables</code>) avec les coordonnées factorielles (<code>Dim.1</code> à <code>Dim.n</code>), les contributions (<code>ctr</code>) et les cosinus carrés (<code>cos2</code>).</li>
+</ul>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1082-1"><a href="sect122.html#cb1082-1"></a><span class="kw">library</span>(FactoMineR)</span>
+<span id="cb1082-2"><a href="sect122.html#cb1082-2"></a><span class="co"># Version classique avec FactoMineR</span></span>
+<span id="cb1082-3"><a href="sect122.html#cb1082-3"></a><span class="co"># Construction d&#39;une ACP sur les colonnes 2 à 11 du DataFrame Data</span></span>
+<span id="cb1082-4"><a href="sect122.html#cb1082-4"></a>res.acp &lt;-<span class="st"> </span><span class="kw">PCA</span>(Data[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], <span class="dt">scale.unit=</span><span class="ot">TRUE</span>, <span class="dt">graph=</span>F)</span>
+<span id="cb1082-5"><a href="sect122.html#cb1082-5"></a><span class="co"># Affichage des résultats de la fonction PCA</span></span>
+<span id="cb1082-6"><a href="sect122.html#cb1082-6"></a><span class="kw">print</span>(res.acp)</span></code></pre></div>
+<pre><code>## **Results for the Principal Component Analysis (PCA)**
+## The analysis was performed on 506 individuals, described by 10 variables
+## *The results are available in the following objects:
+## 
+##    name               description                          
+## 1  &quot;$eig&quot;             &quot;eigenvalues&quot;                        
+## 2  &quot;$var&quot;             &quot;results for the variables&quot;          
+## 3  &quot;$var$coord&quot;       &quot;coord. for the variables&quot;           
+## 4  &quot;$var$cor&quot;         &quot;correlations variables - dimensions&quot;
+## 5  &quot;$var$cos2&quot;        &quot;cos2 for the variables&quot;             
+## 6  &quot;$var$contrib&quot;     &quot;contributions of the variables&quot;     
+## 7  &quot;$ind&quot;             &quot;results for the individuals&quot;        
+## 8  &quot;$ind$coord&quot;       &quot;coord. for the individuals&quot;         
+## 9  &quot;$ind$cos2&quot;        &quot;cos2 for the individuals&quot;           
+## 10 &quot;$ind$contrib&quot;     &quot;contributions of the individuals&quot;   
+## 11 &quot;$call&quot;            &quot;summary statistics&quot;                 
+## 12 &quot;$call$centre&quot;     &quot;mean of the variables&quot;              
+## 13 &quot;$call$ecart.type&quot; &quot;standard error of the variables&quot;    
+## 14 &quot;$call$row.w&quot;      &quot;weights for the individuals&quot;        
+## 15 &quot;$call$col.w&quot;      &quot;weights for the variables&quot;</code></pre>
+<div class="sourceCode" id="cb1084"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1084-1"><a href="sect122.html#cb1084-1"></a><span class="co"># Résumé des résultats (valeurs propres, individus, variables)</span></span>
+<span id="cb1084-2"><a href="sect122.html#cb1084-2"></a><span class="kw">summary</span>(res.acp)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## PCA(X = Data[, 2:11], scale.unit = TRUE, graph = F) 
+## 
+## 
+## Eigenvalues
+##                        Dim.1   Dim.2   Dim.3   Dim.4   Dim.5   Dim.6   Dim.7
+## Variance               3.543   2.760   1.042   0.751   0.606   0.388   0.379
+## % of var.             35.425  27.596  10.422   7.511   6.059   3.880   3.788
+## Cumulative % of var.  35.425  63.021  73.443  80.954  87.013  90.893  94.681
+##                        Dim.8   Dim.9  Dim.10
+## Variance               0.244   0.217   0.071
+## % of var.              2.441   2.167   0.711
+## Cumulative % of var.  97.122  99.289 100.000
+## 
+## Individuals (the 10 first)
+##                Dist    Dim.1    ctr   cos2    Dim.2    ctr   cos2    Dim.3
+## 1          |  3.054 |  1.315  0.096  0.185 | -2.515  0.453  0.678 |  0.221
+## 2          |  1.882 |  0.193  0.002  0.011 | -1.744  0.218  0.859 |  0.082
+## 3          |  2.820 |  2.338  0.305  0.687 | -0.860  0.053  0.093 | -0.765
+## 4          |  2.816 | -0.740  0.031  0.069 |  2.265  0.367  0.647 |  1.293
+## 5          |  3.210 | -2.208  0.272  0.473 | -1.597  0.183  0.248 |  1.471
+## 6          |  3.016 |  2.287  0.292  0.575 | -1.515  0.164  0.252 |  0.390
+## 7          |  3.022 | -1.540  0.132  0.260 | -1.803  0.233  0.356 |  0.465
+## 8          |  3.122 | -1.536  0.132  0.242 | -2.038  0.298  0.426 | -0.120
+## 9          |  4.743 | -3.930  0.862  0.687 | -1.806  0.234  0.145 |  0.993
+## 10         |  3.055 |  2.713  0.411  0.789 |  0.368  0.010  0.014 | -0.391
+##               ctr   cos2  
+## 1           0.009  0.005 |
+## 2           0.001  0.002 |
+## 3           0.111  0.074 |
+## 4           0.317  0.211 |
+## 5           0.411  0.210 |
+## 6           0.029  0.017 |
+## 7           0.041  0.024 |
+## 8           0.003  0.001 |
+## 9           0.187  0.044 |
+## 10          0.029  0.016 |
+## 
+## Variables
+##               Dim.1    ctr   cos2    Dim.2    ctr   cos2    Dim.3    ctr   cos2
+## Lden       |  0.417  4.920  0.174 |  0.567 11.640  0.321 |  0.508 24.799  0.258
+## NO2        |  0.153  0.657  0.023 |  0.926 31.068  0.857 |  0.192  3.540  0.037
+## PM25       |  0.189  1.007  0.036 |  0.915 30.355  0.838 |  0.035  0.117  0.001
+## VegHautPrt | -0.405  4.630  0.164 | -0.419  6.353  0.175 |  0.401 15.459  0.161
+## Pct0_14    |  0.552  8.605  0.305 | -0.533 10.281  0.284 |  0.076  0.553  0.006
+## Pct_65     | -0.409  4.730  0.168 | -0.271  2.658  0.073 |  0.716 49.258  0.513
+## Pct_Img    |  0.874 21.559  0.764 | -0.089  0.288  0.008 |  0.106  1.077  0.011
+## TxChom1564 |  0.774 16.893  0.598 | -0.086  0.267  0.007 | -0.068  0.450  0.005
+## Pct_brevet |  0.727 14.936  0.529 | -0.434  6.813  0.188 |  0.219  4.612  0.048
+## NivVieMed  | -0.884 22.062  0.782 |  0.088  0.278  0.008 |  0.038  0.136  0.001
+##             
+## Lden       |
+## NO2        |
+## PM25       |
+## VegHautPrt |
+## Pct0_14    |
+## Pct_65     |
+## Pct_Img    |
+## TxChom1564 |
+## Pct_brevet |
+## NivVieMed  |</code></pre>
+<p>Avec les fonctions de base <code>barplot</code> et <code>plot</code>, il est possible de construire rapidement des graphiques pour explorer les résultats de l’ACP pour les valeurs propres, les variables et les individus.</p>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1086-1"><a href="sect122.html#cb1086-1"></a><span class="co"># Graphiques pour les valeurs propres</span></span>
+<span id="cb1086-2"><a href="sect122.html#cb1086-2"></a><span class="kw">barplot</span>(res.acp<span class="op">$</span>eig[,<span class="dv">1</span>], <span class="dt">main=</span><span class="st">&quot;Valeurs propres&quot;</span>, <span class="dt">names.arg=</span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(res.acp<span class="op">$</span>eig))</span></code></pre></div>
+<p><img src="MethodesQuantitScSocialesBolR_files/figure-html/unnamed-chunk-296-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1087"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1087-1"><a href="sect122.html#cb1087-1"></a><span class="kw">barplot</span>(res.acp<span class="op">$</span>eig[,<span class="dv">2</span>], <span class="dt">main=</span><span class="st">&quot;Variance expliquée (%)&quot;</span>, <span class="dt">names.arg=</span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(res.acp<span class="op">$</span>eig))</span></code></pre></div>
+<p><img src="MethodesQuantitScSocialesBolR_files/figure-html/unnamed-chunk-296-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1088"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1088-1"><a href="sect122.html#cb1088-1"></a><span class="kw">barplot</span>(res.acp<span class="op">$</span>eig[,<span class="dv">3</span>], <span class="dt">main=</span><span class="st">&quot;Variance expliquée cumulée (%)&quot;</span>,</span>
+<span id="cb1088-2"><a href="sect122.html#cb1088-2"></a>        <span class="dt">names.arg=</span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(res.acp<span class="op">$</span>eig))</span></code></pre></div>
+<p><img src="MethodesQuantitScSocialesBolR_files/figure-html/unnamed-chunk-296-3.png" width="672" /></p>
+<div class="sourceCode" id="cb1089"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1089-1"><a href="sect122.html#cb1089-1"></a><span class="co"># Nuage du points du premier plan factoriel pour les variables et les individus</span></span>
+<span id="cb1089-2"><a href="sect122.html#cb1089-2"></a><span class="kw">plot</span>(res.acp, <span class="dt">graph.type =</span> <span class="st">&quot;classic&quot;</span>, <span class="dt">choix=</span><span class="st">&quot;var&quot;</span>, <span class="dt">axes =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, </span>
+<span id="cb1089-3"><a href="sect122.html#cb1089-3"></a>     <span class="dt">title =</span> <span class="st">&quot;Premier plan factoriel (variables)&quot;</span>)</span></code></pre></div>
+<p><img src="MethodesQuantitScSocialesBolR_files/figure-html/unnamed-chunk-296-4.png" width="672" /></p>
+<div class="sourceCode" id="cb1090"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1090-1"><a href="sect122.html#cb1090-1"></a><span class="kw">plot</span>(res.acp, <span class="dt">graph.type =</span> <span class="st">&quot;classic&quot;</span>, <span class="dt">choix=</span><span class="st">&quot;ind&quot;</span>, <span class="dt">axes =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, </span>
+<span id="cb1090-2"><a href="sect122.html#cb1090-2"></a>     <span class="dt">title =</span> <span class="st">&quot;Premier plan factoriel (individus)&quot;</span>)</span></code></pre></div>
+<p><img src="MethodesQuantitScSocialesBolR_files/figure-html/unnamed-chunk-296-5.png" width="672" /></p>
+<div class="bloc_aller_loin">
+<p>Nous avons vu, dans un encadré ci-dessus, qu’il est possible d’ajouter des variables et des individus supplémentaires dans une ACP, ce que permet la fonction <code>PCA</code> de <code>FactoMineR</code> avec les paramètres <code>ind.sup</code> et <code>quanti.sup</code>. Aussi, pour ajouter des pondérations aux individus ou aux variables, utilisez les paramètres <code>row.w</code> et <code>col.w</code>. Pour plus d’informations sur ces paramètres, consulter l’aide de la fonction en tapant <code>?PCA</code> dans la console de RStudio.</p>
+</div>
+</div>
+<div id="sect12232" class="section level4">
+<h4><span class="header-section-number">12.2.3.2</span> Exploration graphique des résultats de l’ACP avec <code>factoextra</code></h4>
+<p>Visuellement, vous avez pu constater que les graphiques ci-dessus (pour les valeurs propres et pour le premier plan factoriel pour les variables et les individus), réalisés avec les fonctions de base <code>barplot</code> et <code>plot</code>, sont peu attrayants. Avec le <em>package</em> <code>factoextra</code>, quelques lignes de code suffissent pour construire des graphiques bien plus esthétiques.</p>
+<p>Premièrement, la syntaxe ci-dessous renvoie deux graphiques pour analyser les résultats des valeurs propres (figure <a href="sect122.html#fig:factoextra1">12.11</a>).</p>
+<div class="sourceCode" id="cb1091"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1091-1"><a href="sect122.html#cb1091-1"></a><span class="kw">library</span>(factoextra)</span>
+<span id="cb1091-2"><a href="sect122.html#cb1091-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1091-3"><a href="sect122.html#cb1091-3"></a><span class="kw">library</span>(ggpubr)</span>
+<span id="cb1091-4"><a href="sect122.html#cb1091-4"></a></span>
+<span id="cb1091-5"><a href="sect122.html#cb1091-5"></a><span class="co"># Graphiques pour les variables propres avec factoextra</span></span>
+<span id="cb1091-6"><a href="sect122.html#cb1091-6"></a>G1 &lt;-<span class="st"> </span><span class="kw">fviz_screeplot</span>(res.acp, <span class="dt">choice =</span><span class="st">&quot;eigenvalue&quot;</span>, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb1091-7"><a href="sect122.html#cb1091-7"></a>                     <span class="dt">x=</span><span class="st">&quot;Composantes&quot;</span>,</span>
+<span id="cb1091-8"><a href="sect122.html#cb1091-8"></a>                     <span class="dt">y=</span><span class="st">&quot;Valeur propre&quot;</span>,</span>
+<span id="cb1091-9"><a href="sect122.html#cb1091-9"></a>                    <span class="dt">title=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb1091-10"><a href="sect122.html#cb1091-10"></a>G2 &lt;-<span class="st"> </span><span class="kw">fviz_screeplot</span>(res.acp, <span class="dt">choice =</span><span class="st">&quot;variance&quot;</span>, <span class="dt">addlabels =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb1091-11"><a href="sect122.html#cb1091-11"></a>                     <span class="dt">x=</span><span class="st">&quot;Composantes&quot;</span>,</span>
+<span id="cb1091-12"><a href="sect122.html#cb1091-12"></a>                     <span class="dt">y=</span><span class="st">&quot;Pourcentage de la variance expliquée&quot;</span>,</span>
+<span id="cb1091-13"><a href="sect122.html#cb1091-13"></a>                     <span class="dt">title=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb1091-14"><a href="sect122.html#cb1091-14"></a><span class="kw">ggarrange</span>(G1, G2)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra1"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra1-1.png" alt="Graphiques pour les valeurs propres de l'ACP avec factoextra" width="75%" />
+<p class="caption">
+Figure 12.11: Graphiques pour les valeurs propres de l’ACP avec factoextra
+</p>
+</div>
+<p>Deuxièmement, la syntaxe ci-dessous renvoie trois graphiques pour analyser les contributions de chaque variable aux deux premiers axes de l’ACP (figures <a href="sect122.html#fig:factoextra2">12.12</a> et <a href="sect122.html#fig:factoextra3">12.13</a>) et la qualité de représentation des variables sur les trois premiers axes (figure <a href="sect122.html#fig:factoextra4">12.14</a>), c’est-à-dire la somme des cosinus carrés sur les trois axes retenus.</p>
+<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1092-1"><a href="sect122.html#cb1092-1"></a><span class="co"># Contributions des variables aux deux premières composantes avec factoextra</span></span>
+<span id="cb1092-2"><a href="sect122.html#cb1092-2"></a><span class="kw">fviz_contrib</span>(res.acp, <span class="dt">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="dt">axes =</span> <span class="dv">1</span>, <span class="dt">top =</span> <span class="dv">10</span>,</span>
+<span id="cb1092-3"><a href="sect122.html#cb1092-3"></a>             <span class="dt">title =</span> <span class="st">&quot;Contributions des variables à la première composante&quot;</span>)</span>
+<span id="cb1092-4"><a href="sect122.html#cb1092-4"></a><span class="kw">fviz_contrib</span>(res.acp, <span class="dt">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="dt">axes =</span> <span class="dv">2</span>, <span class="dt">top =</span> <span class="dv">10</span>,</span>
+<span id="cb1092-5"><a href="sect122.html#cb1092-5"></a>             <span class="dt">title =</span> <span class="st">&quot;Contributions des variables à la première composante&quot;</span>)</span>
+<span id="cb1092-6"><a href="sect122.html#cb1092-6"></a><span class="kw">fviz_cos2</span>(res.acp, <span class="dt">choice =</span> <span class="st">&quot;var&quot;</span>, <span class="dt">axes =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)<span class="op">+</span></span>
+<span id="cb1092-7"><a href="sect122.html#cb1092-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Somme des cosinus carrés sur les 3 axes retenus&quot;</span>,</span>
+<span id="cb1092-8"><a href="sect122.html#cb1092-8"></a>       <span class="dt">title =</span><span class="st">&quot;Qualité de représentation des variables sur les axes retenus de l&#39;ACP&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra2"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra2-1.png" alt="Contributions des variables à la première composante avec factoextra" width="85%" />
+<p class="caption">
+Figure 12.12: Contributions des variables à la première composante avec factoextra
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra3"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra3-1.png" alt="Contributions des variables à la deuxième composante avec factoextra" width="85%" />
+<p class="caption">
+Figure 12.13: Contributions des variables à la deuxième composante avec factoextra
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra4"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra4-1.png" alt="Qualité des variables sur les trois premières composantes avec factoextra" width="85%" />
+<p class="caption">
+Figure 12.14: Qualité des variables sur les trois premières composantes avec factoextra
+</p>
+</div>
+<p>Troisièmement, le code ci-dessous renvoie un nuage de points pour le premier plan factoriel de l’ACP (axes 1 et 2) pour les variables (figure <a href="sect122.html#fig:factoextra5">12.15</a>) et les individus (figure <a href="sect122.html#fig:factoextra6">12.16</a>).</p>
+<div class="sourceCode" id="cb1093"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1093-1"><a href="sect122.html#cb1093-1"></a><span class="co"># Premier plan factoriel pour les variables avec factoextra</span></span>
+<span id="cb1093-2"><a href="sect122.html#cb1093-2"></a><span class="kw">fviz_pca_var</span>(res.acp, <span class="dt">col.var=</span><span class="st">&quot;contrib&quot;</span>,</span>
+<span id="cb1093-3"><a href="sect122.html#cb1093-3"></a>             <span class="dt">title =</span> <span class="st">&quot;Premier plan factoriel pour les variables&quot;</span>)<span class="op">+</span></span>
+<span id="cb1093-4"><a href="sect122.html#cb1093-4"></a><span class="st">  </span><span class="kw">scale_color_gradient2</span>(<span class="dt">low=</span><span class="st">&quot;#313695&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;#ffffbf&quot;</span>, <span class="dt">high=</span><span class="st">&quot;#a50026&quot;</span>,</span>
+<span id="cb1093-5"><a href="sect122.html#cb1093-5"></a>                        <span class="dt">midpoint=</span><span class="kw">mean</span>(res.acp<span class="op">$</span>var<span class="op">$</span>contrib[,<span class="dv">1</span>]))</span>
+<span id="cb1093-6"><a href="sect122.html#cb1093-6"></a><span class="co"># Premier plan factoriel pour les individus avec factoextra</span></span>
+<span id="cb1093-7"><a href="sect122.html#cb1093-7"></a><span class="kw">fviz_pca_ind</span>(res.acp, <span class="dt">label=</span><span class="st">&quot;none&quot;</span>, <span class="dt">title=</span><span class="st">&quot;ACP. Individus&quot;</span>)</span>
+<span id="cb1093-8"><a href="sect122.html#cb1093-8"></a><span class="kw">fviz_pca_ind</span>(res.acp, <span class="dt">col.ind=</span><span class="st">&quot;cos2&quot;</span>, <span class="dt">title=</span><span class="st">&quot;ACP. Individus&quot;</span>) <span class="op">+</span></span>
+<span id="cb1093-9"><a href="sect122.html#cb1093-9"></a><span class="st">  </span><span class="kw">scale_color_gradient2</span>(<span class="dt">low=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;white&quot;</span>, <span class="dt">high=</span><span class="st">&quot;red&quot;</span>, <span class="dt">midpoint=</span><span class="fl">0.50</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra5"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra5-1.png" alt="Premier plan factoriel de l'ACP pour les variables avec factoextra" width="100%" />
+<p class="caption">
+Figure 12.15: Premier plan factoriel de l’ACP pour les variables avec factoextra
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:factoextra6"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/factoextra6-1.png" alt="Premier plan factoriel de l'ACP pour les individus avec factoextra" width="75%" />
+<p class="caption">
+Figure 12.16: Premier plan factoriel de l’ACP pour les individus avec factoextra
+</p>
+</div>
+</div>
+<div id="sect12233" class="section level4">
+<h4><span class="header-section-number">12.2.3.3</span> Personnalisation des graphiques avec les résultats de l’ACP</h4>
+<p>Avec un peu plus de lignes de code et l’utilisation d’autres <em>packages</em> (<code>ggplot2</code>, <code>ggpubr</code>, <code>stringr</code>, <code>corrplot</code>), vous pouvez aussi construire des graphiques personnalisés.</p>
+<p>Premièrement, la syntaxe ci-dessous permet de réaliser trois graphiques pour analyser les valeurs propres (figure <a href="sect122.html#fig:acpmesgraphs1">12.17</a>). Notez que, d’un coup d’œil, nous pouvons identifier les composantes principales avec une valeur propre égale ou supérieure à 1.</p>
+<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1094-1"><a href="sect122.html#cb1094-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1094-2"><a href="sect122.html#cb1094-2"></a><span class="kw">library</span>(ggpubr)</span>
+<span id="cb1094-3"><a href="sect122.html#cb1094-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb1094-4"><a href="sect122.html#cb1094-4"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb1094-5"><a href="sect122.html#cb1094-5"></a></span>
+<span id="cb1094-6"><a href="sect122.html#cb1094-6"></a><span class="co"># Calcul de l&#39;ACP</span></span>
+<span id="cb1094-7"><a href="sect122.html#cb1094-7"></a>res.acp &lt;-<span class="st"> </span><span class="kw">PCA</span>(Data[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], <span class="dt">ncp=</span><span class="dv">5</span>, <span class="dt">scale.unit=</span><span class="ot">TRUE</span>, <span class="dt">graph=</span>F)</span>
+<span id="cb1094-8"><a href="sect122.html#cb1094-8"></a><span class="kw">print</span>(res.acp)</span>
+<span id="cb1094-9"><a href="sect122.html#cb1094-9"></a></span>
+<span id="cb1094-10"><a href="sect122.html#cb1094-10"></a><span class="co"># Construction d&#39;un DataFrame pour les valeurs propres</span></span>
+<span id="cb1094-11"><a href="sect122.html#cb1094-11"></a>dfACPvp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(res.acp<span class="op">$</span>eig)</span>
+<span id="cb1094-12"><a href="sect122.html#cb1094-12"></a><span class="kw">names</span>(dfACPvp) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;VP&quot;</span>,<span class="st">&quot;VP_pct&quot;</span>,<span class="st">&quot;VP_cumupct&quot;</span>)</span>
+<span id="cb1094-13"><a href="sect122.html#cb1094-13"></a>dfACPvp<span class="op">$</span>Composante &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dfACPvp), <span class="dt">levels=</span><span class="kw">rev</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dfACPvp)))</span>
+<span id="cb1094-14"><a href="sect122.html#cb1094-14"></a>couleursAxes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;steelblue&quot;</span>,<span class="st">&quot;skyblue2&quot;</span>)</span>
+<span id="cb1094-15"><a href="sect122.html#cb1094-15"></a>vpsup1 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(dfACPvp, VP <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>)<span class="op">$</span>VP),<span class="dv">2</span>)</span>
+<span id="cb1094-16"><a href="sect122.html#cb1094-16"></a>vpsup1cumul &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sum</span>(<span class="kw">subset</span>(dfACPvp, VP <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>)<span class="op">$</span>VP_pct),<span class="dv">2</span>)</span>
+<span id="cb1094-17"><a href="sect122.html#cb1094-17"></a></span>
+<span id="cb1094-18"><a href="sect122.html#cb1094-18"></a>plotVP1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPvp,<span class="kw">aes</span>(<span class="dt">x=</span>VP, <span class="dt">y=</span>Composante,<span class="dt">fill=</span>VP<span class="op">&lt;</span><span class="dv">1</span>))<span class="op">+</span></span>
+<span id="cb1094-19"><a href="sect122.html#cb1094-19"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-20"><a href="sect122.html#cb1094-20"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">1</span>, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;azure4&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)<span class="op">+</span></span>
+<span id="cb1094-21"><a href="sect122.html#cb1094-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Valeur</span><span class="ch">\n</span><span class="st">propre&quot;</span>,<span class="dt">values=</span>couleursAxes,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;&gt;= 1&quot;</span>,<span class="st">&quot;&lt; 1&quot;</span>))<span class="op">+</span></span>
+<span id="cb1094-22"><a href="sect122.html#cb1094-22"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Valeur propre&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Composante principale&quot;</span>)</span>
+<span id="cb1094-23"><a href="sect122.html#cb1094-23"></a>plotVP2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPvp, <span class="kw">aes</span>(<span class="dt">x=</span>VP_pct, <span class="dt">y=</span>Composante,<span class="dt">fill=</span>VP<span class="op">&lt;</span><span class="dv">1</span>))<span class="op">+</span></span>
+<span id="cb1094-24"><a href="sect122.html#cb1094-24"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-25"><a href="sect122.html#cb1094-25"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Valeur</span><span class="ch">\n</span><span class="st">propre&quot;</span>,<span class="dt">values=</span>couleursAxes,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;&gt;= 1&quot;</span>,<span class="st">&quot;&lt; 1&quot;</span>))<span class="op">+</span></span>
+<span id="cb1094-26"><a href="sect122.html#cb1094-26"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-27"><a href="sect122.html#cb1094-27"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Pourcentage de la variance expliquée&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb1094-28"><a href="sect122.html#cb1094-28"></a>plotVP3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPvp, <span class="kw">aes</span>(<span class="dt">x=</span>VP_cumupct, <span class="dt">y=</span>Composante,<span class="dt">fill=</span>VP<span class="op">&lt;</span><span class="dv">1</span>, <span class="dt">group=</span><span class="dv">1</span>))<span class="op">+</span></span>
+<span id="cb1094-29"><a href="sect122.html#cb1094-29"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-30"><a href="sect122.html#cb1094-30"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Valeur</span><span class="ch">\n</span><span class="st">propre&quot;</span>,<span class="dt">values=</span>couleursAxes,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;&gt;= 1&quot;</span>,<span class="st">&quot;&lt; 1&quot;</span>))<span class="op">+</span></span>
+<span id="cb1094-31"><a href="sect122.html#cb1094-31"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;solid&quot;</span>, <span class="dt">size=</span>.<span class="dv">8</span>) <span class="op">+</span></span>
+<span id="cb1094-32"><a href="sect122.html#cb1094-32"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">shape=</span><span class="dv">21</span>, <span class="dt">color=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;brown&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-33"><a href="sect122.html#cb1094-33"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)<span class="op">+</span></span>
+<span id="cb1094-34"><a href="sect122.html#cb1094-34"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Pourcentage cumulé de la variance expliquée&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb1094-35"><a href="sect122.html#cb1094-35"></a></span>
+<span id="cb1094-36"><a href="sect122.html#cb1094-36"></a>text1 &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Somme des valeurs propres supérieures à 1 : &quot;</span>,</span>
+<span id="cb1094-37"><a href="sect122.html#cb1094-37"></a>                vpsup1,</span>
+<span id="cb1094-38"><a href="sect122.html#cb1094-38"></a>                <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">Pourcentage cumulé des valeurs propres supérieures à 1 : &quot;</span>,</span>
+<span id="cb1094-39"><a href="sect122.html#cb1094-39"></a>                vpsup1cumul, <span class="st">&quot;%.&quot;</span>)</span>
+<span id="cb1094-40"><a href="sect122.html#cb1094-40"></a><span class="kw">annotate_figure</span>(<span class="kw">ggarrange</span>(plotVP1, plotVP2, plotVP3, <span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">nrow=</span><span class="dv">2</span>),</span>
+<span id="cb1094-41"><a href="sect122.html#cb1094-41"></a>                <span class="kw">text_grob</span>(<span class="st">&quot;Analyse des valeurs propres&quot;</span>, </span>
+<span id="cb1094-42"><a href="sect122.html#cb1094-42"></a>                         <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">12</span>),</span>
+<span id="cb1094-43"><a href="sect122.html#cb1094-43"></a>                <span class="dt">bottom =</span> <span class="kw">text_grob</span>(text1,</span>
+<span id="cb1094-44"><a href="sect122.html#cb1094-44"></a>                           <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">10</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs1"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpmesgraphs1-1.png" alt="Graphiques personnalisés pour les valeurs propres" width="75%" />
+<p class="caption">
+Figure 12.17: Graphiques personnalisés pour les valeurs propres
+</p>
+</div>
+<p>Deuxièmement, la syntaxe ci-dessous permet de :</p>
+<ul>
+<li>Construire un <em>DataFrame</em> avec les résultats des variables.</li>
+<li>Construire des histogrammes avec les coordonnées des variables sur les axes factoriels (figure <a href="sect122.html#fig:acpmesgraphs2">12.18</a>). Notez que les coordonnées négatives sont indiquées avec des barres bleues et celles positives, avec des barres de couleur saumon.</li>
+<li>Un graphique avec les contributions des variables sur les axes retenus (figure <a href="sect122.html#fig:acpmesgraphs3">12.19</a>).</li>
+<li>Un graphique avec les cosinus carrés des variables sur les axes retenus (figure <a href="sect122.html#fig:acpmesgraphs4">12.20</a>).</li>
+<li>Un histogramme avec la qualité des variables sur les axes retenus (figure <a href="sect122.html#fig:acpmesgraphs5">12.21</a>), soit la sommation de leurs cosinus carrés sur les axes retenus.</li>
+</ul>
+<div class="sourceCode" id="cb1095"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1095-1"><a href="sect122.html#cb1095-1"></a><span class="co"># Analyse des résultats de L&#39;ACP pour les variables</span></span>
+<span id="cb1095-2"><a href="sect122.html#cb1095-2"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb1095-3"><a href="sect122.html#cb1095-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb1095-4"><a href="sect122.html#cb1095-4"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1095-5"><a href="sect122.html#cb1095-5"></a><span class="kw">library</span>(ggpubr)</span>
+<span id="cb1095-6"><a href="sect122.html#cb1095-6"></a></span>
+<span id="cb1095-7"><a href="sect122.html#cb1095-7"></a><span class="co"># Indiquer le nombre d&#39;axes à conserver suite à l&#39;analyse des valeurs propres</span></span>
+<span id="cb1095-8"><a href="sect122.html#cb1095-8"></a>nComp &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb1095-9"><a href="sect122.html#cb1095-9"></a><span class="co"># Variance expliquée par les axes retenus</span></span>
+<span id="cb1095-10"><a href="sect122.html#cb1095-10"></a>vppct &lt;-<span class="st"> </span><span class="kw">round</span>(dfACPvp[<span class="dv">1</span><span class="op">:</span>nComp,<span class="st">&quot;VP_pct&quot;</span>],<span class="dv">1</span>)</span>
+<span id="cb1095-11"><a href="sect122.html#cb1095-11"></a><span class="co"># Dataframe des résultats pour les variables</span></span>
+<span id="cb1095-12"><a href="sect122.html#cb1095-12"></a>CoordsVar &lt;-<span class="st"> </span>res.acp<span class="op">$</span>var<span class="op">$</span>coord[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1095-13"><a href="sect122.html#cb1095-13"></a>Cos2Var   &lt;-<span class="st"> </span>res.acp<span class="op">$</span>var<span class="op">$</span>cos2[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1095-14"><a href="sect122.html#cb1095-14"></a>CtrVar   &lt;-<span class="st"> </span>res.acp<span class="op">$</span>var<span class="op">$</span>contrib[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1095-15"><a href="sect122.html#cb1095-15"></a>dfACPVars &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Variable =</span>  <span class="kw">row.names</span>(res.acp<span class="op">$</span>var<span class="op">$</span>coord[, <span class="dv">1</span><span class="op">:</span>nComp]),</span>
+<span id="cb1095-16"><a href="sect122.html#cb1095-16"></a>                        <span class="dt">Coord =</span> CoordsVar,</span>
+<span id="cb1095-17"><a href="sect122.html#cb1095-17"></a>                        <span class="dt">Cos2 =</span> Cos2Var,</span>
+<span id="cb1095-18"><a href="sect122.html#cb1095-18"></a>                        <span class="dt">Qualite =</span> <span class="kw">rowSums</span>(Cos2Var),</span>
+<span id="cb1095-19"><a href="sect122.html#cb1095-19"></a>                        <span class="dt">Ctr =</span> CtrVar)</span>
+<span id="cb1095-20"><a href="sect122.html#cb1095-20"></a><span class="kw">row.names</span>(dfACPVars) &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb1095-21"><a href="sect122.html#cb1095-21"></a><span class="kw">names</span>(dfACPVars) &lt;-<span class="st"> </span><span class="kw">str_replace</span>(<span class="kw">names</span>(dfACPVars), <span class="st">&quot;.Dim.&quot;</span>, <span class="st">&quot;Comp&quot;</span>)</span>
+<span id="cb1095-22"><a href="sect122.html#cb1095-22"></a>dfACPVars</span>
+<span id="cb1095-23"><a href="sect122.html#cb1095-23"></a></span>
+<span id="cb1095-24"><a href="sect122.html#cb1095-24"></a><span class="co"># Histogrammes pour les coordonnées</span></span>
+<span id="cb1095-25"><a href="sect122.html#cb1095-25"></a>couleursCoords &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lightsalmon&quot;</span>,<span class="st">&quot;steelblue&quot;</span>)</span>
+<span id="cb1095-26"><a href="sect122.html#cb1095-26"></a>plotCoordF1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPVars,</span>
+<span id="cb1095-27"><a href="sect122.html#cb1095-27"></a>                      <span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">reorder</span>(Variable, CoordComp1),</span>
+<span id="cb1095-28"><a href="sect122.html#cb1095-28"></a>                          <span class="dt">x =</span> CoordComp1, <span class="dt">fill=</span>CoordComp1<span class="op">&lt;</span><span class="dv">0</span>))<span class="op">+</span></span>
+<span id="cb1095-29"><a href="sect122.html#cb1095-29"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-30"><a href="sect122.html#cb1095-30"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)<span class="op">+</span></span>
+<span id="cb1095-31"><a href="sect122.html#cb1095-31"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Coordonnée&quot;</span>,<span class="dt">values=</span>couleursCoords,</span>
+<span id="cb1095-32"><a href="sect122.html#cb1095-32"></a>                    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Positive&quot;</span>,<span class="st">&quot;Négative&quot;</span>))<span class="op">+</span></span>
+<span id="cb1095-33"><a href="sect122.html#cb1095-33"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="kw">paste0</span>(<span class="st">&quot;Axe 1 (&quot;</span>, vppct[<span class="dv">1</span>],<span class="st">&quot;%)&quot;</span>), <span class="dt">y=</span><span class="st">&quot;Variable&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-34"><a href="sect122.html#cb1095-34"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb1095-35"><a href="sect122.html#cb1095-35"></a>plotCoordF2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPVars,</span>
+<span id="cb1095-36"><a href="sect122.html#cb1095-36"></a>                      <span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">reorder</span>(Variable, CoordComp2),</span>
+<span id="cb1095-37"><a href="sect122.html#cb1095-37"></a>                          <span class="dt">x =</span> CoordComp2, <span class="dt">fill=</span>CoordComp2<span class="op">&lt;</span><span class="dv">0</span>))<span class="op">+</span></span>
+<span id="cb1095-38"><a href="sect122.html#cb1095-38"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-39"><a href="sect122.html#cb1095-39"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)<span class="op">+</span></span>
+<span id="cb1095-40"><a href="sect122.html#cb1095-40"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Coordonnée&quot;</span>,<span class="dt">values=</span>couleursCoords,</span>
+<span id="cb1095-41"><a href="sect122.html#cb1095-41"></a>                    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Positive&quot;</span>,<span class="st">&quot;Négative&quot;</span>))<span class="op">+</span></span>
+<span id="cb1095-42"><a href="sect122.html#cb1095-42"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="kw">paste0</span>(<span class="st">&quot;Axe 2 (&quot;</span>, vppct[<span class="dv">2</span>],<span class="st">&quot;%)&quot;</span>), <span class="dt">y=</span><span class="st">&quot;Variable&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-43"><a href="sect122.html#cb1095-43"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb1095-44"><a href="sect122.html#cb1095-44"></a>plotCoordF3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfACPVars,</span>
+<span id="cb1095-45"><a href="sect122.html#cb1095-45"></a>                      <span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">reorder</span>(Variable, CoordComp3),</span>
+<span id="cb1095-46"><a href="sect122.html#cb1095-46"></a>                          <span class="dt">x =</span> CoordComp3, <span class="dt">fill=</span>CoordComp3<span class="op">&lt;</span><span class="dv">0</span>))<span class="op">+</span></span>
+<span id="cb1095-47"><a href="sect122.html#cb1095-47"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-48"><a href="sect122.html#cb1095-48"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)<span class="op">+</span></span>
+<span id="cb1095-49"><a href="sect122.html#cb1095-49"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Coordonnée&quot;</span>, <span class="dt">values=</span>couleursCoords,</span>
+<span id="cb1095-50"><a href="sect122.html#cb1095-50"></a>                    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Positive&quot;</span>,<span class="st">&quot;Négative&quot;</span>))<span class="op">+</span></span>
+<span id="cb1095-51"><a href="sect122.html#cb1095-51"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="kw">paste0</span>(<span class="st">&quot;Axe 3 (&quot;</span>, vppct[<span class="dv">3</span>],<span class="st">&quot;%)&quot;</span>), <span class="dt">y=</span><span class="st">&quot;Variable&quot;</span>)</span>
+<span id="cb1095-52"><a href="sect122.html#cb1095-52"></a></span>
+<span id="cb1095-53"><a href="sect122.html#cb1095-53"></a><span class="kw">annotate_figure</span>(<span class="kw">ggarrange</span>(plotCoordF1, plotCoordF2, plotCoordF3, <span class="dt">nrow=</span>nComp),</span>
+<span id="cb1095-54"><a href="sect122.html#cb1095-54"></a>                <span class="kw">text_grob</span>(<span class="st">&quot;Coordonnées des variables sur les axes factoriels&quot;</span>,</span>
+<span id="cb1095-55"><a href="sect122.html#cb1095-55"></a>                          <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">12</span>))</span>
+<span id="cb1095-56"><a href="sect122.html#cb1095-56"></a></span>
+<span id="cb1095-57"><a href="sect122.html#cb1095-57"></a><span class="co"># Contributions des variables à la formation des axes</span></span>
+<span id="cb1095-58"><a href="sect122.html#cb1095-58"></a><span class="kw">corrplot</span>(CtrVar, <span class="dt">is.corr=</span><span class="ot">FALSE</span>, <span class="dt">method =</span><span class="st">&quot;square&quot;</span>,</span>
+<span id="cb1095-59"><a href="sect122.html#cb1095-59"></a>         <span class="dt">addCoef.col =</span> <span class="dv">1</span>, <span class="dt">cl.pos =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb1095-60"><a href="sect122.html#cb1095-60"></a></span>
+<span id="cb1095-61"><a href="sect122.html#cb1095-61"></a><span class="co"># La qualité des variables sur les composantes retenues : cosinus carrés</span></span>
+<span id="cb1095-62"><a href="sect122.html#cb1095-62"></a><span class="kw">corrplot</span>(Cos2Var, <span class="dt">is.corr=</span><span class="ot">FALSE</span>, <span class="dt">method =</span><span class="st">&quot;square&quot;</span>,</span>
+<span id="cb1095-63"><a href="sect122.html#cb1095-63"></a>         <span class="dt">addCoef.col =</span> <span class="dv">1</span>, <span class="dt">cl.pos =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb1095-64"><a href="sect122.html#cb1095-64"></a></span>
+<span id="cb1095-65"><a href="sect122.html#cb1095-65"></a><span class="kw">ggplot</span>(dfACPVars)<span class="op">+</span></span>
+<span id="cb1095-66"><a href="sect122.html#cb1095-66"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span><span class="kw">reorder</span>(Variable, Qualite), <span class="dt">x=</span>Qualite),</span>
+<span id="cb1095-67"><a href="sect122.html#cb1095-67"></a>            <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> <span class="fl">.6</span>, <span class="dt">alpha=</span>.<span class="dv">8</span>, <span class="dt">fill=</span><span class="st">&quot;steelblue&quot;</span>)<span class="op">+</span></span>
+<span id="cb1095-68"><a href="sect122.html#cb1095-68"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Somme des cosinus carrés sur les axes retenus&quot;</span>,</span>
+<span id="cb1095-69"><a href="sect122.html#cb1095-69"></a>       <span class="dt">title =</span><span class="st">&quot;Qualité de représentation des variables sur les axes retenus de l&#39;ACP&quot;</span>,</span>
+<span id="cb1095-70"><a href="sect122.html#cb1095-70"></a>       <span class="dt">subtitle =</span> <span class="kw">paste0</span>(<span class="st">&quot;Variance expliquée par les &quot;</span>, nComp, </span>
+<span id="cb1095-71"><a href="sect122.html#cb1095-71"></a>                         <span class="st">&quot; composantes : &quot;</span>, <span class="kw">sum</span>(vppct), <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs2"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpmesgraphs2-1.png" alt="Histogrammes personnalisés avec les coordonnées factorielles pour les variables" width="75%" />
+<p class="caption">
+Figure 12.18: Histogrammes personnalisés avec les coordonnées factorielles pour les variables
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs3"></span>
+<img src="images/analysesfactorielles/corrplotacpmesgraph3.png" alt="Graphiques personnalisés avec les contributions des variables" width="75%" />
+<p class="caption">
+Figure 12.19: Graphiques personnalisés avec les contributions des variables
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs4"></span>
+<img src="images/analysesfactorielles/corrplotacpmesgraph4.png" alt="Graphiques personnalisés avec les cosinus carrés des variables" width="75%" />
+<p class="caption">
+Figure 12.20: Graphiques personnalisés avec les cosinus carrés des variables
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs5"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpmesgraphs5-1.png" alt="Graphique personnalisé avec la qualité des variables sur les axes retenus de l'ACP" width="75%" />
+<p class="caption">
+Figure 12.21: Graphique personnalisé avec la qualité des variables sur les axes retenus de l’ACP
+</p>
+</div>
+<p>Troisièmement, lorsque les observations sont des unités spatiales, il convient de cartographier les coordonnées factorielles des individus. Dans le jeu de données utilisé, les observations sont des polygones délimitant les îlots regroupés pour l’information statistique (IRIS) pour l’agglomération de Lyon (France). Nous utilisons les <em>packages</em> <code>tmap</code> et <code>RColorBrewer</code> pour réaliser des cartes choroplèthes avec les coordonnées des deux premières composantes (figure <a href="sect122.html#fig:acpmesgraphs6">12.22</a>).</p>
+<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1096-1"><a href="sect122.html#cb1096-1"></a><span class="kw">library</span>(<span class="st">&quot;tmap&quot;</span>)</span>
+<span id="cb1096-2"><a href="sect122.html#cb1096-2"></a><span class="kw">library</span>(<span class="st">&quot;RColorBrewer&quot;</span>)</span>
+<span id="cb1096-3"><a href="sect122.html#cb1096-3"></a><span class="co"># Analyse des résultats de l&#39;ACP pour les individus</span></span>
+<span id="cb1096-4"><a href="sect122.html#cb1096-4"></a><span class="co"># Dataframe des résultats pour les individus</span></span>
+<span id="cb1096-5"><a href="sect122.html#cb1096-5"></a>CoordsInd &lt;-<span class="st"> </span>res.acp<span class="op">$</span>ind<span class="op">$</span>coord[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1096-6"><a href="sect122.html#cb1096-6"></a>Cos2Ind   &lt;-<span class="st"> </span>res.acp<span class="op">$</span>ind<span class="op">$</span>cos2[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1096-7"><a href="sect122.html#cb1096-7"></a>CtrInd    &lt;-<span class="st"> </span>res.acp<span class="op">$</span>ind<span class="op">$</span>contrib[, <span class="dv">1</span><span class="op">:</span>nComp]</span>
+<span id="cb1096-8"><a href="sect122.html#cb1096-8"></a>dfACPInd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Coord =</span> CoordsInd, <span class="dt">Cos2 =</span> Cos2Ind, <span class="dt">Ctr =</span> CtrInd)</span>
+<span id="cb1096-9"><a href="sect122.html#cb1096-9"></a><span class="kw">names</span>(dfACPInd) &lt;-<span class="st"> </span><span class="kw">str_replace</span>(<span class="kw">names</span>(dfACPInd), <span class="st">&quot;.Dim.&quot;</span>, <span class="st">&quot;Comp&quot;</span>)</span>
+<span id="cb1096-10"><a href="sect122.html#cb1096-10"></a><span class="co"># Fusion du tableau original avec les résultats de l&#39;ACP pour les individus</span></span>
+<span id="cb1096-11"><a href="sect122.html#cb1096-11"></a>CartoACP &lt;-<span class="st"> </span><span class="kw">cbind</span>(LyonIris, dfACPInd)</span>
+<span id="cb1096-12"><a href="sect122.html#cb1096-12"></a><span class="co"># Cartographie des coordonnées factorielles pour les individus pour les</span></span>
+<span id="cb1096-13"><a href="sect122.html#cb1096-13"></a><span class="co"># deux premières composantes</span></span>
+<span id="cb1096-14"><a href="sect122.html#cb1096-14"></a>Carte1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(CartoACP) <span class="op">+</span></span>
+<span id="cb1096-15"><a href="sect122.html#cb1096-15"></a><span class="st">          </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;CoordComp1&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;cont&quot;</span>,</span>
+<span id="cb1096-16"><a href="sect122.html#cb1096-16"></a>                      <span class="dt">midpoint =</span> <span class="dv">0</span>, <span class="dt">title =</span> <span class="st">&#39;Coordonnées&#39;</span>)<span class="op">+</span></span>
+<span id="cb1096-17"><a href="sect122.html#cb1096-17"></a><span class="st">          </span><span class="kw">tm_layout</span>(<span class="dt">main.title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Axe 1 (&quot;</span>, vppct[<span class="dv">1</span>],<span class="st">&quot;%)&quot;</span>),</span>
+<span id="cb1096-18"><a href="sect122.html#cb1096-18"></a>             <span class="dt">attr.outside =</span> <span class="ot">TRUE</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">main.title.size =</span> <span class="dv">1</span>)</span>
+<span id="cb1096-19"><a href="sect122.html#cb1096-19"></a>Carte2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(CartoACP) <span class="op">+</span></span>
+<span id="cb1096-20"><a href="sect122.html#cb1096-20"></a><span class="st">          </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;CoordComp2&quot;</span>, <span class="dt">style =</span> <span class="st">&quot;cont&quot;</span>,</span>
+<span id="cb1096-21"><a href="sect122.html#cb1096-21"></a>                      <span class="dt">midpoint =</span> <span class="dv">0</span>, <span class="dt">title =</span> <span class="st">&#39;Coordonnées&#39;</span>)<span class="op">+</span></span>
+<span id="cb1096-22"><a href="sect122.html#cb1096-22"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">main.title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Axe 2 (&quot;</span>, vppct[<span class="dv">2</span>],<span class="st">&quot;%)&quot;</span>),</span>
+<span id="cb1096-23"><a href="sect122.html#cb1096-23"></a>             <span class="dt">attr.outside =</span> <span class="ot">TRUE</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, <span class="dt">main.title.size =</span> <span class="dv">1</span>)</span>
+<span id="cb1096-24"><a href="sect122.html#cb1096-24"></a><span class="kw">tmap_arrange</span>(Carte1, Carte2)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:acpmesgraphs6"></span>
+<img src="MethodesQuantitScSocialesBolR_files/figure-html/acpmesgraphs6-1.png" alt="Cartographie des coordonnées factorielles des individus" width="75%" />
+<p class="caption">
+Figure 12.22: Cartographie des coordonnées factorielles des individus
+</p>
+</div>
+<div class="bloc_aller_loin">
+<p><strong>Exploration interactive des résultats d’une ACP avec le <em>package</em> <code>explor</code></strong>.</p>
+<p>Vous avez compris qu’il ne suffit pas de calculer une ACP, il faut retenir les <em>n</em> premiers axes de l’ACP qui nous semblent les plus pertinents, puis les interpréter à la lecture des coordonnées factorielles, des cosinus carrés et des contributions des variables et des individus sur les axes. Il faut donc bien explorer les résultats à l’aide de tableaux et de graphiques! Cela explique que nous avons mobilisé de nombreux graphiques dans les deux sections précédentes (<a href="sect122.html#sect12232">12.2.3.2</a> et <a href="sect122.html#sect12233">12.2.3.3</a>).
+L’exploration des données d’une ACP peut aussi être réalisée avec des graphiques interactifs. Or, un superbe <em>package</em> dénommé <code>explor</code> (<a href="https://juba.github.io/explor/" class="uri">https://juba.github.io/explor/</a>), reposant sur <code>Shiny</code> (<a href="https://shiny.rstudio.com/" class="uri">https://shiny.rstudio.com/</a>), permet d’explorer de manière interactive les résultats de plusieurs méthodes factorielles calculés avec <code>FactorMinerR</code>. Pour cela, il vous suffit de lancer les deux lignes de code suivantes :</p>
+<p><code>library(explor)</code></p>
+<p><code>explor(res.acp)</code></p>
+<p>Finalement, <code>explor</code> permet également d’explorer les résultats d’une analyse des correspondances (AFC) et d’une analyse des correspondances multiples (ACM).</p>
+</div>
+</div>
+</div>
+</div>
+<h3>R&eacute;f&eacute;rences</h3>
+<div id="refs" class="references">
+<div id="ref-2021_4">
+<p>Gelb, Jérémy et Philippe Apparicio. 2021b. « Apport de la classification floue c-means spatiale en géographie: essai de taxinomie socio-résidentielle et environnementale à Lyon ». <em>Cybergeo: European Journal of Geography</em>. <a href="https://doi.org/10.4000/cybergeo.36414">https://doi.org/10.4000/cybergeo.36414</a>.</p>
+</div>
+<div id="ref-hubert2005robpca">
+<p>Hubert, Mia, Peter J Rousseeuw et Karlien Vanden Branden. 2005. « ROBPCA: a new approach to robust principal component analysis ». <em>Technometrics</em> 47 (1): 64‑79. <a href="https://doi.org/10.1198/004017004000000563">https://doi.org/10.1198/004017004000000563</a>.</p>
+</div>
+<div id="ref-kaiser1960application">
+<p>Kaiser, Henry F. 1960. « The application of electronic computers to factor analysis ». <em>Educational and psychological measurement</em> 20 (1): 141‑151. <a href="https://doi.org/10.1177%2F001316446002000116">https://doi.org/10.1177%2F001316446002000116</a>.</p>
+</div>
+<div id="ref-lebart1995statistique">
+<p>Lebart, Ludovic, Alain Morineau et Marie Piron. 1995. <em>Statistique exploratoire multidimensionnelle</em>. Dunod.</p>
+</div>
+<div id="ref-pages2013analyse">
+<p>Pagès, Jérôme. 2013. <em>Analyse factorielle multiple avec R</em>. EDP sciences.</p>
+</div>
+<div id="ref-rivest1988analyse">
+<p>Rivest, Louis-Paul et Nathalie Plante. 1988. « L’analyse en composantes principales robuste ». <em>Revue de statistique appliquée</em> 36 (1): 55‑66. <a href="http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf">http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sect121.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sect123.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["MethodesQuantitScSocialesBolR.pdf"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

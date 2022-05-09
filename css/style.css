@@ -1,0 +1,123 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+p.flushright {
+  text-align: right;
+}
+blockquote > p:last-child {
+  text-align: right;
+}
+blockquote > p:first-child {
+  text-align: inherit;
+}
+.header-section-number {
+  padding-right: .2em;
+  font-weight: 500;
+}
+.level1 .header-section-number {
+  display: inline-block;
+  border-bottom: 3px solid;
+}
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+h1.title {
+  font-weight: 700;
+}
+.book .book-body .page-wrapper .page-inner section.normal strong {
+  font-weight: 600;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* %%%%%%%%%%%%%%%%%%% styles pour les blocs  %%%%%%%%%%%%%%%%%%%%%%% */
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+/* pour les messages d'erreur */
+.error_message{
+  color:#b55604;
+  font-family: "Lucida Console";
+}
+
+/* forme generale d'un bloc */
+
+.bloc_notes, .bloc_aller_loin, .bloc_astuce, .bloc_attention, .bloc_package, .bloc_objectif{
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 85%;
+  line-height: 1.2;
+  border: 1px solid #00000012;
+  text-align:justify;
+}
+
+/* pour les notes */
+.bloc_notes{
+  background-image: url("../images/notes.png");
+}
+
+
+/* pour le aller plus loin */
+.bloc_aller_loin{
+  background-image: url("../images/aller_loin.png");
+}
+
+/* pour les astuces */
+.bloc_astuce{
+  background-image: url("../images/astuce.png");
+}
+
+/* pour les attentions */
+.bloc_attention{
+  background-image: url("../images/attention.png");
+}
+
+/* pour les objectifs */
+.bloc_objectif{
+  background-image: url("../images/objectif.png");
+}
+
+/* pour les packages */
+.bloc_package{
+  background-image: url("../images/package.png");
+}
+
+
+/* pour les revision */
+.revision_rem{
+  color : red;
+  text-decoration : line-through;
+  text-align:justify;
+}
+
+.revision_prop{
+  color : green;
+  text-align:justify;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* %%%%%%%%%%%%%%%%%%% masquer les éléments indésirables  %%%%%%%%%%%%%%%%%%%%%%% */
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+.btn.pull-right.js-toolbar-action{
+  display : none;
+}
+
+.fa.fa-share-alt{
+  display : none;
+}
