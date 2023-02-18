@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.6 Mise en oeuvre dans R | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
   <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.6 Mise en oeuvre dans R | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://laeq.github.io/LivreStatistique_website/" />
   <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
   <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
@@ -32,7 +31,8 @@
   
 <link rel="prev" href="sect115.html"/>
 <link rel="next" href="sect117.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,9 +48,10 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <script src="libs/d3-4.13.0/d3.min.js"></script>
 <script src="libs/d3-tip-0.8.1/index.js"></script>
 <link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
@@ -60,18 +61,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,13 +92,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +123,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/quizlib.min.css" type="text/css" />
@@ -142,7 +166,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
-<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
 <li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
 <li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
 <li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
@@ -154,15 +179,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
 <li class="part"><span><b>I Découverte de R</b></span></li>
-<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a><ul>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
-<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a><ul>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
 <li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
 <li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
 <li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a><ul>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
 <li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
 <li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
@@ -170,7 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
 <li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a><ul>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
 <li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
 </ul></li>
@@ -181,28 +210,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
-<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a><ul>
-<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a><ul>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
 <li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a><ul>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
 <li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
 <li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
 <li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a><ul>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
 <li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a><ul>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
 <li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
 <li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
 <li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a><ul>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
 <li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
 <li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
@@ -210,15 +245,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
 <li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a><ul>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
 <li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
 <li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a><ul>
-<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a><ul>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
 <li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
 <li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
@@ -226,7 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
 <li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a><ul>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
 <li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
 <li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
@@ -236,7 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
 <li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a><ul>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
@@ -247,13 +287,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
 </ul></li>
 <li class="part"><span><b>III Analyses bivariées</b></span></li>
-<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a><ul>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
-<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a><ul>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a><ul>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
 <li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
@@ -263,7 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a><ul>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
 <li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
 <li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
@@ -272,19 +316,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a><ul>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
 <li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
 <li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
 <li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a><ul>
-<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a><ul>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
 <li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a><ul>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
 <li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
 <li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
@@ -294,36 +342,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>IV Modèles de régression</b></span></li>
-<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
-<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
 <li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a><ul>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
 <li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a><ul>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
 <li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
 <li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a><ul>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
 <li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
 <li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
 <li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a><ul>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
 <li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
 <li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
 <li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
 <li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
 <li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
 <li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
@@ -331,8 +386,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a><ul>
-<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a><ul>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
 <li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
 <li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
@@ -340,21 +397,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
 <li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a><ul>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
 <li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
 <li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
 <li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
 <li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a><ul>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
 <li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
 <li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
 <li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
 <li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a><ul>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
 <li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
 <li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
@@ -363,43 +423,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
 <li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a><ul>
-<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
 <li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a><ul>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
 <li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
 <li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a><ul>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
 <li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a><ul>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
 <li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
 <li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
-<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a><ul>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a>
+<ul>
 <li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
 <li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a><ul>
-<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a><ul>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
 <li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a><ul>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
 <li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
-<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
 <li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
 <li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
@@ -408,8 +478,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a><ul>
-<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
 <li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
 <li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
@@ -418,7 +490,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
 <li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
 <li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
-<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a><ul>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a>
+<ul>
 <li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
 <li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
 <li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
@@ -428,40 +501,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
-<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a><ul>
-<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a><ul>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
 <li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a><ul>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
 <li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a><ul>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
 <li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a><ul>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a><ul>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
-<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a><ul>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
 <li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a><ul>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
 <li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
 <li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
 <li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a><ul>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a>
+<ul>
 <li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
 <li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
 <li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
@@ -471,11 +553,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
 <li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>14</b> Annexes</a><ul>
-<li class="chapter" data-level="14.1" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14.1</b> Table des valeurs critiques de khi-deux</a></li>
-<li class="chapter" data-level="14.2" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>14.2</b> Table des valeurs critiques de Fisher</a></li>
-<li class="chapter" data-level="14.3" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>14.3</b> Table des valeurs critiques de <em>t</em></a></li>
-</ul></li>
+<li class="part"><span><b>VI Annexes</b></span></li>
+<li class="chapter" data-level="14" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="15" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>15</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="16" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>16</b> Table des valeurs critiques de <em>t</em></a></li>
 </ul>
 
       </nav>
@@ -493,100 +574,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sect116" class="section level2">
-<h2><span class="header-section-number">11.6</span> Mise en oeuvre dans R</h2>
+<div id="sect116" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Mise en oeuvre dans R<a href="sect116.html#sect116" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Il est possible d’ajuster des <em>splines</em> de régression dans n’importe quel <em>package</em> permettant d’ajuster des coefficients pour un modèle de régression. Il suffit de construire les bases des <em>splines</em> en amont à l’aide du <em>package</em> <code>splines2</code> et de les ajouter directement dans l’équation de régression.
 En revanche, il est nécessaire d’utiliser des <em>packages</em> spécialisés pour ajuster des <em>splines</em> de lissage. Parmi ceux-ci, <code>mgcv</code> est probablement le plus populaire du fait de sa (très) grande flexibilité, suivi des <em>packages</em> <code>gamlss</code>, <code>gam</code> et <code>VGAM.</code> Nous comparons ici les deux approches, puis nous tentons d’améliorer le modèle que nous avons ajusté pour prédire le pourcentage de surface couverte par des îlots de chaleur dans les aires de diffusion de Montréal, dans une perspective d’équité environnementale. Pour rappel, la variable dépendante est exprimée en pourcentage et nous utilisons une distribution bêta pour la modéliser.</p>
-<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="sect116.html#cb1045-1"></a><span class="kw">library</span>(mgcv)</span>
-<span id="cb1045-2"><a href="sect116.html#cb1045-2"></a><span class="co"># Chargement des données</span></span>
-<span id="cb1045-3"><a href="sect116.html#cb1045-3"></a>dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/gam/data_chaleur.csv&quot;</span>,<span class="dt">fileEncoding =</span> <span class="st">&quot;utf8&quot;</span>)</span>
-<span id="cb1045-4"><a href="sect116.html#cb1045-4"></a><span class="co"># Ajustement du modèle de base</span></span>
-<span id="cb1045-5"><a href="sect116.html#cb1045-5"></a>refmodel &lt;-<span class="st"> </span><span class="kw">gam</span>(hot <span class="op">~</span></span>
-<span id="cb1045-6"><a href="sect116.html#cb1045-6"></a><span class="st">          </span>A65Pct <span class="op">+</span><span class="st"> </span>A014Pct <span class="op">+</span><span class="st"> </span>PopFRPct <span class="op">+</span><span class="st"> </span>PopMVPct <span class="op">+</span></span>
-<span id="cb1045-7"><a href="sect116.html#cb1045-7"></a><span class="st">          </span><span class="kw">poly</span>(prt_veg, <span class="dt">degree =</span> <span class="dv">2</span>)  <span class="op">+</span><span class="st"> </span>Arrond,</span>
-<span id="cb1045-8"><a href="sect116.html#cb1045-8"></a>        <span class="dt">data =</span> dataset, <span class="dt">family =</span> <span class="kw">betar</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1047-1"><a href="sect116.html#cb1047-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb1047-2"><a href="sect116.html#cb1047-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargement des données</span></span>
+<span id="cb1047-3"><a href="sect116.html#cb1047-3" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/gam/data_chaleur.csv&quot;</span>,<span class="at">fileEncoding =</span> <span class="st">&quot;utf8&quot;</span>)</span>
+<span id="cb1047-4"><a href="sect116.html#cb1047-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustement du modèle de base</span></span>
+<span id="cb1047-5"><a href="sect116.html#cb1047-5" aria-hidden="true" tabindex="-1"></a>refmodel <span class="ot">&lt;-</span> <span class="fu">gam</span>(hot <span class="sc">~</span></span>
+<span id="cb1047-6"><a href="sect116.html#cb1047-6" aria-hidden="true" tabindex="-1"></a>          A65Pct <span class="sc">+</span> A014Pct <span class="sc">+</span> PopFRPct <span class="sc">+</span> PopMVPct <span class="sc">+</span></span>
+<span id="cb1047-7"><a href="sect116.html#cb1047-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">poly</span>(prt_veg, <span class="at">degree =</span> <span class="dv">2</span>)  <span class="sc">+</span> Arrond,</span>
+<span id="cb1047-8"><a href="sect116.html#cb1047-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>Dans notre première analyse de ces données, nous avons ajusté une polynomiale d’ordre 2 pour représenter un potentiel effet non linéaire de la végétation sur les îlots de chaleur. Nous remplaçons à présent ce terme par une <em>spline</em> de régression en sélectionnant quatre nœuds.</p>
-<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1046-1"><a href="sect116.html#cb1046-1"></a><span class="kw">library</span>(splines2)</span>
-<span id="cb1046-2"><a href="sect116.html#cb1046-2"></a><span class="co"># Création des bases de la spline</span></span>
-<span id="cb1046-3"><a href="sect116.html#cb1046-3"></a>basis &lt;-<span class="st"> </span><span class="kw">bSpline</span>(<span class="dt">x =</span> dataset<span class="op">$</span>prt_veg, <span class="dt">df =</span><span class="dv">4</span>, <span class="dt">intercept =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb1046-4"><a href="sect116.html#cb1046-4"></a><span class="co"># Ajouter les bases au DataFrame</span></span>
-<span id="cb1046-5"><a href="sect116.html#cb1046-5"></a>basisdf &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(basis)</span>
-<span id="cb1046-6"><a href="sect116.html#cb1046-6"></a><span class="kw">names</span>(basisdf) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;spline&#39;</span>,<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(basisdf),<span class="dt">sep=</span><span class="st">&#39;&#39;</span>)</span>
-<span id="cb1046-7"><a href="sect116.html#cb1046-7"></a>dataset &lt;-<span class="st"> </span><span class="kw">cbind</span>(dataset, basisdf)</span>
-<span id="cb1046-8"><a href="sect116.html#cb1046-8"></a><span class="co"># Ajuster le modèle</span></span>
-<span id="cb1046-9"><a href="sect116.html#cb1046-9"></a>model0 &lt;-<span class="st"> </span><span class="kw">gam</span>(hot <span class="op">~</span></span>
-<span id="cb1046-10"><a href="sect116.html#cb1046-10"></a><span class="st">          </span>A65Pct <span class="op">+</span><span class="st"> </span>A014Pct <span class="op">+</span><span class="st"> </span>PopFRPct <span class="op">+</span><span class="st"> </span>PopMVPct <span class="op">+</span></span>
-<span id="cb1046-11"><a href="sect116.html#cb1046-11"></a><span class="st">          </span>spline1 <span class="op">+</span><span class="st"> </span>spline2 <span class="op">+</span><span class="st"> </span>spline3 <span class="op">+</span><span class="st"> </span>spline4 <span class="op">+</span><span class="st"> </span>Arrond,</span>
-<span id="cb1046-12"><a href="sect116.html#cb1046-12"></a>        <span class="dt">data =</span> dataset, <span class="dt">family =</span> <span class="kw">betar</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1048-1"><a href="sect116.html#cb1048-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines2)</span>
+<span id="cb1048-2"><a href="sect116.html#cb1048-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Création des bases de la spline</span></span>
+<span id="cb1048-3"><a href="sect116.html#cb1048-3" aria-hidden="true" tabindex="-1"></a>basis <span class="ot">&lt;-</span> <span class="fu">bSpline</span>(<span class="at">x =</span> dataset<span class="sc">$</span>prt_veg, <span class="at">df =</span><span class="dv">4</span>, <span class="at">intercept =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1048-4"><a href="sect116.html#cb1048-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter les bases au DataFrame</span></span>
+<span id="cb1048-5"><a href="sect116.html#cb1048-5" aria-hidden="true" tabindex="-1"></a>basisdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(basis)</span>
+<span id="cb1048-6"><a href="sect116.html#cb1048-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(basisdf) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;spline&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(basisdf),<span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb1048-7"><a href="sect116.html#cb1048-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dataset, basisdf)</span>
+<span id="cb1048-8"><a href="sect116.html#cb1048-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuster le modèle</span></span>
+<span id="cb1048-9"><a href="sect116.html#cb1048-9" aria-hidden="true" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">gam</span>(hot <span class="sc">~</span></span>
+<span id="cb1048-10"><a href="sect116.html#cb1048-10" aria-hidden="true" tabindex="-1"></a>          A65Pct <span class="sc">+</span> A014Pct <span class="sc">+</span> PopFRPct <span class="sc">+</span> PopMVPct <span class="sc">+</span></span>
+<span id="cb1048-11"><a href="sect116.html#cb1048-11" aria-hidden="true" tabindex="-1"></a>          spline1 <span class="sc">+</span> spline2 <span class="sc">+</span> spline3 <span class="sc">+</span> spline4 <span class="sc">+</span> Arrond,</span>
+<span id="cb1048-12"><a href="sect116.html#cb1048-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>Nous pouvons à présent ajuster une <em>spline</em> de lissage et laisser <code>mgcv</code> déterminer son niveau de complexité.</p>
-<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1047-1"><a href="sect116.html#cb1047-1"></a><span class="co"># Ajustement du modèle avec une spline simple</span></span>
-<span id="cb1047-2"><a href="sect116.html#cb1047-2"></a>model1 &lt;-<span class="st"> </span><span class="kw">gam</span>(hot <span class="op">~</span></span>
-<span id="cb1047-3"><a href="sect116.html#cb1047-3"></a><span class="st">          </span>A65Pct <span class="op">+</span><span class="st"> </span>A014Pct <span class="op">+</span><span class="st"> </span>PopFRPct <span class="op">+</span><span class="st"> </span>PopMVPct <span class="op">+</span></span>
-<span id="cb1047-4"><a href="sect116.html#cb1047-4"></a><span class="st">          </span><span class="kw">s</span>(prt_veg)  <span class="op">+</span><span class="st"> </span>Arrond,</span>
-<span id="cb1047-5"><a href="sect116.html#cb1047-5"></a>        <span class="dt">data =</span> dataset, <span class="dt">family =</span> <span class="kw">betar</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1049-1"><a href="sect116.html#cb1049-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustement du modèle avec une spline simple</span></span>
+<span id="cb1049-2"><a href="sect116.html#cb1049-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">gam</span>(hot <span class="sc">~</span></span>
+<span id="cb1049-3"><a href="sect116.html#cb1049-3" aria-hidden="true" tabindex="-1"></a>          A65Pct <span class="sc">+</span> A014Pct <span class="sc">+</span> PopFRPct <span class="sc">+</span> PopMVPct <span class="sc">+</span></span>
+<span id="cb1049-4"><a href="sect116.html#cb1049-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">s</span>(prt_veg)  <span class="sc">+</span> Arrond,</span>
+<span id="cb1049-5"><a href="sect116.html#cb1049-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>Notez ici que la syntaxe à employer est très simple, il suffit de spécifier <code>s(prt_veg)</code> pour indiquer à la fonction <code>gam</code> que vous souhaitez ajuster une <em>spline</em> pour la variable <code>prt_veg</code>. Nous pouvons à présent comparer l’ajustement des deux modèles en utilisant la mesure de l’AIC.</p>
-<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1048-1"><a href="sect116.html#cb1048-1"></a><span class="co"># Comparaison des AIC</span></span>
-<span id="cb1048-2"><a href="sect116.html#cb1048-2"></a><span class="kw">AIC</span>(refmodel, model0, model1)</span></code></pre></div>
+<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1050-1"><a href="sect116.html#cb1050-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparaison des AIC</span></span>
+<span id="cb1050-2"><a href="sect116.html#cb1050-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(refmodel, model0, model1)</span></code></pre></div>
 <pre><code>##                df       AIC
 ## refmodel 40.00000 -6399.784
 ## model0   42.00000 -6419.630
 ## model1   44.61065 -6417.562</code></pre>
 <p>Nous constatons que la valeur de l’AIC du second modèle est plus réduite, indiquant un meilleur ajustement du modèle avec une <em>spline</em> de régression. Notons cependant que la différence avec la <em>spline</em> de lissage est anecdotique (deux points de l’AIC) et que nous connaissions a priori le bon nombre de nœuds à utiliser. Pour des relations plus complexes, les <em>splines</em> de lissage ont tendance à nettement mieux performer. Voyons à présent comment représenter ces trois termes non linéaires.</p>
-<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1050-1"><a href="sect116.html#cb1050-1"></a><span class="co"># Création d&#39;un DataFrame de prédiction dans lequel seule</span></span>
-<span id="cb1050-2"><a href="sect116.html#cb1050-2"></a><span class="co"># la variable prt_veg varie.</span></span>
-<span id="cb1050-3"><a href="sect116.html#cb1050-3"></a>dfpred &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb1050-4"><a href="sect116.html#cb1050-4"></a>  <span class="dt">prt_veg =</span> <span class="kw">seq</span>(<span class="kw">min</span>(dataset<span class="op">$</span>prt_veg), <span class="kw">max</span>(dataset<span class="op">$</span>prt_veg), <span class="fl">0.5</span>),</span>
-<span id="cb1050-5"><a href="sect116.html#cb1050-5"></a>  <span class="dt">A65Pct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>A65Pct),</span>
-<span id="cb1050-6"><a href="sect116.html#cb1050-6"></a>  <span class="dt">A014Pct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>A014Pct),</span>
-<span id="cb1050-7"><a href="sect116.html#cb1050-7"></a>  <span class="dt">PopFRPct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>PopFRPct),</span>
-<span id="cb1050-8"><a href="sect116.html#cb1050-8"></a>  <span class="dt">PopMVPct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>PopMVPct),</span>
-<span id="cb1050-9"><a href="sect116.html#cb1050-9"></a>  <span class="dt">Arrond =</span> <span class="st">&quot;Verdun&quot;</span></span>
-<span id="cb1050-10"><a href="sect116.html#cb1050-10"></a>)</span>
-<span id="cb1050-11"><a href="sect116.html#cb1050-11"></a></span>
-<span id="cb1050-12"><a href="sect116.html#cb1050-12"></a><span class="co"># Recréation des bases de la spline de régression</span></span>
-<span id="cb1050-13"><a href="sect116.html#cb1050-13"></a><span class="co"># pour les nouvelles observations</span></span>
-<span id="cb1050-14"><a href="sect116.html#cb1050-14"></a>nvl_bases &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">predict</span>(basis,<span class="dt">newx =</span> dfpred<span class="op">$</span>prt_veg))</span>
-<span id="cb1050-15"><a href="sect116.html#cb1050-15"></a><span class="kw">names</span>(nvl_bases) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;spline&#39;</span>,<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(basisdf),<span class="dt">sep=</span><span class="st">&#39;&#39;</span>)</span>
-<span id="cb1050-16"><a href="sect116.html#cb1050-16"></a>dfpred &lt;-<span class="st"> </span><span class="kw">cbind</span>(dfpred, nvl_bases)</span>
-<span id="cb1050-17"><a href="sect116.html#cb1050-17"></a></span>
-<span id="cb1050-18"><a href="sect116.html#cb1050-18"></a><span class="co"># Définition de la fonction inv.logit, soit l&#39;inverse de la fonction </span></span>
-<span id="cb1050-19"><a href="sect116.html#cb1050-19"></a><span class="co"># de lien du modèle pour retrouver les prédictions dans l&#39;échelle </span></span>
-<span id="cb1050-20"><a href="sect116.html#cb1050-20"></a><span class="co"># originales des données</span></span>
-<span id="cb1050-21"><a href="sect116.html#cb1050-21"></a>inv.logit &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">exp</span>(x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(x))}</span>
-<span id="cb1050-22"><a href="sect116.html#cb1050-22"></a></span>
-<span id="cb1050-23"><a href="sect116.html#cb1050-23"></a><span class="co"># Utilisation des deux modèles pour effectuer les prédictions</span></span>
-<span id="cb1050-24"><a href="sect116.html#cb1050-24"></a>predref &lt;-<span class="st"> </span><span class="kw">predict</span>(refmodel, <span class="dt">newdata =</span> dfpred, <span class="dt">type =</span> <span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> T)</span>
-<span id="cb1050-25"><a href="sect116.html#cb1050-25"></a>predmod0 &lt;-<span class="st"> </span><span class="kw">predict</span>(model0, <span class="dt">newdata =</span> dfpred, <span class="dt">type =</span> <span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> T)</span>
-<span id="cb1050-26"><a href="sect116.html#cb1050-26"></a>predmod1 &lt;-<span class="st"> </span><span class="kw">predict</span>(model1, <span class="dt">newdata =</span> dfpred, <span class="dt">type =</span> <span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> T)</span>
-<span id="cb1050-27"><a href="sect116.html#cb1050-27"></a></span>
-<span id="cb1050-28"><a href="sect116.html#cb1050-28"></a><span class="co"># Calcul de la valeur prédite et construction des intervalles de confiance</span></span>
-<span id="cb1050-29"><a href="sect116.html#cb1050-29"></a>dfpred<span class="op">$</span>polypred &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predref<span class="op">$</span>fit)</span>
-<span id="cb1050-30"><a href="sect116.html#cb1050-30"></a>dfpred<span class="op">$</span>poly025 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predref<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predref<span class="op">$</span>se.fit)</span>
-<span id="cb1050-31"><a href="sect116.html#cb1050-31"></a>dfpred<span class="op">$</span>poly975 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predref<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predref<span class="op">$</span>se.fit)</span>
-<span id="cb1050-32"><a href="sect116.html#cb1050-32"></a></span>
-<span id="cb1050-33"><a href="sect116.html#cb1050-33"></a>dfpred<span class="op">$</span>regsplinepred &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod0<span class="op">$</span>fit)</span>
-<span id="cb1050-34"><a href="sect116.html#cb1050-34"></a>dfpred<span class="op">$</span>regspline025 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod0<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predmod0<span class="op">$</span>se.fit)</span>
-<span id="cb1050-35"><a href="sect116.html#cb1050-35"></a>dfpred<span class="op">$</span>regspline975 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod0<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predmod0<span class="op">$</span>se.fit)</span>
-<span id="cb1050-36"><a href="sect116.html#cb1050-36"></a></span>
-<span id="cb1050-37"><a href="sect116.html#cb1050-37"></a>dfpred<span class="op">$</span>splinepred &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod1<span class="op">$</span>fit)</span>
-<span id="cb1050-38"><a href="sect116.html#cb1050-38"></a>dfpred<span class="op">$</span>spline025 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod1<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predmod1<span class="op">$</span>se.fit)</span>
-<span id="cb1050-39"><a href="sect116.html#cb1050-39"></a>dfpred<span class="op">$</span>spline975 &lt;-<span class="st"> </span><span class="kw">inv.logit</span>(predmod1<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>predmod1<span class="op">$</span>se.fit)</span>
-<span id="cb1050-40"><a href="sect116.html#cb1050-40"></a></span>
-<span id="cb1050-41"><a href="sect116.html#cb1050-41"></a><span class="co"># Créer un graphique pour afficher les résultats</span></span>
-<span id="cb1050-42"><a href="sect116.html#cb1050-42"></a><span class="kw">ggplot</span>(dfpred) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1050-43"><a href="sect116.html#cb1050-43"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> prt_veg, <span class="dt">ymin =</span> poly025, <span class="dt">ymax =</span> poly975),</span>
-<span id="cb1050-44"><a href="sect116.html#cb1050-44"></a>              <span class="dt">alpha =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="op">+</span></span>
-<span id="cb1050-45"><a href="sect116.html#cb1050-45"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> prt_veg, <span class="dt">ymin =</span> spline025, <span class="dt">ymax =</span> spline975),</span>
-<span id="cb1050-46"><a href="sect116.html#cb1050-46"></a>              <span class="dt">alpha =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="op">+</span></span>
-<span id="cb1050-47"><a href="sect116.html#cb1050-47"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> prt_veg, <span class="dt">ymin =</span> regspline025, <span class="dt">ymax =</span> regspline975),</span>
-<span id="cb1050-48"><a href="sect116.html#cb1050-48"></a>              <span class="dt">alpha =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="op">+</span></span>
-<span id="cb1050-49"><a href="sect116.html#cb1050-49"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> polypred, <span class="dt">x =</span> prt_veg, <span class="dt">color =</span> <span class="st">&#39;polynomiale&#39;</span>),</span>
-<span id="cb1050-50"><a href="sect116.html#cb1050-50"></a>            <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1050-51"><a href="sect116.html#cb1050-51"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> regsplinepred, <span class="dt">x =</span> prt_veg, <span class="dt">color =</span> <span class="st">&#39;spline de régression&#39;</span>),</span>
-<span id="cb1050-52"><a href="sect116.html#cb1050-52"></a>            <span class="dt">size =</span> <span class="dv">1</span>)<span class="op">+</span></span>
-<span id="cb1050-53"><a href="sect116.html#cb1050-53"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> splinepred, <span class="dt">x =</span> prt_veg, <span class="dt">color =</span> <span class="st">&#39;spline de lissage&#39;</span>),</span>
-<span id="cb1050-54"><a href="sect116.html#cb1050-54"></a>            <span class="dt">size =</span> <span class="dv">1</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:figgam16"></span>
+<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1052-1"><a href="sect116.html#cb1052-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d&#39;un DataFrame de prédiction dans lequel seule</span></span>
+<span id="cb1052-2"><a href="sect116.html#cb1052-2" aria-hidden="true" tabindex="-1"></a><span class="co"># la variable prt_veg varie.</span></span>
+<span id="cb1052-3"><a href="sect116.html#cb1052-3" aria-hidden="true" tabindex="-1"></a>dfpred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1052-4"><a href="sect116.html#cb1052-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prt_veg =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dataset<span class="sc">$</span>prt_veg), <span class="fu">max</span>(dataset<span class="sc">$</span>prt_veg), <span class="fl">0.5</span>),</span>
+<span id="cb1052-5"><a href="sect116.html#cb1052-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">A65Pct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>A65Pct),</span>
+<span id="cb1052-6"><a href="sect116.html#cb1052-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">A014Pct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>A014Pct),</span>
+<span id="cb1052-7"><a href="sect116.html#cb1052-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">PopFRPct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>PopFRPct),</span>
+<span id="cb1052-8"><a href="sect116.html#cb1052-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">PopMVPct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>PopMVPct),</span>
+<span id="cb1052-9"><a href="sect116.html#cb1052-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Arrond =</span> <span class="st">&quot;Verdun&quot;</span></span>
+<span id="cb1052-10"><a href="sect116.html#cb1052-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1052-11"><a href="sect116.html#cb1052-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-12"><a href="sect116.html#cb1052-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Recréation des bases de la spline de régression</span></span>
+<span id="cb1052-13"><a href="sect116.html#cb1052-13" aria-hidden="true" tabindex="-1"></a><span class="co"># pour les nouvelles observations</span></span>
+<span id="cb1052-14"><a href="sect116.html#cb1052-14" aria-hidden="true" tabindex="-1"></a>nvl_bases <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(basis,<span class="at">newx =</span> dfpred<span class="sc">$</span>prt_veg))</span>
+<span id="cb1052-15"><a href="sect116.html#cb1052-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(nvl_bases) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;spline&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(basisdf),<span class="at">sep=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb1052-16"><a href="sect116.html#cb1052-16" aria-hidden="true" tabindex="-1"></a>dfpred <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dfpred, nvl_bases)</span>
+<span id="cb1052-17"><a href="sect116.html#cb1052-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-18"><a href="sect116.html#cb1052-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Définition de la fonction inv.logit, soit l&#39;inverse de la fonction </span></span>
+<span id="cb1052-19"><a href="sect116.html#cb1052-19" aria-hidden="true" tabindex="-1"></a><span class="co"># de lien du modèle pour retrouver les prédictions dans l&#39;échelle </span></span>
+<span id="cb1052-20"><a href="sect116.html#cb1052-20" aria-hidden="true" tabindex="-1"></a><span class="co"># originales des données</span></span>
+<span id="cb1052-21"><a href="sect116.html#cb1052-21" aria-hidden="true" tabindex="-1"></a>inv.logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">exp</span>(x)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(x))}</span>
+<span id="cb1052-22"><a href="sect116.html#cb1052-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-23"><a href="sect116.html#cb1052-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilisation des deux modèles pour effectuer les prédictions</span></span>
+<span id="cb1052-24"><a href="sect116.html#cb1052-24" aria-hidden="true" tabindex="-1"></a>predref <span class="ot">&lt;-</span> <span class="fu">predict</span>(refmodel, <span class="at">newdata =</span> dfpred, <span class="at">type =</span> <span class="st">&#39;link&#39;</span>, <span class="at">se.fit =</span> T)</span>
+<span id="cb1052-25"><a href="sect116.html#cb1052-25" aria-hidden="true" tabindex="-1"></a>predmod0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model0, <span class="at">newdata =</span> dfpred, <span class="at">type =</span> <span class="st">&#39;link&#39;</span>, <span class="at">se.fit =</span> T)</span>
+<span id="cb1052-26"><a href="sect116.html#cb1052-26" aria-hidden="true" tabindex="-1"></a>predmod1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> dfpred, <span class="at">type =</span> <span class="st">&#39;link&#39;</span>, <span class="at">se.fit =</span> T)</span>
+<span id="cb1052-27"><a href="sect116.html#cb1052-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-28"><a href="sect116.html#cb1052-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul de la valeur prédite et construction des intervalles de confiance</span></span>
+<span id="cb1052-29"><a href="sect116.html#cb1052-29" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>polypred <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predref<span class="sc">$</span>fit)</span>
+<span id="cb1052-30"><a href="sect116.html#cb1052-30" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>poly025 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predref<span class="sc">$</span>fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> predref<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-31"><a href="sect116.html#cb1052-31" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>poly975 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predref<span class="sc">$</span>fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> predref<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-32"><a href="sect116.html#cb1052-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-33"><a href="sect116.html#cb1052-33" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>regsplinepred <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod0<span class="sc">$</span>fit)</span>
+<span id="cb1052-34"><a href="sect116.html#cb1052-34" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>regspline025 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod0<span class="sc">$</span>fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> predmod0<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-35"><a href="sect116.html#cb1052-35" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>regspline975 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod0<span class="sc">$</span>fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> predmod0<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-36"><a href="sect116.html#cb1052-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-37"><a href="sect116.html#cb1052-37" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>splinepred <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod1<span class="sc">$</span>fit)</span>
+<span id="cb1052-38"><a href="sect116.html#cb1052-38" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>spline025 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod1<span class="sc">$</span>fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> predmod1<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-39"><a href="sect116.html#cb1052-39" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>spline975 <span class="ot">&lt;-</span> <span class="fu">inv.logit</span>(predmod1<span class="sc">$</span>fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> predmod1<span class="sc">$</span>se.fit)</span>
+<span id="cb1052-40"><a href="sect116.html#cb1052-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1052-41"><a href="sect116.html#cb1052-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un graphique pour afficher les résultats</span></span>
+<span id="cb1052-42"><a href="sect116.html#cb1052-42" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dfpred) <span class="sc">+</span> </span>
+<span id="cb1052-43"><a href="sect116.html#cb1052-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> prt_veg, <span class="at">ymin =</span> poly025, <span class="at">ymax =</span> poly975),</span>
+<span id="cb1052-44"><a href="sect116.html#cb1052-44" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="sc">+</span></span>
+<span id="cb1052-45"><a href="sect116.html#cb1052-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> prt_veg, <span class="at">ymin =</span> spline025, <span class="at">ymax =</span> spline975),</span>
+<span id="cb1052-46"><a href="sect116.html#cb1052-46" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="sc">+</span></span>
+<span id="cb1052-47"><a href="sect116.html#cb1052-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> prt_veg, <span class="at">ymin =</span> regspline025, <span class="at">ymax =</span> regspline975),</span>
+<span id="cb1052-48"><a href="sect116.html#cb1052-48" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="sc">+</span></span>
+<span id="cb1052-49"><a href="sect116.html#cb1052-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> polypred, <span class="at">x =</span> prt_veg, <span class="at">color =</span> <span class="st">&#39;polynomiale&#39;</span>),</span>
+<span id="cb1052-50"><a href="sect116.html#cb1052-50" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb1052-51"><a href="sect116.html#cb1052-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> regsplinepred, <span class="at">x =</span> prt_veg, <span class="at">color =</span> <span class="st">&#39;spline de régression&#39;</span>),</span>
+<span id="cb1052-52"><a href="sect116.html#cb1052-52" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb1052-53"><a href="sect116.html#cb1052-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> splinepred, <span class="at">x =</span> prt_veg, <span class="at">color =</span> <span class="st">&#39;spline de lissage&#39;</span>),</span>
+<span id="cb1052-54"><a href="sect116.html#cb1052-54" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:figgam16"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/figgam16-1.png" alt="Comparaison d'une spline et d'une polynomiale" width="75%" />
 <p class="caption">
 Figure 11.16: Comparaison d’une spline et d’une polynomiale
@@ -594,36 +675,36 @@ Figure 11.16: Comparaison d’une spline et d’une polynomiale
 </div>
 <p>Nous constatons que les trois termes renvoient des prédictions très similaires et qu’une légère différence n’est observable que pour les secteurs avec les plus hauts niveaux de végétation (supérieurs à 75 %).</p>
 <p>Jusqu’ici, nous utilisons l’arrondissement dans lequel est comprise chaque aire de diffusion comme une variable nominale afin de capturer la dimension spatiale du jeu de données. Puisque nous avons abordé la notion de <em>splines</em> bivariées, il serait certainement plus efficace d’en construire une à partir des coordonnées géographiques (<em>x</em>,<em>y</em>) des centroïdes des aires de diffusion. En effet, il est plus probable que la distribution des îlots de chaleur suive un patron spatial continu sur le territoire plutôt que les délimitations arbitraires des arrondissements.</p>
-<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1051-1"><a href="sect116.html#cb1051-1"></a><span class="co"># Ajustement du modèle avec une spline bivariée pour l&#39;espace</span></span>
-<span id="cb1051-2"><a href="sect116.html#cb1051-2"></a>model2 &lt;-<span class="st"> </span><span class="kw">gam</span>(hot <span class="op">~</span></span>
-<span id="cb1051-3"><a href="sect116.html#cb1051-3"></a><span class="st">          </span>A65Pct <span class="op">+</span><span class="st"> </span>A014Pct <span class="op">+</span><span class="st"> </span>PopFRPct <span class="op">+</span><span class="st"> </span>PopMVPct <span class="op">+</span></span>
-<span id="cb1051-4"><a href="sect116.html#cb1051-4"></a><span class="st">          </span><span class="kw">s</span>(prt_veg)  <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(X,Y),</span>
-<span id="cb1051-5"><a href="sect116.html#cb1051-5"></a>        <span class="dt">data =</span> dataset, <span class="dt">family =</span> <span class="kw">betar</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="sect116.html#cb1053-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustement du modèle avec une spline bivariée pour l&#39;espace</span></span>
+<span id="cb1053-2"><a href="sect116.html#cb1053-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(hot <span class="sc">~</span></span>
+<span id="cb1053-3"><a href="sect116.html#cb1053-3" aria-hidden="true" tabindex="-1"></a>          A65Pct <span class="sc">+</span> A014Pct <span class="sc">+</span> PopFRPct <span class="sc">+</span> PopMVPct <span class="sc">+</span></span>
+<span id="cb1053-4"><a href="sect116.html#cb1053-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">s</span>(prt_veg)  <span class="sc">+</span> <span class="fu">s</span>(X,Y),</span>
+<span id="cb1053-5"><a href="sect116.html#cb1053-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>Notez ici que l’expression <code>s(X,Y)</code> permet de créer une <em>spline</em> bivariée à partir des coordonnées (<em>x,y</em>), soit deux colonnes présentes dans le jeu de données. Ces coordonnées sont exprimées toutes deux en mètres et n’interagissent pas ensemble au sens strict, nous devons donc ajuster une <em>spline</em> bivariée. Si vous avez besoin d’ajuster une <em>spline</em> d’interaction (notamment quand les variables sont dans des unités différentes), il est nécessaire d’utiliser une autre syntaxe <code>te(X,Y)</code> ou <code>t2(X,Y)</code> faisant appel à une structure mathématique légèrement différente, soit des <em>tensor product smooths</em>.</p>
 <p>Puisque notre modèle intègre deux <em>splines</em>, nous devons nous assurer que nous n’avons pas de problème de concurvité, ce que nous pouvons faire avec la fonction <code>concurvity</code> du <em>package</em> <code>mgcv</code>.</p>
-<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1052-1"><a href="sect116.html#cb1052-1"></a>values &lt;-<span class="st"> </span><span class="kw">concurvity</span>(model2, <span class="dt">full =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb1052-2"><a href="sect116.html#cb1052-2"></a></span>
-<span id="cb1052-3"><a href="sect116.html#cb1052-3"></a><span class="co"># Worst, estimation pessimiste de la concurvité</span></span>
-<span id="cb1052-4"><a href="sect116.html#cb1052-4"></a><span class="kw">round</span>(values<span class="op">$</span>worst,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1054"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1054-1"><a href="sect116.html#cb1054-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">concurvity</span>(model2, <span class="at">full =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1054-2"><a href="sect116.html#cb1054-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1054-3"><a href="sect116.html#cb1054-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Worst, estimation pessimiste de la concurvité</span></span>
+<span id="cb1054-4"><a href="sect116.html#cb1054-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(values<span class="sc">$</span>worst,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            para s(prt_veg) s(X,Y)
 ## para          1      0.000  0.000
 ## s(prt_veg)    0      1.000  0.458
 ## s(X,Y)        0      0.458  1.000</code></pre>
-<div class="sourceCode" id="cb1054"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1054-1"><a href="sect116.html#cb1054-1"></a><span class="co"># Observed, estimation optimiste de la concurvité</span></span>
-<span id="cb1054-2"><a href="sect116.html#cb1054-2"></a><span class="kw">round</span>(values<span class="op">$</span>observed,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="sect116.html#cb1056-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed, estimation optimiste de la concurvité</span></span>
+<span id="cb1056-2"><a href="sect116.html#cb1056-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(values<span class="sc">$</span>observed,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            para s(prt_veg) s(X,Y)
 ## para          1      0.000  0.000
 ## s(prt_veg)    0      1.000  0.154
 ## s(X,Y)        0      0.403  1.000</code></pre>
-<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="sect116.html#cb1056-1"></a><span class="co"># Estimate, estimation entre deux de la concurvité</span></span>
-<span id="cb1056-2"><a href="sect116.html#cb1056-2"></a><span class="kw">round</span>(values<span class="op">$</span>estimate,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1058-1"><a href="sect116.html#cb1058-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate, estimation entre deux de la concurvité</span></span>
+<span id="cb1058-2"><a href="sect116.html#cb1058-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(values<span class="sc">$</span>estimate,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            para s(prt_veg) s(X,Y)
 ## para          1      0.000  0.000
 ## s(prt_veg)    0      1.000  0.142
 ## s(X,Y)        0      0.358  1.000</code></pre>
 <p>Nous pouvons ainsi constater des niveaux de concurvité tout à fait acceptables dans notre modèle. Des valeurs supérieures à 0,8 devraient être considérées comme alarmantes, surtout si elles sont reportées pour <code>observed</code> et <code>estimate</code>.</p>
 <p>Voyons désormais, le résumé d’un modèle GAM tel que présenté dans R.</p>
-<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1058-1"><a href="sect116.html#cb1058-1"></a><span class="kw">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="sect116.html#cb1060-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Family: Beta regression(15.469) 
 ## Link function: logit 
@@ -653,82 +734,82 @@ Figure 11.16: Comparaison d’une spline et d’une polynomiale
 ## -REML = -3234.3  Scale est. = 1         n = 3157</code></pre>
 <p>La première partie du résumé comprend les résultats pour les effets fixes et linéaires du modèle. Ils s’interprètent comme pour ceux d’un GLM classique. La seconde partie présente les résultats pour les termes non linéaires. La valeur de <em>p</em> permet de déterminer si la <em>spline</em> a ou non un effet différent de 0. Une valeur non significative indique que la <em>spline</em> ne contribue pas au modèle. Les colonnes <em>edf</em> et <em>Ref.df</em> indiquent la complexité de la <em>spline</em> et peuvent être considérées comme une approximation du nombre de nœuds. Dans notre cas, la <em>spline</em> spatiale (<code>s(X,Y)</code>) est environ 5 fois plus complexe que la <em>spline</em> ajustée pour la végétation (<code>s(prt_veg)</code>). Cela n’est pas surprenant puisque la dimension spatiale (<em>spline</em> bivariée) du phénomène est certainement plus complexe que l’effet de la végétation. Notez ici que des valeurs <em>edf</em> et <em>Ref.df</em> proches de 1 signaleraient que l’effet d’un prédicteur est essentiellement linéaire et qu’il n’est pas nécessaire de recourir à une <em>spline</em> pour cette variable.</p>
 <p>La dernière partie du résumé comprend deux indicateurs de qualité d’ajustement, soit le R<sup>2</sup> ajusté et la part de la déviance expliquée.</p>
-<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="sect116.html#cb1060-1"></a><span class="kw">AIC</span>(refmodel, model1, model2)</span></code></pre></div>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="sect116.html#cb1062-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(refmodel, model1, model2)</span></code></pre></div>
 <pre><code>##                df       AIC
 ## refmodel 40.00000 -6399.784
 ## model1   44.61065 -6417.562
 ## model2   40.06053 -6596.884</code></pre>
 <p>Nous pouvons constater que le fait d’introduire la <em>spline</em> spatiale dans le modèle contribue à réduire encore la valeur de l’AIC, et donc à améliorer le modèle. À ce stade, nous pourrions tenter de forcer la <em>spline</em> à être plus complexe en augmentant le nombre de nœuds.</p>
-<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="sect116.html#cb1062-1"></a><span class="co"># Augmentation de la complexité de la spline spatiale</span></span>
-<span id="cb1062-2"><a href="sect116.html#cb1062-2"></a>model3 &lt;-<span class="st"> </span><span class="kw">gam</span>(hot <span class="op">~</span></span>
-<span id="cb1062-3"><a href="sect116.html#cb1062-3"></a><span class="st">          </span>A65Pct <span class="op">+</span><span class="st"> </span>A014Pct <span class="op">+</span><span class="st"> </span>PopFRPct <span class="op">+</span><span class="st"> </span>PopMVPct <span class="op">+</span></span>
-<span id="cb1062-4"><a href="sect116.html#cb1062-4"></a><span class="st">          </span><span class="kw">s</span>(prt_veg)  <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(X,Y,<span class="dt">k =</span> <span class="dv">40</span>),</span>
-<span id="cb1062-5"><a href="sect116.html#cb1062-5"></a>        <span class="dt">data =</span> dataset, <span class="dt">family =</span> <span class="kw">betar</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb1062-6"><a href="sect116.html#cb1062-6"></a></span>
-<span id="cb1062-7"><a href="sect116.html#cb1062-7"></a><span class="kw">AIC</span>(refmodel, model1, model2, model3)</span></code></pre></div>
+<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="sect116.html#cb1064-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Augmentation de la complexité de la spline spatiale</span></span>
+<span id="cb1064-2"><a href="sect116.html#cb1064-2" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(hot <span class="sc">~</span></span>
+<span id="cb1064-3"><a href="sect116.html#cb1064-3" aria-hidden="true" tabindex="-1"></a>          A65Pct <span class="sc">+</span> A014Pct <span class="sc">+</span> PopFRPct <span class="sc">+</span> PopMVPct <span class="sc">+</span></span>
+<span id="cb1064-4"><a href="sect116.html#cb1064-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">s</span>(prt_veg)  <span class="sc">+</span> <span class="fu">s</span>(X,Y,<span class="at">k =</span> <span class="dv">40</span>),</span>
+<span id="cb1064-5"><a href="sect116.html#cb1064-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb1064-6"><a href="sect116.html#cb1064-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1064-7"><a href="sect116.html#cb1064-7" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(refmodel, model1, model2, model3)</span></code></pre></div>
 <pre><code>##                df       AIC
 ## refmodel 40.00000 -6399.784
 ## model1   44.61065 -6417.562
 ## model2   40.06053 -6596.884
 ## model3   48.28633 -6639.955</code></pre>
 <p>Cela a pour effet d’améliorer de nouveau le modèle. Pour vérifier si l’augmentation du nombre nœuds est judicieuse, il est possible de représenter le résultat des deux <em>splines</em> précédentes. Pour ce faire, nous proposons de calculer les valeurs prédites de la <em>spline</em> pour chaque localisation dans notre terrain d’étude, en le découpant préalablement en pixels de 100 de côté. Pour cette prédiction, nous maintenons toutes les autres variables à leur moyenne respective afin d’évaluer uniquement l’effet de la <em>spline</em> spatiale.</p>
-<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="sect116.html#cb1064-1"></a><span class="kw">library</span>(viridis)</span>
-<span id="cb1064-2"><a href="sect116.html#cb1064-2"></a><span class="kw">library</span>(metR) <span class="co"># pour placer des étiquettes sur les isolignes</span></span>
-<span id="cb1064-3"><a href="sect116.html#cb1064-3"></a></span>
-<span id="cb1064-4"><a href="sect116.html#cb1064-4"></a><span class="co"># Création d&#39;un DataFrame fictif pour les prédictions</span></span>
-<span id="cb1064-5"><a href="sect116.html#cb1064-5"></a>dfpred &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
-<span id="cb1064-6"><a href="sect116.html#cb1064-6"></a>  <span class="dt">prt_veg =</span><span class="kw">mean</span>(dataset<span class="op">$</span>prt_veg),</span>
-<span id="cb1064-7"><a href="sect116.html#cb1064-7"></a>  <span class="dt">A65Pct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>A65Pct),</span>
-<span id="cb1064-8"><a href="sect116.html#cb1064-8"></a>  <span class="dt">A014Pct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>A014Pct),</span>
-<span id="cb1064-9"><a href="sect116.html#cb1064-9"></a>  <span class="dt">PopFRPct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>PopFRPct),</span>
-<span id="cb1064-10"><a href="sect116.html#cb1064-10"></a>  <span class="dt">PopMVPct =</span> <span class="kw">mean</span>(dataset<span class="op">$</span>PopMVPct),</span>
-<span id="cb1064-11"><a href="sect116.html#cb1064-11"></a>  <span class="dt">X =</span> <span class="kw">seq</span>(<span class="kw">min</span>(dataset<span class="op">$</span>X),<span class="kw">max</span>(dataset<span class="op">$</span>X),<span class="dv">100</span>),</span>
-<span id="cb1064-12"><a href="sect116.html#cb1064-12"></a>  <span class="dt">Y =</span> <span class="kw">seq</span>(<span class="kw">min</span>(dataset<span class="op">$</span>Y),<span class="kw">max</span>(dataset<span class="op">$</span>Y),<span class="dv">100</span>)</span>
-<span id="cb1064-13"><a href="sect116.html#cb1064-13"></a>)</span>
-<span id="cb1064-14"><a href="sect116.html#cb1064-14"></a></span>
-<span id="cb1064-15"><a href="sect116.html#cb1064-15"></a>dfpred<span class="op">$</span>predicted1 &lt;-<span class="st"> </span><span class="kw">predict</span>(model2, <span class="dt">newdata =</span> dfpred, <span class="dt">type =</span> <span class="st">&#39;response&#39;</span>)</span>
-<span id="cb1064-16"><a href="sect116.html#cb1064-16"></a>dfpred<span class="op">$</span>predicted2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model3, <span class="dt">newdata =</span> dfpred, <span class="dt">type =</span> <span class="st">&#39;response&#39;</span>)</span>
-<span id="cb1064-17"><a href="sect116.html#cb1064-17"></a></span>
-<span id="cb1064-18"><a href="sect116.html#cb1064-18"></a><span class="co"># Centrage des prédictions</span></span>
-<span id="cb1064-19"><a href="sect116.html#cb1064-19"></a>dfpred<span class="op">$</span>predicted1 &lt;-<span class="st"> </span>dfpred<span class="op">$</span>predicted1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dfpred<span class="op">$</span>predicted1)</span>
-<span id="cb1064-20"><a href="sect116.html#cb1064-20"></a>dfpred<span class="op">$</span>predicted2 &lt;-<span class="st"> </span>dfpred<span class="op">$</span>predicted2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(dfpred<span class="op">$</span>predicted2)</span>
-<span id="cb1064-21"><a href="sect116.html#cb1064-21"></a></span>
-<span id="cb1064-22"><a href="sect116.html#cb1064-22"></a><span class="co"># Représentation des splines</span></span>
-<span id="cb1064-23"><a href="sect116.html#cb1064-23"></a>plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfpred) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-24"><a href="sect116.html#cb1064-24"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">fill =</span> predicted1)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-25"><a href="sect116.html#cb1064-25"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y),</span>
-<span id="cb1064-26"><a href="sect116.html#cb1064-26"></a>             <span class="dt">size =</span> <span class="fl">0.2</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>,</span>
-<span id="cb1064-27"><a href="sect116.html#cb1064-27"></a>             <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">data =</span> dataset)<span class="op">+</span></span>
-<span id="cb1064-28"><a href="sect116.html#cb1064-28"></a><span class="st">  </span><span class="kw">geom_contour</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">z =</span> predicted1),<span class="dt">binwidth =</span> <span class="fl">0.1</span>, </span>
-<span id="cb1064-29"><a href="sect116.html#cb1064-29"></a>               <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-30"><a href="sect116.html#cb1064-30"></a><span class="st">  </span><span class="kw">geom_text_contour</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">z =</span> predicted1), </span>
-<span id="cb1064-31"><a href="sect116.html#cb1064-31"></a>                    <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">binwidth =</span> <span class="fl">0.1</span>)<span class="op">+</span></span>
-<span id="cb1064-32"><a href="sect116.html#cb1064-32"></a><span class="st">  </span><span class="kw">scale_fill_viridis</span>() <span class="op">+</span></span>
-<span id="cb1064-33"><a href="sect116.html#cb1064-33"></a><span class="st">  </span><span class="kw">coord_cartesian</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-34"><a href="sect116.html#cb1064-34"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title=</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1064-35"><a href="sect116.html#cb1064-35"></a>        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1064-36"><a href="sect116.html#cb1064-36"></a>        <span class="dt">axis.ticks =</span>  <span class="kw">element_blank</span>()</span>
-<span id="cb1064-37"><a href="sect116.html#cb1064-37"></a>        ) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-38"><a href="sect116.html#cb1064-38"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&#39;spline de base&#39;</span>, <span class="dt">fill =</span> <span class="st">&quot;prédictions&quot;</span>)</span>
-<span id="cb1064-39"><a href="sect116.html#cb1064-39"></a></span>
-<span id="cb1064-40"><a href="sect116.html#cb1064-40"></a>plot2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dfpred) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-41"><a href="sect116.html#cb1064-41"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">fill =</span> predicted2)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-42"><a href="sect116.html#cb1064-42"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y),</span>
-<span id="cb1064-43"><a href="sect116.html#cb1064-43"></a>             <span class="dt">size =</span> <span class="fl">0.2</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>,</span>
-<span id="cb1064-44"><a href="sect116.html#cb1064-44"></a>             <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">data =</span> dataset)<span class="op">+</span></span>
-<span id="cb1064-45"><a href="sect116.html#cb1064-45"></a><span class="st">  </span><span class="kw">geom_contour</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">z =</span> predicted2),</span>
-<span id="cb1064-46"><a href="sect116.html#cb1064-46"></a>               <span class="dt">binwidth =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-47"><a href="sect116.html#cb1064-47"></a><span class="st">  </span><span class="kw">geom_text_contour</span>(<span class="kw">aes</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> Y, <span class="dt">z =</span> predicted2), <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">binwidth =</span> <span class="fl">0.1</span>)<span class="op">+</span></span>
-<span id="cb1064-48"><a href="sect116.html#cb1064-48"></a><span class="st">  </span><span class="kw">scale_fill_viridis</span>() <span class="op">+</span></span>
-<span id="cb1064-49"><a href="sect116.html#cb1064-49"></a><span class="st">  </span><span class="kw">coord_cartesian</span>()<span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-50"><a href="sect116.html#cb1064-50"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title=</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1064-51"><a href="sect116.html#cb1064-51"></a>        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb1064-52"><a href="sect116.html#cb1064-52"></a>        <span class="dt">axis.ticks =</span>  <span class="kw">element_blank</span>()</span>
-<span id="cb1064-53"><a href="sect116.html#cb1064-53"></a>        ) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb1064-54"><a href="sect116.html#cb1064-54"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&#39;spline plus complexe&#39;</span>, <span class="dt">fill =</span> <span class="st">&quot;prédictions&quot;</span>)</span>
-<span id="cb1064-55"><a href="sect116.html#cb1064-55"></a></span>
-<span id="cb1064-56"><a href="sect116.html#cb1064-56"></a><span class="kw">ggarrange</span>(plot1, plot2, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">common.legend =</span> <span class="ot">TRUE</span>, <span class="dt">legend =</span> <span class="st">&#39;bottom&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:figgam17"></span>
+<div class="sourceCode" id="cb1066"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1066-1"><a href="sect116.html#cb1066-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb1066-2"><a href="sect116.html#cb1066-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metR) <span class="co"># pour placer des étiquettes sur les isolignes</span></span>
+<span id="cb1066-3"><a href="sect116.html#cb1066-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-4"><a href="sect116.html#cb1066-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d&#39;un DataFrame fictif pour les prédictions</span></span>
+<span id="cb1066-5"><a href="sect116.html#cb1066-5" aria-hidden="true" tabindex="-1"></a>dfpred <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb1066-6"><a href="sect116.html#cb1066-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prt_veg =</span><span class="fu">mean</span>(dataset<span class="sc">$</span>prt_veg),</span>
+<span id="cb1066-7"><a href="sect116.html#cb1066-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">A65Pct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>A65Pct),</span>
+<span id="cb1066-8"><a href="sect116.html#cb1066-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">A014Pct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>A014Pct),</span>
+<span id="cb1066-9"><a href="sect116.html#cb1066-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">PopFRPct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>PopFRPct),</span>
+<span id="cb1066-10"><a href="sect116.html#cb1066-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">PopMVPct =</span> <span class="fu">mean</span>(dataset<span class="sc">$</span>PopMVPct),</span>
+<span id="cb1066-11"><a href="sect116.html#cb1066-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dataset<span class="sc">$</span>X),<span class="fu">max</span>(dataset<span class="sc">$</span>X),<span class="dv">100</span>),</span>
+<span id="cb1066-12"><a href="sect116.html#cb1066-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dataset<span class="sc">$</span>Y),<span class="fu">max</span>(dataset<span class="sc">$</span>Y),<span class="dv">100</span>)</span>
+<span id="cb1066-13"><a href="sect116.html#cb1066-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1066-14"><a href="sect116.html#cb1066-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-15"><a href="sect116.html#cb1066-15" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>predicted1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> dfpred, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>)</span>
+<span id="cb1066-16"><a href="sect116.html#cb1066-16" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>predicted2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model3, <span class="at">newdata =</span> dfpred, <span class="at">type =</span> <span class="st">&#39;response&#39;</span>)</span>
+<span id="cb1066-17"><a href="sect116.html#cb1066-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-18"><a href="sect116.html#cb1066-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Centrage des prédictions</span></span>
+<span id="cb1066-19"><a href="sect116.html#cb1066-19" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>predicted1 <span class="ot">&lt;-</span> dfpred<span class="sc">$</span>predicted1 <span class="sc">-</span> <span class="fu">mean</span>(dfpred<span class="sc">$</span>predicted1)</span>
+<span id="cb1066-20"><a href="sect116.html#cb1066-20" aria-hidden="true" tabindex="-1"></a>dfpred<span class="sc">$</span>predicted2 <span class="ot">&lt;-</span> dfpred<span class="sc">$</span>predicted2 <span class="sc">-</span> <span class="fu">mean</span>(dfpred<span class="sc">$</span>predicted2)</span>
+<span id="cb1066-21"><a href="sect116.html#cb1066-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-22"><a href="sect116.html#cb1066-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Représentation des splines</span></span>
+<span id="cb1066-23"><a href="sect116.html#cb1066-23" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfpred) <span class="sc">+</span> </span>
+<span id="cb1066-24"><a href="sect116.html#cb1066-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">fill =</span> predicted1)) <span class="sc">+</span> </span>
+<span id="cb1066-25"><a href="sect116.html#cb1066-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y),</span>
+<span id="cb1066-26"><a href="sect116.html#cb1066-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>,</span>
+<span id="cb1066-27"><a href="sect116.html#cb1066-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">data =</span> dataset)<span class="sc">+</span></span>
+<span id="cb1066-28"><a href="sect116.html#cb1066-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">z =</span> predicted1),<span class="at">binwidth =</span> <span class="fl">0.1</span>, </span>
+<span id="cb1066-29"><a href="sect116.html#cb1066-29" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&#39;white&#39;</span>, <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb1066-30"><a href="sect116.html#cb1066-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_contour</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">z =</span> predicted1), </span>
+<span id="cb1066-31"><a href="sect116.html#cb1066-31" aria-hidden="true" tabindex="-1"></a>                    <span class="at">color =</span> <span class="st">&#39;white&#39;</span>, <span class="at">binwidth =</span> <span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb1066-32"><a href="sect116.html#cb1066-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
+<span id="cb1066-33"><a href="sect116.html#cb1066-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>() <span class="sc">+</span> </span>
+<span id="cb1066-34"><a href="sect116.html#cb1066-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title=</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1066-35"><a href="sect116.html#cb1066-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1066-36"><a href="sect116.html#cb1066-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span>  <span class="fu">element_blank</span>()</span>
+<span id="cb1066-37"><a href="sect116.html#cb1066-37" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span> </span>
+<span id="cb1066-38"><a href="sect116.html#cb1066-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&#39;spline de base&#39;</span>, <span class="at">fill =</span> <span class="st">&quot;prédictions&quot;</span>)</span>
+<span id="cb1066-39"><a href="sect116.html#cb1066-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-40"><a href="sect116.html#cb1066-40" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dfpred) <span class="sc">+</span> </span>
+<span id="cb1066-41"><a href="sect116.html#cb1066-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">fill =</span> predicted2)) <span class="sc">+</span> </span>
+<span id="cb1066-42"><a href="sect116.html#cb1066-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y),</span>
+<span id="cb1066-43"><a href="sect116.html#cb1066-43" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>,</span>
+<span id="cb1066-44"><a href="sect116.html#cb1066-44" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">data =</span> dataset)<span class="sc">+</span></span>
+<span id="cb1066-45"><a href="sect116.html#cb1066-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">z =</span> predicted2),</span>
+<span id="cb1066-46"><a href="sect116.html#cb1066-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">color =</span> <span class="st">&#39;white&#39;</span>, <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb1066-47"><a href="sect116.html#cb1066-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_contour</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">z =</span> predicted2), <span class="at">color =</span> <span class="st">&#39;white&#39;</span>, <span class="at">binwidth =</span> <span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb1066-48"><a href="sect116.html#cb1066-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>() <span class="sc">+</span></span>
+<span id="cb1066-49"><a href="sect116.html#cb1066-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>()<span class="sc">+</span> </span>
+<span id="cb1066-50"><a href="sect116.html#cb1066-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title=</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1066-51"><a href="sect116.html#cb1066-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1066-52"><a href="sect116.html#cb1066-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span>  <span class="fu">element_blank</span>()</span>
+<span id="cb1066-53"><a href="sect116.html#cb1066-53" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span> </span>
+<span id="cb1066-54"><a href="sect116.html#cb1066-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&#39;spline plus complexe&#39;</span>, <span class="at">fill =</span> <span class="st">&quot;prédictions&quot;</span>)</span>
+<span id="cb1066-55"><a href="sect116.html#cb1066-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1066-56"><a href="sect116.html#cb1066-56" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plot1, plot2, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">&#39;bottom&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:figgam17"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/figgam17-1.png" alt="Comparaison de deux splines spatiales" width="100%" />
 <p class="caption">
 Figure 11.17: Comparaison de deux splines spatiales
@@ -746,7 +827,6 @@ Figure 11.17: Comparaison de deux splines spatiales
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -765,6 +845,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -785,6 +866,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MethodesQuantitScSocialesBolR.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
@@ -798,7 +883,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

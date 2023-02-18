@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.5 Introduction de variables explicatives particulières | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
   <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.5 Introduction de variables explicatives particulières | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://laeq.github.io/LivreStatistique_website/" />
   <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
   <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
@@ -32,7 +31,8 @@
   
 <link rel="prev" href="sect074.html"/>
 <link rel="next" href="sect076.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,9 +48,10 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <script src="libs/d3-4.13.0/d3.min.js"></script>
 <script src="libs/d3-tip-0.8.1/index.js"></script>
 <link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
@@ -60,18 +61,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,13 +92,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +123,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/quizlib.min.css" type="text/css" />
@@ -142,7 +166,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
-<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
 <li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
 <li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
 <li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
@@ -154,15 +179,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
 <li class="part"><span><b>I Découverte de R</b></span></li>
-<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a><ul>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
-<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a><ul>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
 <li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
 <li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
 <li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a><ul>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
 <li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
 <li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
@@ -170,7 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
 <li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a><ul>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
 <li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
 </ul></li>
@@ -181,28 +210,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
-<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a><ul>
-<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a><ul>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
 <li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a><ul>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
 <li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
 <li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
 <li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a><ul>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
 <li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a><ul>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
 <li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
 <li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
 <li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a><ul>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
 <li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
 <li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
@@ -210,15 +245,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
 <li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a><ul>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
 <li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
 <li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a><ul>
-<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a><ul>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
 <li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
 <li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
@@ -226,7 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
 <li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a><ul>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
 <li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
 <li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
@@ -236,7 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
 <li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a><ul>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
@@ -247,13 +287,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
 </ul></li>
 <li class="part"><span><b>III Analyses bivariées</b></span></li>
-<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a><ul>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
-<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a><ul>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a><ul>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
 <li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
@@ -263,7 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a><ul>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
 <li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
 <li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
@@ -272,19 +316,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a><ul>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
 <li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
 <li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
 <li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a><ul>
-<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a><ul>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
 <li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a><ul>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
 <li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
 <li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
@@ -294,36 +342,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>IV Modèles de régression</b></span></li>
-<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
-<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
 <li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a><ul>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
 <li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a><ul>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
 <li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
 <li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a><ul>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
 <li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
 <li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
 <li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a><ul>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
 <li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
 <li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
 <li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
 <li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
 <li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
 <li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
@@ -331,8 +386,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a><ul>
-<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a><ul>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
 <li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
 <li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
@@ -340,21 +397,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
 <li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a><ul>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
 <li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
 <li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
 <li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
 <li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a><ul>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
 <li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
 <li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
 <li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
 <li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a><ul>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
 <li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
 <li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
@@ -363,43 +423,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
 <li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a><ul>
-<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
 <li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a><ul>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
 <li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
 <li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a><ul>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
 <li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a><ul>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
 <li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
 <li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
-<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a><ul>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a>
+<ul>
 <li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
 <li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a><ul>
-<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a><ul>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
 <li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a><ul>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
 <li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
-<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
 <li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
 <li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
@@ -408,8 +478,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a><ul>
-<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
 <li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
 <li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
@@ -418,7 +490,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
 <li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
 <li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
-<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a><ul>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a>
+<ul>
 <li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
 <li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
 <li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
@@ -428,40 +501,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
-<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a><ul>
-<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a><ul>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
 <li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a><ul>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
 <li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a><ul>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
 <li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a><ul>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a><ul>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
-<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a><ul>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
 <li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a><ul>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
 <li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
 <li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
 <li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a><ul>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a>
+<ul>
 <li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
 <li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
 <li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
@@ -471,11 +553,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
 <li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>14</b> Annexes</a><ul>
-<li class="chapter" data-level="14.1" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14.1</b> Table des valeurs critiques de khi-deux</a></li>
-<li class="chapter" data-level="14.2" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>14.2</b> Table des valeurs critiques de Fisher</a></li>
-<li class="chapter" data-level="14.3" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>14.3</b> Table des valeurs critiques de <em>t</em></a></li>
-</ul></li>
+<li class="part"><span><b>VI Annexes</b></span></li>
+<li class="chapter" data-level="14" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="15" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>15</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="16" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>16</b> Table des valeurs critiques de <em>t</em></a></li>
 </ul>
 
       </nav>
@@ -493,14 +574,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sect075" class="section level2">
-<h2><span class="header-section-number">7.5</span> Introduction de variables explicatives particulières</h2>
-<div id="sect0751" class="section level3">
-<h3><span class="header-section-number">7.5.1</span> Exploration des relations non linéaires</h3>
-<div id="sect07511" class="section level4">
-<h4><span class="header-section-number">7.5.1.1</span> Variable indépendante avec une fonction polynomiale</h4>
+<div id="sect075" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Introduction de variables explicatives particulières<a href="sect075.html#sect075" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sect0751" class="section level3 hasAnchor" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Exploration des relations non linéaires<a href="sect075.html#sect0751" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sect07511" class="section level4 hasAnchor" number="7.5.1.1">
+<h4><span class="header-section-number">7.5.1.1</span> Variable indépendante avec une fonction polynomiale<a href="sect075.html#sect07511" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Dans la section <a href="sect041.html#sect041">4.1</a>, nous avons vu que la relation entre deux variables continues n’est pas toujours linéaire; elle peut être aussi curvilinéaire. Pour explorer les relations curvilinéaires, nous introduisons la variable indépendante sous la forme polynomiale d’ordre 2 (voir le prochain encadré). L’équation de régression s’écrit alors :</p>
-
 <p><span class="math display" id="eq:regpolyordre2">\[\begin{equation}
 Y = b_{0} + b_{1}X_{1} + b_{11}X_{1}^2 + b_{2}X_{2} +\ldots+ b_{k}X_{k} + e
 \tag{7.21}
@@ -540,14 +620,14 @@ Y = b_{0} + b_{1}X_{1} + b_{11}X_{1}^2 + b_{2}X_{2} +\ldots+ b_{k}X_{k} + e
 <li>Dans le premier modèle, le coefficient de régression pour <code>AgeMedian</code> n’est pas significatif. L’âge médian des bâtiments n’est donc pas associé linéairement avec la variable dépendante.</li>
 <li>Dans le second modèle, la valeur du coefficient de <code>poly(AgeMedian, 2)1</code> est positive et celle de <code>poly(AgeMedian, 2)2</code> est négative et significative. Cela indique qu’il existe une relation linéaire en forme de U inversé. Si le premier coefficient avait été négatif et le second positif, nous aurions alors conclu que la forme curvilinéaire prend la forme d’un U.</li>
 </ul>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="sect075.html#cb665-1"></a><span class="co"># régression linéaire</span></span>
-<span id="cb665-2"><a href="sect075.html#cb665-2"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(VegPct <span class="op">~</span><span class="st"> </span>HABHA<span class="op">+</span>AgeMedian<span class="op">+</span>Pct_<span class="dv">014</span><span class="op">+</span>Pct_65P<span class="op">+</span>Pct_MV<span class="op">+</span>Pct_FR, <span class="dt">data =</span> DataFinal)</span>
-<span id="cb665-3"><a href="sect075.html#cb665-3"></a></span>
-<span id="cb665-4"><a href="sect075.html#cb665-4"></a><span class="co"># régression polynomiale</span></span>
-<span id="cb665-5"><a href="sect075.html#cb665-5"></a>modele2 &lt;-<span class="st"> </span><span class="kw">lm</span>(VegPct <span class="op">~</span><span class="st"> </span>HABHA<span class="op">+</span><span class="kw">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="op">+</span>Pct_<span class="dv">014</span><span class="op">+</span>Pct_65P<span class="op">+</span>Pct_MV<span class="op">+</span>Pct_FR, <span class="dt">data =</span> DataFinal)</span>
-<span id="cb665-6"><a href="sect075.html#cb665-6"></a></span>
-<span id="cb665-7"><a href="sect075.html#cb665-7"></a><span class="co"># affichage des résultats du modèle 1</span></span>
-<span id="cb665-8"><a href="sect075.html#cb665-8"></a><span class="kw">summary</span>(modele1)</span></code></pre></div>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="sect075.html#cb667-1" aria-hidden="true" tabindex="-1"></a><span class="co"># régression linéaire</span></span>
+<span id="cb667-2"><a href="sect075.html#cb667-2" aria-hidden="true" tabindex="-1"></a>modele1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(VegPct <span class="sc">~</span> HABHA<span class="sc">+</span>AgeMedian<span class="sc">+</span>Pct_014<span class="sc">+</span>Pct_65P<span class="sc">+</span>Pct_MV<span class="sc">+</span>Pct_FR, <span class="at">data =</span> DataFinal)</span>
+<span id="cb667-3"><a href="sect075.html#cb667-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb667-4"><a href="sect075.html#cb667-4" aria-hidden="true" tabindex="-1"></a><span class="co"># régression polynomiale</span></span>
+<span id="cb667-5"><a href="sect075.html#cb667-5" aria-hidden="true" tabindex="-1"></a>modele2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(VegPct <span class="sc">~</span> HABHA<span class="sc">+</span><span class="fu">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="sc">+</span>Pct_014<span class="sc">+</span>Pct_65P<span class="sc">+</span>Pct_MV<span class="sc">+</span>Pct_FR, <span class="at">data =</span> DataFinal)</span>
+<span id="cb667-6"><a href="sect075.html#cb667-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb667-7"><a href="sect075.html#cb667-7" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage des résultats du modèle 1</span></span>
+<span id="cb667-8"><a href="sect075.html#cb667-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modele1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = VegPct ~ HABHA + AgeMedian + Pct_014 + Pct_65P + 
@@ -572,8 +652,8 @@ Y = b_{0} + b_{1}X_{1} + b_{11}X_{1}^2 + b_{2}X_{2} +\ldots+ b_{k}X_{k} + e
 ## Residual standard error: 14.16 on 10203 degrees of freedom
 ## Multiple R-squared:  0.4182, Adjusted R-squared:  0.4179 
 ## F-statistic:  1223 on 6 and 10203 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="sect075.html#cb667-1"></a><span class="co"># affichage des résultats du modèle 1</span></span>
-<span id="cb667-2"><a href="sect075.html#cb667-2"></a><span class="kw">summary</span>(modele2)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="sect075.html#cb669-1" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage des résultats du modèle 1</span></span>
+<span id="cb669-2"><a href="sect075.html#cb669-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modele2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = VegPct ~ HABHA + poly(AgeMedian, 2) + Pct_014 + 
@@ -599,8 +679,8 @@ Y = b_{0} + b_{1}X_{1} + b_{11}X_{1}^2 + b_{2}X_{2} +\ldots+ b_{k}X_{k} + e
 ## Residual standard error: 13.92 on 10202 degrees of freedom
 ## Multiple R-squared:  0.4382, Adjusted R-squared:  0.4378 
 ## F-statistic:  1137 on 7 and 10202 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="sect075.html#cb669-1"></a><span class="co"># test de Fisher pour comparer les modèles</span></span>
-<span id="cb669-2"><a href="sect075.html#cb669-2"></a><span class="kw">anova</span>(modele1, modele2)</span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="sect075.html#cb671-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test de Fisher pour comparer les modèles</span></span>
+<span id="cb671-2"><a href="sect075.html#cb671-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modele1, modele2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: VegPct ~ HABHA + AgeMedian + Pct_014 + Pct_65P + Pct_MV + Pct_FR
@@ -614,59 +694,59 @@ Y = b_{0} + b_{1}X_{1} + b_{11}X_{1}^2 + b_{2}X_{2} +\ldots+ b_{k}X_{k} + e
 <p><strong>Construction d’un graphique des effets marginaux</strong></p>
 <p>Pour visualiser la relation linéaire et curvilinéaire, nous vous proposons de réaliser un graphique des effets marginaux à partir de la syntaxe ci-dessous.</p>
 <p>Les graphiques des effets marginaux permettent de visualiser l’impact d’une variable indépendante sur la variable dépendante d’une régression. Nous nous basons pour cela sur les prédictions effectuées par le modèle. Admettons que nous nous intéressons à l’effet de la variable <em>X<sub>1</sub></em> sur la variable <em>Y</em>. Il est possible de créer de nouvelles données fictives pour lesquelles l’ensemble des autres variables <em>X</em> sont fixées à leur moyenne respective, et seule <em>X<sub>1</sub></em> est autorisée à varier. En utilisant l’équation de régression du modèle sur ces données fictives, nous pouvons observer l’évolution de la valeur prédite de <em>Y</em> quand <em>X<sub>1</sub></em> augmente ou diminue, et ce, toutes choses étant égales par ailleurs (puisque toutes les autres variables ont une valeur fixe). Cette approche est particulièrement intéressante pour décrire des effets non linéaires obtenus avec des polynomiales, mais aussi des interactions comme nous le verrons plus tard. Elle est également utilisée dans les modèles linéaires généralisés (GLM) et additifs (GAM) (chapitres <a href="chap08.html#chap08">8</a> et <a href="chap11.html#chap11">11</a>). Notez qu’il est aussi important de représenter, sur ce type de graphique, l’incertitude de la prédiction. Pour cela, il est possible de construire des intervalles de confiance à 95 % autour de la prédiction en utilisant l’erreur standard de la prédiction (renvoyée par la fonction <code>predict</code>).</p>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="sect075.html#cb671-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb671-2"><a href="sect075.html#cb671-2"></a><span class="co"># Statistique sur la variable AgeMedian qui varie de 0 à 226 ans</span></span>
-<span id="cb671-3"><a href="sect075.html#cb671-3"></a><span class="kw">summary</span>(DataFinal<span class="op">$</span>AgeMedian)</span></code></pre></div>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="sect075.html#cb673-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb673-2"><a href="sect075.html#cb673-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistique sur la variable AgeMedian qui varie de 0 à 226 ans</span></span>
+<span id="cb673-3"><a href="sect075.html#cb673-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(DataFinal<span class="sc">$</span>AgeMedian)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    0.00   37.25   49.00   52.11   61.00  226.00</code></pre>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="sect075.html#cb673-1"></a><span class="co"># Création d&#39;un DataFrame temporaire</span></span>
-<span id="cb673-2"><a href="sect075.html#cb673-2"></a><span class="co"># remarquez que les autres variables indépendantes sont constantes :</span></span>
-<span id="cb673-3"><a href="sect075.html#cb673-3"></a><span class="co"># nous leur avons attribué leur moyenne correspondante</span></span>
-<span id="cb673-4"><a href="sect075.html#cb673-4"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb673-5"><a href="sect075.html#cb673-5"></a>  <span class="dt">HABHA =</span> <span class="kw">mean</span>(DataFinal<span class="op">$</span>HABHA),</span>
-<span id="cb673-6"><a href="sect075.html#cb673-6"></a>  <span class="dt">AgeMedian=</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">2</span>),</span>
-<span id="cb673-7"><a href="sect075.html#cb673-7"></a>  <span class="dt">AgeMedian2 =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span>,</span>
-<span id="cb673-8"><a href="sect075.html#cb673-8"></a>  <span class="dt">Pct_014=</span> <span class="kw">mean</span>(DataFinal<span class="op">$</span>Pct_<span class="dv">014</span>),</span>
-<span id="cb673-9"><a href="sect075.html#cb673-9"></a>  <span class="dt">Pct_65P=</span> <span class="kw">mean</span>(DataFinal<span class="op">$</span>Pct_65P),</span>
-<span id="cb673-10"><a href="sect075.html#cb673-10"></a>  <span class="dt">Pct_MV=</span> <span class="kw">mean</span>(DataFinal<span class="op">$</span>Pct_MV),</span>
-<span id="cb673-11"><a href="sect075.html#cb673-11"></a>  <span class="dt">Pct_FR=</span> <span class="kw">mean</span>(DataFinal<span class="op">$</span>Pct_FR)</span>
-<span id="cb673-12"><a href="sect075.html#cb673-12"></a>)</span>
-<span id="cb673-13"><a href="sect075.html#cb673-13"></a></span>
-<span id="cb673-14"><a href="sect075.html#cb673-14"></a><span class="co"># calcul de la valeur de t pour un intervalle à 95 %</span></span>
-<span id="cb673-15"><a href="sect075.html#cb673-15"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(modele1<span class="op">$</span>fitted.values) </span>
-<span id="cb673-16"><a href="sect075.html#cb673-16"></a>k &lt;-<span class="st"> </span><span class="kw">length</span>(modele1<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb673-17"><a href="sect075.html#cb673-17"></a>t95 &lt;-<span class="st"> </span><span class="kw">qt</span>(<span class="dt">p=</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="fl">0.05</span><span class="op">/</span><span class="dv">2</span>),  <span class="dt">df=</span>n<span class="op">-</span>k<span class="dv">-1</span>)</span>
-<span id="cb673-18"><a href="sect075.html#cb673-18"></a></span>
-<span id="cb673-19"><a href="sect075.html#cb673-19"></a><span class="co"># Calcul des valeurs prédites pour le 1er modèle</span></span>
-<span id="cb673-20"><a href="sect075.html#cb673-20"></a><span class="co"># avec l&#39;intervalle de confiance à 95 %</span></span>
-<span id="cb673-21"><a href="sect075.html#cb673-21"></a>predsM1 &lt;-<span class="st"> </span><span class="kw">predict</span>(modele1,<span class="dt">se =</span> T, <span class="dt">newdata =</span> df)</span>
-<span id="cb673-22"><a href="sect075.html#cb673-22"></a>df<span class="op">$</span>predM1 &lt;-<span class="st"> </span>predsM1<span class="op">$</span>fit</span>
-<span id="cb673-23"><a href="sect075.html#cb673-23"></a>df<span class="op">$</span>lowerM1 &lt;-<span class="st"> </span>predsM1<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span>t95<span class="op">*</span>predsM1<span class="op">$</span>se.fit</span>
-<span id="cb673-24"><a href="sect075.html#cb673-24"></a>df<span class="op">$</span>upperM1 &lt;-<span class="st"> </span>predsM1<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>t95<span class="op">*</span>predsM1<span class="op">$</span>se.fit</span>
-<span id="cb673-25"><a href="sect075.html#cb673-25"></a></span>
-<span id="cb673-26"><a href="sect075.html#cb673-26"></a><span class="co"># Calcul des valeurs prédites pour le 2e modèle</span></span>
-<span id="cb673-27"><a href="sect075.html#cb673-27"></a><span class="co"># avec l&#39;intervalle de confiance à 95 %</span></span>
-<span id="cb673-28"><a href="sect075.html#cb673-28"></a>predsM2 &lt;-<span class="st"> </span><span class="kw">predict</span>(modele2,<span class="dt">se =</span> T, <span class="dt">newdata =</span> df)</span>
-<span id="cb673-29"><a href="sect075.html#cb673-29"></a>df<span class="op">$</span>predM2 &lt;-<span class="st"> </span>predsM2<span class="op">$</span>fit</span>
-<span id="cb673-30"><a href="sect075.html#cb673-30"></a>df<span class="op">$</span>lowerM2 &lt;-<span class="st"> </span>predsM2<span class="op">$</span>fit <span class="op">-</span><span class="st"> </span>t95<span class="op">*</span>predsM2<span class="op">$</span>se.fit</span>
-<span id="cb673-31"><a href="sect075.html#cb673-31"></a>df<span class="op">$</span>upperM2 &lt;-<span class="st"> </span>predsM2<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>t95<span class="op">*</span>predsM2<span class="op">$</span>se.fit</span>
-<span id="cb673-32"><a href="sect075.html#cb673-32"></a></span>
-<span id="cb673-33"><a href="sect075.html#cb673-33"></a><span class="co"># Graphique</span></span>
-<span id="cb673-34"><a href="sect075.html#cb673-34"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> df) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb673-35"><a href="sect075.html#cb673-35"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AgeMedian, <span class="dt">ymin =</span> lowerM1, <span class="dt">ymax =</span> upperM1), </span>
-<span id="cb673-36"><a href="sect075.html#cb673-36"></a>             <span class="dt">fill =</span> <span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb673-37"><a href="sect075.html#cb673-37"></a><span class="st">  </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AgeMedian, <span class="dt">y =</span> predM1), <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>)<span class="op">+</span></span>
-<span id="cb673-38"><a href="sect075.html#cb673-38"></a><span class="st">  </span></span>
-<span id="cb673-39"><a href="sect075.html#cb673-39"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AgeMedian, <span class="dt">ymin =</span> lowerM2, <span class="dt">ymax =</span> upperM2), </span>
-<span id="cb673-40"><a href="sect075.html#cb673-40"></a>              <span class="dt">fill =</span> <span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb673-41"><a href="sect075.html#cb673-41"></a><span class="st">  </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AgeMedian, <span class="dt">y =</span> predM2), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>)<span class="op">+</span></span>
-<span id="cb673-42"><a href="sect075.html#cb673-42"></a><span class="st">  </span></span>
-<span id="cb673-43"><a href="sect075.html#cb673-43"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Effet marginal de l&#39;âge médian des bâtiments sur la&quot;</span>,</span>
-<span id="cb673-44"><a href="sect075.html#cb673-44"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;couverture végétale des îlots de l&#39;île de Montréal&quot;</span>,</span>
-<span id="cb673-45"><a href="sect075.html#cb673-45"></a>       <span class="dt">caption =</span> <span class="st">&quot;bleu : relation linéaire; rouge : curvilinéaire&quot;</span>,</span>
-<span id="cb673-46"><a href="sect075.html#cb673-46"></a>       <span class="dt">x =</span> <span class="st">&quot;Âge médian des bâtiments&quot;</span>,</span>
-<span id="cb673-47"><a href="sect075.html#cb673-47"></a>       <span class="dt">y =</span> <span class="st">&quot;Couverture végétale (%)&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:calculRegPoly2"></span>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="sect075.html#cb675-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d&#39;un DataFrame temporaire</span></span>
+<span id="cb675-2"><a href="sect075.html#cb675-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remarquez que les autres variables indépendantes sont constantes :</span></span>
+<span id="cb675-3"><a href="sect075.html#cb675-3" aria-hidden="true" tabindex="-1"></a><span class="co"># nous leur avons attribué leur moyenne correspondante</span></span>
+<span id="cb675-4"><a href="sect075.html#cb675-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb675-5"><a href="sect075.html#cb675-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">HABHA =</span> <span class="fu">mean</span>(DataFinal<span class="sc">$</span>HABHA),</span>
+<span id="cb675-6"><a href="sect075.html#cb675-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">AgeMedian=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>, <span class="at">by =</span> <span class="dv">2</span>),</span>
+<span id="cb675-7"><a href="sect075.html#cb675-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">AgeMedian2 =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>, <span class="at">by =</span> <span class="dv">2</span>)<span class="sc">**</span><span class="dv">2</span>,</span>
+<span id="cb675-8"><a href="sect075.html#cb675-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pct_014=</span> <span class="fu">mean</span>(DataFinal<span class="sc">$</span>Pct_014),</span>
+<span id="cb675-9"><a href="sect075.html#cb675-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pct_65P=</span> <span class="fu">mean</span>(DataFinal<span class="sc">$</span>Pct_65P),</span>
+<span id="cb675-10"><a href="sect075.html#cb675-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pct_MV=</span> <span class="fu">mean</span>(DataFinal<span class="sc">$</span>Pct_MV),</span>
+<span id="cb675-11"><a href="sect075.html#cb675-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pct_FR=</span> <span class="fu">mean</span>(DataFinal<span class="sc">$</span>Pct_FR)</span>
+<span id="cb675-12"><a href="sect075.html#cb675-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb675-13"><a href="sect075.html#cb675-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb675-14"><a href="sect075.html#cb675-14" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul de la valeur de t pour un intervalle à 95 %</span></span>
+<span id="cb675-15"><a href="sect075.html#cb675-15" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(modele1<span class="sc">$</span>fitted.values) </span>
+<span id="cb675-16"><a href="sect075.html#cb675-16" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(modele1<span class="sc">$</span>coefficients)<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb675-17"><a href="sect075.html#cb675-17" aria-hidden="true" tabindex="-1"></a>t95 <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="at">p=</span><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>),  <span class="at">df=</span>n<span class="sc">-</span>k<span class="dv">-1</span>)</span>
+<span id="cb675-18"><a href="sect075.html#cb675-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb675-19"><a href="sect075.html#cb675-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des valeurs prédites pour le 1er modèle</span></span>
+<span id="cb675-20"><a href="sect075.html#cb675-20" aria-hidden="true" tabindex="-1"></a><span class="co"># avec l&#39;intervalle de confiance à 95 %</span></span>
+<span id="cb675-21"><a href="sect075.html#cb675-21" aria-hidden="true" tabindex="-1"></a>predsM1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(modele1,<span class="at">se =</span> T, <span class="at">newdata =</span> df)</span>
+<span id="cb675-22"><a href="sect075.html#cb675-22" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>predM1 <span class="ot">&lt;-</span> predsM1<span class="sc">$</span>fit</span>
+<span id="cb675-23"><a href="sect075.html#cb675-23" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lowerM1 <span class="ot">&lt;-</span> predsM1<span class="sc">$</span>fit <span class="sc">-</span> t95<span class="sc">*</span>predsM1<span class="sc">$</span>se.fit</span>
+<span id="cb675-24"><a href="sect075.html#cb675-24" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>upperM1 <span class="ot">&lt;-</span> predsM1<span class="sc">$</span>fit <span class="sc">+</span> t95<span class="sc">*</span>predsM1<span class="sc">$</span>se.fit</span>
+<span id="cb675-25"><a href="sect075.html#cb675-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb675-26"><a href="sect075.html#cb675-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des valeurs prédites pour le 2e modèle</span></span>
+<span id="cb675-27"><a href="sect075.html#cb675-27" aria-hidden="true" tabindex="-1"></a><span class="co"># avec l&#39;intervalle de confiance à 95 %</span></span>
+<span id="cb675-28"><a href="sect075.html#cb675-28" aria-hidden="true" tabindex="-1"></a>predsM2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(modele2,<span class="at">se =</span> T, <span class="at">newdata =</span> df)</span>
+<span id="cb675-29"><a href="sect075.html#cb675-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>predM2 <span class="ot">&lt;-</span> predsM2<span class="sc">$</span>fit</span>
+<span id="cb675-30"><a href="sect075.html#cb675-30" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lowerM2 <span class="ot">&lt;-</span> predsM2<span class="sc">$</span>fit <span class="sc">-</span> t95<span class="sc">*</span>predsM2<span class="sc">$</span>se.fit</span>
+<span id="cb675-31"><a href="sect075.html#cb675-31" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>upperM2 <span class="ot">&lt;-</span> predsM2<span class="sc">$</span>fit <span class="sc">+</span> t95<span class="sc">*</span>predsM2<span class="sc">$</span>se.fit</span>
+<span id="cb675-32"><a href="sect075.html#cb675-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb675-33"><a href="sect075.html#cb675-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique</span></span>
+<span id="cb675-34"><a href="sect075.html#cb675-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df) <span class="sc">+</span> </span>
+<span id="cb675-35"><a href="sect075.html#cb675-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> AgeMedian, <span class="at">ymin =</span> lowerM1, <span class="at">ymax =</span> upperM1), </span>
+<span id="cb675-36"><a href="sect075.html#cb675-36" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="fu">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="sc">+</span> </span>
+<span id="cb675-37"><a href="sect075.html#cb675-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> AgeMedian, <span class="at">y =</span> predM1), <span class="at">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">size =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb675-38"><a href="sect075.html#cb675-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb675-39"><a href="sect075.html#cb675-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> AgeMedian, <span class="at">ymin =</span> lowerM2, <span class="at">ymax =</span> upperM2), </span>
+<span id="cb675-40"><a href="sect075.html#cb675-40" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="fu">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="sc">+</span> </span>
+<span id="cb675-41"><a href="sect075.html#cb675-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> AgeMedian, <span class="at">y =</span> predM2), <span class="at">color =</span> <span class="st">&#39;red&#39;</span>, <span class="at">size =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb675-42"><a href="sect075.html#cb675-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb675-43"><a href="sect075.html#cb675-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Effet marginal de l&#39;âge médian des bâtiments sur la&quot;</span>,</span>
+<span id="cb675-44"><a href="sect075.html#cb675-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;couverture végétale des îlots de l&#39;île de Montréal&quot;</span>,</span>
+<span id="cb675-45"><a href="sect075.html#cb675-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;bleu : relation linéaire; rouge : curvilinéaire&quot;</span>,</span>
+<span id="cb675-46"><a href="sect075.html#cb675-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Âge médian des bâtiments&quot;</span>,</span>
+<span id="cb675-47"><a href="sect075.html#cb675-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Couverture végétale (%)&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:calculRegPoly2"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/calculRegPoly2-1.png" alt="Relations linéaire et curvilinéaire" width="75%" />
 <p class="caption">
 Figure 7.2: Relations linéaire et curvilinéaire
@@ -674,9 +754,9 @@ Figure 7.2: Relations linéaire et curvilinéaire
 </div>
 <p>La figure <a href="sect075.html#fig:calculRegPoly2">7.2</a> démontre bien que la relation linéaire n’est pas significative : la pente est extrêmement faible, ce qui signale que l’effet de l’âge médian est presque nul (B = 0,0108, <em>p</em> = 0,0902). En revanche, la relation curvilinéaire est plus intéressante : la couverture végétale croît quand l’âge médian des bâtiments dans l’îlot augmente de 0 à 60 ans environ, puis elle décroît.</p>
 </div>
-<div id="sect07512" class="section level4">
-<h4><span class="header-section-number">7.5.1.2</span> Variable indépendante sous forme logarithmique</h4>
-<p>Une autre manière d’explorer une relation non linéaire est d’intégrer la variable sous forme logarithmique <span class="citation">(Hanck et al. <a href="#ref-hanck2019introduction" role="doc-biblioref">2019</a>, 212‑218)</span>. L’interprétation du coefficient de régression est alors plus complexe : un 1 % d’augmentation de la variable <span class="math inline">\(X_k\)</span> entraîne un changement de <span class="math inline">\(\mbox{0,01} \times \beta_k\)</span> de la variable dépendante. Autrement dit, il n’est plus exprimé dans les unités de mesure originales des deux variables.</p>
+<div id="sect07512" class="section level4 hasAnchor" number="7.5.1.2">
+<h4><span class="header-section-number">7.5.1.2</span> Variable indépendante sous forme logarithmique<a href="sect075.html#sect07512" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Une autre manière d’explorer une relation non linéaire est d’intégrer la variable sous forme logarithmique <span class="citation">(<a href="#ref-hanck2019introduction" role="doc-biblioref">Hanck et al. 2019, 212‑218</a>)</span>. L’interprétation du coefficient de régression est alors plus complexe : un 1 % d’augmentation de la variable <span class="math inline">\(X_k\)</span> entraîne un changement de <span class="math inline">\(\mbox{0,01} \times \beta_k\)</span> de la variable dépendante. Autrement dit, il n’est plus exprimé dans les unités de mesure originales des deux variables.</p>
 <p>Au tableau <a href="sect075.html#tab:regmodeleLog">7.4</a>, le coefficient de <code>-6,855</code> pour la variable <code>logHABHA</code> s’interprète alors comme suit : un changement de 1 % de la variable densité de population entraîne une diminution de <span class="math inline">\(\mbox{0,01} \times -\mbox{6,855 =} -\mbox{0,07}\)</span> de la couverture végétale dans l’île, toutes choses étant égales par ailleurs.</p>
 <table>
 <caption>
@@ -924,46 +1004,46 @@ Pct_FR
 <li><strong>Comparez les mesures d’ajustement des deux modèles (surtout les R<sup>2</sup> ajustés)</strong>. Si le R<sup>2</sup> ajusté du modèle avec <span class="math inline">\(log(\beta_k)\)</span> est plus élevé que celui avec <span class="math inline">\(\beta_k\)</span>, alors la transformation logarithmique fait de votre variable indépendante un meilleur prédicteur, toutes choses étant égales par ailleurs.</li>
 <li><strong>Construisez les graphiques des effets marginaux</strong> de votre variable afin de vérifier si la relation qu’elle partage avec votre VD est plutôt logarithmique que linéaire (figure <a href="sect075.html#fig:EffetMarginalVariableLogEtNon">7.3</a>). Notez que cette approche graphique peut aussi ne donner aucune indication lorsque vos données sont très dispersées ou que la relation est faible entre votre variable dépendante et indépendante.</li>
 </ul>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="sect075.html#cb674-1"></a><span class="kw">library</span>(ggpubr)</span>
-<span id="cb674-2"><a href="sect075.html#cb674-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb674-3"><a href="sect075.html#cb674-3"></a><span class="kw">library</span>(ggeffects)</span>
-<span id="cb674-4"><a href="sect075.html#cb674-4"></a></span>
-<span id="cb674-5"><a href="sect075.html#cb674-5"></a><span class="co"># Modèles</span></span>
-<span id="cb674-6"><a href="sect075.html#cb674-6"></a>modele1a &lt;-<span class="st"> </span><span class="kw">lm</span>(VegPct <span class="op">~</span><span class="st"> </span>HABHA<span class="op">+</span><span class="kw">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="op">+</span></span>
-<span id="cb674-7"><a href="sect075.html#cb674-7"></a><span class="st">              </span>Pct_<span class="dv">014</span><span class="op">+</span>Pct_65P<span class="op">+</span>Pct_MV<span class="op">+</span>Pct_FR, <span class="dt">data =</span> DataFinal)</span>
-<span id="cb674-8"><a href="sect075.html#cb674-8"></a></span>
-<span id="cb674-9"><a href="sect075.html#cb674-9"></a>modele1b &lt;-<span class="st"> </span><span class="kw">lm</span>(VegPct <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(HABHA)<span class="op">+</span><span class="kw">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="op">+</span></span>
-<span id="cb674-10"><a href="sect075.html#cb674-10"></a><span class="st">              </span>Pct_<span class="dv">014</span><span class="op">+</span>Pct_65P<span class="op">+</span>Pct_MV<span class="op">+</span>Pct_FR, <span class="dt">data =</span> DataFinal)</span>
-<span id="cb674-11"><a href="sect075.html#cb674-11"></a></span>
-<span id="cb674-12"><a href="sect075.html#cb674-12"></a></span>
-<span id="cb674-13"><a href="sect075.html#cb674-13"></a><span class="co"># Valeurs prédites</span></span>
-<span id="cb674-14"><a href="sect075.html#cb674-14"></a>fit1a &lt;-<span class="st"> </span><span class="kw">ggpredict</span>(modele1a, <span class="dt">terms =</span> <span class="st">&quot;HABHA&quot;</span>)</span>
-<span id="cb674-15"><a href="sect075.html#cb674-15"></a>fit1b &lt;-<span class="st"> </span><span class="kw">ggpredict</span>(modele1b, <span class="dt">terms =</span> <span class="st">&quot;HABHA&quot;</span>)</span>
-<span id="cb674-16"><a href="sect075.html#cb674-16"></a></span>
-<span id="cb674-17"><a href="sect075.html#cb674-17"></a></span>
-<span id="cb674-18"><a href="sect075.html#cb674-18"></a><span class="co"># Graphiques</span></span>
-<span id="cb674-19"><a href="sect075.html#cb674-19"></a>G1a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(fit1a, <span class="kw">aes</span>(x, predicted)) <span class="op">+</span></span>
-<span id="cb674-20"><a href="sect075.html#cb674-20"></a><span class="st">      </span><span class="kw">geom_point</span>(<span class="dt">data =</span> DataFinal, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>HABHA, <span class="dt">y =</span> VegPct),</span>
-<span id="cb674-21"><a href="sect075.html#cb674-21"></a>                 <span class="dt">size =</span> <span class="fl">0.2</span>, <span class="dt">color =</span> <span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb674-22"><a href="sect075.html#cb674-22"></a><span class="st">      </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> conf.low, <span class="dt">ymax =</span> conf.high), <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">fill =</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb674-23"><a href="sect075.html#cb674-23"></a><span class="st">      </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb674-24"><a href="sect075.html#cb674-24"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Variable non transformée&quot;</span>,</span>
-<span id="cb674-25"><a href="sect075.html#cb674-25"></a>           <span class="dt">y=</span><span class="st">&quot;VD: valeur prédite&quot;</span>,</span>
-<span id="cb674-26"><a href="sect075.html#cb674-26"></a>           <span class="dt">x =</span> <span class="st">&quot;Habitants km2&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb674-27"><a href="sect075.html#cb674-27"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">600</span>)</span>
-<span id="cb674-28"><a href="sect075.html#cb674-28"></a></span>
-<span id="cb674-29"><a href="sect075.html#cb674-29"></a>G1b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(fit1b, <span class="kw">aes</span>(x, predicted)) <span class="op">+</span></span>
-<span id="cb674-30"><a href="sect075.html#cb674-30"></a><span class="st">      </span><span class="kw">geom_point</span>(<span class="dt">data =</span> DataFinal, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>HABHA, <span class="dt">y =</span> VegPct),</span>
-<span id="cb674-31"><a href="sect075.html#cb674-31"></a>                 <span class="dt">size =</span> <span class="fl">0.2</span>, <span class="dt">color =</span> <span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb674-32"><a href="sect075.html#cb674-32"></a><span class="st">      </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> conf.low, <span class="dt">ymax =</span> conf.high), <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">fill =</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb674-33"><a href="sect075.html#cb674-33"></a><span class="st">      </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb674-34"><a href="sect075.html#cb674-34"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Variable transformée (log)&quot;</span>,</span>
-<span id="cb674-35"><a href="sect075.html#cb674-35"></a>           <span class="dt">y=</span><span class="st">&quot;VD: valeur prédite&quot;</span>,</span>
-<span id="cb674-36"><a href="sect075.html#cb674-36"></a>           <span class="dt">x =</span> <span class="st">&quot;Habitants km2&quot;</span>)</span>
-<span id="cb674-37"><a href="sect075.html#cb674-37"></a></span>
-<span id="cb674-38"><a href="sect075.html#cb674-38"></a>G1aG1b &lt;-<span class="st"> </span><span class="kw">ggarrange</span>(G1a, G1b, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb674-39"><a href="sect075.html#cb674-39"></a>G1aG1b</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:EffetMarginalVariableLogEtNon"></span>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="sect075.html#cb676-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb676-2"><a href="sect075.html#cb676-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb676-3"><a href="sect075.html#cb676-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb676-4"><a href="sect075.html#cb676-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-5"><a href="sect075.html#cb676-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèles</span></span>
+<span id="cb676-6"><a href="sect075.html#cb676-6" aria-hidden="true" tabindex="-1"></a>modele1a <span class="ot">&lt;-</span> <span class="fu">lm</span>(VegPct <span class="sc">~</span> HABHA<span class="sc">+</span><span class="fu">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb676-7"><a href="sect075.html#cb676-7" aria-hidden="true" tabindex="-1"></a>              Pct_014<span class="sc">+</span>Pct_65P<span class="sc">+</span>Pct_MV<span class="sc">+</span>Pct_FR, <span class="at">data =</span> DataFinal)</span>
+<span id="cb676-8"><a href="sect075.html#cb676-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-9"><a href="sect075.html#cb676-9" aria-hidden="true" tabindex="-1"></a>modele1b <span class="ot">&lt;-</span> <span class="fu">lm</span>(VegPct <span class="sc">~</span> <span class="fu">log</span>(HABHA)<span class="sc">+</span><span class="fu">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb676-10"><a href="sect075.html#cb676-10" aria-hidden="true" tabindex="-1"></a>              Pct_014<span class="sc">+</span>Pct_65P<span class="sc">+</span>Pct_MV<span class="sc">+</span>Pct_FR, <span class="at">data =</span> DataFinal)</span>
+<span id="cb676-11"><a href="sect075.html#cb676-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-12"><a href="sect075.html#cb676-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-13"><a href="sect075.html#cb676-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Valeurs prédites</span></span>
+<span id="cb676-14"><a href="sect075.html#cb676-14" aria-hidden="true" tabindex="-1"></a>fit1a <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modele1a, <span class="at">terms =</span> <span class="st">&quot;HABHA&quot;</span>)</span>
+<span id="cb676-15"><a href="sect075.html#cb676-15" aria-hidden="true" tabindex="-1"></a>fit1b <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(modele1b, <span class="at">terms =</span> <span class="st">&quot;HABHA&quot;</span>)</span>
+<span id="cb676-16"><a href="sect075.html#cb676-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-17"><a href="sect075.html#cb676-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-18"><a href="sect075.html#cb676-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphiques</span></span>
+<span id="cb676-19"><a href="sect075.html#cb676-19" aria-hidden="true" tabindex="-1"></a>G1a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fit1a, <span class="fu">aes</span>(x, predicted)) <span class="sc">+</span></span>
+<span id="cb676-20"><a href="sect075.html#cb676-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">data =</span> DataFinal, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>HABHA, <span class="at">y =</span> VegPct),</span>
+<span id="cb676-21"><a href="sect075.html#cb676-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="fu">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="sc">+</span> </span>
+<span id="cb676-22"><a href="sect075.html#cb676-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">fill =</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb676-23"><a href="sect075.html#cb676-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb676-24"><a href="sect075.html#cb676-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Variable non transformée&quot;</span>,</span>
+<span id="cb676-25"><a href="sect075.html#cb676-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="st">&quot;VD: valeur prédite&quot;</span>,</span>
+<span id="cb676-26"><a href="sect075.html#cb676-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;Habitants km2&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb676-27"><a href="sect075.html#cb676-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">600</span>)</span>
+<span id="cb676-28"><a href="sect075.html#cb676-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-29"><a href="sect075.html#cb676-29" aria-hidden="true" tabindex="-1"></a>G1b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fit1b, <span class="fu">aes</span>(x, predicted)) <span class="sc">+</span></span>
+<span id="cb676-30"><a href="sect075.html#cb676-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">data =</span> DataFinal, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>HABHA, <span class="at">y =</span> VegPct),</span>
+<span id="cb676-31"><a href="sect075.html#cb676-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="fu">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>)) <span class="sc">+</span> </span>
+<span id="cb676-32"><a href="sect075.html#cb676-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">fill =</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb676-33"><a href="sect075.html#cb676-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb676-34"><a href="sect075.html#cb676-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Variable transformée (log)&quot;</span>,</span>
+<span id="cb676-35"><a href="sect075.html#cb676-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="st">&quot;VD: valeur prédite&quot;</span>,</span>
+<span id="cb676-36"><a href="sect075.html#cb676-36" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;Habitants km2&quot;</span>)</span>
+<span id="cb676-37"><a href="sect075.html#cb676-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb676-38"><a href="sect075.html#cb676-38" aria-hidden="true" tabindex="-1"></a>G1aG1b <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(G1a, G1b, <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb676-39"><a href="sect075.html#cb676-39" aria-hidden="true" tabindex="-1"></a>G1aG1b</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:EffetMarginalVariableLogEtNon"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/EffetMarginalVariableLogEtNon-1.png" alt="Effet marginal de la densité de population" width="75%" />
 <p class="caption">
 Figure 7.3: Effet marginal de la densité de population
@@ -971,17 +1051,17 @@ Figure 7.3: Effet marginal de la densité de population
 </div>
 </div>
 </div>
-<div id="sect0752" class="section level3">
-<h3><span class="header-section-number">7.5.2</span> Variable indépendante qualitative dichotomique</h3>
+<div id="sect0752" class="section level3 hasAnchor" number="7.5.2">
+<h3><span class="header-section-number">7.5.2</span> Variable indépendante qualitative dichotomique<a href="sect075.html#sect0752" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il est très fréquent d’introduire une variable qualitative dichotomique comme variable explicative ou de contrôle dans un modèle. À titre de rappel, une variable dichotomique comprend deux modalités (section <a href="sect021.html#sect0212">2.1.2</a>).</p>
 <p>Dans le modèle ci-dessous, nous voulons vérifier si un îlot situé sur le territoire de la ville de Montréal a proportionnellement moins de végétation qu’un îlot situé dans une autre municipalité de l’île de Montréal, toutes choses étant égales par ailleurs. Pour ce faire, nous créons une variable binaire dénommée <code>VilleMtl</code> qui prend la valeur de 1 pour les îlots de la ville de Montréal et 0 pour ceux d’une autre municipalité.</p>
 <p>Nous obtenons ainsi un coefficient de régression pour <code>VilleMtl</code> de -7,699 (tableau <a href="sect075.html#tab:regmodeleDich2">7.5</a>). Cela signifie que si toutes les autres variables indépendantes du modèle étaient constantes, alors un îlot de la ville de Montréal aurait en moyenne une valeur de -7,7 % de moins de végétation comparativement à un îlot situé dans une autre municipalité.</p>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="sect075.html#cb675-1"></a><span class="co"># Création d&#39;une variable muette pour Montréal (0 ou 1)</span></span>
-<span id="cb675-2"><a href="sect075.html#cb675-2"></a>DataFinal<span class="op">$</span>VilleMtl &lt;-<span class="st"> </span><span class="kw">ifelse</span>(DataFinal<span class="op">$</span>SDRNOM <span class="op">==</span><span class="st"> &quot;Montréal&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb675-3"><a href="sect075.html#cb675-3"></a></span>
-<span id="cb675-4"><a href="sect075.html#cb675-4"></a><span class="co"># Modèle avec la variable dichtonomique</span></span>
-<span id="cb675-5"><a href="sect075.html#cb675-5"></a>modele3 &lt;-<span class="st"> </span><span class="kw">lm</span>(VegPct <span class="op">~</span><span class="st"> </span>VilleMtl<span class="op">+</span><span class="kw">log</span>(HABHA)<span class="op">+</span><span class="kw">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="op">+</span></span>
-<span id="cb675-6"><a href="sect075.html#cb675-6"></a><span class="st">              </span>Pct_<span class="dv">014</span><span class="op">+</span>Pct_65P<span class="op">+</span>Pct_MV<span class="op">+</span>Pct_FR, <span class="dt">data =</span> DataFinal)</span></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="sect075.html#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d&#39;une variable muette pour Montréal (0 ou 1)</span></span>
+<span id="cb677-2"><a href="sect075.html#cb677-2" aria-hidden="true" tabindex="-1"></a>DataFinal<span class="sc">$</span>VilleMtl <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(DataFinal<span class="sc">$</span>SDRNOM <span class="sc">==</span> <span class="st">&quot;Montréal&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb677-3"><a href="sect075.html#cb677-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb677-4"><a href="sect075.html#cb677-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Modèle avec la variable dichtonomique</span></span>
+<span id="cb677-5"><a href="sect075.html#cb677-5" aria-hidden="true" tabindex="-1"></a>modele3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(VegPct <span class="sc">~</span> VilleMtl<span class="sc">+</span><span class="fu">log</span>(HABHA)<span class="sc">+</span><span class="fu">poly</span>(AgeMedian,<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb677-6"><a href="sect075.html#cb677-6" aria-hidden="true" tabindex="-1"></a>              Pct_014<span class="sc">+</span>Pct_65P<span class="sc">+</span>Pct_MV<span class="sc">+</span>Pct_FR, <span class="at">data =</span> DataFinal)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:regmodeleDich2">Tableau 7.5: </span>Modèle avec une variable dichotomique
@@ -1258,19 +1338,19 @@ Pct_FR
 <p>Pour éviter d’oublier quelle est la modalité de référence (valeur de 0), nous verrons plus tard (dans la section mise en œuvre des modèles de régression dans R (section <a href="sect077.html#sect077">7.7</a>) qu’il peut être préférable de définir un facteur avec la fonction <code>as.factor</code> et d’indiquer la catégorie de référence avec la fonction <code>relevel(x, ref)</code>.</p>
 </div>
 <p>Comme pour une variable indépendante introduite avec une fonction polynomiale, il peut être très intéressant d’illustrer l’effet marginal de la variable dichotomique avec un graphique qui montre l’écart entre les moyennes des deux modalités, une fois contrôlées les autres variables indépendantes (figure <a href="sect075.html#fig:EffetMarginalDich">7.4</a>). Notez que dans ce graphique, les barres d’erreurs situées au sommet des rectangles représentent les intervalles à 95 % des prédictions du modèle.</p>
-<div class="figure" style="text-align: center"><span id="fig:EffetMarginalDich"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:EffetMarginalDich"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/EffetMarginalDich-1.png" alt="Effet marginal d'une variable dichotomique" width="70%" />
 <p class="caption">
 Figure 7.4: Effet marginal d’une variable dichotomique
 </p>
 </div>
 </div>
-<div id="sect0753" class="section level3">
-<h3><span class="header-section-number">7.5.3</span> Variable indépendante qualitative polytomique</h3>
+<div id="sect0753" class="section level3 hasAnchor" number="7.5.3">
+<h3><span class="header-section-number">7.5.3</span> Variable indépendante qualitative polytomique<a href="sect075.html#sect0753" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Il est possible d’introduire une variable qualitative polytomique comme variable explicative ou de contrôle dans un modèle. À titre de rappel, une variable polytomique comprend plus de deux modalités, qu’elle soit nominale ou ordinale (section <a href="sect021.html#sect0212">2.1.2</a>).</p>
 <p>En guise d’exemple, une variable qualitative pourrait être : différents groupes de population (groupes d’âge, minorités visibles, catégories socioprofessionnelles, etc.), différents territoires ou régions (ville centrale, première couronne, deuxième couronne, etc.), une variable continue transformée en quatre ou cinq catégories ordinales selon les quartiles ou les quintiles.</p>
-<div id="sect07531" class="section level4">
-<h4><span class="header-section-number">7.5.3.1</span> Comment construire un modèle de régression avec une variable explicative qualitative polytomique?</h4>
+<div id="sect07531" class="section level4 hasAnchor" number="7.5.3.1">
+<h4><span class="header-section-number">7.5.3.1</span> Comment construire un modèle de régression avec une variable explicative qualitative polytomique?<a href="sect075.html#sect07531" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Prenons l’exemple d’un modèle de régression comprenant deux variables indépendantes : l’une continue (<code>X1</code>), l’autre qualitative (<code>X2</code>) avec quatre modalités (A, B, C et D). L’introduction de la variable qualitative dans le modèle revient à :</p>
 <ul>
 <li>Transformer chaque modalité en variable muette (binaire). Nous avons ainsi quatre nouvelles variables binaires : <code>X2A</code>, <code>X2B</code>, <code>X2C</code> et <code>X2D</code>. Par exemple, pour <code>X2A</code>, les observations de la modalité <em>A</em> se verront affecter la valeur de 1 versus 0 pour les autres observations. La même démarche s’applique à <code>X2B</code>, <code>X2C</code> et <code>X2D</code> (voir tableau <a href="sect075.html#tab:transfVarQMuettes">7.6</a>).</li>
@@ -1313,10 +1393,10 @@ X2D
 1
 </td>
 <td style="text-align:right;">
-55,20
+38,74
 </td>
 <td style="text-align:right;">
-11,92
+30,72
 </td>
 <td style="text-align:center;">
 A
@@ -1339,10 +1419,10 @@ A
 2
 </td>
 <td style="text-align:right;">
-48,48
+36,08
 </td>
 <td style="text-align:right;">
-23,55
+15,56
 </td>
 <td style="text-align:center;">
 A
@@ -1365,10 +1445,10 @@ A
 3
 </td>
 <td style="text-align:right;">
-37,67
+67,47
 </td>
 <td style="text-align:right;">
-16,37
+18,84
 </td>
 <td style="text-align:center;">
 A
@@ -1391,10 +1471,10 @@ A
 4
 </td>
 <td style="text-align:right;">
-61,83
+26,30
 </td>
 <td style="text-align:right;">
-23,20
+23,21
 </td>
 <td style="text-align:center;">
 B
@@ -1417,10 +1497,10 @@ B
 5
 </td>
 <td style="text-align:right;">
-46,23
+46,15
 </td>
 <td style="text-align:right;">
-13,85
+17,45
 </td>
 <td style="text-align:center;">
 B
@@ -1443,10 +1523,10 @@ B
 6
 </td>
 <td style="text-align:right;">
-51,25
+54,44
 </td>
 <td style="text-align:right;">
-13,89
+29,93
 </td>
 <td style="text-align:center;">
 B
@@ -1469,10 +1549,10 @@ B
 7
 </td>
 <td style="text-align:right;">
-46,80
+49,67
 </td>
 <td style="text-align:right;">
-21,86
+23,30
 </td>
 <td style="text-align:center;">
 C
@@ -1495,10 +1575,10 @@ C
 8
 </td>
 <td style="text-align:right;">
-36,69
+46,50
 </td>
 <td style="text-align:right;">
-24,75
+31,07
 </td>
 <td style="text-align:center;">
 C
@@ -1521,10 +1601,10 @@ C
 9
 </td>
 <td style="text-align:right;">
-40,63
+44,72
 </td>
 <td style="text-align:right;">
-18,51
+19,64
 </td>
 <td style="text-align:center;">
 D
@@ -1547,10 +1627,10 @@ D
 10
 </td>
 <td style="text-align:right;">
-59,00
+36,62
 </td>
 <td style="text-align:right;">
-17,90
+15,02
 </td>
 <td style="text-align:center;">
 D
@@ -1571,10 +1651,9 @@ D
 </tbody>
 </table>
 <ul>
-<li><p>Toutes les modalités transformées en variables muettes sont introduites dans le modèle comme variables indépendantes <strong>sauf celle servant de catégorie de référence</strong>. Pourquoi sauf une? Si nous mettions toutes les modalités en variable muette, alors chaque observation serait repérée par une valeur de 1, « il y aurait alors une parfaite multicolinéarité et aucune solution unique pour les coefficients de régression ne pourrait être trouvée » <span class="citation">(Bressoux <a href="#ref-bressoux2010" role="doc-biblioref">2010</a>, 128)</span>.</p></li>
+<li><p>Toutes les modalités transformées en variables muettes sont introduites dans le modèle comme variables indépendantes <strong>sauf celle servant de catégorie de référence</strong>. Pourquoi sauf une? Si nous mettions toutes les modalités en variable muette, alors chaque observation serait repérée par une valeur de 1, « il y aurait alors une parfaite multicolinéarité et aucune solution unique pour les coefficients de régression ne pourrait être trouvée » <span class="citation">(<a href="#ref-bressoux2010" role="doc-biblioref">Bressoux 2010, 128</a>)</span>.</p></li>
 <li><p>Par exemple, si nous choisissons la modalité <em>A</em> comme catégorie de référence, l’équation de régression s’écrit alors :</p></li>
 </ul>
-
 <p><span class="math display" id="eq:regvarpoly1">\[\begin{equation}
 Y = b_{0} + b_{1}X_{1} + b_{2B}X_{2B} + b_{2C}X_{2C} + b_{2D}X_{2D}+ e
 \tag{7.25}
@@ -1583,15 +1662,14 @@ Y = b_{0} + b_{1}X_{1} + b_{2B}X_{2B} + b_{2C}X_{2C} + b_{2D}X_{2D}+ e
 <ul>
 <li>Vous aurez compris que choisir la modalité <em>D</em> comme catégorie de référence revient à écrire l’équation suivante :</li>
 </ul>
-
 <p><span class="math display" id="eq:regvarpoly2">\[\begin{equation}
 Y = b_{0} + b_{1}X_{1} + b_{2A}X_{2A} + b_{2B}X_{2B} + b_{2C}X_{2C} + e
 \tag{7.26}
 \end{equation}\]</span>
 </p>
 </div>
-<div id="sect07532" class="section level4">
-<h4><span class="header-section-number">7.5.3.2</span> Comment interpréter les coefficients des modalités d’une variable explicative qualitative polytomique</h4>
+<div id="sect07532" class="section level4 hasAnchor" number="7.5.3.2">
+<h4><span class="header-section-number">7.5.3.2</span> Comment interpréter les coefficients des modalités d’une variable explicative qualitative polytomique<a href="sect075.html#sect07532" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Les coefficients des différentes modalités s’interprètent en fonction de la catégorie de référence. Dans l’exemple ci-dessous, nous avons inclus la ville de Montréal comme catégorie de référence (tableau <a href="sect075.html#tab:ModeleVarPoly1">7.7</a>). Toutes choses étant égales par ailleurs, nous pouvons alors constater que  :</p>
 <ul>
 <li>en moyenne, les îlots résidentiels de Senneville et de Baie-D’Urfé ont respectivement 23,235 % et 21,400 % plus de végétation que ceux de la ville de Montréal.</li>
@@ -3118,10 +3196,10 @@ Westmount
 <p>Mais surtout, évitez de choisir une catégorie comprenant très peu d’observations.</p>
 </div>
 </div>
-<div id="sect07533" class="section level4">
-<h4><span class="header-section-number">7.5.3.3</span> Effet marginal d’une variable explicative qualitative polytomique</h4>
+<div id="sect07533" class="section level4 hasAnchor" number="7.5.3.3">
+<h4><span class="header-section-number">7.5.3.3</span> Effet marginal d’une variable explicative qualitative polytomique<a href="sect075.html#sect07533" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Comme pour une variable dichotomique, il est possible d’illustrer l’effet marginal de la variable qualitative dichotomique avec un graphique. Quelle que soit la catégorie de référence choisie, le graphique est le même. La figure <a href="sect075.html#fig:EffetMarginalPoly">7.5</a> illustre ainsi la valeur moyenne, avec son intervalle de confiance à 95 %, de la végétation dans les îlots résidentiels de chacune des municipalités de la région de Montréal, <em>ceteris paribus</em>.</p>
-<div class="figure" style="text-align: center"><span id="fig:EffetMarginalPoly"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:EffetMarginalPoly"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/EffetMarginalPoly-1.png" alt="Effet marginal d'une variable polytomique" width="90%" />
 <p class="caption">
 Figure 7.5: Effet marginal d’une variable polytomique
@@ -3129,13 +3207,12 @@ Figure 7.5: Effet marginal d’une variable polytomique
 </div>
 </div>
 </div>
-<div id="sect0754" class="section level3">
-<h3><span class="header-section-number">7.5.4</span> Variables d’interaction</h3>
-<div id="sect07541" class="section level4">
-<h4><span class="header-section-number">7.5.4.1</span> Variable d’interaction entre deux variables continues</h4>
+<div id="sect0754" class="section level3 hasAnchor" number="7.5.4">
+<h3><span class="header-section-number">7.5.4</span> Variables d’interaction<a href="sect075.html#sect0754" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sect07541" class="section level4 hasAnchor" number="7.5.4.1">
+<h4><span class="header-section-number">7.5.4.1</span> Variable d’interaction entre deux variables continues<a href="sect075.html#sect07541" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Une interaction entre deux variables indépendantes continues consiste à simplement les multiplier (<span class="math inline">\(X_1 \times X_2\)</span>). Le modèle s’écrit alors :</p>
-
-<p><span class="math display" id="eq:reginteractioncontinues">\[\begin{equation} 
+<p><span class="math display" id="eq:reginteractioncontinues">\[\begin{equation}
 Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \beta_{3}(X_{1}\times X_{2}) +\ldots+ \beta_{k}X_{k} + e\tag{7.27}
 \end{equation}\]</span>
 </p>
@@ -3581,25 +3658,24 @@ DistCBDkmX_Pct_FR
 </table>
 <p>À nouveau, il est possible de représenter l’effet de cette interaction à l’aide d’un graphique des effets marginaux. Notez cependant que nous devons représenter l’effet simultané de deux variables indépendantes sur notre variable dépendante, ce qu’il est possible de faire avec une carte de chaleur. La figure <a href="sect075.html#fig:ModeleInteraction2heat">7.6</a> représente donc l’effet moyen de l’interaction sur la prédiction dans le premier panneau, ainsi que l’intervalle de confiance à 95 % de la prédiction dans les deuxième et troisième panneaux.</p>
 <p>Nous constatons ainsi que le modèle prédit des valeurs de végétation les plus faibles lorsque le pourcentage de personnes à faible revenu est élevé et que la distance au centre-ville est élevée (en haut à droite à la figure <a href="sect075.html#fig:ModeleInteraction2heat">7.6</a>). En revanche, les valeurs les plus élevées de végétation sont atteintes lorsque la distance au centre-ville est élevée et que le pourcentage de personnes à faible revenu est faible (en bas à droite). Il semble donc que l’éloignement au centre-ville soit associé avec une augmentation de la densité végétale, mais que cette augmentation puisse être mitigée par l’augmentation parallèle du pourcentage de personnes à faible revenu.</p>
-<div class="figure"><span id="fig:ModeleInteraction2heat"></span>
+<div class="figure"><span style="display:block;" id="fig:ModeleInteraction2heat"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/ModeleInteraction2heat-1.png" alt="Effet marginal de l'interaction entre deux variables continues" width="95%" />
 <p class="caption">
 Figure 7.6: Effet marginal de l’interaction entre deux variables continues
 </p>
 </div>
 <p>Notez que dans la figure <a href="sect075.html#fig:ModeleInteraction2heat">7.6</a>, la relation entre les deux variables indépendantes et la variable dépendante apparaît non linéaire du fait de l’interaction. À titre de comparaison, si nous utilisons les prédictions du modèle 5 (sans interaction), nous obtenons les prédictions présentées à la figure <a href="sect075.html#fig:ModeleInteraction2heat2">7.7</a>. Vous pouvez constater sur cette figure sans interaction que les deux effets des variables indépendantes sont linéaires puisque toutes les lignes sont parallèles.</p>
-<div class="figure"><span id="fig:ModeleInteraction2heat2"></span>
+<div class="figure"><span style="display:block;" id="fig:ModeleInteraction2heat2"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/ModeleInteraction2heat2-1.png" alt="Effets marginaux de deux variables continues en cas d'absence d'interaction" width="75%" />
 <p class="caption">
 Figure 7.7: Effets marginaux de deux variables continues en cas d’absence d’interaction
 </p>
 </div>
 </div>
-<div id="sect07542" class="section level4">
-<h4><span class="header-section-number">7.5.4.2</span> Variable d’interaction entre une variable continue et une variable dichotomique</h4>
+<div id="sect07542" class="section level4 hasAnchor" number="7.5.4.2">
+<h4><span class="header-section-number">7.5.4.2</span> Variable d’interaction entre une variable continue et une variable dichotomique<a href="sect075.html#sect07542" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Une interaction entre une VI continue et une VI dichotomique consiste aussi à les multiplier (<span class="math inline">\(X_1 \times D_2\)</span>); le modèle s’écrit alors :</p>
-
-<p><span class="math display" id="eq:reginteractioncontinuedicho">\[\begin{equation} 
+<p><span class="math display" id="eq:reginteractioncontinuedicho">\[\begin{equation}
 Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}D_{2} + \beta_{3}(X_{1}\times D_{2}) +\ldots+ \beta_{k}X_{k} + e\tag{7.28}
 \end{equation}\]</span>
 </p>
@@ -3837,29 +3913,29 @@ VilleMtlX_Pct_FR
 </tbody>
 </table>
 <p>L’interaction entre une variable qualitative et une variable quantitative peut être représentée par un graphique des effets marginaux. La pente (coefficient) de la variable quantitative varie en fonction des deux catégories de la variable qualitative dichotomique.</p>
-<div class="figure" style="text-align: center"><span id="fig:ModeleInteractionBinaireFIG"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ModeleInteractionBinaireFIG"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/ModeleInteractionBinaireFIG-1.png" alt="Graphique de l’effet marginal de l’interaction entre une variable quantitative et qualitative" width="75%" />
 <p class="caption">
 Figure 7.8: Graphique de l’effet marginal de l’interaction entre une variable quantitative et qualitative
 </p>
 </div>
 </div>
-<div id="sect07543" class="section level4">
-<h4><span class="header-section-number">7.5.4.3</span> Variable d’interaction entre deux variables dichotomiques</h4>
+<div id="sect07543" class="section level4 hasAnchor" number="7.5.4.3">
+<h4><span class="header-section-number">7.5.4.3</span> Variable d’interaction entre deux variables dichotomiques<a href="sect075.html#sect07543" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="bloc_aller_loin">
 <p><strong>Variable d’interaction entre deux variables dichotomiques</strong></p>
-<p>Nous avons vu qu’il est possible d’introduire une variable d’interaction entre deux variables continues ou entre une variable continue et une autre dichotomique. Sachez qu’il est aussi possible d’introduire une interaction entre deux variables dichotomiques. Sur le sujet, vous pouvez consulter la section 8.3 de l’excellent ouvrage de Hanck et al. <span class="citation">(<a href="#ref-hanck2019introduction" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Nous avons vu qu’il est possible d’introduire une variable d’interaction entre deux variables continues ou entre une variable continue et une autre dichotomique. Sachez qu’il est aussi possible d’introduire une interaction entre deux variables dichotomiques. Sur le sujet, vous pouvez consulter la section 8.3 de l’excellent ouvrage de Hanck et al. <span class="citation">(<a href="#ref-hanck2019introduction" role="doc-biblioref">2019</a>)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <h3>R&eacute;f&eacute;rences</h3>
-<div id="refs" class="references">
-<div id="ref-bressoux2010">
-<p>Bressoux, Pascal. 2010. <em>Modélisation statistique appliquée aux sciences sociales</em>. De boeck.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-bressoux2010" class="csl-entry">
+Bressoux, Pascal. 2010. <em>Mod<span>é</span>lisation statistique appliqu<span>é</span>e aux sciences sociales</em>. De boeck.
 </div>
-<div id="ref-hanck2019introduction">
-<p>Hanck, Christoph, Martin Arnold, Alexander Gerber et Martin Schmelzer. 2019. <em>Introduction to econometrics with R</em>. <a href="https://www.econometrics-with-r.org/ITER.pdf">https://www.econometrics-with-r.org/ITER.pdf</a>.</p>
+<div id="ref-hanck2019introduction" class="csl-entry">
+Hanck, Christoph, Martin Arnold, Alexander Gerber et Martin Schmelzer. 2019. <em>Introduction to econometrics with R</em>. s.n. <a href="https://www.econometrics-with-r.org/ITER.pdf">https://www.econometrics-with-r.org/ITER.pdf</a>.
 </div>
 </div>
             </section>
@@ -3872,7 +3948,6 @@ Figure 7.8: Graphique de l’effet marginal de l’interaction entre une variabl
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -3891,6 +3966,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -3911,6 +3987,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MethodesQuantitScSocialesBolR.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
@@ -3924,7 +4004,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

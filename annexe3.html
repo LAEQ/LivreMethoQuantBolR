@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.3 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
+  <title>Chapitre 16 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
   <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.3 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  <meta property="og:title" content="Chapitre 16 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://laeq.github.io/LivreStatistique_website/" />
   <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
   <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.3 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
+  <meta name="twitter:title" content="Chapitre 16 Table des valeurs critiques de t | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   
   <meta name="twitter:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
   <meta name="twitter:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
@@ -32,7 +31,8 @@
   
 <link rel="prev" href="annexe2.html"/>
 
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,9 +48,10 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <script src="libs/d3-4.13.0/d3.min.js"></script>
 <script src="libs/d3-tip-0.8.1/index.js"></script>
 <link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
@@ -60,18 +61,18 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,13 +92,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -122,6 +123,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/quizlib.min.css" type="text/css" />
@@ -142,7 +166,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
-<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
 <li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
 <li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
 <li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
@@ -154,15 +179,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
 <li class="part"><span><b>I Découverte de R</b></span></li>
-<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a><ul>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
-<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a><ul>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
 <li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
 <li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
 <li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a><ul>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
 <li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
 <li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
@@ -170,7 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
 <li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a><ul>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
 <li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
 </ul></li>
@@ -181,28 +210,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
-<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a><ul>
-<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a><ul>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
 <li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a><ul>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
 <li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
 <li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
 <li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a><ul>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
 <li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a><ul>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
 <li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
 <li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
 <li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a><ul>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
 <li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
 <li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
@@ -210,15 +245,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
 <li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a><ul>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
 <li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
 <li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a><ul>
-<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a><ul>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
 <li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
 <li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
@@ -226,7 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
 <li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a><ul>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
 <li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
 <li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
@@ -236,7 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
 <li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a><ul>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
 <li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
 <li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
@@ -247,13 +287,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
 </ul></li>
 <li class="part"><span><b>III Analyses bivariées</b></span></li>
-<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a><ul>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
-<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a><ul>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a><ul>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
 <li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
 <li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
@@ -263,7 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a><ul>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
 <li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
 <li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
@@ -272,19 +316,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a><ul>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
 <li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
 <li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
 <li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
 <li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a><ul>
-<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a><ul>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
 <li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a><ul>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
 <li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
 <li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
@@ -294,36 +342,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>IV Modèles de régression</b></span></li>
-<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
-<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a><ul>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
 <li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a><ul>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
 <li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a><ul>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
 <li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
 <li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
 <li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a><ul>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a>
+<ul>
 <li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
 <li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
 <li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
 <li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a><ul>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
 <li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
 <li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
 <li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
 <li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
 <li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
 <li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
@@ -331,8 +386,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a><ul>
-<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a><ul>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
 <li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
 <li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
@@ -340,21 +397,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
 <li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a><ul>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
 <li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
 <li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
 <li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
 <li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a><ul>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
 <li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
 <li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
 <li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
 <li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a><ul>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
 <li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
 <li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
@@ -363,43 +423,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
 <li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a><ul>
-<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
 <li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a><ul>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
 <li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
 <li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a><ul>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
 <li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a><ul>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
 <li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
 <li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
-<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a><ul>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a>
+<ul>
 <li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
 <li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a><ul>
-<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a><ul>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
 <li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a><ul>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
 <li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
-<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a><ul>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
 <li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
 <li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
@@ -408,8 +478,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a><ul>
-<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
 <li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
 <li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
@@ -418,7 +490,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
 <li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
 <li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
-<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a><ul>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a>
+<ul>
 <li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
 <li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
 <li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
@@ -428,40 +501,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
 <li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
-<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a><ul>
-<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a><ul>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
 <li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a><ul>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
 <li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a><ul>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
 <li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a><ul>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
 <li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
 <li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a><ul>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
-<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a><ul>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
 <li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a><ul>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a>
+<ul>
 <li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
 <li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
 <li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
 <li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a><ul>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a>
+<ul>
 <li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
 <li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
 <li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
@@ -471,11 +553,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
 <li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>14</b> Annexes</a><ul>
-<li class="chapter" data-level="14.1" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14.1</b> Table des valeurs critiques de khi-deux</a></li>
-<li class="chapter" data-level="14.2" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>14.2</b> Table des valeurs critiques de Fisher</a></li>
-<li class="chapter" data-level="14.3" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>14.3</b> Table des valeurs critiques de <em>t</em></a></li>
-</ul></li>
+<li class="part"><span><b>VI Annexes</b></span></li>
+<li class="chapter" data-level="14" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="15" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>15</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="16" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>16</b> Table des valeurs critiques de <em>t</em></a></li>
 </ul>
 
       </nav>
@@ -493,27 +574,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="annexe3" class="section level2">
-<h2><span class="header-section-number">14.3</span> Table des valeurs critiques de <em>t</em></h2>
-<p>La courte syntaxe R ci-dessous permet de générer le tableau <a href="annexe3.html#tab:tableCritiqueT">14.5</a> avec les valeurs critiques de <em>t</em> avec <em>p</em> = 0,10, 0,05, 0,01 et 0,01.</p>
-<div class="sourceCode" id="cb1177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1177-1"><a href="annexe3.html#cb1177-1"></a><span class="kw">library</span>(stargazer)</span>
-<span id="cb1177-2"><a href="annexe3.html#cb1177-2"></a></span>
-<span id="cb1177-3"><a href="annexe3.html#cb1177-3"></a><span class="co"># vecteur pour les degrés de liberté de 1 à 30, puis 40 et 50</span></span>
-<span id="cb1177-4"><a href="annexe3.html#cb1177-4"></a>dl &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>) </span>
-<span id="cb1177-5"><a href="annexe3.html#cb1177-5"></a><span class="co"># la fonction qchisq permet d&#39;obtenir la valeur théorique en fonction </span></span>
-<span id="cb1177-6"><a href="annexe3.html#cb1177-6"></a><span class="co"># d&#39;une valeur de p et d&#39;un nombre de degrés de liberté</span></span>
-<span id="cb1177-7"><a href="annexe3.html#cb1177-7"></a>tableT &lt;-<span class="st"> </span><span class="kw">cbind</span>(dl,</span>
-<span id="cb1177-8"><a href="annexe3.html#cb1177-8"></a>                <span class="dt">p0.10 =</span>  <span class="kw">round</span>(<span class="kw">qt</span>(<span class="dt">p=</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="fl">0.10</span><span class="op">/</span><span class="dv">2</span>),  <span class="dt">df=</span>dl),<span class="dv">2</span>),</span>
-<span id="cb1177-9"><a href="annexe3.html#cb1177-9"></a>                <span class="dt">p0.05 =</span>  <span class="kw">round</span>(<span class="kw">qt</span>(<span class="dt">p=</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="fl">0.05</span><span class="op">/</span><span class="dv">2</span>),  <span class="dt">df=</span>dl),<span class="dv">2</span>),</span>
-<span id="cb1177-10"><a href="annexe3.html#cb1177-10"></a>                <span class="dt">p0.01 =</span>  <span class="kw">round</span>(<span class="kw">qt</span>(<span class="dt">p=</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="fl">0.01</span><span class="op">/</span><span class="dv">2</span>),  <span class="dt">df=</span>dl),<span class="dv">2</span>),</span>
-<span id="cb1177-11"><a href="annexe3.html#cb1177-11"></a>                <span class="dt">p0.001 =</span> <span class="kw">round</span>(<span class="kw">qt</span>(<span class="dt">p=</span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="fl">0.001</span><span class="op">/</span><span class="dv">2</span>), <span class="dt">df=</span>dl),<span class="dv">2</span>))</span>
-<span id="cb1177-12"><a href="annexe3.html#cb1177-12"></a><span class="co"># Impression du tableau avec la library stargazer</span></span>
-<span id="cb1177-13"><a href="annexe3.html#cb1177-13"></a><span class="kw">stargazer</span>(tableT, <span class="dt">type=</span><span class="st">&quot;text&quot;</span>, <span class="dt">summary=</span><span class="ot">FALSE</span>, <span class="dt">rownames=</span><span class="ot">FALSE</span>, <span class="dt">align =</span> <span class="ot">TRUE</span>, <span class="dt">digits =</span> <span class="dv">2</span>,</span>
-<span id="cb1177-14"><a href="annexe3.html#cb1177-14"></a>          <span class="dt">title=</span><span class="st">&quot;Distribution des valeurs critiques de t&quot;</span>)</span></code></pre></div>
+<div id="annexe3" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number">Chapitre 16</span> Table des valeurs critiques de <em>t</em><a href="annexe3.html#annexe3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La courte syntaxe R ci-dessous permet de générer le tableau <a href="annexe3.html#tab:tableCritiqueT">16.1</a> avec les valeurs critiques de <em>t</em> avec <em>p</em> = 0,10, 0,05, 0,01 et 0,01.</p>
+<div class="sourceCode" id="cb1180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1180-1"><a href="annexe3.html#cb1180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb1180-2"><a href="annexe3.html#cb1180-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1180-3"><a href="annexe3.html#cb1180-3" aria-hidden="true" tabindex="-1"></a><span class="co"># vecteur pour les degrés de liberté de 1 à 30, puis 40 et 50</span></span>
+<span id="cb1180-4"><a href="annexe3.html#cb1180-4" aria-hidden="true" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2500</span>) </span>
+<span id="cb1180-5"><a href="annexe3.html#cb1180-5" aria-hidden="true" tabindex="-1"></a><span class="co"># la fonction qchisq permet d&#39;obtenir la valeur théorique en fonction </span></span>
+<span id="cb1180-6"><a href="annexe3.html#cb1180-6" aria-hidden="true" tabindex="-1"></a><span class="co"># d&#39;une valeur de p et d&#39;un nombre de degrés de liberté</span></span>
+<span id="cb1180-7"><a href="annexe3.html#cb1180-7" aria-hidden="true" tabindex="-1"></a>tableT <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dl,</span>
+<span id="cb1180-8"><a href="annexe3.html#cb1180-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">p0.10 =</span>  <span class="fu">round</span>(<span class="fu">qt</span>(<span class="at">p=</span><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.10</span><span class="sc">/</span><span class="dv">2</span>),  <span class="at">df=</span>dl),<span class="dv">2</span>),</span>
+<span id="cb1180-9"><a href="annexe3.html#cb1180-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">p0.05 =</span>  <span class="fu">round</span>(<span class="fu">qt</span>(<span class="at">p=</span><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>),  <span class="at">df=</span>dl),<span class="dv">2</span>),</span>
+<span id="cb1180-10"><a href="annexe3.html#cb1180-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">p0.01 =</span>  <span class="fu">round</span>(<span class="fu">qt</span>(<span class="at">p=</span><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.01</span><span class="sc">/</span><span class="dv">2</span>),  <span class="at">df=</span>dl),<span class="dv">2</span>),</span>
+<span id="cb1180-11"><a href="annexe3.html#cb1180-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">p0.001 =</span> <span class="fu">round</span>(<span class="fu">qt</span>(<span class="at">p=</span><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.001</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">df=</span>dl),<span class="dv">2</span>))</span>
+<span id="cb1180-12"><a href="annexe3.html#cb1180-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Impression du tableau avec la library stargazer</span></span>
+<span id="cb1180-13"><a href="annexe3.html#cb1180-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(tableT, <span class="at">type=</span><span class="st">&quot;text&quot;</span>, <span class="at">summary=</span><span class="cn">FALSE</span>, <span class="at">rownames=</span><span class="cn">FALSE</span>, <span class="at">align =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb1180-14"><a href="annexe3.html#cb1180-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">title=</span><span class="st">&quot;Distribution des valeurs critiques de t&quot;</span>)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
 <table>
 <caption>
-<span id="tab:tableCritiqueT">Tableau 14.5: </span>Distribution des valeurs critiques de t
+<span id="tab:tableCritiqueT">Tableau 16.1: </span>Distribution des valeurs critiques de t
 </caption>
 <thead>
 <tr>
@@ -1236,334 +1317,333 @@ p = 0,001
 </table>
 <div style="page-break-after: always;"></div>
 
-<div id="refs" class="references">
-<div>
-<p>Aggarwal, Charu C, Alexander Hinneburg et Daniel A Keim. 2001. « On the surprising behavior of distance metrics in high dimensional space ». In <em>International conference on database theory</em>, 420‑434. Springer.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Aggarwal, Charu C, Alexander Hinneburg et Daniel A Keim. 2001. <span>« On the surprising behavior of distance metrics in high dimensional space. »</span> In <em>International conference on database theory</em>, 420‑434. Springer.
 </div>
-<div>
-<p>Allcott, Hunt et Matthew Gentzkow. 2017. « Social media and fake news in the 2016 election ». <em>Journal of economic perspectives</em> 31 (2): 211‑36. <a href="https://doi.org/10.1257/jep.31.2.211">https://doi.org/10.1257/jep.31.2.211</a>.</p>
+<div class="csl-entry">
+Allcott, Hunt et Matthew Gentzkow. 2017. <span>« Social media and fake news in the 2016 election. »</span> <em>Journal of economic perspectives</em> 31 (2): 211‑36. <a href="https://doi.org/10.1257/jep.31.2.211">https://doi.org/10.1257/jep.31.2.211</a>.
 </div>
-<div>
-<p>Aly, Sharif S, Jianyang Zhao, Ben Li et Jiming Jiang. 2014. « Reliability of environmental sampling culture results using the negative binomial intraclass correlation coefficient ». <em>SpringerPlus</em> 3 (1): 40. <a href="https://doi.org/10.1186/2193-1801-3-40">https://doi.org/10.1186/2193-1801-3-40</a>.</p>
+<div class="csl-entry">
+Aly, Sharif S, Jianyang Zhao, Ben Li et Jiming Jiang. 2014. <span>« Reliability of environmental sampling culture results using the negative binomial intraclass correlation coefficient. »</span> <em>SpringerPlus</em> 3 (1): 40. <a href="https://doi.org/10.1186/2193-1801-3-40">https://doi.org/10.1186/2193-1801-3-40</a>.
 </div>
-<div>
-<p>Anastasopoulos, Panagiotis C, John E Haddock, Matthew G Karlaftis et Fred L Mannering. 2012. « Analysis of urban travel times: Hazard-based approach to random parameters ». <em>Transportation research record</em> 2302 (1): 121‑129. <a href="https://doi.org/10.3141%2F2302-13">https://doi.org/10.3141%2F2302-13</a>.</p>
+<div class="csl-entry">
+Anastasopoulos, Panagiotis C, John E Haddock, Matthew G Karlaftis et Fred L Mannering. 2012. <span>« Analysis of urban travel times: Hazard-based approach to random parameters. »</span> <em>Transportation research record</em> 2302 (1): 121‑129. <a href="https://doi.org/10.3141%2F2302-13">https://doi.org/10.3141%2F2302-13</a>.
 </div>
-<div>
-<p>Apparicio, Philippe. 2002. « Apport des systèmes d’information géographique à l’étude de l’insertion des HLM dans les quartiers montréalais ». Thèse de doctorat, Université du Maine. <a href="http://www.theses.fr/2002LEMA3007">http://www.theses.fr/2002LEMA3007</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe. 2002. <span>« Apport des syst<span>è</span>mes d’information g<span>é</span>ographique <span>à</span> l’<span>é</span>tude de l’insertion des HLM dans les quartiers montr<span>é</span>alais. »</span> Thèse de doctorat, Université du Maine. <a href="http://www.theses.fr/2002LEMA3007">http://www.theses.fr/2002LEMA3007</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Mathieu Carrier, Jérémy Gelb, Anne-Marie Séguin et Simon Kingham. 2016. « Cyclists’ exposure to air pollution and road traffic noise in central city neighbourhoods of Montreal ». <em>Journal of Transport Geography</em> 57: 63‑69. <a href="https://doi.org/10.1016/j.jtrangeo.2016.09.014">https://doi.org/10.1016/j.jtrangeo.2016.09.014</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Mathieu Carrier, Jérémy Gelb, Anne-Marie Séguin et Simon Kingham. 2016. <span>« Cyclists’ exposure to air pollution and road traffic noise in central city neighbourhoods of Montreal. »</span> <em>Journal of Transport Geography</em> 57: 63‑69. <a href="https://doi.org/10.1016/j.jtrangeo.2016.09.014">https://doi.org/10.1016/j.jtrangeo.2016.09.014</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Marie-Soleil Cloutier, Anne-Marie Séguin et Josefina Ades. 2010. « Accessibilité spatiale aux parcs urbains pour les enfants et injustice environnementale. Exploration du cas montréalais ». <em>Revue internationale de géomatique</em> 20 (3): 363‑389. <a href="http://rig.revuesonline.com/article.jsp?articleId=15208">http://rig.revuesonline.com/article.jsp?articleId=15208</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Marie-Soleil Cloutier, Anne-Marie Séguin et Josefina Ades. 2010. <span>« Accessibilit<span>é</span> spatiale aux parcs urbains pour les enfants et injustice environnementale. Exploration du cas montr<span>é</span>alais. »</span> <em>Revue internationale de g<span>é</span>omatique</em> 20 (3): 363‑389. <a href="http://rig.revuesonline.com/article.jsp?articleId=15208">http://rig.revuesonline.com/article.jsp?articleId=15208</a>.
 </div>
-<div>
-<p>Apparicio, Philippe et Jérémy Gelb. 2020. « Cyclists′ exposure to road traffic noise: A comparison of three North American and European cities ». <em>Acoustics</em> 2 (1): 73‑86. <a href="https://doi.org/10.3390/acoustics2010006">https://doi.org/10.3390/acoustics2010006</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe et Jérémy Gelb. 2020. <span>« Cyclists′ exposure to road traffic noise: A comparison of three North American and European cities. »</span> <em>Acoustics</em> 2 (1): 73‑86. <a href="https://doi.org/10.3390/acoustics2010006">https://doi.org/10.3390/acoustics2010006</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Jérémy Gelb, Mathieu Carrier, Marie-Ève Mathieu et Simon Kingham. 2018. « Exposure to noise and air pollution by mode of transportation during rush hours in Montreal ». <em>Journal of Transport Geography</em> 70: 182‑192. <a href="https://doi.org/10.1016/j.jtrangeo.2018.06.007">https://doi.org/10.1016/j.jtrangeo.2018.06.007</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Jérémy Gelb, Mathieu Carrier, Marie-Ève Mathieu et Simon Kingham. 2018. <span>« Exposure to noise and air pollution by mode of transportation during rush hours in Montreal. »</span> <em>Journal of Transport Geography</em> 70: 182‑192. <a href="https://doi.org/10.1016/j.jtrangeo.2018.06.007">https://doi.org/10.1016/j.jtrangeo.2018.06.007</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Jérémy Gelb, Anne-Sophie Dubé, Simon Kingham, Lise Gauvin et Éric Robitaille. 2017. « The approaches to measuring the potential spatial access to urban health services revisited: distance types and aggregation-error issues ». <em>International journal of health geographics</em> 16 (1): 32. <a href="https://doi.org/10.1186/s12942-017-0105-9">https://doi.org/10.1186/s12942-017-0105-9</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Jérémy Gelb, Anne-Sophie Dubé, Simon Kingham, Lise Gauvin et Éric Robitaille. 2017. <span>« The approaches to measuring the potential spatial access to urban health services revisited: distance types and aggregation-error issues. »</span> <em>International journal of health geographics</em> 16 (1): 32. <a href="https://doi.org/10.1186/s12942-017-0105-9">https://doi.org/10.1186/s12942-017-0105-9</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Jérémy Gelb, Vincent Jarry et Élaine Lesage-Mann. 2021. « Cycling in one of the most polluted cities in the world: Exposure to noise and air pollution and potential adverse health impacts in Delhi ». <em>International journal of health geographics</em> 20 (1): 1‑16. <a href="https://doi.org/10.1186/s12942-021-00272-2">https://doi.org/10.1186/s12942-021-00272-2</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Jérémy Gelb, Vincent Jarry et Élaine Lesage-Mann. 2021. <span>« Cycling in one of the most polluted cities in the world: Exposure to noise and air pollution and potential adverse health impacts in Delhi. »</span> <em>International journal of health geographics</em> 20 (1): 1‑16. <a href="https://doi.org/10.1186/s12942-021-00272-2">https://doi.org/10.1186/s12942-021-00272-2</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Jérémy Gelb et Marie-Ève Mathieu. 2019. « Un atlas-web pour comparer l’exposition individuelle aux pollutions atmosphérique et sonore selon le mode de transport ». <em>Cybergeo: European Journal of Geography</em> 903. <a href="https://doi.org/10.4000/cybergeo.32391">https://doi.org/10.4000/cybergeo.32391</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Jérémy Gelb et Marie-Ève Mathieu. 2019. <span>« Un atlas-web pour comparer l’exposition individuelle aux pollutions atmosph<span>é</span>rique et sonore selon le mode de transport. »</span> <em>Cybergeo: European Journal of Geography</em> 903. <a href="https://doi.org/10.4000/cybergeo.32391">https://doi.org/10.4000/cybergeo.32391</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, David Maignan et Jérémy Gelb. 2021. « VIFECO: An Open-source software for counting features on a Video ». <em>Journal of Open Research Software</em> 9 (1). <a href="https://doi.org/10.5334/jors.300">https://doi.org/10.5334/jors.300</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, David Maignan et Jérémy Gelb. 2021. <span>« VIFECO: An Open-source software for counting features on a Video. »</span> <em>Journal of Open Research Software</em> 9 (1). <a href="https://doi.org/10.5334/jors.300">https://doi.org/10.5334/jors.300</a>.
 </div>
-<div>
-<p>Apparicio, Philippe, Thi-Thanh-Hien Pham, Anne-Marie Séguin et Jean Dubé. 2016. « Spatial distribution of vegetation in and around city blocks on the Island of Montreal: A double environmental inequity? » <em>Applied Geography</em> 76: 128‑136. <a href="http://dx.doi.org/10.1016/j.apgeog.2016.09.023">http://dx.doi.org/10.1016/j.apgeog.2016.09.023</a>.</p>
+<div class="csl-entry">
+Apparicio, Philippe, Thi-Thanh-Hien Pham, Anne-Marie Séguin et Jean Dubé. 2016. <span>« Spatial distribution of vegetation in and around city blocks on the Island of Montreal: A double environmental inequity? »</span> <em>Applied Geography</em> 76: 128‑136. <a href="http://dx.doi.org/10.1016/j.apgeog.2016.09.023">http://dx.doi.org/10.1016/j.apgeog.2016.09.023</a>.
 </div>
-<div>
-<p>Atkinson, Rowland et Keith Kintrea. 2001. « Disentangling area effects: Evidence from deprived and non-deprived neighbourhoods ». <em>Urban studies</em> 38 (12): 2277‑2298. <a href="https://doi.org/10.1080%2F00420980120087162">https://doi.org/10.1080%2F00420980120087162</a>.</p>
+<div class="csl-entry">
+Atkinson, Rowland et Keith Kintrea. 2001. <span>« Disentangling area effects: Evidence from deprived and non-deprived neighbourhoods. »</span> <em>Urban studies</em> 38 (12): 2277‑2298. <a href="https://doi.org/10.1080%2F00420980120087162">https://doi.org/10.1080%2F00420980120087162</a>.
 </div>
-<div>
-<p>Audate, Pierre Paul, Geneviève Cloutier et Alexandre Lebel. 2021. « The motivations of urban agriculture practitioners in deprived neighborhoods: A comparative study of Montreal and Quito ». <em>Urban Forestry &amp; Urban Greening</em> 62: 127171. <a href="https://doi.org/10.1016/j.ufug.2021.127171">https://doi.org/10.1016/j.ufug.2021.127171</a>.</p>
+<div class="csl-entry">
+Audate, Pierre Paul, Geneviève Cloutier et Alexandre Lebel. 2021. <span>« The motivations of urban agriculture practitioners in deprived neighborhoods: A comparative study of Montreal and Quito. »</span> <em>Urban Forestry &amp; Urban Greening</em> 62: 127171. <a href="https://doi.org/10.1016/j.ufug.2021.127171">https://doi.org/10.1016/j.ufug.2021.127171</a>.
 </div>
-<div>
-<p>Audrin, Thomas, Philippe Apparicio et Anne-Marie Séguin. 2021. « La localisation des écoles primaires et le bruit aérien dans la région métropolitaine de Toronto: un diagnostic d’équité environnementale et une analyse des impacts sur la réussite scolaire ». <em>Canadian Journal of Regional Science/Revue canadienne des sciences régionales</em> 44 (1): 22‑34. <a href="https://idjs.ca/images/rcsr/archives/V44N1_5-AUDRIN-APPARICIO-SEGUIN.pdf">https://idjs.ca/images/rcsr/archives/V44N1_5-AUDRIN-APPARICIO-SEGUIN.pdf</a>.</p>
+<div class="csl-entry">
+Audrin, Thomas, Philippe Apparicio et Anne-Marie Séguin. 2021. <span>« La localisation des <span>é</span>coles primaires et le bruit a<span>é</span>rien dans la r<span>é</span>gion m<span>é</span>tropolitaine de Toronto: un diagnostic d’<span>é</span>quit<span>é</span> environnementale et une analyse des impacts sur la r<span>é</span>ussite scolaire. »</span> <em>Canadian Journal of Regional Science/Revue canadienne des sciences r<span>é</span>gionales</em> 44 (1): 22‑34. <a href="https://idjs.ca/images/rcsr/archives/V44N1_5-AUDRIN-APPARICIO-SEGUIN.pdf">https://idjs.ca/images/rcsr/archives/V44N1_5-AUDRIN-APPARICIO-SEGUIN.pdf</a>.
 </div>
-<div>
-<p>Bair, Eric. 2013. « Semi-supervised clustering methods ». <em>Wiley Interdisciplinary Reviews: Computational Statistics</em> 5 (5): 349‑361. <a href="https://dx.doi.org/10.1002%2Fwics.1270">https://dx.doi.org/10.1002%2Fwics.1270</a>.</p>
+<div class="csl-entry">
+Bair, Eric. 2013. <span>« Semi-supervised clustering methods. »</span> <em>Wiley Interdisciplinary Reviews: Computational Statistics</em> 5 (5): 349‑361. <a href="https://dx.doi.org/10.1002%2Fwics.1270">https://dx.doi.org/10.1002%2Fwics.1270</a>.
 </div>
-<div>
-<p>Bendixen, Mike T. 1995. « Compositional perceptual mapping using chi-squared trees analysis and correspondence analysis ». <em>Journal of Marketing Management</em> 11 (6): 571‑581. <a href="https://doi.org/10.1080/0267257X.1995.9964368">https://doi.org/10.1080/0267257X.1995.9964368</a>.</p>
+<div class="csl-entry">
+Bendixen, Mike T. 1995. <span>« Compositional perceptual mapping using chi-squared trees analysis and correspondence analysis. »</span> <em>Journal of Marketing Management</em> 11 (6): 571‑581. <a href="https://doi.org/10.1080/0267257X.1995.9964368">https://doi.org/10.1080/0267257X.1995.9964368</a>.
 </div>
-<div>
-<p>Benzécri, Jean-Paul. 1973. <em>L’analyse des données. Tome 1. La taxinomie. Tome 2. L’analyse des correspondances</em>. Vol. 2. Dunod.</p>
+<div class="csl-entry">
+Benzécri, Jean-Paul. 1973. <em>L’analyse des donn<span>é</span>es. Tome 1. La taxinomie. Tome 2. L’analyse des correspondances</em>. Vol. 2. Dunod.
 </div>
-<div>
-<p>Bhatt, Vikram et Leila Marie Farah. 2016. « Cultivating Montreal: A Brief History of Citizens and Institutions Integrating Urban Agriculture in the City ». <em>Urban Agriculture &amp; Regional Food Systems</em> 1 (1): 1‑12. <a href="http://dx.doi.org/10.2134/urbanag2015.01.1511">http://dx.doi.org/10.2134/urbanag2015.01.1511</a>.</p>
+<div class="csl-entry">
+Bhatt, Vikram et Leila Marie Farah. 2016. <span>« Cultivating Montreal: A Brief History of Citizens and Institutions Integrating Urban Agriculture in the City. »</span> <em>Urban Agriculture &amp; Regional Food Systems</em> 1 (1): 1‑12. <a href="http://dx.doi.org/10.2134/urbanag2015.01.1511">http://dx.doi.org/10.2134/urbanag2015.01.1511</a>.
 </div>
-<div>
-<p>Bolker, Benjamin M, Mollie E Brooks, Connie J Clark, Shane W Geange, John R Poulsen, M Henry H Stevens et Jada-Simone S White. 2009. « Generalized linear mixed models: a practical guide for ecology and evolution ». <em>Trends in ecology &amp; evolution</em> 24 (3): 127‑135. <a href="https://doi.org/10.1016/j.tree.2008.10.008">https://doi.org/10.1016/j.tree.2008.10.008</a>.</p>
+<div class="csl-entry">
+Bolker, Benjamin M, Mollie E Brooks, Connie J Clark, Shane W Geange, John R Poulsen, M Henry H Stevens et Jada-Simone S White. 2009. <span>« Generalized linear mixed models: a practical guide for ecology and evolution. »</span> <em>Trends in ecology &amp; evolution</em> 24 (3): 127‑135. <a href="https://doi.org/10.1016/j.tree.2008.10.008">https://doi.org/10.1016/j.tree.2008.10.008</a>.
 </div>
-<div>
-<p>Boulos, Maged N Kamel et Estella M Geraghty. 2020. « Geographical tracking and mapping of coronavirus disease COVID-19/severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) epidemic and associated events around the world: how 21st century GIS technologies are supporting the global fight against outbreaks and epidemics ». <em>International journal of health geographics</em> 19 (1): 1‑12. <a href="https://doi.org/10.1186/s12942-020-00202-8">https://doi.org/10.1186/s12942-020-00202-8</a>.</p>
+<div class="csl-entry">
+Boulos, Maged N Kamel et Estella M Geraghty. 2020. <span>« Geographical tracking and mapping of coronavirus disease COVID-19/severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) epidemic and associated events around the world: how 21st century GIS technologies are supporting the global fight against outbreaks and epidemics. »</span> <em>International journal of health geographics</em> 19 (1): 1‑12. <a href="https://doi.org/10.1186/s12942-020-00202-8">https://doi.org/10.1186/s12942-020-00202-8</a>.
 </div>
-<div>
-<p>Brant, Rollin. 1990. « Assessing proportionality in the proportional odds model for ordinal logistic regression ». <em>Biometrics</em>: 1171‑1178. <a href="https://www.jstor.org/stable/2532457">https://www.jstor.org/stable/2532457</a>.</p>
+<div class="csl-entry">
+Brant, Rollin. 1990. <span>« Assessing proportionality in the proportional odds model for ordinal logistic regression. »</span> <em>Biometrics</em>: 1171‑1178. <a href="https://www.jstor.org/stable/2532457">https://www.jstor.org/stable/2532457</a>.
 </div>
-<div>
-<p>Bressoux, Pascal. 2010. <em>Modélisation statistique appliquée aux sciences sociales</em>. De boeck.</p>
+<div class="csl-entry">
+Bressoux, Pascal. 2010. <em>Mod<span>é</span>lisation statistique appliqu<span>é</span>e aux sciences sociales</em>. De boeck.
 </div>
-<div>
-<p>Burdenski, Jr Thomas K. 2000. « Evaluating univariate, bivariate, and multivariate normality using graphical procedures ». <em>ERIC</em>: 1‑62.</p>
+<div class="csl-entry">
+Burdenski, Jr Thomas K. 2000. <span>« Evaluating univariate, bivariate, and multivariate normality using graphical procedures. »</span> <em>ERIC</em>: 1‑62.
 </div>
-<div>
-<p>Buregeya, Jean Marie, Philippe Apparicio et Jérémy Gelb. 2020. « Short-term impact of traffic-related particulate matter and noise exposure on cardiac function ». <em>International Journal of Environmental Research and Public Health</em> 17 (4): 1220. <a href="https://dx.doi.org/10.3390%2Fijerph17041220">https://dx.doi.org/10.3390%2Fijerph17041220</a>.</p>
+<div class="csl-entry">
+Buregeya, Jean Marie, Philippe Apparicio et Jérémy Gelb. 2020. <span>« Short-term impact of traffic-related particulate matter and noise exposure on cardiac function. »</span> <em>International Journal of Environmental Research and Public Health</em> 17 (4): 1220. <a href="https://dx.doi.org/10.3390%2Fijerph17041220">https://dx.doi.org/10.3390%2Fijerph17041220</a>.
 </div>
-<div>
-<p>Carrier, Mathieu, Philippe Apparicio, Anne-Marie Séguin et Dan Crouse. 2014. « Ambient air pollution concentration in Montreal and environmental equity: Are children at risk at school? » <em>Case Studies on Transport Policy</em> 2 (2): 61‑69. <a href="https://doi.org/10.1016/j.cstp.2014.06.003">https://doi.org/10.1016/j.cstp.2014.06.003</a>.</p>
+<div class="csl-entry">
+Carrier, Mathieu, Philippe Apparicio, Anne-Marie Séguin et Dan Crouse. 2014. <span>« Ambient air pollution concentration in Montreal and environmental equity: Are children at risk at school? »</span> <em>Case Studies on Transport Policy</em> 2 (2): 61‑69. <a href="https://doi.org/10.1016/j.cstp.2014.06.003">https://doi.org/10.1016/j.cstp.2014.06.003</a>.
 </div>
-<div>
-<p>Chandra, Mahalanobis Prasanta. 1936. « On the generalised distance in statistics ». In <em>Proceedings of the National Institute of Sciences of India</em>, 2:49‑55. 1.</p>
+<div class="csl-entry">
+Chandra, Mahalanobis Prasanta. 1936. <span>« On the generalised distance in statistics. »</span> In <em>Proceedings of the National Institute of Sciences of India</em>, 2:49‑55. 1. s.n.
 </div>
-<div>
-<p>Chang, Winston. 2018. <em>R Graphics Cookbook, 2nd edition</em>. CRC Press.</p>
+<div class="csl-entry">
+Chang, Winston. 2018. <em>R Graphics Cookbook, 2nd edition</em>. CRC Press.
 </div>
-<div>
-<p>Cloutier, Marie-soleil, Mathieu Tremblay, Patrick Morency et Philippe Apparicio. 2014. « Carrefours en milieu urbain: quels risques pour les piétons? Exemple empirique des quartiers centraux de Montréal, Canada ». <em>Recherche Transports Sécurité</em> 30: 3‑20.</p>
+<div class="csl-entry">
+Cloutier, Marie-soleil, Mathieu Tremblay, Patrick Morency et Philippe Apparicio. 2014. <span>« Carrefours en milieu urbain: quels risques pour les pi<span>é</span>tons? Exemple empirique des quartiers centraux de Montr<span>é</span>al, Canada. »</span> <em>Recherche Transports Sécurité</em> 30: 3‑20.
 </div>
-<div>
-<p>Cohen, Jacob. 1992. « A power primer ». <em>Psychological bulletin</em> 112 (1): 155‑159. <a href="https://doi.org/10.1037/0033-2909.112.1.155">https://doi.org/10.1037/0033-2909.112.1.155</a>.</p>
+<div class="csl-entry">
+Cohen, Jacob. 1992. <span>« A power primer. »</span> <em>Psychological bulletin</em> 112 (1): 155‑159. <a href="https://doi.org/10.1037/0033-2909.112.1.155">https://doi.org/10.1037/0033-2909.112.1.155</a>.
 </div>
-<div>
-<p>———. 2013. <em>Statistical power analysis for the behavioral sciences</em>. Academic press.</p>
+<div class="csl-entry">
+———. 2013. <em>Statistical power analysis for the behavioral sciences</em>. Academic press.
 </div>
-<div>
-<p>De Alvarenga, Bernardo, Philippe Apparicio et Anne-Marie Séguin. 2018. « L’accessibilité aux aires de jeux dans les parcs de la Communauté métropolitaine de Montréal ». <em>Cahiers de géographie du Québec</em> 62 (176): 229‑246. <a href="https://doi.org/10.7202/1063104ar">https://doi.org/10.7202/1063104ar</a>.</p>
+<div class="csl-entry">
+De Alvarenga, Bernardo, Philippe Apparicio et Anne-Marie Séguin. 2018. <span>« L’accessibilit<span>é</span> aux aires de jeux dans les parcs de la Communaut<span>é</span> m<span>é</span>tropolitaine de Montr<span>é</span>al. »</span> <em>Cahiers de g<span>é</span>ographie du Qu<span>é</span>bec</em> 62 (176): 229‑246. <a href="https://doi.org/10.7202/1063104ar">https://doi.org/10.7202/1063104ar</a>.
 </div>
-<div>
-<p>Delaunay, Déborah, Philippe Apparicio, Anne-Marie Séguin, Jérémy Gelb et Mathieu Carrier. 2019. « L’identification des zones calmes et un diagnostic d’équité environnementale à Montréal ». <em>The Canadian Geographer/Le Géographe canadien</em> 63 (2): 184‑197. <a href="https://doi.org/10.1111/cag.12511">https://doi.org/10.1111/cag.12511</a>.</p>
+<div class="csl-entry">
+Delaunay, Déborah, Philippe Apparicio, Anne-Marie Séguin, Jérémy Gelb et Mathieu Carrier. 2019. <span>« L’identification des zones calmes et un diagnostic d’<span>é</span>quit<span>é</span> environnementale <span>à</span> Montr<span>é</span>al. »</span> <em>The Canadian Geographer/Le G<span>é</span>ographe canadien</em> 63 (2): 184‑197. <a href="https://doi.org/10.1111/cag.12511">https://doi.org/10.1111/cag.12511</a>.
 </div>
-<div>
-<p>Dunn, Peter K. et Gordon K. Smyth. 1996. « Randomized Quantile Residuals ». <em>Journal of Computational and Graphical Statistics</em> 5 (3): 236‑244. <a href="https://doi.org/10.2307/1390802">https://doi.org/10.2307/1390802</a>.</p>
+<div class="csl-entry">
+Dunn, Peter K. et Gordon K. Smyth. 1996. <span>« Randomized Quantile Residuals. »</span> <em>Journal of Computational and Graphical Statistics</em> 5 (3): 236‑244. <a href="https://doi.org/10.2307/1390802">https://doi.org/10.2307/1390802</a>.
 </div>
-<div>
-<p>Escofier, Brigitte. 1979. « Traitement simultané de variables qualitatives et quantitatives en analyse factorielle ». <em>Cahiers de l’Analyse des Données</em> 4 (2): 137‑146.</p>
+<div class="csl-entry">
+Escofier, Brigitte. 1979. <span>« Traitement simultan<span>é</span> de variables qualitatives et quantitatives en analyse factorielle. »</span> <em>Cahiers de l’Analyse des Donn<span>é</span>es</em> 4 (2): 137‑146.
 </div>
-<div>
-<p>Escofier, Brigitte et Jérôme Pagès. 1998. « Analyses factorielles simples et multiples ». <em>Dunod, Paris</em>.</p>
+<div class="csl-entry">
+Escofier, Brigitte et Jérôme Pagès. 1998. <span>« Analyses factorielles simples et multiples. »</span> <em>Dunod, Paris</em>.
 </div>
-<div>
-<p>Field, Andy P, Jeremy Miles et Zoë Field. 2012. « Discovering statistics using R ». Thousand Oaks.</p>
+<div class="csl-entry">
+Field, Andy P, Jeremy Miles et Zoë Field. 2012. <span>« Discovering statistics using R. »</span> Thousand Oaks.
 </div>
-<div>
-<p>Fox, John et Georges Monette. 1992. « Generalized collinearity diagnostics ». <em>Journal of the American Statistical Association</em> 87 (417): 178‑183. <a href="https://doi.org/10.2307/2290467">https://doi.org/10.2307/2290467</a>.</p>
+<div class="csl-entry">
+Fox, John et Georges Monette. 1992. <span>« Generalized collinearity diagnostics. »</span> <em>Journal of the American Statistical Association</em> 87 (417): 178‑183. <a href="https://doi.org/10.2307/2290467">https://doi.org/10.2307/2290467</a>.
 </div>
-<div>
-<p>Frank, Lawrence, Mark Bradley, Sarah Kavage, James Chapman et T Keith Lawton. 2008. « Urban form, travel time, and cost relationships with tour complexity and mode choice ». <em>Transportation</em> 35 (1): 37‑54. <a href="https://doi.org/10.1007/s11116-007-9136-6">https://doi.org/10.1007/s11116-007-9136-6</a>.</p>
+<div class="csl-entry">
+Frank, Lawrence, Mark Bradley, Sarah Kavage, James Chapman et T Keith Lawton. 2008. <span>« Urban form, travel time, and cost relationships with tour complexity and mode choice. »</span> <em>Transportation</em> 35 (1): 37‑54. <a href="https://doi.org/10.1007/s11116-007-9136-6">https://doi.org/10.1007/s11116-007-9136-6</a>.
 </div>
-<div>
-<p>Fukuyama, Yoshiki. 1989. « A new method of choosing the number of clusters for the fuzzy c-mean method ». In <em>Proc. 5th Fuzzy Syst. Symp., 1989</em>, 247‑250.</p>
+<div class="csl-entry">
+Fukuyama, Yoshiki. 1989. <span>« A new method of choosing the number of clusters for the fuzzy c-mean method. »</span> In <em>Proc. 5th Fuzzy Syst. Symp., 1989</em>, 247‑250. s.n.
 </div>
-<div>
-<p>Gelb, Jérémy et Philippe Apparicio. 2019. « Noise exposure of cyclists in Ho Chi Minh City: A spatio-temporal analysis using non-linear models ». <em>Applied Acoustics</em> 148: 332‑343. <a href="https://doi.org/10.1016/j.apacoust.2018.12.031">https://doi.org/10.1016/j.apacoust.2018.12.031</a>.</p>
+<div class="csl-entry">
+Gelb, Jérémy et Philippe Apparicio. 2019. <span>« Noise exposure of cyclists in Ho Chi Minh City: A spatio-temporal analysis using non-linear models. »</span> <em>Applied Acoustics</em> 148: 332‑343. <a href="https://doi.org/10.1016/j.apacoust.2018.12.031">https://doi.org/10.1016/j.apacoust.2018.12.031</a>.
 </div>
-<div>
-<p>Gelb, Jérémy et Philippe Apparicio. 2020. « Modelling cyclists’ multi-exposure to air and noise pollution with low-cost sensors: The case of Paris ». <em>Atmosphere</em> 11 (4): 422. <a href="https://doi.org/10.3390/atmos11040422">https://doi.org/10.3390/atmos11040422</a>.</p>
+<div class="csl-entry">
+———. 2020. <span>« Modelling cyclists’ multi-exposure to air and noise pollution with low-cost sensors: The case of Paris. »</span> <em>Atmosphere</em> 11 (4): 422. <a href="https://doi.org/10.3390/atmos11040422">https://doi.org/10.3390/atmos11040422</a>.
 </div>
-<div>
-<p>———. 2021a. « Cyclists’ exposure to atmospheric and noise pollution: a systematic literature review ». <em>Transport Reviews</em>: 1‑24. <a href="https://doi.org/10.1080/01441647.2021.1895361">https://doi.org/10.1080/01441647.2021.1895361</a>.</p>
+<div class="csl-entry">
+———. 2021a. <span>« Cyclists’ exposure to atmospheric and noise pollution: a systematic literature review. »</span> <em>Transport Reviews</em>: 1‑24. <a href="https://doi.org/10.1080/01441647.2021.1895361">https://doi.org/10.1080/01441647.2021.1895361</a>.
 </div>
-<div>
-<p>———. 2021b. « Apport de la classification floue c-means spatiale en géographie: essai de taxinomie socio-résidentielle et environnementale à Lyon ». <em>Cybergeo: European Journal of Geography</em>. <a href="https://doi.org/10.4000/cybergeo.36414">https://doi.org/10.4000/cybergeo.36414</a>.</p>
+<div class="csl-entry">
+———. 2021b. <span>« Apport de la classification floue c-means spatiale en g<span>é</span>ographie: essai de taxinomie socio-r<span>é</span>sidentielle et environnementale <span>à</span> Lyon. »</span> <em>Cybergeo: European Journal of Geography</em>. <a href="https://doi.org/10.4000/cybergeo.36414">https://doi.org/10.4000/cybergeo.36414</a>.
 </div>
-<div>
-<p>Gelman, Andrew. 2005. « Analysis of variance—why it is more important than ever ». <em>The annals of statistics</em> 33 (1): 1‑53. <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.</p>
+<div class="csl-entry">
+Gelman, Andrew. 2005. <span>« Analysis of variance—why it is more important than ever. »</span> <em>The annals of statistics</em> 33 (1): 1‑53. <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.
 </div>
-<div>
-<p>Gelman, Andrew et Jennifer Hill. 2006. <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge university press.</p>
+<div class="csl-entry">
+Gelman, Andrew et Jennifer Hill. 2006. <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge university press.
 </div>
-<div>
-<p>Gilles, Alain et Pierre Maranda. 1994. <em>Éléments de méthodologie et d’analyse statistique pour les sciences sociales</em>. McGraw-Hill.</p>
+<div class="csl-entry">
+Gilles, Alain et Pierre Maranda. 1994. <em><span>É</span>l<span>é</span>ments de m<span>é</span>thodologie et d’analyse statistique pour les sciences sociales</em>. McGraw-Hill.
 </div>
-<div>
-<p>Glass, Gene V, Percy D Peckham et James R Sanders. 1972. « Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance ». <em>Review of educational research</em> 42 (3): 237‑288.</p>
+<div class="csl-entry">
+Glass, Gene V, Percy D Peckham et James R Sanders. 1972. <span>« Consequences of failure to meet assumptions underlying the fixed effects analyses of variance and covariance. »</span> <em>Review of educational research</em> 42 (3): 237‑288.
 </div>
-<div>
-<p>Gower, John C. 1971. « A general coefficient of similarity and some of its properties ». <em>Biometrics</em>: 857‑871. <a href="https://doi.org/10.2307/2528823">https://doi.org/10.2307/2528823</a>.</p>
+<div class="csl-entry">
+Gower, John C. 1971. <span>« A general coefficient of similarity and some of its properties. »</span> <em>Biometrics</em>: 857‑871. <a href="https://doi.org/10.2307/2528823">https://doi.org/10.2307/2528823</a>.
 </div>
-<div>
-<p>Hanck, Christoph, Martin Arnold, Alexander Gerber et Martin Schmelzer. 2019. <em>Introduction to econometrics with R</em>. <a href="https://www.econometrics-with-r.org/ITER.pdf">https://www.econometrics-with-r.org/ITER.pdf</a>.</p>
+<div class="csl-entry">
+Hanck, Christoph, Martin Arnold, Alexander Gerber et Martin Schmelzer. 2019. <em>Introduction to econometrics with R</em>. s.n. <a href="https://www.econometrics-with-r.org/ITER.pdf">https://www.econometrics-with-r.org/ITER.pdf</a>.
 </div>
-<div>
-<p>Harlan, Sharon L, Anthony J Brazel, G Darrel Jenerette, Nancy S Jones, Larissa Larsen, Lela Prashad et William L Stefanov. 2007. « In the shade of affluence: the inequitable distribution of the urban heat island ». <em>Research in Social Problems and Public Policy</em> 15: 173‑202. <a href="http://dx.doi.org/10.1016/S0196-1152(07)15005-5">http://dx.doi.org/10.1016/S0196-1152(07)15005-5</a>.</p>
+<div class="csl-entry">
+Harlan, Sharon L, Anthony J Brazel, G Darrel Jenerette, Nancy S Jones, Larissa Larsen, Lela Prashad et William L Stefanov. 2007. <span>« In the shade of affluence: the inequitable distribution of the urban heat island. »</span> <em>Research in Social Problems and Public Policy</em> 15: 173‑202. <a href="http://dx.doi.org/10.1016/S0196-1152(07)15005-5">http://dx.doi.org/10.1016/S0196-1152(07)15005-5</a>.
 </div>
-<div>
-<p>Hilbe, Joseph M. 2009. <em>Logistic regression models</em>. CRC press.</p>
+<div class="csl-entry">
+Hilbe, Joseph M. 2009. <em>Logistic regression models</em>. CRC press.
 </div>
-<div>
-<p>Hotelling, Harold. 1933. « Analysis of a complex of statistical variables into principal components ». <em>Journal of educational psychology</em> 24 (6): 417. <a href="https://psycnet.apa.org/doi/10.1037/h0071325">https://psycnet.apa.org/doi/10.1037/h0071325</a>.</p>
+<div class="csl-entry">
+Hotelling, Harold. 1933. <span>« Analysis of a complex of statistical variables into principal components. »</span> <em>Journal of educational psychology</em> 24 (6): 417. <a href="https://psycnet.apa.org/doi/10.1037/h0071325">https://psycnet.apa.org/doi/10.1037/h0071325</a>.
 </div>
-<div>
-<p>Huang, Ganlin, Weiqi Zhou et ML Cadenasso. 2011. « Is everyone hot in the city? Spatial pattern of land surface temperatures, land cover and neighborhood socioeconomic characteristics in Baltimore, MD ». <em>Journal of environmental management</em> 92 (7): 1753‑1759. <a href="https://doi.org/10.1016/j.jenvman.2011.02.006">https://doi.org/10.1016/j.jenvman.2011.02.006</a>.</p>
+<div class="csl-entry">
+Huang, Ganlin, Weiqi Zhou et ML Cadenasso. 2011. <span>« Is everyone hot in the city? Spatial pattern of land surface temperatures, land cover and neighborhood socioeconomic characteristics in Baltimore, MD. »</span> <em>Journal of environmental management</em> 92 (7): 1753‑1759. <a href="https://doi.org/10.1016/j.jenvman.2011.02.006">https://doi.org/10.1016/j.jenvman.2011.02.006</a>.
 </div>
-<div>
-<p>Hubert, Mia, Peter J Rousseeuw et Karlien Vanden Branden. 2005. « ROBPCA: a new approach to robust principal component analysis ». <em>Technometrics</em> 47 (1): 64‑79. <a href="https://doi.org/10.1198/004017004000000563">https://doi.org/10.1198/004017004000000563</a>.</p>
+<div class="csl-entry">
+Hubert, Mia, Peter J Rousseeuw et Karlien Vanden Branden. 2005. <span>« ROBPCA: a new approach to robust principal component analysis. »</span> <em>Technometrics</em> 47 (1): 64‑79. <a href="https://doi.org/10.1198/004017004000000563">https://doi.org/10.1198/004017004000000563</a>.
 </div>
-<div>
-<p>Ismay, Chester et Albert Y Kim. 2019. <em>Statistical inference via data science: a ModernDive into R and the tidyverse</em>. CRC Press.</p>
+<div class="csl-entry">
+Ismay, Chester et Albert Y Kim. 2019. <em>Statistical inference via data science: a ModernDive into R and the tidyverse</em>. CRC Press.
 </div>
-<div>
-<p>Joanes, DN et CA Gill. 1998. « Comparing measures of sample skewness and kurtosis ». <em>Journal of the Royal Statistical Society: Series D (The Statistician)</em> 47 (1): 183‑189. <a href="https://www.jstor.org/stable/2988433">https://www.jstor.org/stable/2988433</a>.</p>
+<div class="csl-entry">
+Joanes, DN et CA Gill. 1998. <span>« Comparing measures of sample skewness and kurtosis. »</span> <em>Journal of the Royal Statistical Society: Series D (The Statistician)</em> 47 (1): 183‑189. <a href="https://www.jstor.org/stable/2988433">https://www.jstor.org/stable/2988433</a>.
 </div>
-<div>
-<p>Kaiser, Henry F. 1960. « The application of electronic computers to factor analysis ». <em>Educational and psychological measurement</em> 20 (1): 141‑151. <a href="https://doi.org/10.1177%2F001316446002000116">https://doi.org/10.1177%2F001316446002000116</a>.</p>
+<div class="csl-entry">
+Kaiser, Henry F. 1960. <span>« The application of electronic computers to factor analysis. »</span> <em>Educational and psychological measurement</em> 20 (1): 141‑151. <a href="https://doi.org/10.1177%2F001316446002000116">https://doi.org/10.1177%2F001316446002000116</a>.
 </div>
-<div>
-<p>Lebart, Ludovic, Alain Morineau et Marie Piron. 1995. <em>Statistique exploratoire multidimensionnelle</em>. Dunod.</p>
+<div class="csl-entry">
+Lebart, Ludovic, Alain Morineau et Marie Piron. 1995. <em>Statistique exploratoire multidimensionnelle</em>. Dunod.
 </div>
-<div>
-<p>Lix, Lisa M, Joanne C Keselman et HJ Keselman. 1996. « Consequences of assumption violations revisited: A quantitative review of alternatives to the one-way analysis of variance F test ». <em>Review of educational research</em> 66 (4): 579‑619. <a href="https://doi.org/10.3102/00346543066004579">https://doi.org/10.3102/00346543066004579</a>.</p>
+<div class="csl-entry">
+Lix, Lisa M, Joanne C Keselman et HJ Keselman. 1996. <span>« Consequences of assumption violations revisited: A quantitative review of alternatives to the one-way analysis of variance F test. »</span> <em>Review of educational research</em> 66 (4): 579‑619. <a href="https://doi.org/10.3102/00346543066004579">https://doi.org/10.3102/00346543066004579</a>.
 </div>
-<div>
-<p>MacQueen, James. 1967. « Some methods for classification and analysis of multivariate observations ». In <em>Proceedings of the fifth Berkeley symposium on mathematical statistics and probability</em>, 1:281‑297. 14. Oakland, CA, USA.</p>
+<div class="csl-entry">
+MacQueen, James. 1967. <span>« Some methods for classification and analysis of multivariate observations. »</span> In <em>Proceedings of the fifth Berkeley symposium on mathematical statistics and probability</em>, 1:281‑297. 14. Oakland, CA, USA.
 </div>
-<div>
-<p>McClintock, Nathan. 2018. « Urban agriculture, racial capitalism, and resistance in the settler-colonial city ». <em>Geography Compass</em> 12 (6): 1‑16. <a href="https://doi.org/10.1111/gec3.12373">https://doi.org/10.1111/gec3.12373</a>.</p>
+<div class="csl-entry">
+McClintock, Nathan. 2018. <span>« Urban agriculture, racial capitalism, and resistance in the settler-colonial city. »</span> <em>Geography Compass</em> 12 (6): 1‑16. <a href="https://doi.org/10.1111/gec3.12373">https://doi.org/10.1111/gec3.12373</a>.
 </div>
-<div>
-<p>McElreath, Richard. 2020. <em>Statistical rethinking: A Bayesian course with examples in R and Stan</em>. CRC press.</p>
+<div class="csl-entry">
+McElreath, Richard. 2020. <em>Statistical rethinking: A Bayesian course with examples in R and Stan</em>. CRC press.
 </div>
-<div>
-<p>McFadden, Brandon R. 2016. « Examining the gap between science and public opinion about genetically modified food and global warming ». <em>PloS one</em> 11 (11): e0166140. <a href="https://doi.org/10.1371/journal.pone.0166140">https://doi.org/10.1371/journal.pone.0166140</a>.</p>
+<div class="csl-entry">
+McFadden, Brandon R. 2016. <span>« Examining the gap between science and public opinion about genetically modified food and global warming. »</span> <em>PloS one</em> 11 (11): e0166140. <a href="https://doi.org/10.1371/journal.pone.0166140">https://doi.org/10.1371/journal.pone.0166140</a>.
 </div>
-<div>
-<p>Messerli, Franz H. 2012. « Chocolate consumption, cognitive Function, and Nobel laureates ». <em>The new England Journal of Medicine</em> 367 (16): 1563‑1564. <a href="https://doi.org/10.1056/nejmon1211064">https://doi.org/10.1056/nejmon1211064</a>.</p>
+<div class="csl-entry">
+Messerli, Franz H. 2012. <span>« Chocolate consumption, cognitive Function, and Nobel laureates. »</span> <em>The new England Journal of Medicine</em> 367 (16): 1563‑1564. <a href="https://doi.org/10.1056/nejmon1211064">https://doi.org/10.1056/nejmon1211064</a>.
 </div>
-<div>
-<p>Mihalcea, Rada et Paul Tarau. 2004. « Textrank: Bringing order into text ». In <em>Proceedings of the 2004 conference on empirical methods in natural language processing</em>, 404‑411.</p>
+<div class="csl-entry">
+Mihalcea, Rada et Paul Tarau. 2004. <span>« Textrank: Bringing order into text. »</span> In <em>Proceedings of the 2004 conference on empirical methods in natural language processing</em>, 404‑411. s.n.
 </div>
-<div>
-<p>Nakagawa, Shinichi, Paul C. D. Johnson et Holger Schielzeth. 2017. « The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded ». <em>Journal of The Royal Society Interface</em> 14 (134): 20170213. <a href="https://doi.org/10.1098/rsif.2017.0213">https://doi.org/10.1098/rsif.2017.0213</a>.</p>
+<div class="csl-entry">
+Nakagawa, Shinichi, Paul C. D. Johnson et Holger Schielzeth. 2017. <span>« The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded. »</span> <em>Journal of The Royal Society Interface</em> 14 (134): 20170213. <a href="https://doi.org/10.1098/rsif.2017.0213">https://doi.org/10.1098/rsif.2017.0213</a>.
 </div>
-<div>
-<p>Nelder, John A. et Robert W. M. Wedderburn. 1972. « Generalized Linear Models ». <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370‑384. <a href="http://www.jstor.org/stable/2344614">http://www.jstor.org/stable/2344614</a>.</p>
+<div class="csl-entry">
+Nelder, John A. et Robert W. M. Wedderburn. 1972. <span>« Generalized Linear Models. »</span> <em>Journal of the Royal Statistical Society. Series A (General)</em> 135 (3): 370‑384. <a href="http://www.jstor.org/stable/2344614">http://www.jstor.org/stable/2344614</a>.
 </div>
-<div>
-<p>Neyman, Jerzy, Egon Sharpe Pearson et Karl Pearson. 1933. « IX. On the problem of the most efficient tests of statistical hypotheses ». <em>Philosophical Transactions of the Royal Society of London. Series A, Containing Papers of a Mathematical or Physical Character</em> 231 (694-706): 289‑337. <a href="https://royalsocietypublishing.org/doi/abs/10.1098/rsta.1933.0009">https://royalsocietypublishing.org/doi/abs/10.1098/rsta.1933.0009</a>.</p>
+<div class="csl-entry">
+Neyman, Jerzy, Egon Sharpe Pearson et Karl Pearson. 1933. <span>« IX. On the problem of the most efficient tests of statistical hypotheses. »</span> <em>Philosophical Transactions of the Royal Society of London. Series A, Containing Papers of a Mathematical or Physical Character</em> 231 (694-706): 289‑337. <a href="https://royalsocietypublishing.org/doi/abs/10.1098/rsta.1933.0009">https://royalsocietypublishing.org/doi/abs/10.1098/rsta.1933.0009</a>.
 </div>
-<div>
-<p>Pagès, Jérôme. 2002. « Analyse factorielle multiple appliquée aux variables qualitatives et aux données mixtes ». <em>Revue de statistique appliquée</em> 50 (4): 5‑37.</p>
+<div class="csl-entry">
+Pagès, Jérôme. 2002. <span>« Analyse factorielle multiple appliqu<span>é</span>e aux variables qualitatives et aux donn<span>é</span>es mixtes. »</span> <em>Revue de statistique appliqu<span>é</span>e</em> 50 (4): 5‑37.
 </div>
-<div>
-<p>———. 2013. <em>Analyse factorielle multiple avec R</em>. EDP sciences.</p>
+<div class="csl-entry">
+———. 2013. <em>Analyse factorielle multiple avec R</em>. EDP sciences.
 </div>
-<div>
-<p>Pham, Thi-Thanh-Hien, Philippe Apparicio, Shawn Landry et Joseph Lewnard. 2017. « Disentangling the effects of urban form and socio-demographic context on street tree cover: A multi-level analysis from Montréal ». <em>Landscape and Urban Planning</em> 157: 422‑433. <a href="http://dx.doi.org/10.1016/j.landurbplan.2016.09.001">http://dx.doi.org/10.1016/j.landurbplan.2016.09.001</a>.</p>
+<div class="csl-entry">
+Pham, Thi-Thanh-Hien, Philippe Apparicio, Shawn Landry et Joseph Lewnard. 2017. <span>« Disentangling the effects of urban form and socio-demographic context on street tree cover: A multi-level analysis from Montr<span>é</span>al. »</span> <em>Landscape and Urban Planning</em> 157: 422‑433. <a href="http://dx.doi.org/10.1016/j.landurbplan.2016.09.001">http://dx.doi.org/10.1016/j.landurbplan.2016.09.001</a>.
 </div>
-<div>
-<p>Pham, Thi-Thanh-Hien, Philippe Apparicio, Anne-Marie Séguin, Shawn Landry et Martin Gagnon. 2012. « Spatial distribution of vegetation in Montreal: an uneven distribution or environmental inequity? » <em>Landscape and urban planning</em> 107 (3): 214‑224. <a href="http://dx.doi.org/10.1016/j.landurbplan.2012.06.002">http://dx.doi.org/10.1016/j.landurbplan.2012.06.002</a>.</p>
+<div class="csl-entry">
+Pham, Thi-Thanh-Hien, Philippe Apparicio, Anne-Marie Séguin, Shawn Landry et Martin Gagnon. 2012. <span>« Spatial distribution of vegetation in Montreal: an uneven distribution or environmental inequity? »</span> <em>Landscape and urban planning</em> 107 (3): 214‑224. <a href="http://dx.doi.org/10.1016/j.landurbplan.2012.06.002">http://dx.doi.org/10.1016/j.landurbplan.2012.06.002</a>.
 </div>
-<div>
-<p>Philibert, Mathieu D et Philippe Apparicio. 2007. « Statistiques spatiales appliquées à l’analyse de données de santé ». In <em>Géographie de la santé : un panorama</em>, 111‑132. Economica.</p>
+<div class="csl-entry">
+Philibert, Mathieu D et Philippe Apparicio. 2007. <span>« Statistiques spatiales appliqu<span>é</span>es <span>à</span> l’analyse de donn<span>é</span>es de sant<span>é</span>. »</span> In <em>Géographie de la santé : un panorama</em>, 111‑132. Economica.
 </div>
-<div>
-<p>Pumain, Denise et Michèle Béguin. 1994. <em>La représentation des données géographiques: statistique et cartographie</em>. Armand Colin.</p>
+<div class="csl-entry">
+Pumain, Denise et Michèle Béguin. 1994. <em>La représentation des données géographiques: statistique et cartographie</em>. Armand Colin.
 </div>
-<div>
-<p>Raudenbush, Stephen W et Anthony S Bryk. 2002. <em>Hierarchical linear models: Applications and data analysis methods</em>. Vol. 1. Sage.</p>
+<div class="csl-entry">
+Raudenbush, Stephen W et Anthony S Bryk. 2002. <em>Hierarchical linear models: Applications and data analysis methods</em>. Vol. 1. Sage.
 </div>
-<div>
-<p>Razali, Nornadiah Mohd et Yap Bee Wah. 2011. « Power comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling tests ». <em>Journal of statistical modeling and analytics</em> 2 (1): 21‑33.</p>
+<div class="csl-entry">
+Razali, Nornadiah Mohd et Yap Bee Wah. 2011. <span>« Power comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling tests. »</span> <em>Journal of statistical modeling and analytics</em> 2 (1): 21‑33.
 </div>
-<div>
-<p>Reed, William J. 2002. « On the rank-Size distribution for human settlements ». <em>Journal of Regional Science</em> 42 (1): 1‑17. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247">https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247</a>.</p>
+<div class="csl-entry">
+Reed, William J. 2002. <span>« On the rank-Size distribution for human settlements. »</span> <em>Journal of Regional Science</em> 42 (1): 1‑17. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247">https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-9787.00247</a>.
 </div>
-<div>
-<p>Reed, William J. et Murray Jorgensen. 2004. « The souble Pareto-Lognormal sistribution: A new parametric model for size distributions ». <em>Communications in Statistics - Theory and Methods</em> 33 (8). Taylor &amp; Francis: 1733‑1753. <a href="https://doi.org/10.1081/STA-120037438">https://doi.org/10.1081/STA-120037438</a>.</p>
+<div class="csl-entry">
+Reed, William J. et Murray Jorgensen. 2004. <span>« The souble Pareto-Lognormal sistribution: A new parametric model for size distributions. »</span> <em>Communications in Statistics - Theory and Methods</em> 33 (8). Taylor &amp; Francis: 1733‑1753. <a href="https://doi.org/10.1081/STA-120037438">https://doi.org/10.1081/STA-120037438</a>.
 </div>
-<div>
-<p>Rivest, Louis-Paul et Nathalie Plante. 1988. « L’analyse en composantes principales robuste ». <em>Revue de statistique appliquée</em> 36 (1): 55‑66. <a href="http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf">http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf</a>.</p>
+<div class="csl-entry">
+Rivest, Louis-Paul et Nathalie Plante. 1988. <span>« L’analyse en composantes principales robuste. »</span> <em>Revue de statistique appliqu<span>é</span>e</em> 36 (1): 55‑66. <a href="http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf">http://www.numdam.org/article/RSA_1988__36_1_55_0.pdf</a>.
 </div>
-<div>
-<p>Roback, Paul et Julie Legler. 2021. <em>Beyond multiple linear regression: Applied generalized linear models and multilevel models in R</em>. CRC Press.</p>
+<div class="csl-entry">
+Roback, Paul et Julie Legler. 2021. <em>Beyond multiple linear regression: Applied generalized linear models and multilevel models in R</em>. CRC Press.
 </div>
-<div>
-<p>Sanchez, Lino et Tony G Reames. 2019. « Cooling Detroit: A socio-spatial analysis of equity in green roofs as an urban heat island mitigation strategy ». <em>Urban Forestry &amp; Urban Greening</em> 44: 126331. <a href="https://doi.org/10.1016/j.ufug.2019.04.014">https://doi.org/10.1016/j.ufug.2019.04.014</a>.</p>
+<div class="csl-entry">
+Sanchez, Lino et Tony G Reames. 2019. <span>« Cooling Detroit: A socio-spatial analysis of equity in green roofs as an urban heat island mitigation strategy. »</span> <em>Urban Forestry &amp; Urban Greening</em> 44: 126331. <a href="https://doi.org/10.1016/j.ufug.2019.04.014">https://doi.org/10.1016/j.ufug.2019.04.014</a>.
 </div>
-<div>
-<p>Sanders, Lena. 1989. <em>L’analyse statistique des données en géographie</em>. GIP Reclus.</p>
+<div class="csl-entry">
+Sanders, Lena. 1989. <em>L’analyse statistique des donn<span>é</span>es en g<span>é</span>ographie</em>. GIP Reclus.
 </div>
-<div>
-<p>SAS Institute Inc. 2020a. « SAS/STAT 15.2 User’s Guide Modeling Multinomial Overdispersion ». <a href="https://documentation.sas.com/?docsetId=statug&amp;docsetTarget=statug_fmm_examples04.htm&amp;docsetVersion=15.2&amp;locale=en">https://documentation.sas.com/?docsetId=statug&amp;docsetTarget=statug_fmm_examples04.htm&amp;docsetVersion=15.2&amp;locale=en</a>.</p>
+<div class="csl-entry">
+SAS Institute Inc. 2020a. <span>« <span>SAS/STAT 15.2 User’s Guide</span> Modeling Multinomial Overdispersion. »</span> <a href="https://documentation.sas.com/?docsetId=statug&amp;docsetTarget=statug_fmm_examples04.htm&amp;docsetVersion=15.2&amp;locale=en" class="uri">https://documentation.sas.com/?docsetId=statug&amp;docsetTarget=statug_fmm_examples04.htm&amp;docsetVersion=15.2&amp;locale=en</a>.
 </div>
-<div>
-<p>———. 2020b. « SAS/STAT 15.2 User’s Guide Poisson Regression | SAS Annotated Output ». <a href="https://stats.idre.ucla.edu/sas/output/poisson-regression/">https://stats.idre.ucla.edu/sas/output/poisson-regression/</a>.</p>
+<div class="csl-entry">
+———. 2020b. <span>« <span>SAS/STAT 15.2 User’s Guide</span> Poisson Regression | SAS Annotated Output. »</span> <a href="https://stats.idre.ucla.edu/sas/output/poisson-regression/" class="uri">https://stats.idre.ucla.edu/sas/output/poisson-regression/</a>.
 </div>
-<div>
-<p>Sawilowsky, Shlomo S. 2009. « New effect size rules of thumb ». <em>Journal of Modern Applied Statistical Methods</em> 8 (2): 467‑474. <a href="https://doi.org/10.22237/jmasm/1257035100">https://doi.org/10.22237/jmasm/1257035100</a>.</p>
+<div class="csl-entry">
+Sawilowsky, Shlomo S. 2009. <span>« New effect size rules of thumb. »</span> <em>Journal of Modern Applied Statistical Methods</em> 8 (2): 467‑474. <a href="https://doi.org/10.22237/jmasm/1257035100">https://doi.org/10.22237/jmasm/1257035100</a>.
 </div>
-<div>
-<p>Schwarzkopf, Dietrich, Benjamin de Haas et Geraint Rees. 2012. « Better ways to improve standards in brain-behavior correlation analysis ». <em>Frontiers in Human Neuroscience</em> 6: 200. <a href="https://www.frontiersin.org/articles/10.3389/fnhum.2012.00200">https://www.frontiersin.org/articles/10.3389/fnhum.2012.00200</a>.</p>
+<div class="csl-entry">
+Schwarzkopf, Dietrich, Benjamin de Haas et Geraint Rees. 2012. <span>« Better ways to improve standards in brain-behavior correlation analysis. »</span> <em>Frontiers in Human Neuroscience</em> 6: 200. <a href="https://www.frontiersin.org/articles/10.3389/fnhum.2012.00200">https://www.frontiersin.org/articles/10.3389/fnhum.2012.00200</a>.
 </div>
-<div>
-<p>Sean, Owen. 2018. « Common probability distributions ». <a href="https://medium.com/@srowen/common-probability-distributions-347e6b945ce4">https://medium.com/@srowen/common-probability-distributions-347e6b945ce4</a>.</p>
+<div class="csl-entry">
+Sean, Owen. 2018. <span>« Common probability distributions. »</span> <a href="https://medium.com/@srowen/common-probability-distributions-347e6b945ce4">https://medium.com/@srowen/common-probability-distributions-347e6b945ce4</a>.
 </div>
-<div>
-<p>Smithson, Michael et Jay Verkuilen. 2006. « A better lemon squeezer? Maximum-likelihood regression with beta-distributed dependent variables ». <em>Psychological methods</em> 11 (1): 54. <a href="https://doi.org/10.1037/1082-989x.11.1.54">https://doi.org/10.1037/1082-989x.11.1.54</a>.</p>
+<div class="csl-entry">
+Smithson, Michael et Jay Verkuilen. 2006. <span>« A better lemon squeezer? Maximum-likelihood regression with beta-distributed dependent variables. »</span> <em>Psychological methods</em> 11 (1): 54. <a href="https://doi.org/10.1037/1082-989x.11.1.54">https://doi.org/10.1037/1082-989x.11.1.54</a>.
 </div>
-<div>
-<p>Sobol, IM. 1993. « Sensitivity estimates for nonlinear mathematical models ». <em>Mathematics and Computers in Simulation</em> 1 (4): 407‑414.</p>
+<div class="csl-entry">
+Sobol, IM. 1993. <span>« Sensitivity estimates for nonlinear mathematical models. »</span> <em>Mathematics and Computers in Simulation</em> 1 (4): 407‑414.
 </div>
-<div>
-<p>Spyratos, Spyridon, Michele Vespe, Fabrizio Natale, Ingmar Weber, Emilio Zagheni et Marzia Rango. 2019. « Quantifying international human mobility patterns using Facebook Network data ». <em>PloS one</em> 14 (10): e0224134. <a href="https://doi.org/10.1371/journal.pone.0224134">https://doi.org/10.1371/journal.pone.0224134</a>.</p>
+<div class="csl-entry">
+Spyratos, Spyridon, Michele Vespe, Fabrizio Natale, Ingmar Weber, Emilio Zagheni et Marzia Rango. 2019. <span>« Quantifying international human mobility patterns using Facebook Network data. »</span> <em>PloS one</em> 14 (10): e0224134. <a href="https://doi.org/10.1371/journal.pone.0224134">https://doi.org/10.1371/journal.pone.0224134</a>.
 </div>
-<div>
-<p>Stryhn, H, J Sanchez, P Morley, C Booker et IR Dohoo. 2006. « Interpretation of variance parameters in multilevel Poisson regression models ». In <em>Proceedings of the 11th International Symposium on Veterinary Epidemiology and Economics</em>. Vol. 702.</p>
+<div class="csl-entry">
+Stryhn, H, J Sanchez, P Morley, C Booker et IR Dohoo. 2006. <span>« Interpretation of variance parameters in multilevel Poisson regression models. »</span> In <em>Proceedings of the 11th International Symposium on Veterinary Epidemiology and Economics</em>. Vol. 702. s.n.
 </div>
-<div>
-<p>Tabachnick, Barbara G, Linda S Fidell et Jodie B Ullman. 2007. <em>Using multivariate statistics</em>. Pearson.</p>
+<div class="csl-entry">
+Tabachnick, Barbara G, Linda S Fidell et Jodie B Ullman. 2007. <em>Using multivariate statistics</em>. Pearson.
 </div>
-<div>
-<p>Teubner, Timm, Florian Hawlitschek et David Dann. 2017. « Price determinants on AirBnB: How reputation pays off in the sharing economy ». <em>Journal of Self-Governance &amp; Management Economics</em> 5 (4). <a href="http://dx.doi.org/10.22381/JSME5420173">http://dx.doi.org/10.22381/JSME5420173</a>.</p>
+<div class="csl-entry">
+Teubner, Timm, Florian Hawlitschek et David Dann. 2017. <span>« Price determinants on AirBnB: How reputation pays off in the sharing economy. »</span> <em>Journal of Self-Governance &amp; Management Economics</em> 5 (4). <a href="http://dx.doi.org/10.22381/JSME5420173">http://dx.doi.org/10.22381/JSME5420173</a>.
 </div>
-<div>
-<p>Tibshirani, Robert, Guenther Walther et Trevor Hastie. 2001. « Estimating the number of clusters in a data set via the gap statistic ». <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 63 (2): 411‑423. <a href="https://doi.org/10.1111/1467-9868.00293">https://doi.org/10.1111/1467-9868.00293</a>.</p>
+<div class="csl-entry">
+Tibshirani, Robert, Guenther Walther et Trevor Hastie. 2001. <span>« Estimating the number of clusters in a data set via the gap statistic. »</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 63 (2): 411‑423. <a href="https://doi.org/10.1111/1467-9868.00293">https://doi.org/10.1111/1467-9868.00293</a>.
 </div>
-<div>
-<p>Wang, Dan et Juan L Nicolau. 2017. « Price determinants of sharing economy based accommodation rental: A study of listings from 33 cities on Airbnb.com ». <em>International Journal of Hospitality Management</em> 62: 120‑131. <a href="https://doi.org/10.1016/j.ijhm.2016.12.007">https://doi.org/10.1016/j.ijhm.2016.12.007</a>.</p>
+<div class="csl-entry">
+Wang, Dan et Juan L Nicolau. 2017. <span>« Price determinants of sharing economy based accommodation rental: A study of listings from 33 cities on Airbnb.com. »</span> <em>International Journal of Hospitality Management</em> 62: 120‑131. <a href="https://doi.org/10.1016/j.ijhm.2016.12.007">https://doi.org/10.1016/j.ijhm.2016.12.007</a>.
 </div>
-<div>
-<p>Ward, Joe H. 1963. « Hierarchical grouping to optimize an objective function ». <em>Journal of the American statistical association</em> 58 (301): 236‑244. <a href="https://doi.org/10.1080/01621459.1963.10500845">https://doi.org/10.1080/01621459.1963.10500845</a>.</p>
+<div class="csl-entry">
+Ward, Joe H. 1963. <span>« Hierarchical grouping to optimize an objective function. »</span> <em>Journal of the American statistical association</em> 58 (301): 236‑244. <a href="https://doi.org/10.1080/01621459.1963.10500845">https://doi.org/10.1080/01621459.1963.10500845</a>.
 </div>
-<div>
-<p>Wickham, Hadley. 2010. « A layered grammar of graphics ». <em>Journal of Computational and Graphical Statistics</em> 19 (1): 3‑28. <a href="http://dx.doi.org/10.1198/jcgs.2009.07098">http://dx.doi.org/10.1198/jcgs.2009.07098</a>.</p>
+<div class="csl-entry">
+Wickham, Hadley. 2010. <span>« A layered grammar of graphics. »</span> <em>Journal of Computational and Graphical Statistics</em> 19 (1): 3‑28. <a href="http://dx.doi.org/10.1198/jcgs.2009.07098">http://dx.doi.org/10.1198/jcgs.2009.07098</a>.
 </div>
-<div>
-<p>Wilcox, Rand R. 1994. « The percentage bend correlation coefficient ». <em>Psychometrika</em> 59 (4): 601‑616. <a href="https://doi.org/10.1007/BF02294395">https://doi.org/10.1007/BF02294395</a>.</p>
+<div class="csl-entry">
+Wilcox, Rand R. 1994. <span>« The percentage bend correlation coefficient. »</span> <em>Psychometrika</em> 59 (4): 601‑616. <a href="https://doi.org/10.1007/BF02294395">https://doi.org/10.1007/BF02294395</a>.
 </div>
-<div>
-<p>Wood, Simon N. 2004. « Stable and efficient multiple smoothing parameter estimation for generalized additive models ». <em>Journal of the American Statistical Association</em> 99 (467): 673‑686. <a href="https://doi.org/10.1198/016214504000000980">https://doi.org/10.1198/016214504000000980</a>.</p>
+<div class="csl-entry">
+Wood, Simon N. 2004. <span>« Stable and efficient multiple smoothing parameter estimation for generalized additive models. »</span> <em>Journal of the American Statistical Association</em> 99 (467): 673‑686. <a href="https://doi.org/10.1198/016214504000000980">https://doi.org/10.1198/016214504000000980</a>.
 </div>
-<div>
-<p>Wu, Sheng, Catherine M Crespi et Weng Kee Wong. 2012. « Comparison of methods for estimating the intraclass correlation coefficient for binary responses in cancer prevention cluster randomized trials ». <em>Contemporary clinical trials</em> 33 (5): 869‑880. <a href="https://doi.org/10.1016/j.cct.2012.05.004">https://doi.org/10.1016/j.cct.2012.05.004</a>.</p>
+<div class="csl-entry">
+Wu, Sheng, Catherine M Crespi et Weng Kee Wong. 2012. <span>« Comparison of methods for estimating the intraclass correlation coefficient for binary responses in cancer prevention cluster randomized trials. »</span> <em>Contemporary clinical trials</em> 33 (5): 869‑880. <a href="https://doi.org/10.1016/j.cct.2012.05.004">https://doi.org/10.1016/j.cct.2012.05.004</a>.
 </div>
-<div>
-<p>Xie, Xuanli Lisa et Gerardo Beni. 1991. « A validity measure for fuzzy clustering ». <em>IEEE Transactions on pattern analysis and machine intelligence</em> 13 (8): 841‑847. <a href="https://doi.org/10.1109/34.85677">https://doi.org/10.1109/34.85677</a>.</p>
+<div class="csl-entry">
+Xie, Xuanli Lisa et Gerardo Beni. 1991. <span>« A validity measure for fuzzy clustering. »</span> <em>IEEE Transactions on pattern analysis and machine intelligence</em> 13 (8): 841‑847. <a href="https://doi.org/10.1109/34.85677">https://doi.org/10.1109/34.85677</a>.
 </div>
-<div>
-<p>Xie, Yihui. 2016. <em>Bookdown: authoring books and technical documents with R markdown</em>. CRC Press.</p>
+<div class="csl-entry">
+Xie, Yihui. 2016. <em>Bookdown: authoring books and technical documents with R markdown</em>. CRC Press.
 </div>
-<div>
-<p>Yap, Bee Wah et Chiaw Hock Sim. 2011. « Comparisons of various types of normality tests ». <em>Journal of Statistical Computation and Simulation</em> 81 (12): 2141‑2155. <a href="https://doi.org/10.1080/00949655.2010.520163">https://doi.org/10.1080/00949655.2010.520163</a>.</p>
+<div class="csl-entry">
+Yap, Bee Wah et Chiaw Hock Sim. 2011. <span>« Comparisons of various types of normality tests. »</span> <em>Journal of Statistical Computation and Simulation</em> 81 (12): 2141‑2155. <a href="https://doi.org/10.1080/00949655.2010.520163">https://doi.org/10.1080/00949655.2010.520163</a>.
 </div>
-<div>
-<p>Zeileis, Achim. 2004. <em>Econometric computing with HC and HAC covariance matrix estimators</em>. Institut für Statistik und Mathematik.</p>
+<div class="csl-entry">
+Zeileis, Achim. 2004. <em>Econometric computing with HC and HAC covariance matrix estimators</em>. Institut f<span>ü</span>r Statistik und Mathematik.
 </div>
-<div>
-<p>Zhang, Zhihua, Rachel JC Chen, Lee D Han et Lu Yang. 2017. « Key factors affecting the price of Airbnb listings: A geographically weighted approach ». <em>Sustainability</em> 9 (9): 1635. <a href="http://dx.doi.org/10.3390/su9091635">http://dx.doi.org/10.3390/su9091635</a>.</p>
+<div class="csl-entry">
+Zhang, Zhihua, Rachel JC Chen, Lee D Han et Lu Yang. 2017. <span>« Key factors affecting the price of Airbnb listings: A geographically weighted approach. »</span> <em>Sustainability</em> 9 (9): 1635. <a href="http://dx.doi.org/10.3390/su9091635">http://dx.doi.org/10.3390/su9091635</a>.
 </div>
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
@@ -1574,7 +1654,6 @@ p = 0,001
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1593,6 +1672,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1613,6 +1693,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MethodesQuantitScSocialesBolR.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
@@ -1626,7 +1710,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
