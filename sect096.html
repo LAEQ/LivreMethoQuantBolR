@@ -932,8 +932,7 @@ Figure 9.19: Constantes aléatoires estimées par Pays (IC par bootstrap)
 <div class="sourceCode" id="cb983"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb983-1"><a href="sect096.html#cb983-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modele3)</span></code></pre></div>
 <pre><code>## Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [&#39;glmerMod&#39;]
 ##  Family: binomial  ( logit )
-## Formula: y ~ Sexe + Age2 + Education + StatutEmploi + Revenu + Residence +  
-##     Duree2 + ConsEnv + (1 + Age2 | Pays)
+## Formula: y ~ Sexe + Age2 + Education + StatutEmploi + Revenu + Residence +      Duree2 + ConsEnv + (1 + Age2 | Pays)
 ##    Data: dfenquete2
 ## Control: glmerControl(optimizer = &quot;bobyqa&quot;)
 ## 

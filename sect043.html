@@ -605,8 +605,8 @@ r_{xy} = \frac{\sum_{i=1}^n (x_{i}-\bar{x})(y_{i}-\bar{y})}{(n-1)\sqrt{\sum_{i=1
 <span id="cb452-18"><a href="sect043.html#cb452-18" aria-hidden="true" tabindex="-1"></a>cor2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(df1<span class="sc">$</span>zV1<span class="sc">*</span>df1<span class="sc">$</span>zV2) <span class="sc">/</span> (<span class="fu">nrow</span>(df1)<span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb452-19"><a href="sect043.html#cb452-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Corrélation de Pearson = &quot;</span>,<span class="fu">round</span>(cor1,<span class="dv">5</span>),</span>
 <span id="cb452-20"><a href="sect043.html#cb452-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Moyenne du produit des variables centrées-réduites =&quot;</span>, <span class="fu">round</span>(cor2,<span class="dv">5</span>))</span></code></pre></div>
-<pre><code>## Corrélation de Pearson =  0.78356 
-## Moyenne du produit des variables centrées-réduites = 0.78356</code></pre>
+<pre><code>## Corrélation de Pearson =  0.79449 
+## Moyenne du produit des variables centrées-réduites = 0.79449</code></pre>
 </div>
 <div id="sect0432" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Interprétation<a href="sect043.html#sect0432" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -996,7 +996,7 @@ Figure 4.8: Histogramme pour les valeurs de corrélation issues du Bootstrap
 ## 
 ## Bootstrap Statistics :
 ##       original       bias    std. error
-## t1* -0.1580801 0.0001124603  0.03985756</code></pre>
+## t1* -0.1580801 -0.001017975   0.0388877</code></pre>
 <div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="sect043.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intervalle de confiance du bootstrap à 95 %</span></span>
 <span id="cb478-2"><a href="sect043.html#cb478-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boot.ci</span>(<span class="at">boot.out =</span> corBootstraped, <span class="at">conf =</span> <span class="fl">0.95</span>, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)</span></code></pre></div>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
@@ -1007,10 +1007,10 @@ Figure 4.8: Histogramme pour les valeurs de corrélation issues du Bootstrap
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   (-0.2363, -0.0801 )   (-0.2430, -0.0878 )  
+## 95%   (-0.2333, -0.0808 )   (-0.2403, -0.0882 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   (-0.2284, -0.0732 )   (-0.2196, -0.0544 )  
+## 95%   (-0.2279, -0.0758 )   (-0.2156, -0.0529 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="sect043.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparaison de l&#39;intervalle classique basé sur la valeur de T</span></span>
 <span id="cb480-2"><a href="sect043.html#cb480-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(df<span class="sc">$</span>HabKm2, df<span class="sc">$</span>A65plus)</span>

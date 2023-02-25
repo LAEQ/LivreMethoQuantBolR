@@ -2347,22 +2347,22 @@ Figure 8.36: Diagnostic général des résidus simulés du modèle de Poisson av
 <span id="cb883-5"><a href="sect084.html#cb883-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cas_etrange)</span></code></pre></div>
 <pre><code>##     Nbr_acci Feux_auto Feux_piet Pass_piet Terreplein Apaisement EmpTotBuffer Densite_pop  Entropie
 ## 1         19         1         1         1          1          0     7208.538    5980.923 0.8073926
+## 2         13         1         1         1          0          0    15198.958   11696.805 0.6432018
 ## 5         12         1         0         1          0          0     8585.350    8655.430 0.7607852
 ## 26         7         0         0         1          0          0     1342.625    2751.012 0.0000000
-## 44         5         0         0         0          0          0     4998.519    8090.478 0.7879618
-## 482        0         0         0         0          0          0     1813.911    8988.260 0.4486079
+## 483        0         0         0         1          0          0     2665.846    7208.356 0.6251996
 ##     DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app
 ## 1       42.41597       6955.00      1         1 2.995732           1            1     0   1       4
+## 2       86.50445       9581.51      1         0 2.639057           1            1     0   1       4
 ## 5       89.11495       6412.27      0         0 2.564949           1            1     0   1       4
 ## 26      73.35344       2849.66      0         0 2.079442           1            1     1   1       3
-## 44      66.86856       4517.65      0         0 1.791759           1            1     1   1       4
-## 482     60.93742       3821.78      1         0 0.000000           0            0     0   0       3
-##     LogEmploi AccOrdinal    PopHa
-## 1    8.883021          2 5.980923
-## 5    9.057813          2 8.655430
-## 26   7.202382          2 2.751012
-## 44   8.516897          2 8.090478
-## 482  7.503240          0 8.988260</code></pre>
+## 483     44.49561       1684.07      0         0 0.000000           0            0     1   1       4
+##     LogEmploi AccOrdinal     PopHa
+## 1    8.883021          2  5.980923
+## 2    9.628982          2 11.696805
+## 5    9.057813          2  8.655430
+## 26   7.202382          2  2.751012
+## 483  7.888277          0  7.208356</code></pre>
 <p>Nous retirons des données les quelques observations pouvant avoir une trop forte influence sur le modèle. Après réajustement, la figure <a href="sect084.html#fig:diagzip2">8.37</a> nous informe que nous n’avons plus de valeurs aberrantes restantes ni de fort problème de dispersion. En revanche, le premier quantile des résidus tant à être plus faible que ce que nous aurions pu nous attendre d’une distribution uniforme. Ce constat laisse penser que le modèle a du mal à bien identifier les faux zéros. Ce résultat n’est pas étonnant, car aucune variable n’avait été identifiée à cette fin dans l’article original <span class="citation">(<a href="#ref-cloutier2014carrefours" role="doc-biblioref">Cloutier et al. 2014</a>)</span> qui utilisait un modèle binomial négatif.</p>
 <div class="sourceCode" id="cb885"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb885-1"><a href="sect084.html#cb885-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_accidents, isOutlier<span class="sc">==</span><span class="cn">FALSE</span>)</span>
 <span id="cb885-2"><a href="sect084.html#cb885-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuster une première version du modèle</span></span>
@@ -2372,17 +2372,16 @@ Figure 8.36: Diagnostic général des résidus simulés du modèle de Poisson av
 <span id="cb885-6"><a href="sect084.html#cb885-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sigma.formula =</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> Feux_auto <span class="sc">+</span> Feux_piet <span class="sc">+</span> Densite_pop <span class="sc">+</span> NB_voies5,</span>
 <span id="cb885-7"><a href="sect084.html#cb885-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">ZIP</span>(<span class="at">mu.link =</span> <span class="st">&quot;log&quot;</span>, <span class="at">sigma.link=</span><span class="st">&quot;logit&quot;</span>),</span>
 <span id="cb885-8"><a href="sect084.html#cb885-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> data2)</span></code></pre></div>
-<pre><code>## GAMLSS-RS iteration 1: Global Deviance = 1390.884 
-## GAMLSS-RS iteration 2: Global Deviance = 1381.199 
-## GAMLSS-RS iteration 3: Global Deviance = 1378.319 
-## GAMLSS-RS iteration 4: Global Deviance = 1377.422 
-## GAMLSS-RS iteration 5: Global Deviance = 1377.118 
-## GAMLSS-RS iteration 6: Global Deviance = 1377.015 
-## GAMLSS-RS iteration 7: Global Deviance = 1376.982 
-## GAMLSS-RS iteration 8: Global Deviance = 1376.972 
-## GAMLSS-RS iteration 9: Global Deviance = 1376.968 
-## GAMLSS-RS iteration 10: Global Deviance = 1376.967 
-## GAMLSS-RS iteration 11: Global Deviance = 1376.966</code></pre>
+<pre><code>## GAMLSS-RS iteration 1: Global Deviance = 1397.751 
+## GAMLSS-RS iteration 2: Global Deviance = 1386.151 
+## GAMLSS-RS iteration 3: Global Deviance = 1382.5 
+## GAMLSS-RS iteration 4: Global Deviance = 1381.285 
+## GAMLSS-RS iteration 5: Global Deviance = 1380.893 
+## GAMLSS-RS iteration 6: Global Deviance = 1380.777 
+## GAMLSS-RS iteration 7: Global Deviance = 1380.745 
+## GAMLSS-RS iteration 8: Global Deviance = 1380.736 
+## GAMLSS-RS iteration 9: Global Deviance = 1380.733 
+## GAMLSS-RS iteration 10: Global Deviance = 1380.732</code></pre>
 <div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="sect084.html#cb887-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraire la prédiction des valeurs lambda</span></span>
 <span id="cb887-2"><a href="sect084.html#cb887-2" aria-hidden="true" tabindex="-1"></a>lambdas <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelza, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">what =</span> <span class="st">&quot;mu&quot;</span>)</span>
 <span id="cb887-3"><a href="sect084.html#cb887-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraire la prédiction des valeurs p</span></span>
@@ -2475,19 +2474,19 @@ Figure 8.38: Comparaison de la distribution originale et des simulations pour le
 <span id="cb889-10"><a href="sect084.html#cb889-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="fu">nrow</span>(data2)</span>
 <span id="cb889-11"><a href="sect084.html#cb889-11" aria-hidden="true" tabindex="-1"></a>     )</span></code></pre></div>
 <pre><code>## $`deviance expliquee`
-## [1] 0.1073371
+## [1] 0.08807561
 ## 
 ## $`McFadden ajuste`
-## &#39;log Lik.&#39; 0.3588483 (df=18)
+## &#39;log Lik.&#39; 0.3484515 (df=18)
 ## 
 ## $`Cox and Snell`
-## &#39;log Lik.&#39; 0.8086509 (df=18)
+## &#39;log Lik.&#39; 0.7955335 (df=18)
 ## 
 ## $Nagelkerke
-## &#39;log Lik.&#39; 0.8186255 (df=18)</code></pre>
+## &#39;log Lik.&#39; 0.805948 (df=18)</code></pre>
 <div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="sect084.html#cb891-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul du RMSE</span></span>
 <span id="cb891-2"><a href="sect084.html#cb891-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((preds <span class="sc">-</span> data2<span class="sc">$</span>Nbr_acci)<span class="sc">**</span><span class="dv">2</span>))</span></code></pre></div>
-<pre><code>## [1] 2.635322</code></pre>
+<pre><code>## [1] 2.576983</code></pre>
 <p>Le modèle avec excès de zéro ajusté ne parvient à expliquer que 11 % de la déviance totale. Il obtient toutefois des valeurs de R<sup>2</sup> assez hautes (McFadden ajusté : 0,36, Nagerlkerke : 0,82). Son RMSE est très élevé (2,6), comparativement à celui que nous avons obtenu avec le modèle binomial négatif (1,9). Considérant ces éléments, ce modèle est nettement moins informatif que le modèle binomial négatif et ne devrait pas être retenu. Nous montrons tout de même ici comment interpréter ces résultats.</p>
 <p><strong>Interprétation des résultats</strong></p>
 <p>L’ensemble des coefficients du modèle sont accessibles avec la fonction <code>summary</code>. Les coefficients dédiés à la partie Poisson (appelée <strong>Mu</strong> dans le résumé) doivent être analysés et interprétés de la même manière que s’ils provenaient d’un modèle de Poisson. Les coefficients appartenant à la partie logistique (appelé <strong>Sigma</strong> dans le résumé) doivent être analysés et interprétés de la même manière que s’ils provenaient d’un modèle logistique.</p>
@@ -2509,19 +2508,19 @@ Figure 8.38: Comparaison de la distribution originale et des simulations pour le
 ## Mu link function:  log
 ## Mu Coefficients:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   -2.609e+00  5.419e-01  -4.814 1.98e-06 ***
-## Feux_auto      5.779e-01  1.903e-01   3.036  0.00253 ** 
-## Feux_piet      4.207e-01  1.048e-01   4.012 6.97e-05 ***
-## Pass_piet      3.995e-01  1.938e-01   2.061  0.03987 *  
-## Terreplein    -3.348e-01  1.666e-01  -2.010  0.04502 *  
-## Apaisement     2.246e-01  1.535e-01   1.463  0.14405    
-## LogEmploi      1.663e-01  7.509e-02   2.215  0.02723 *  
-## Densite_pop    8.610e-05  1.501e-05   5.735 1.72e-08 ***
-## Entropie      -2.894e-01  2.950e-01  -0.981  0.32698    
-## DensiteInter   4.035e-03  2.052e-03   1.967  0.04980 *  
-## Long_arterePS  1.100e-05  2.024e-05   0.544  0.58698    
-## Artere         8.629e-02  1.117e-01   0.772  0.44035    
-## NB_voies5      4.295e-01  1.017e-01   4.224 2.87e-05 ***
+## (Intercept)   -2.472e+00  5.483e-01  -4.508 8.21e-06 ***
+## Feux_auto      5.628e-01  1.909e-01   2.948 0.003359 ** 
+## Feux_piet      3.905e-01  1.102e-01   3.545 0.000431 ***
+## Pass_piet      3.389e-01  1.926e-01   1.760 0.079087 .  
+## Terreplein    -3.318e-01  1.667e-01  -1.991 0.047078 *  
+## Apaisement     2.164e-01  1.534e-01   1.411 0.158933    
+## LogEmploi      1.638e-01  7.644e-02   2.142 0.032668 *  
+## Densite_pop    7.841e-05  1.533e-05   5.116 4.51e-07 ***
+## Entropie      -1.308e-01  3.094e-01  -0.423 0.672799    
+## DensiteInter   3.677e-03  2.082e-03   1.766 0.078108 .  
+## Long_arterePS  8.103e-06  2.054e-05   0.395 0.693332    
+## Artere         3.142e-02  1.156e-01   0.272 0.785871    
+## NB_voies5      4.761e-01  1.055e-01   4.511 8.10e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2529,11 +2528,11 @@ Figure 8.38: Comparaison de la distribution originale et des simulations pour le
 ## Sigma link function:  logit
 ## Sigma Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)  1.004e+00  5.530e-01   1.816  0.07005 . 
-## Feux_auto   -1.716e+00  6.031e-01  -2.845  0.00463 **
-## Feux_piet    2.661e-01  7.228e-01   0.368  0.71292   
-## Densite_pop -1.170e-04  5.469e-05  -2.140  0.03286 * 
-## NB_voies5   -1.831e+00  1.227e+00  -1.493  0.13606   
+## (Intercept)  1.1597263  0.5259636   2.205  0.02793 * 
+## Feux_auto   -1.6591393  0.6038115  -2.748  0.00622 **
+## Feux_piet    0.0653804  0.7645555   0.086  0.93189   
+## Densite_pop -0.0001252  0.0000532  -2.353  0.01903 * 
+## NB_voies5   -1.4651605  0.8694733  -1.685  0.09261 . 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2541,11 +2540,11 @@ Figure 8.38: Comparaison de la distribution originale et des simulations pour le
 ## No. of observations in the fit:  500 
 ## Degrees of Freedom for the fit:  18
 ##       Residual Deg. of Freedom:  482 
-##                       at cycle:  11 
+##                       at cycle:  10 
 ##  
-## Global Deviance:     1376.967 
-##             AIC:     1412.967 
-##             SBC:     1488.829 
+## Global Deviance:     1380.732 
+##             AIC:     1416.732 
+##             SBC:     1492.595 
 ## ******************************************************************</code></pre>
 <div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="sect084.html#cb895-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplication par 1000 des coefficients de population</span></span>
 <span id="cb895-2"><a href="sect084.html#cb895-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (effet pour 1000 habitants)</span></span>
@@ -2621,19 +2620,19 @@ Sign.
 (Intercept)
 </td>
 <td style="text-align:right;">
--2.609
+-2.472
 </td>
 <td style="text-align:right;">
 &lt;0.001
 </td>
 <td style="text-align:right;">
-0.074
+0.084
 </td>
 <td style="text-align:right;">
-0.025
+0.029
 </td>
 <td style="text-align:right;">
-0.213
+0.247
 </td>
 <td style="text-align:right;">
 ***
@@ -2644,19 +2643,19 @@ Sign.
 Feux_auto
 </td>
 <td style="text-align:right;">
-0.578
+0.563
 </td>
 <td style="text-align:right;">
 0.003
 </td>
 <td style="text-align:right;">
-1.782
+1.756
 </td>
 <td style="text-align:right;">
-1.227
+1.208
 </td>
 <td style="text-align:right;">
-2.588
+2.552
 </td>
 <td style="text-align:right;">
 **
@@ -2667,19 +2666,19 @@ Feux_auto
 Feux_piet
 </td>
 <td style="text-align:right;">
-0.421
+0.391
 </td>
 <td style="text-align:right;">
 &lt;0.001
 </td>
 <td style="text-align:right;">
-1.523
+1.478
 </td>
 <td style="text-align:right;">
-1.24
+1.191
 </td>
 <td style="text-align:right;">
-1.87
+1.834
 </td>
 <td style="text-align:right;">
 ***
@@ -2690,42 +2689,42 @@ Feux_piet
 Pass_piet
 </td>
 <td style="text-align:right;">
-0.399
+0.339
 </td>
 <td style="text-align:right;">
-0.04
+0.079
 </td>
 <td style="text-align:right;">
-1.491
+1.403
 </td>
 <td style="text-align:right;">
-1.02
+0.962
 </td>
 <td style="text-align:right;">
-2.18
+2.047
 </td>
 <td style="text-align:right;">
-<ul>
-<li></td>
+.
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Terreplein
 </td>
 <td style="text-align:right;">
--0.335
+-0.332
 </td>
 <td style="text-align:right;">
-0.045
+0.047
 </td>
 <td style="text-align:right;">
-0.715
+0.718
 </td>
 <td style="text-align:right;">
-0.516
+0.518
 </td>
 <td style="text-align:right;">
-0.992
+0.995
 </td>
 <td style="text-align:right;">
 <ul>
@@ -2736,19 +2735,19 @@ Terreplein
 Apaisement
 </td>
 <td style="text-align:right;">
-0.225
+0.216
 </td>
 <td style="text-align:right;">
-0.144
+0.159
 </td>
 <td style="text-align:right;">
-1.252
+1.242
 </td>
 <td style="text-align:right;">
-0.927
+0.919
 </td>
 <td style="text-align:right;">
-1.691
+1.677
 </td>
 <td style="text-align:right;">
 </td>
@@ -2758,16 +2757,16 @@ Apaisement
 LogEmploi
 </td>
 <td style="text-align:right;">
-0.166
+0.164
 </td>
 <td style="text-align:right;">
-0.027
+0.033
 </td>
 <td style="text-align:right;">
-1.181
+1.178
 </td>
 <td style="text-align:right;">
-1.019
+1.014
 </td>
 <td style="text-align:right;">
 1.368
@@ -2781,19 +2780,19 @@ LogEmploi
 Densite_pop
 </td>
 <td style="text-align:right;">
-0.086
+0.078
 </td>
 <td style="text-align:right;">
 &lt;0.001
 </td>
 <td style="text-align:right;">
-1.09
+1.082
 </td>
 <td style="text-align:right;">
-1.058
+1.05
 </td>
 <td style="text-align:right;">
-1.122
+1.115
 </td>
 <td style="text-align:right;">
 ***
@@ -2804,19 +2803,19 @@ Densite_pop
 Entropie
 </td>
 <td style="text-align:right;">
--0.289
+-0.131
 </td>
 <td style="text-align:right;">
-0.327
+0.673
 </td>
 <td style="text-align:right;">
-0.749
+0.877
 </td>
 <td style="text-align:right;">
-0.42
+0.478
 </td>
 <td style="text-align:right;">
-1.335
+1.609
 </td>
 <td style="text-align:right;">
 </td>
@@ -2829,7 +2828,7 @@ DensiteInter
 0.004
 </td>
 <td style="text-align:right;">
-0.05
+0.078
 </td>
 <td style="text-align:right;">
 1.004
@@ -2841,27 +2840,27 @@ DensiteInter
 1.008
 </td>
 <td style="text-align:right;">
-<ul>
-<li></td>
+.
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Long_arterePS
 </td>
 <td style="text-align:right;">
-0.011
+0.008
 </td>
 <td style="text-align:right;">
-0.587
+0.693
 </td>
 <td style="text-align:right;">
-1.011
+1.008
 </td>
 <td style="text-align:right;">
-0.972
+0.968
 </td>
 <td style="text-align:right;">
-1.052
+1.05
 </td>
 <td style="text-align:right;">
 </td>
@@ -2871,19 +2870,19 @@ Long_arterePS
 Artere
 </td>
 <td style="text-align:right;">
-0.086
+0.031
 </td>
 <td style="text-align:right;">
-0.44
+0.786
 </td>
 <td style="text-align:right;">
-1.09
+1.032
 </td>
 <td style="text-align:right;">
-0.876
+0.823
 </td>
 <td style="text-align:right;">
-1.357
+1.294
 </td>
 <td style="text-align:right;">
 </td>
@@ -2893,19 +2892,19 @@ Artere
 NB_voies5
 </td>
 <td style="text-align:right;">
-0.429
+0.476
 </td>
 <td style="text-align:right;">
 &lt;0.001
 </td>
 <td style="text-align:right;">
-1.536
+1.61
 </td>
 <td style="text-align:right;">
-1.259
+1.309
 </td>
 <td style="text-align:right;">
-1.875
+1.98
 </td>
 <td style="text-align:right;">
 ***
@@ -2913,8 +2912,6 @@ NB_voies5
 </tr>
 </tbody>
 </table></li>
-</ul></li>
-</ul></li>
 </ul></li>
 </ul>
 <table>
@@ -2952,42 +2949,42 @@ Sign.
 (Intercept)
 </td>
 <td style="text-align:right;">
-1.004
+1.16
 </td>
 <td style="text-align:right;">
-0.07
+0.028
 </td>
 <td style="text-align:right;">
-2.729
+3.189
 </td>
 <td style="text-align:right;">
-0.923
+1.138
 </td>
 <td style="text-align:right;">
-8.067
+8.941
 </td>
 <td style="text-align:right;">
-.
-</td>
+<ul>
+<li></td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Feux_auto
 </td>
 <td style="text-align:right;">
--1.716
+-1.659
 </td>
 <td style="text-align:right;">
-0.005
+0.006
 </td>
 <td style="text-align:right;">
-0.18
+0.19
 </td>
 <td style="text-align:right;">
-0.055
+0.058
 </td>
 <td style="text-align:right;">
-0.586
+0.621
 </td>
 <td style="text-align:right;">
 **
@@ -2998,19 +2995,19 @@ Feux_auto
 Feux_piet
 </td>
 <td style="text-align:right;">
-0.266
+0.065
 </td>
 <td style="text-align:right;">
-0.713
+0.932
 </td>
 <td style="text-align:right;">
-1.305
+1.068
 </td>
 <td style="text-align:right;">
-0.316
+0.239
 </td>
 <td style="text-align:right;">
-5.381
+4.777
 </td>
 <td style="text-align:right;">
 </td>
@@ -3020,19 +3017,19 @@ Feux_piet
 Densite_pop
 </td>
 <td style="text-align:right;">
--0.117
+-0.125
 </td>
 <td style="text-align:right;">
-0.033
+0.019
 </td>
 <td style="text-align:right;">
-0.89
+0.882
 </td>
 <td style="text-align:right;">
-0.799
+0.795
 </td>
 <td style="text-align:right;">
-0.99
+0.979
 </td>
 <td style="text-align:right;">
 <ul>
@@ -3043,25 +3040,27 @@ Densite_pop
 NB_voies5
 </td>
 <td style="text-align:right;">
--1.831
+-1.465
 </td>
 <td style="text-align:right;">
-0.136
+0.093
 </td>
 <td style="text-align:right;">
-0.16
+0.231
 </td>
 <td style="text-align:right;">
-0.014
+0.042
 </td>
 <td style="text-align:right;">
-1.773
+1.27
 </td>
 <td style="text-align:right;">
+.
 </td>
 </tr>
 </tbody>
 </table></li>
+</ul></li>
 </ul>
 <p>Nous observons ainsi que la présence d’un feu de circulation divise par 5 les chances de rentrer dans la catégorie d’intersection où des accidents peuvent se produire. De même, la densité de population réduit les chances de passer dans cette catégorie de 11 %.</p>
 <p>Concernant les coefficients pour la partie Poisson du modèle, nous observons que les présences d’un feu de circulation et d’un feu pour piéton contribuent à multiplier respectivement par 2 et 1,5 le nombre attendu d’accidents à une intersection. De même, la présence d’un axe de circulation à cinq voies augmente de 57 % le nombre d’accidents. Enfin, la densité de population est aussi associée à une augmentation du nombre d’accidents : pour 1 000 habitants supplémentaires autour de l’intersection, nous augmentons le nombre d’accidents attendu de 9 %.</p>

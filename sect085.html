@@ -685,16 +685,16 @@ Figure 8.40: Distances de Cook pour le modèle gaussien
 <div class="sourceCode" id="cb898"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb898-1"><a href="sect085.html#cb898-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection des cas étranges</span></span>
 <span id="cb898-2"><a href="sect085.html#cb898-2" aria-hidden="true" tabindex="-1"></a>cas_etranges <span class="ot">&lt;-</span> <span class="fu">subset</span>(DataFinal, cooksd <span class="sc">&gt;</span> <span class="fl">0.03</span>)</span>
 <span id="cb898-3"><a href="sect085.html#cb898-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cas_etranges)</span></code></pre></div>
-<pre><code>##      VegPct ArbPct V250Pct V500Pct A250Pct A500Pct      HABHA AgeMedian Pct_014 Pct_65P Pct_MV
-## 3374 10.481  5.478  18.987  13.744   2.908   2.704  74.835867       226    4.76   14.29  23.81
-## 3378  0.000  0.000  12.709  12.505   2.116   2.324  88.006946       206    6.25   12.50  25.00
-## 4446 23.162  5.209  31.437  31.535   8.672   9.108 313.142733       206   14.40   16.87  53.50
-## 9088 85.767 27.583  78.195  83.492  42.999  51.074   2.070472       207   12.00   24.00  12.00
-##      Pct_FR DistCBDkm   SDRNOM
-## 3374  14.29     0.748 Montréal
-## 3378  12.50     0.706 Montréal
-## 4446  42.39     8.678 Montréal
-## 9088  16.00    28.440 Montréal</code></pre>
+<pre><code>##      VegPct ArbPct V250Pct V500Pct A250Pct A500Pct      HABHA AgeMedian Pct_014 Pct_65P Pct_MV Pct_FR
+## 3374 10.481  5.478  18.987  13.744   2.908   2.704  74.835867       226    4.76   14.29  23.81  14.29
+## 3378  0.000  0.000  12.709  12.505   2.116   2.324  88.006946       206    6.25   12.50  25.00  12.50
+## 4446 23.162  5.209  31.437  31.535   8.672   9.108 313.142733       206   14.40   16.87  53.50  42.39
+## 9088 85.767 27.583  78.195  83.492  42.999  51.074   2.070472       207   12.00   24.00  12.00  16.00
+##      DistCBDkm   SDRNOM
+## 3374     0.748 Montréal
+## 3378     0.706 Montréal
+## 4446     8.678 Montréal
+## 9088    28.440 Montréal</code></pre>
 <p>Il s’agit de quatre îlots dans Montréal avec des logements très anciens : plus de 200 ans, alors que la moyenne est de 52 ans pour le reste de la zone d’étude. Le fait que nous ayons dans le modèle une polynomiale d’ordre 2 pour cette variable intensifie l’influence de ces valeurs extrêmes. Par conséquent, nous décidons de simplement les supprimer. Nous verrons plus tard qu’une alternative envisageable est de changer la distribution du modèle pour une distribution de Student (plus robuste aux valeurs extrêmes).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gausscook2"></span>
 <img src="MethodesQuantitScSocialesBolR_files/figure-html/gausscook2-1.png" alt="Distances de Cook pour le modèle gaussien après suppression des observations influentes" width="65%" />
@@ -1812,7 +1812,7 @@ Figure 8.56: Diagnostic général des résidus simulés du modèle Gamma
 <span id="cb926-6"><a href="sect085.html#cb926-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sim_outliers)</span></code></pre></div>
 <pre><code>## sim_outliers
 ## FALSE  TRUE 
-## 22925   621</code></pre>
+## 22908   638</code></pre>
 <div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb928-1"><a href="sect085.html#cb928-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirer ces observations des données</span></span>
 <span id="cb928-2"><a href="sect085.html#cb928-2" aria-hidden="true" tabindex="-1"></a>dataset3 <span class="ot">&lt;-</span> <span class="fu">subset</span>(dataset2, sim_outliers<span class="sc">==</span><span class="cn">FALSE</span>)</span>
 <span id="cb928-3"><a href="sect085.html#cb928-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Réajuster le modèle</span></span>
@@ -1900,20 +1900,20 @@ Figure 8.58: Comparaison de la variance attendue par le modèle et la variance o
 <span id="cb930-12"><a href="sect085.html#cb930-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="fu">nrow</span>(dataset3)</span>
 <span id="cb930-13"><a href="sect085.html#cb930-13" aria-hidden="true" tabindex="-1"></a>     )</span></code></pre></div>
 <pre><code>## $`deviance expliquee`
-## [1] 0.0506886
+## [1] 0.05082912
 ## 
 ## $`McFadden ajuste`
-## [1] 0.05024084
+## [1] 0.05038095
 ## 
 ## $`Cox and Snell`
-## [1] 0.3329673
+## [1] 0.3336696
 ## 
 ## $Nagelkerke
-## [1] 0.3330803</code></pre>
+## [1] 0.3337831</code></pre>
 <div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb932-1"><a href="sect085.html#cb932-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul du RMSE</span></span>
 <span id="cb932-2"><a href="sect085.html#cb932-2" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(modele, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)[,<span class="dv">1</span>]</span>
 <span id="cb932-3"><a href="sect085.html#cb932-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((preds <span class="sc">-</span> dataset3<span class="sc">$</span>Duree)<span class="sc">**</span><span class="dv">2</span>))</span></code></pre></div>
-<pre><code>## [1] 13.35911</code></pre>
+<pre><code>## [1] 13.33416</code></pre>
 <p>Le modèle n’explique que 5 % de la déviance et obtient des valeurs de R<sup>2</sup> ajusté de McFadden, de Cox et Snell et de Nagelkerke de respectivement 0,05, 0,33 et 0,33. La moyenne de l’erreur quadratique est de seulement 13,4 indiquant que le modèle se trompe en moyenne de seulement 13,4 minutes. La capacité de prédiction du modèle est donc limitée sans être catastrophique.</p>
 <p><strong>Interprétation des résultats</strong></p>
 <p>Pour rappel, la fonction de lien dans notre modèle est la fonction <code>log</code>. Chaque coefficient représente donc l’effet de l’augmentation d’une unité des variables indépendantes sur le logarithme de l’espérance de notre variable dépendante. Si nous transformons nos coefficients avec la fonction exponentielle (<code>exp</code>), nous obtenons, pour chaque augmentation d’une unité des variables indépendantes, la multiplication de l’espérance de notre variable dépendante.</p>
@@ -2034,19 +2034,19 @@ Sign.
 Constante
 </td>
 <td style="text-align:right;">
-2,930
+2,925
 </td>
 <td style="text-align:right;">
-18,721
+18,637
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-14,984
+14,924
 </td>
 <td style="text-align:right;">
-23,383
+23,266
 </td>
 <td style="text-align:right;">
 ***
@@ -2097,19 +2097,19 @@ ref : pieton
 transport collectif
 </td>
 <td style="text-align:right;">
-0,423
+0,424
 </td>
 <td style="text-align:right;">
-1,526
+1,527
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-1,487
+1,489
 </td>
 <td style="text-align:right;">
-1,565
+1,567
 </td>
 <td style="text-align:right;">
 ***
@@ -2120,7 +2120,7 @@ transport collectif
 vehicule individuel
 </td>
 <td style="text-align:right;">
--0,319
+-0,318
 </td>
 <td style="text-align:right;">
 0,727
@@ -2143,19 +2143,19 @@ vehicule individuel
 velo
 </td>
 <td style="text-align:right;">
--0,260
+-0,258
 </td>
 <td style="text-align:right;">
-0,771
+0,772
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-0,752
+0,754
 </td>
 <td style="text-align:right;">
-0,791
+0,792
 </td>
 <td style="text-align:right;">
 ***
@@ -2206,19 +2206,19 @@ ref : education
 loisir
 </td>
 <td style="text-align:right;">
--0,015
+-0,011
 </td>
 <td style="text-align:right;">
-0,986
+0,989
 </td>
 <td style="text-align:right;">
-0,399
+0,508
 </td>
 <td style="text-align:right;">
-0,953
+0,956
 </td>
 <td style="text-align:right;">
-1,019
+1,022
 </td>
 <td style="text-align:right;">
 </td>
@@ -2228,19 +2228,19 @@ loisir
 magasinage
 </td>
 <td style="text-align:right;">
--0,116
+-0,113
 </td>
 <td style="text-align:right;">
-0,891
+0,893
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-0,861
+0,863
 </td>
 <td style="text-align:right;">
-0,922
+0,924
 </td>
 <td style="text-align:right;">
 ***
@@ -2251,19 +2251,19 @@ magasinage
 travail
 </td>
 <td style="text-align:right;">
--0,067
+-0,062
 </td>
 <td style="text-align:right;">
-0,935
+0,940
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-0,908
+0,912
 </td>
 <td style="text-align:right;">
-0,964
+0,969
 </td>
 <td style="text-align:right;">
 ***
@@ -2274,19 +2274,19 @@ travail
 LogDist
 </td>
 <td style="text-align:right;">
-0,332
+0,333
 </td>
 <td style="text-align:right;">
-1,393
+1,395
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-1,379
+1,381
 </td>
 <td style="text-align:right;">
-1,408
+1,411
 </td>
 <td style="text-align:right;">
 ***
@@ -2337,19 +2337,19 @@ ref : Different
 Meme
 </td>
 <td style="text-align:right;">
--0,042
+-0,038
 </td>
 <td style="text-align:right;">
-0,959
+0,963
 </td>
 <td style="text-align:right;">
-0,000
+0,001
 </td>
 <td style="text-align:right;">
-0,939
+0,943
 </td>
 <td style="text-align:right;">
-0,979
+0,984
 </td>
 <td style="text-align:right;">
 ***
@@ -2400,19 +2400,19 @@ ref : lundi au vendredi
 samedi et dimanche
 </td>
 <td style="text-align:right;">
-0,006
+0,002
 </td>
 <td style="text-align:right;">
-1,006
+1,002
 </td>
 <td style="text-align:right;">
-0,546
+0,852
 </td>
 <td style="text-align:right;">
-0,986
+0,981
 </td>
 <td style="text-align:right;">
-1,027
+1,023
 </td>
 <td style="text-align:right;">
 </td>
@@ -2438,19 +2438,19 @@ samedi et dimanche
 shape
 </td>
 <td style="text-align:right;">
-1,146
+1,150
 </td>
 <td style="text-align:right;">
-3,146
+3,158
 </td>
 <td style="text-align:right;">
 0,000
 </td>
 <td style="text-align:right;">
-3,093
+3,105
 </td>
 <td style="text-align:right;">
-3,203
+3,212
 </td>
 <td style="text-align:right;">
 ***

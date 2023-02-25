@@ -885,46 +885,46 @@ Figure 8.4: Distances de Cook pour le modèle binomial avec toutes les observati
 <span id="cb763-4"><a href="sect082.html#cb763-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">nrow</span>(cas_etranges),<span class="st">&#39;observations se démarquant dans le modèle&#39;</span>)</span></code></pre></div>
 <pre><code>## 19 observations se démarquant dans le modèle</code></pre>
 <div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="sect082.html#cb765-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cas_etranges)</span></code></pre></div>
-<pre><code>##           X y       Pays  Sexe Age            Education Statut_emploi       Revenu
-## 7660   7660 1  Slovaquie homme  50           universite      Employed        moyen
-## 25150 25150 1      Malte homme  16           secondaire  Not Employed        moyen
-## 25227 25227 1      Malte femme  53 secondaire inferieur  Not Employed        moyen
-## 25309 25309 1      Malte femme  32           secondaire      Employed        moyen
-## 25322 25322 1      Malte homme  38           universite      Employed        eleve
-## 25536 25536 1      Malte homme  27           universite      Employed   tres eleve
-## 25541 25541 1      Malte homme  38 secondaire inferieur      Employed        moyen
-## 25549 25549 1      Malte homme  31           universite      Employed sans reponse
-## 25690 25690 1 Luxembourg homme  32           universite      Employed   tres eleve
-## 26190 26190 1     Chypre homme  24           secondaire  Not Employed        moyen
-## 26201 26201 1     Chypre homme  25           secondaire      Employed       faible
-## 26244 26244 1     Chypre homme  32           secondaire      Employed  tres faible
-## 26269 26269 1     Chypre homme  60           secondaire  Not Employed        moyen
-## 26303 26303 1     Chypre homme  59           secondaire  Not Employed        moyen
-## 26393 26393 1     Chypre homme  30        premier cycle      Employed   tres eleve
-## 26444 26444 1     Chypre femme  52           universite      Employed        eleve
-## 26516 26516 1     Chypre homme  21           universite  Not Employed        moyen
-## 26549 26549 1     Chypre homme  28           universite      Employed  tres faible
-## 26600 26600 1     Chypre homme  36           secondaire      Employed        moyen
-##                  Residence Duree mode_pref StatutEmploi ConsEnv
-## 7660           zone rurale   775      velo      employe       7
-## 25150          zone rurale    15      velo  sans emploi       3
-## 25227          zone rurale    45    marche  sans emploi       5
-## 25309 petite-moyenne ville    25    marche      employe       4
-## 25322          zone rurale    30    marche      employe      10
-## 25536 petite-moyenne ville    14      velo      employe      10
-## 25541          zone rurale     5    marche      employe       8
-## 25549 petite-moyenne ville    60      velo      employe      10
-## 25690 petite-moyenne ville   720      velo      employe       6
-## 26190         grande ville    20      velo  sans emploi       5
-## 26201          zone rurale    20      velo      employe       5
-## 26244 petite-moyenne ville    18      velo      employe       4
-## 26269 petite-moyenne ville     5      velo  sans emploi       7
-## 26303          zone rurale     7      velo  sans emploi       8
-## 26393 petite-moyenne ville    61      velo      employe       5
-## 26444 petite-moyenne ville   120      velo      employe       3
-## 26516 petite-moyenne ville    25      velo  sans emploi       8
-## 26549 petite-moyenne ville    15      velo      employe       2
-## 26600 petite-moyenne ville     8      velo      employe       1</code></pre>
+<pre><code>##           X y       Pays  Sexe Age            Education Statut_emploi       Revenu            Residence
+## 7660   7660 1  Slovaquie homme  50           universite      Employed        moyen          zone rurale
+## 25150 25150 1      Malte homme  16           secondaire  Not Employed        moyen          zone rurale
+## 25227 25227 1      Malte femme  53 secondaire inferieur  Not Employed        moyen          zone rurale
+## 25309 25309 1      Malte femme  32           secondaire      Employed        moyen petite-moyenne ville
+## 25322 25322 1      Malte homme  38           universite      Employed        eleve          zone rurale
+## 25536 25536 1      Malte homme  27           universite      Employed   tres eleve petite-moyenne ville
+## 25541 25541 1      Malte homme  38 secondaire inferieur      Employed        moyen          zone rurale
+## 25549 25549 1      Malte homme  31           universite      Employed sans reponse petite-moyenne ville
+## 25690 25690 1 Luxembourg homme  32           universite      Employed   tres eleve petite-moyenne ville
+## 26190 26190 1     Chypre homme  24           secondaire  Not Employed        moyen         grande ville
+## 26201 26201 1     Chypre homme  25           secondaire      Employed       faible          zone rurale
+## 26244 26244 1     Chypre homme  32           secondaire      Employed  tres faible petite-moyenne ville
+## 26269 26269 1     Chypre homme  60           secondaire  Not Employed        moyen petite-moyenne ville
+## 26303 26303 1     Chypre homme  59           secondaire  Not Employed        moyen          zone rurale
+## 26393 26393 1     Chypre homme  30        premier cycle      Employed   tres eleve petite-moyenne ville
+## 26444 26444 1     Chypre femme  52           universite      Employed        eleve petite-moyenne ville
+## 26516 26516 1     Chypre homme  21           universite  Not Employed        moyen petite-moyenne ville
+## 26549 26549 1     Chypre homme  28           universite      Employed  tres faible petite-moyenne ville
+## 26600 26600 1     Chypre homme  36           secondaire      Employed        moyen petite-moyenne ville
+##       Duree mode_pref StatutEmploi ConsEnv
+## 7660    775      velo      employe       7
+## 25150    15      velo  sans emploi       3
+## 25227    45    marche  sans emploi       5
+## 25309    25    marche      employe       4
+## 25322    30    marche      employe      10
+## 25536    14      velo      employe      10
+## 25541     5    marche      employe       8
+## 25549    60      velo      employe      10
+## 25690   720      velo      employe       6
+## 26190    20      velo  sans emploi       5
+## 26201    20      velo      employe       5
+## 26244    18      velo      employe       4
+## 26269     5      velo  sans emploi       7
+## 26303     7      velo  sans emploi       8
+## 26393    61      velo      employe       5
+## 26444   120      velo      employe       3
+## 26516    25      velo  sans emploi       8
+## 26549    15      velo      employe       2
+## 26600     8      velo      employe       1</code></pre>
 <p>À la lecture des valeurs pour ces 19 cas étranges, nous remarquons que la plupart des observations proviennent de Malte et de Chypre. Ces deux petites îles constituent des cas particuliers en Europe et devraient vraisemblablement faire l’objet d’une analyse séparée. Nous décidons donc de les retirer du jeu de données. Deux autres observations étranges sont observables en Slovaquie et au Luxembourg. Dans les deux cas, les répondants ont renseigné des temps de trajet fantaisistes de respectivement 775 et 720 minutes. Nous les retirons donc également de l’analyse.</p>
 <div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="sect082.html#cb767-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirer les observations aberrantes</span></span>
 <span id="cb767-2"><a href="sect082.html#cb767-2" aria-hidden="true" tabindex="-1"></a>dfenquete2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(dfenquete, (dfenquete<span class="sc">$</span>Pays <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Malte&quot;</span>, <span class="st">&quot;Chypre&quot;</span>)) <span class="sc">==</span> F <span class="sc">&amp;</span> </span>
@@ -2509,14 +2509,12 @@ Nombre total de logements détenus par l’hôte sur Airbnb
 <span id="cb785-5"><a href="sect082.html#cb785-5" aria-hidden="true" tabindex="-1"></a>    Garden_or_backyard <span class="sc">+</span> Host_greets_you <span class="sc">+</span> Free_street_parking <span class="sc">+</span> </span>
 <span id="cb785-6"><a href="sect082.html#cb785-6" aria-hidden="true" tabindex="-1"></a>      prt_veg_500m <span class="sc">+</span> has_metro_500m <span class="sc">+</span> commercial_1km <span class="sc">+</span>host_total_listings_count <span class="sc">+</span></span>
 <span id="cb785-7"><a href="sect082.html#cb785-7" aria-hidden="true" tabindex="-1"></a>      private <span class="sc">+</span> cat_review, <span class="at">data =</span> data_airbnb))</span></code></pre></div>
-<pre><code>##                      beds        Garden_or_backyard           Host_greets_you 
-##                  1.123595                  1.079324                  1.046884 
-##       Free_street_parking              prt_veg_500m            has_metro_500m 
-##                  1.142189                  1.532536                  1.239516 
-##            commercial_1km host_total_listings_count                   private 
-##                  1.225301                  1.058232                  1.143932 
-##                cat_review 
-##                  1.015778</code></pre>
+<pre><code>##                      beds        Garden_or_backyard           Host_greets_you       Free_street_parking 
+##                  1.123595                  1.079324                  1.046884                  1.142189 
+##              prt_veg_500m            has_metro_500m            commercial_1km host_total_listings_count 
+##                  1.532536                  1.239516                  1.225301                  1.058232 
+##                   private                cat_review 
+##                  1.143932                  1.015778</code></pre>
 <p>Toutes les valeurs de VIF sont inférieures à 2, indiquant une absence de multicolinéarité excessive. Nous pouvons alors ajuster le modèle et analyser les distances de Cook afin de vérifier la présence ou non d’observations très influentes. Pour ajuster le modèle, nous utilisons le <em>package</em> <code>VGAM</code> et la fonction <code>vglm</code> qui nous donnent accès à la famille <code>cumulative</code> pour ajuster des modèles logistiques ordinaux. Notez que le fonctionnement de base de cette famille est de modéliser <span class="math inline">\(P(Y\leq1),P(Y\leq2),...,P(Y\leq J)\)</span> avec <em>J</em> le nombre de catégories. Cependant, nous voulons ici modéliser la probabilité de passer à une catégorie supérieure de prix. Pour cela, il est nécessaire de spécifier le paramètre <code>reverse = TRUE</code> pour la famille <code>cumulative</code> (voir <code>help(cumulative)</code> pour plus de détails).</p>
 <div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="sect082.html#cb787-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VGAM)</span>
 <span id="cb787-2"><a href="sect082.html#cb787-2" aria-hidden="true" tabindex="-1"></a>modele <span class="ot">&lt;-</span> <span class="fu">vglm</span>(fac_price_cat <span class="sc">~</span> beds <span class="sc">+</span></span>
@@ -2585,7 +2583,7 @@ Figure 8.13: Distances de Cook pour le modèle logistique des cotes proportionne
 <span id="cb791-12"><a href="sect082.html#cb791-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(matsim[<span class="dv">1</span>,])</span></code></pre></div>
 <pre><code>## 
 ##   1   2   3 
-## 740 235  25</code></pre>
+## 713 268  19</code></pre>
 <p>À partir de ces simulations de prédiction, nous pouvons réaliser un diagnostic des résidus simulés grâce au <em>package</em> <code>DHARMa</code>.</p>
 <div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="sect082.html#cb793-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
 <span id="cb793-2"><a href="sect082.html#cb793-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraction de la prédiction moyenne du modèle</span></span>

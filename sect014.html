@@ -716,7 +716,7 @@ Fonction
 <tbody>
 <tr>
 <td style="text-align:right;">
-0,03
+0,04
 </td>
 <td style="text-align:left;">
 read.csv
@@ -732,7 +732,7 @@ read.dbf
 </tr>
 <tr>
 <td style="text-align:right;">
-0,01
+0,00
 </td>
 <td style="text-align:left;">
 read.spss
@@ -748,7 +748,7 @@ read.dta
 </tr>
 <tr>
 <td style="text-align:right;">
-0,46
+0,92
 </td>
 <td style="text-align:left;">
 read.sas7bdat
@@ -756,7 +756,7 @@ read.sas7bdat
 </tr>
 <tr>
 <td style="text-align:right;">
-8,72
+13,77
 </td>
 <td style="text-align:left;">
 read.xlsx
@@ -764,7 +764,7 @@ read.xlsx
 </tr>
 <tr>
 <td style="text-align:right;">
-0,32
+0,23
 </td>
 <td style="text-align:left;">
 read.xlsx2
@@ -973,8 +973,7 @@ Philosophie d’évolution agressive, aucune assurance de rétrocompatibilité
 <p>Les adresses comprennent des caractères accentués. Ce type de caractères cause régulièrement des problèmes d’encodage. Nous pourrions alors décider de les remplacer par des caractères simples avec la fonction <code>str_replace_all</code>.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sect014.html#cb142-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>adresses_1 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(df<span class="sc">$</span>adresses,<span class="st">&#39;é&#39;</span>,<span class="st">&#39;e&#39;</span>)</span>
 <span id="cb142-2"><a href="sect014.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>adresses_1)</span></code></pre></div>
-<pre><code>## [1] &quot;15 rue Levy&quot;            &quot;413 Blvd Saint-Laurent&quot; &quot;3606 rue Duke&quot;         
-## [4] &quot;2457 route St Marys&quot;</code></pre>
+<pre><code>## [1] &quot;15 rue Levy&quot;            &quot;413 Blvd Saint-Laurent&quot; &quot;3606 rue Duke&quot;          &quot;2457 route St Marys&quot;</code></pre>
 <p>La même fonction peut être utilisée pour remplacer les <em>St</em> par <em>Saint</em> et les <em>Blvd</em> par <em>Boulevard</em>.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sect014.html#cb144-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>adresses_2 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(df<span class="sc">$</span>adresses_1,<span class="st">&#39; St &#39;</span>,<span class="st">&#39; Saint &#39;</span>)</span>
 <span id="cb144-2"><a href="sect014.html#cb144-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>adresses_3 <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(df<span class="sc">$</span>adresses_2,<span class="st">&#39; Blvd &#39;</span>,<span class="st">&#39; Boulevard &#39;</span>)</span>
@@ -1015,10 +1014,8 @@ Philosophie d’évolution agressive, aucune assurance de rétrocompatibilité
 <p>À l’inverse du découpage, il est parfois nécessaire de concaténer des éléments de texte, ce qu’il est possible de réaliser avec la fonction <code>paste</code>.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="sect014.html#cb154-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>texte_complet <span class="ot">&lt;-</span> <span class="fu">paste</span>(df<span class="sc">$</span>noms_corr, df<span class="sc">$</span>adresses_3, <span class="at">sep =</span> <span class="st">&quot; : &quot;</span>)</span>
 <span id="cb154-2"><a href="sect014.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>texte_complet)</span></code></pre></div>
-<pre><code>## [1] &quot;Jérémy Toutanplace : 15 rue Levy&quot;              
-## [2] &quot;Constant Tinople : 413 Boulevard Saint-Laurent&quot;
-## [3] &quot;Dino Resto : 3606 rue Duke&quot;                    
-## [4] &quot;Luce Tancil : 2457 route Saint Marys&quot;</code></pre>
+<pre><code>## [1] &quot;Jérémy Toutanplace : 15 rue Levy&quot;               &quot;Constant Tinople : 413 Boulevard Saint-Laurent&quot;
+## [3] &quot;Dino Resto : 3606 rue Duke&quot;                     &quot;Luce Tancil : 2457 route Saint Marys&quot;</code></pre>
 <p>Le paramètre <code>sep</code> permet d’indiquer le ou les caractères à intercaler entre les éléments à concaténer. Notez qu’il est possible de concaténer plus que deux éléments.</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sect014.html#cb156-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>ville <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Montreal&#39;</span>,<span class="st">&#39;Montreal&#39;</span>,<span class="st">&#39;Montreal&#39;</span>,<span class="st">&#39;Montreal&#39;</span>)</span>
 <span id="cb156-2"><a href="sect014.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(df<span class="sc">$</span>noms_corr, df<span class="sc">$</span>adresses_3, df<span class="sc">$</span>ville, <span class="at">sep =</span> <span class="st">&quot;, &quot;</span>)</span></code></pre></div>

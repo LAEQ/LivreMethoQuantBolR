@@ -865,10 +865,10 @@ Pct_FR
 <span id="cb647-7"><a href="sect074.html#cb647-7" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">scale</span>(Pct_MV)<span class="sc">+</span><span class="fu">scale</span>(Pct_FR), <span class="at">data =</span> DataFinal)</span>
 <span id="cb647-8"><a href="sect074.html#cb647-8" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> ModeleZ<span class="sc">$</span>coefficients</span>
 <span id="cb647-9"><a href="sect074.html#cb647-9" aria-hidden="true" tabindex="-1"></a>coefs[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(coefs)]</span></code></pre></div>
-<pre><code>##      (Intercept)     scale(HABHA) scale(AgeMedian)   scale(Pct_014)   scale(Pct_65P) 
-##     3.721649e-16    -2.806891e-01     1.467299e-02     3.093456e-01     1.788453e-01 
-##    scale(Pct_MV)    scale(Pct_FR) 
-##    -2.755087e-02    -3.004544e-01</code></pre>
+<pre><code>##      (Intercept)     scale(HABHA) scale(AgeMedian)   scale(Pct_014)   scale(Pct_65P)    scale(Pct_MV) 
+##     3.721649e-16    -2.806891e-01     1.467299e-02     3.093456e-01     1.788453e-01    -2.755087e-02 
+##    scale(Pct_FR) 
+##    -3.004544e-01</code></pre>
 <div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="sect074.html#cb649-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Méthode 2 : à partir de l&#39;équation</span></span>
 <span id="cb649-2"><a href="sect074.html#cb649-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Écart-type de la variable dépendante</span></span>
 <span id="cb649-3"><a href="sect074.html#cb649-3" aria-hidden="true" tabindex="-1"></a>VDet <span class="ot">&lt;-</span> <span class="fu">sd</span>(DataFinal<span class="sc">$</span>VegPct)</span>

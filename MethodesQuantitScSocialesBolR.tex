@@ -397,6 +397,10 @@
 \renewcommand*\listfigurename{Liste des figures}
 \renewcommand*\listtablename{Liste des tableaux}
 
+%editing the table and figure names
+\renewcommand*\figurename{Fig.}
+\renewcommand*\tablename{Tab.}
+
 %\let\maketitle\oldmaketitle
 %\maketitle
 
@@ -1174,7 +1178,7 @@ Il est aussi possible que certaines fonctions ne requièrent pas d'argument. Par
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2023-02-18 08:54:38 EST"
+## [1] "2023-02-24 22:52:08 EST"
 \end{verbatim}
 
 Par contre, si nous essayons de lancer la fonction \texttt{round} sans argument, nous obtenons une erreur~:
@@ -1541,6 +1545,10 @@ Notez qu'à présent, nous pouvons ajouter une nouvelle couleur dans le premier 
 \NormalTok{couleurs\_yeux\_facteur[}\DecValTok{7}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"rouge"}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning in `[<-.factor`(`*tmp*`, 7, value = "rouge"): niveau de facteur incorrect, NAs générés
+\end{verbatim}
 
 Le message d'erreur nous informe que nous avons tenté d'introduire une valeur invalide dans le facteur.
 
@@ -2185,12 +2193,12 @@ Durée (secondes) & Fonction\\
 \midrule
 0,02 & read.csv\\
 0,02 & read.dbf\\
-0,01 & read.spss\\
-0,01 & read.dta\\
-0,44 & read.sas7bdat\\
+0,00 & read.spss\\
+0,00 & read.dta\\
+0,45 & read.sas7bdat\\
 \addlinespace
-8,01 & read.xlsx\\
-0,17 & read.xlsx2\\
+8,87 & read.xlsx\\
+0,33 & read.xlsx2\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2495,8 +2503,7 @@ Les adresses comprennent des caractères accentués. Ce type de caractères caus
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "15 rue Levy"            "413 Blvd Saint-Laurent" "3606 rue Duke"         
-## [4] "2457 route St Marys"
+## [1] "15 rue Levy"            "413 Blvd Saint-Laurent" "3606 rue Duke"          "2457 route St Marys"
 \end{verbatim}
 
 La même fonction peut être utilisée pour remplacer les \emph{St} par \emph{Saint} et les \emph{Blvd} par \emph{Boulevard}.
@@ -2591,10 +2598,8 @@ Notez que les paramètres \texttt{start} et \texttt{stop} de la fonction \texttt
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Jérémy Toutanplace : 15 rue Levy"              
-## [2] "Constant Tinople : 413 Boulevard Saint-Laurent"
-## [3] "Dino Resto : 3606 rue Duke"                    
-## [4] "Luce Tancil : 2457 route Saint Marys"
+## [1] "Jérémy Toutanplace : 15 rue Levy"               "Constant Tinople : 413 Boulevard Saint-Laurent"
+## [3] "Dino Resto : 3606 rue Duke"                     "Luce Tancil : 2457 route Saint Marys"
 \end{verbatim}
 
 Le paramètre \texttt{sep} permet d'indiquer le ou les caractères à intercaler entre les éléments à concaténer. Notez qu'il est possible de concaténer plus que deux éléments.
@@ -4137,6 +4142,11 @@ La distribution continue la plus simple à décrire est certainement la distribu
 
 La fonction de densité de la distribution uniforme a donc deux paramètres, \emph{a} et \emph{b}, représentant respectivement les valeurs maximale et minimale au-delà desquelles les valeurs ont une probabilité 0 d'être obtenues. Pour avoir une meilleure intuition de ce que décrit une fonction de densité, il est intéressant de la représenter avec un graphique (figure \ref{fig:fig254}). Notez que sur ce graphique, l'axe des ordonnées n'indique pas précisément la probabilité associée à chaque valeur, car celle-ci est infinitésimale. Il sert uniquement à représenter la valeur de la fonction de densité de la distribution pour chaque valeur de x.
 
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+\end{verbatim}
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.6\linewidth]{MethodesQuantitScSocialesBolR_files/figure-latex/fig254-1} 
@@ -5116,7 +5126,7 @@ Regardez attentivement les équations \eqref{eq:KurtType1}, \eqref{eq:KurtType2}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.205
+## [1] -0.135
 \end{verbatim}
 
 \begin{Shaded}
@@ -5126,7 +5136,7 @@ Regardez attentivement les équations \eqref{eq:KurtType1}, \eqref{eq:KurtType2}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.798
+## [1] 2.868
 \end{verbatim}
 
 \end{bloc_attention}
@@ -5204,20 +5214,20 @@ Dans le tableau \ref{tab:calcultestnormalites} sont reportées les valeurs des d
 \toprule
  & Normale & Asymétrie négative & Asymétrie positive & Leptokurtique & Platikurtique\\
 \midrule
-Skewness & -0,033 & 1,363 & -1,427 & 1,045 & -0,043\\
-Kurtosis & 0,098 & 2,127 & 2,859 & 11,976 & -0,951\\
-Kolmogorov-Smirnov (KS) & 0,020 & 0,102 & 0,095 & 0,115 & 0,044\\
-Lilliefors (LF) & 0,020 & 0,102 & 0,095 & 0,115 & 0,044\\
-Shapiro-Wilk (SW) & 0,998 & 0,891 & 0,898 & 0,863 & 0,972\\
+Skewness & -0,028 & 1,107 & -1,678 & -0,093 & -0,039\\
+Kurtosis & -0,135 & 0,744 & 4,720 & 6,286 & -0,855\\
+Kolmogorov-Smirnov (KS) & 0,032 & 0,123 & 0,113 & 0,119 & 0,052\\
+Lilliefors (LF) & 0,032 & 0,123 & 0,113 & 0,119 & 0,052\\
+Shapiro-Wilk (SW) & 0,997 & 0,904 & 0,876 & 0,891 & 0,977\\
 \addlinespace
-Anderson-Darling (AD) & 0,204 & 12,961 & 10,824 & 14,095 & 2,465\\
-Jarque-Bera (JB) & 0,566 & 336,808 & 465,078 & 9 544,578 & 14,022\\
-KS (valeur p) & 0,985 & 0,000 & 0,000 & 0,000 & 0,287\\
-LF (valeur p) & 0,879 & 0,000 & 0,000 & 0,000 & 0,022\\
-SW (valeur p) & 0,839 & 0,000 & 0,000 & 0,000 & 0,000\\
+Anderson-Darling (AD) & 0,558 & 14,086 & 12,802 & 13,832 & 1,895\\
+Jarque-Bera (JB) & 0,448 & 164,055 & 948,492 & 2 574,989 & 10,344\\
+KS (valeur p) & 0,673 & 0,000 & 0,000 & 0,000 & 0,129\\
+LF (valeur p) & 0,231 & 0,000 & 0,000 & 0,000 & 0,002\\
+SW (valeur p) & 0,518 & 0,000 & 0,000 & 0,000 & 0,000\\
 \addlinespace
-AD (valeur p) & 0,874 & 0,000 & 0,000 & 0,000 & 0,000\\
-JB (valeur p) & 0,754 & 0,000 & 0,000 & 0,000 & 0,001\\
+AD (valeur p) & 0,148 & 0,000 & 0,000 & 0,000 & 0,000\\
+JB (valeur p) & 0,799 & 0,000 & 0,000 & 0,000 & 0,006\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -6081,8 +6091,7 @@ Admettons que vous voulez obtenir des statistiques pour une seule variable prés
 \end{Shaded}
 
 \begin{verbatim}
-##            sk      se.sk    t.sk p.sk
-## [1,] 1.678963 0.07943015 21.1376    0
+## [1] 1.67367
 \end{verbatim}
 
 \begin{Shaded}
@@ -6092,8 +6101,7 @@ Admettons que vous voulez obtenir des statistiques pour une seule variable prés
 \end{Shaded}
 
 \begin{verbatim}
-##            ku     se.ku     t.ku p.ku
-## [1,] 4.907434 0.1588603 30.89151    0
+## [1] 4.858815
 \end{verbatim}
 
 \begin{Shaded}
@@ -6419,11 +6427,8 @@ Pour obtenir des sorties de statistiques descriptives pour plusieurs variables, 
 \end{Shaded}
 
 \begin{verbatim}
-##           HabKm2   TxChomage     PctFRev
-## [1,]  1.97369004  1.28426434  1.67896292
-## [2,]  0.07943015  0.07943015  0.07943015
-## [3,] 24.84812266 16.16847488 21.13760304
-## [4,]  0.00000000  0.00000000  0.00000000
+##    HabKm2 TxChomage   PctFRev 
+##  1.967468  1.280216  1.673670
 \end{verbatim}
 
 \begin{Shaded}
@@ -6433,11 +6438,8 @@ Pour obtenir des sorties de statistiques descriptives pour plusieurs variables, 
 \end{Shaded}
 
 \begin{verbatim}
-##          HabKm2  TxChomage    PctFRev
-## [1,]  8.6222926  2.9265210  4.9074341
-## [2,]  0.1588603  0.1588603  0.1588603
-## [3,] 54.2759453 18.4219788 30.8915084
-## [4,]  0.0000000  0.0000000  0.0000000
+##    HabKm2 TxChomage   PctFRev 
+##  8.546403  2.892443  4.858815
 \end{verbatim}
 
 \begin{Shaded}
@@ -6497,16 +6499,11 @@ Pour obtenir des sorties de statistiques descriptives pour plusieurs variables, 
 \end{Shaded}
 
 \begin{verbatim}
-##           HabKm2                                          
-## statistic 0.148988                                        
-## p.value   5.689619e-58                                    
-## method    "Lilliefors (Kolmogorov-Smirnov) normality test"
-## data.name "X[[i]]"                                        
-##           TxChomage                                       
-## statistic 0.0801829                                       
-## p.value   7.758887e-16                                    
-## method    "Lilliefors (Kolmogorov-Smirnov) normality test"
-## data.name "X[[i]]"                                        
+##           HabKm2                                           TxChomage                                       
+## statistic 0.148988                                         0.0801829                                       
+## p.value   5.689619e-58                                     7.758887e-16                                    
+## method    "Lilliefors (Kolmogorov-Smirnov) normality test" "Lilliefors (Kolmogorov-Smirnov) normality test"
+## data.name "X[[i]]"                                         "X[[i]]"                                        
 ##           PctFRev                                         
 ## statistic 0.1048704                                       
 ## p.value   7.43257e-28                                     
@@ -6521,16 +6518,11 @@ Pour obtenir des sorties de statistiques descriptives pour plusieurs variables, 
 \end{Shaded}
 
 \begin{verbatim}
-##           HabKm2                            TxChomage                        
-## statistic 36.40276                          14.9237                          
-## p.value   3.7e-24                           3.7e-24                          
-## method    "Anderson-Darling normality test" "Anderson-Darling normality test"
-## data.name "X[[i]]"                          "X[[i]]"                         
-##           PctFRev                          
-## statistic 21.07194                         
-## p.value   3.7e-24                          
-## method    "Anderson-Darling normality test"
-## data.name "X[[i]]"
+##           HabKm2                            TxChomage                         PctFRev                          
+## statistic 36.40276                          14.9237                           21.07194                         
+## p.value   3.7e-24                           3.7e-24                           3.7e-24                          
+## method    "Anderson-Darling normality test" "Anderson-Darling normality test" "Anderson-Darling normality test"
+## data.name "X[[i]]"                          "X[[i]]"                          "X[[i]]"
 \end{verbatim}
 
 \begin{Shaded}
@@ -6587,11 +6579,8 @@ La syntaxe ci-dessous illustre trois exemples de transformation (logarithme, rac
 \end{Shaded}
 
 \begin{verbatim}
-##           HabKm2   HabKm2_log  HabKm2_sqrt   HabKm2_inv
-## [1,]  1.97369004  -1.21094995 4.192253e-01   8.27979101
-## [2,]  0.07943015   0.07943015 7.943015e-02   0.07943015
-## [3,] 24.84812266 -15.24547034 5.277911e+00 104.23990533
-## [4,]  0.00000000   0.00000000 6.533235e-08   0.00000000
+##      HabKm2  HabKm2_log HabKm2_sqrt  HabKm2_inv 
+##   1.9674683  -1.2071326   0.4179037   8.2536901
 \end{verbatim}
 
 \begin{Shaded}
@@ -6601,11 +6590,8 @@ La syntaxe ci-dessous illustre trois exemples de transformation (logarithme, rac
 \end{Shaded}
 
 \begin{verbatim}
-##          HabKm2 HabKm2_log HabKm2_sqrt  HabKm2_inv
-## [1,]  8.6222926  1.5809079  0.05866005  83.4814647
-## [2,]  0.1588603  0.1588603  0.15886029   0.1588603
-## [3,] 54.2759453  9.9515611  0.36925556 525.5023926
-## [4,]  0.0000000  0.0000000  0.35596862   0.0000000
+##      HabKm2  HabKm2_log HabKm2_sqrt  HabKm2_inv 
+##  8.54640302  1.55670769  0.04563433 82.85604898
 \end{verbatim}
 
 \begin{Shaded}
@@ -8279,8 +8265,8 @@ Un nuage de points est un outil très intéressant pour visualiser la relation e
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "country_code" "year"         "Population"   "Urbanisation" "CO2_kt"       "Country.Name"
-## [7] "CO2t_hab"     "region7"      "region23"
+## [1] "country_code" "year"         "Population"   "Urbanisation" "CO2_kt"       "Country.Name" "CO2t_hab"    
+## [8] "region7"      "region23"
 \end{verbatim}
 
 \hypertarget{sect03231}{%
@@ -8317,9 +8303,8 @@ Commençons par un nuage de points simple avec l'ensemble des données.
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba"
-## [13] "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba"
-## [25] "Aruba"
+##  [1] "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba"
+## [14] "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba" "Aruba"
 \end{verbatim}
 
 Il s'agit d'une petite île néerlandaise des Caraïbes nommée Aruba disposant d'une faible population, mais avec des activités très polluantes (raffinerie et extraction d'or). Nous faisons ici le choix de retirer ces observations puisqu'elles sont assez peu représentatives de la tendance mondiale. Cette démarche si simple relève ainsi de l'analyse exploratoire des données! Sans ce graphique, nous n'aurions probablement jamais identifié ces cas problématiques.
@@ -8576,6 +8561,10 @@ Ces barres d'erreurs indiquent notamment qu'il n'y a finalement aucun écart sig
   \FunctionTok{guides}\NormalTok{( }\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as of ggplot2 3.3.4.
+\end{verbatim}
 
 \begin{figure}
 
@@ -9305,8 +9294,7 @@ Avec \texttt{ggplot2}, nous avons aussi besoin des \emph{packages} \texttt{class
 
 \begin{verbatim}
 ## Reading layer `IlotsVeg2006' from data source 
-##   `E:\Livres\Livre_stat_PAJG\livre_statistique_Phil_Jere\data\bivariee\IlotsVeg2006.shp' 
-##   using driver `ESRI Shapefile'
+##   `E:\Livres\Livre_stat_PAJG\livre_statistique_Phil_Jere\data\bivariee\IlotsVeg2006.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 10213 features and 12 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -9701,8 +9689,8 @@ La syntaxe ci-dessous démontre que le coefficient de corrélation de Pearson es
 \end{Shaded}
 
 \begin{verbatim}
-## Corrélation de Pearson =  0.80297 
-## Moyenne du produit des variables centrées-réduites = 0.80297
+## Corrélation de Pearson =  0.7807 
+## Moyenne du produit des variables centrées-réduites = 0.7807
 \end{verbatim}
 
 \hypertarget{sect0432}{%
@@ -9912,7 +9900,7 @@ r & IC 2,5 \% & IC 97,5 \% & Méthode\\
 -0,120 & -0,184 & -0,055 & Spearman\\
 -0,137 & -0,199 & -0,074 & Biweight\\
 -0,174 & -0,235 & -0,111 & Percentage\\
--0,119 & -0,185 & -0,052 & Shepherd\\
+-0,121 & -0,187 & -0,054 & Shepherd\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -10127,7 +10115,7 @@ On pourra aussi modifier l'intervalle de confiance, par exemple à 90~\% ou 99~\
 ## 
 ## Bootstrap Statistics :
 ##       original        bias    std. error
-## t1* -0.1580801 -0.0006705646  0.03967016
+## t1* -0.1580801 -0.0009653557  0.04036792
 \end{verbatim}
 
 \begin{Shaded}
@@ -10146,10 +10134,10 @@ On pourra aussi modifier l'intervalle de confiance, par exemple à 90~\% ou 99~\
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   (-0.2352, -0.0797 )   (-0.2447, -0.0872 )  
+## 95%   (-0.2362, -0.0780 )   (-0.2447, -0.0866 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   (-0.2290, -0.0715 )   (-0.2174, -0.0516 )  
+## 95%   (-0.2296, -0.0715 )   (-0.2176, -0.0481 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -12187,13 +12175,13 @@ D'emblée, l'analyse visuelle des boîtes à moustaches (figure \ref{fig:figttes
 
 \begin{verbatim}
 ## 
-##  groupe A (n = 60), moy = 18, 
-##            variance = 1.9, écart-type = 1.4
-##  groupe B (n = 50), moy = 14.8, 
-##           variance = 2.5, écart-type = 1.6
-##  ratio variance = 0.76
-##  t-test (variances égales): t(dl = 108) = 11.1369, p = 0
-##  t-Welch (variances inégales): t(dl = 98.088) = 10.999, p = 0
+##  groupe A (n = 60), moy = 18.2, 
+##            variance = 3, écart-type = 1.7
+##  groupe B (n = 50), moy = 15, 
+##           variance = 2.3, écart-type = 1.5
+##  ratio variance = 1.26
+##  t-test (variances égales): t(dl = 108) = 10.2066, p = 0
+##  t-Welch (variances inégales): t(dl = 107.477) = 10.3137, p = 0
 ##  Variances semblables. Utilisez le test de Student!
 ##  Les moyennes des deux groupes sont significativement différentes.
 \end{verbatim}
@@ -12207,13 +12195,13 @@ D'emblée, l'analyse visuelle des boîtes à moustaches (figure \ref{fig:figttes
 
 \begin{verbatim}
 ## 
-##  groupe A (n = 60), moy = 16, 
-##            variance = 8.8, écart-type = 3
+##  groupe A (n = 60), moy = 16.1, 
+##            variance = 9, écart-type = 3
 ##  groupe B (n = 50), moy = 15.2, 
-##           variance = 2.3, écart-type = 1.5
-##  ratio variance = 3.86
-##  t-test (variances égales): t(dl = 108) = 1.7275, p = 0.086941
-##  t-Welch (variances inégales): t(dl = 90.797) = 1.8234, p = 0.071532
+##           variance = 2.1, écart-type = 1.4
+##  ratio variance = 4.31
+##  t-test (variances égales): t(dl = 108) = 1.8644, p = 0.064983
+##  t-Welch (variances inégales): t(dl = 88.211) = 1.9741, p = 0.051494
 ##  Variances dissemblables. Utilisez le test de Welch-Satterwaithe!
 ##  Les moyennes des deux groupes ne sont pas significativement différentes.
 \end{verbatim}
@@ -12327,11 +12315,11 @@ D'emblée, l'analyse visuelle des boîtes à moustaches (figure \ref{fig:figttes
 
 \begin{verbatim}
 ## 
-##  groupe A : moy = 69.6, var = 21.1, sd = 4.6
-##  groupe B : moy = 51.1, var = 23.1, sd = 4.8
-##  Moyenne des différences = 18.5
-##  Ecart-type des différences = 7.3
-##  t(dl = 49) = 17.8, p = 0
+##  groupe A : moy = 70.2, var = 23.2, sd = 4.8
+##  groupe B : moy = 50, var = 27.3, sd = 5.2
+##  Moyenne des différences = 20.2
+##  Ecart-type des différences = 7.5
+##  t(dl = 49) = 19.05, p = 0
 ##  La moyenne des différences entre les échantillons est significative
 \end{verbatim}
 
@@ -12343,11 +12331,11 @@ D'emblée, l'analyse visuelle des boîtes à moustaches (figure \ref{fig:figttes
 
 \begin{verbatim}
 ## 
-##  groupe A : moy = 68.8, var = 22.9, sd = 4.8
-##  groupe B : moy = 65.3, var = 32.7, sd = 5.7
-##  Moyenne des différences = 3.5
-##  Ecart-type des différences = 7.7
-##  t(dl = 49) = 3.21, p = 0.002
+##  groupe A : moy = 70.3, var = 18.3, sd = 4.3
+##  groupe B : moy = 65.2, var = 27.8, sd = 5.3
+##  Moyenne des différences = 5.1
+##  Ecart-type des différences = 5.8
+##  t(dl = 49) = 6.24, p = 0
 ##  La moyenne des différences entre les échantillons est significative
 \end{verbatim}
 
@@ -12601,10 +12589,11 @@ Le test indique que nous n'avons aucune raison de rejeter l'hypothèse nulle sel
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1 x 7
-##   .y.       group1           group2   effsize    n1    n2 magnitude
-## * <chr>     <chr>            <chr>      <dbl> <int> <int> <ord>    
-## 1 Locataire Hors de Montréal Montréal   -1.57   430   521 large
+## Cohen's d |         95% CI
+## --------------------------
+## -1.56     | [-1.71, -1.41]
+## 
+## - Estimated using pooled SD.
 \end{verbatim}
 
 \begin{Shaded}
@@ -12963,8 +12952,8 @@ Pour le second exemple, nous générons deux jeux de données au hasard représe
 
 \begin{verbatim}
 ## 50 observations
-## POST. median = 72.5, moy = 70.6
-## PRE.  median = 49.5, moy = 50.5
+## POST. median = 70.5, moy = 70.6
+## PRE.  median = 46.5, moy = 46.6
 \end{verbatim}
 
 \begin{Shaded}
@@ -12978,7 +12967,7 @@ Pour le second exemple, nous générons deux jeux de données au hasard représe
 ##  Wilcoxon signed rank test with continuity correction
 ## 
 ## data:  df1$Avant and df1$Apres
-## V = 1225, p-value = 1.137e-09
+## V = 1274, p-value = 8.183e-10
 ## alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 
@@ -14781,10 +14770,10 @@ La syntaxe R ci-dessous illustre trois façons d'obtenir les coefficients standa
 \end{Shaded}
 
 \begin{verbatim}
-##      (Intercept)     scale(HABHA) scale(AgeMedian)   scale(Pct_014)   scale(Pct_65P) 
-##     3.721649e-16    -2.806891e-01     1.467299e-02     3.093456e-01     1.788453e-01 
-##    scale(Pct_MV)    scale(Pct_FR) 
-##    -2.755087e-02    -3.004544e-01
+##      (Intercept)     scale(HABHA) scale(AgeMedian)   scale(Pct_014)   scale(Pct_65P)    scale(Pct_MV) 
+##     3.721649e-16    -2.806891e-01     1.467299e-02     3.093456e-01     1.788453e-01    -2.755087e-02 
+##    scale(Pct_FR) 
+##    -3.004544e-01
 \end{verbatim}
 
 \begin{Shaded}
@@ -15661,17 +15650,17 @@ Prenons l'exemple d'un modèle de régression comprenant deux variables indépen
 \toprule
 obs & Y & X1 & X2 & X2A & X2B & X2C & X2D\\
 \midrule
-1 & 43,13 & 16,33 & A & 1 & 0 & 0 & 0\\
-2 & 54,01 & 16,71 & A & 1 & 0 & 0 & 0\\
-3 & 47,72 & 27,50 & A & 1 & 0 & 0 & 0\\
-4 & 56,03 & 17,63 & B & 0 & 1 & 0 & 0\\
-5 & 57,78 & 20,89 & B & 0 & 1 & 0 & 0\\
+1 & 32,64 & 18,74 & A & 1 & 0 & 0 & 0\\
+2 & 44,15 & 22,25 & A & 1 & 0 & 0 & 0\\
+3 & 56,71 & 22,03 & A & 1 & 0 & 0 & 0\\
+4 & 62,24 & 19,94 & B & 0 & 1 & 0 & 0\\
+5 & 59,25 & 22,54 & B & 0 & 1 & 0 & 0\\
 \addlinespace
-6 & 41,86 & 22,88 & B & 0 & 1 & 0 & 0\\
-7 & 58,45 & 21,25 & C & 0 & 0 & 1 & 0\\
-8 & 54,37 & 28,35 & C & 0 & 0 & 1 & 0\\
-9 & 39,10 & 16,73 & D & 0 & 0 & 0 & 1\\
-10 & 54,92 & 20,88 & D & 0 & 0 & 0 & 1\\
+6 & 27,87 & 26,56 & B & 0 & 1 & 0 & 0\\
+7 & 38,99 & 21,66 & C & 0 & 0 & 1 & 0\\
+8 & 69,76 & 21,89 & C & 0 & 0 & 1 & 0\\
+9 & 53,38 & 18,87 & D & 0 & 0 & 0 & 1\\
+10 & 70,71 & 23,96 & D & 0 & 0 & 0 & 1\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -18554,46 +18543,46 @@ Le calcul de la distance de Cook révèle un ensemble d'observations se démarqu
 \end{Shaded}
 
 \begin{verbatim}
-##           X y       Pays  Sexe Age            Education Statut_emploi       Revenu
-## 7660   7660 1  Slovaquie homme  50           universite      Employed        moyen
-## 25150 25150 1      Malte homme  16           secondaire  Not Employed        moyen
-## 25227 25227 1      Malte femme  53 secondaire inferieur  Not Employed        moyen
-## 25309 25309 1      Malte femme  32           secondaire      Employed        moyen
-## 25322 25322 1      Malte homme  38           universite      Employed        eleve
-## 25536 25536 1      Malte homme  27           universite      Employed   tres eleve
-## 25541 25541 1      Malte homme  38 secondaire inferieur      Employed        moyen
-## 25549 25549 1      Malte homme  31           universite      Employed sans reponse
-## 25690 25690 1 Luxembourg homme  32           universite      Employed   tres eleve
-## 26190 26190 1     Chypre homme  24           secondaire  Not Employed        moyen
-## 26201 26201 1     Chypre homme  25           secondaire      Employed       faible
-## 26244 26244 1     Chypre homme  32           secondaire      Employed  tres faible
-## 26269 26269 1     Chypre homme  60           secondaire  Not Employed        moyen
-## 26303 26303 1     Chypre homme  59           secondaire  Not Employed        moyen
-## 26393 26393 1     Chypre homme  30        premier cycle      Employed   tres eleve
-## 26444 26444 1     Chypre femme  52           universite      Employed        eleve
-## 26516 26516 1     Chypre homme  21           universite  Not Employed        moyen
-## 26549 26549 1     Chypre homme  28           universite      Employed  tres faible
-## 26600 26600 1     Chypre homme  36           secondaire      Employed        moyen
-##                  Residence Duree mode_pref StatutEmploi ConsEnv
-## 7660           zone rurale   775      velo      employe       7
-## 25150          zone rurale    15      velo  sans emploi       3
-## 25227          zone rurale    45    marche  sans emploi       5
-## 25309 petite-moyenne ville    25    marche      employe       4
-## 25322          zone rurale    30    marche      employe      10
-## 25536 petite-moyenne ville    14      velo      employe      10
-## 25541          zone rurale     5    marche      employe       8
-## 25549 petite-moyenne ville    60      velo      employe      10
-## 25690 petite-moyenne ville   720      velo      employe       6
-## 26190         grande ville    20      velo  sans emploi       5
-## 26201          zone rurale    20      velo      employe       5
-## 26244 petite-moyenne ville    18      velo      employe       4
-## 26269 petite-moyenne ville     5      velo  sans emploi       7
-## 26303          zone rurale     7      velo  sans emploi       8
-## 26393 petite-moyenne ville    61      velo      employe       5
-## 26444 petite-moyenne ville   120      velo      employe       3
-## 26516 petite-moyenne ville    25      velo  sans emploi       8
-## 26549 petite-moyenne ville    15      velo      employe       2
-## 26600 petite-moyenne ville     8      velo      employe       1
+##           X y       Pays  Sexe Age            Education Statut_emploi       Revenu            Residence Duree
+## 7660   7660 1  Slovaquie homme  50           universite      Employed        moyen          zone rurale   775
+## 25150 25150 1      Malte homme  16           secondaire  Not Employed        moyen          zone rurale    15
+## 25227 25227 1      Malte femme  53 secondaire inferieur  Not Employed        moyen          zone rurale    45
+## 25309 25309 1      Malte femme  32           secondaire      Employed        moyen petite-moyenne ville    25
+## 25322 25322 1      Malte homme  38           universite      Employed        eleve          zone rurale    30
+## 25536 25536 1      Malte homme  27           universite      Employed   tres eleve petite-moyenne ville    14
+## 25541 25541 1      Malte homme  38 secondaire inferieur      Employed        moyen          zone rurale     5
+## 25549 25549 1      Malte homme  31           universite      Employed sans reponse petite-moyenne ville    60
+## 25690 25690 1 Luxembourg homme  32           universite      Employed   tres eleve petite-moyenne ville   720
+## 26190 26190 1     Chypre homme  24           secondaire  Not Employed        moyen         grande ville    20
+## 26201 26201 1     Chypre homme  25           secondaire      Employed       faible          zone rurale    20
+## 26244 26244 1     Chypre homme  32           secondaire      Employed  tres faible petite-moyenne ville    18
+## 26269 26269 1     Chypre homme  60           secondaire  Not Employed        moyen petite-moyenne ville     5
+## 26303 26303 1     Chypre homme  59           secondaire  Not Employed        moyen          zone rurale     7
+## 26393 26393 1     Chypre homme  30        premier cycle      Employed   tres eleve petite-moyenne ville    61
+## 26444 26444 1     Chypre femme  52           universite      Employed        eleve petite-moyenne ville   120
+## 26516 26516 1     Chypre homme  21           universite  Not Employed        moyen petite-moyenne ville    25
+## 26549 26549 1     Chypre homme  28           universite      Employed  tres faible petite-moyenne ville    15
+## 26600 26600 1     Chypre homme  36           secondaire      Employed        moyen petite-moyenne ville     8
+##       mode_pref StatutEmploi ConsEnv
+## 7660       velo      employe       7
+## 25150      velo  sans emploi       3
+## 25227    marche  sans emploi       5
+## 25309    marche      employe       4
+## 25322    marche      employe      10
+## 25536      velo      employe      10
+## 25541    marche      employe       8
+## 25549      velo      employe      10
+## 25690      velo      employe       6
+## 26190      velo  sans emploi       5
+## 26201      velo      employe       5
+## 26244      velo      employe       4
+## 26269      velo  sans emploi       7
+## 26303      velo  sans emploi       8
+## 26393      velo      employe       5
+## 26444      velo      employe       3
+## 26516      velo  sans emploi       8
+## 26549      velo      employe       2
+## 26600      velo      employe       1
 \end{verbatim}
 
 À la lecture des valeurs pour ces 19 cas étranges, nous remarquons que la plupart des observations proviennent de Malte et de Chypre. Ces deux petites îles constituent des cas particuliers en Europe et devraient vraisemblablement faire l'objet d'une analyse séparée. Nous décidons donc de les retirer du jeu de données. Deux autres observations étranges sont observables en Slovaquie et au Luxembourg. Dans les deux cas, les répondants ont renseigné des temps de trajet fantaisistes de respectivement 775 et 720~minutes. Nous les retirons donc également de l'analyse.
@@ -19324,14 +19313,12 @@ Avant d'ajuster le modèle, il convient de vérifier l'absence de multicolinéar
 \end{Shaded}
 
 \begin{verbatim}
-##                      beds        Garden_or_backyard           Host_greets_you 
-##                  1.123595                  1.079324                  1.046884 
-##       Free_street_parking              prt_veg_500m            has_metro_500m 
-##                  1.142189                  1.532536                  1.239516 
-##            commercial_1km host_total_listings_count                   private 
-##                  1.225301                  1.058232                  1.143932 
-##                cat_review 
-##                  1.015778
+##                      beds        Garden_or_backyard           Host_greets_you       Free_street_parking 
+##                  1.123595                  1.079324                  1.046884                  1.142189 
+##              prt_veg_500m            has_metro_500m            commercial_1km host_total_listings_count 
+##                  1.532536                  1.239516                  1.225301                  1.058232 
+##                   private                cat_review 
+##                  1.143932                  1.015778
 \end{verbatim}
 
 Toutes les valeurs de VIF sont inférieures à 2, indiquant une absence de multicolinéarité excessive. Nous pouvons alors ajuster le modèle et analyser les distances de Cook afin de vérifier la présence ou non d'observations très influentes. Pour ajuster le modèle, nous utilisons le \emph{package} \texttt{VGAM} et la fonction \texttt{vglm} qui nous donnent accès à la famille \texttt{cumulative} pour ajuster des modèles logistiques ordinaux. Notez que le fonctionnement de base de cette famille est de modéliser \(P(Y\leq1),P(Y\leq2),...,P(Y\leq J)\) avec \emph{J} le nombre de catégories. Cependant, nous voulons ici modéliser la probabilité de passer à une catégorie supérieure de prix. Pour cela, il est nécessaire de spécifier le paramètre \texttt{reverse\ =\ TRUE} pour la famille \texttt{cumulative} (voir \texttt{help(cumulative)} pour plus de détails).
@@ -19433,7 +19420,7 @@ Nous constatons ainsi que, pour la première observation, la probabilité prédi
 \begin{verbatim}
 ## 
 ##   1   2   3 
-## 719 253  28
+## 681 290  29
 \end{verbatim}
 
 À partir de ces simulations de prédiction, nous pouvons réaliser un diagnostic des résidus simulés grâce au \emph{package} \texttt{DHARMa}.
@@ -20641,10 +20628,10 @@ Comme précédemment, notre première étape est de vérifier l'absence de multi
 \end{Shaded}
 
 \begin{verbatim}
-##     Feux_auto     Feux_piet     Pass_piet    Terreplein    Apaisement     LogEmploi   Densite_pop 
-##      2.861708      1.518668      2.321213      1.221683      1.059722      4.763692      1.153096 
-##      Entropie  DensiteInter Long_arterePS        Artere     NB_voies5 
-##      1.770904      2.040457      4.467841      1.887728      1.520514
+##     Feux_auto     Feux_piet     Pass_piet    Terreplein    Apaisement     LogEmploi   Densite_pop      Entropie 
+##      2.861708      1.518668      2.321213      1.221683      1.059722      4.763692      1.153096      1.770904 
+##  DensiteInter Long_arterePS        Artere     NB_voies5 
+##      2.040457      4.467841      1.887728      1.520514
 \end{verbatim}
 
 Toutes les valeurs de VIF sont inférieures à 5. Notons tout de même que le logarithme de l'emploi et la longueur d'artère dans un rayon d'un kilomètre ont des valeurs de VIF proches de 5. La seconde étape du diagnostic consiste à calculer et à visualiser les distances de Cook.
@@ -20694,14 +20681,14 @@ La figure \ref{fig:poisscookdist} signale la présence de trois observations ave
 ## 1         19         1         1         1          1          0     7208.538    5980.923 0.8073926
 ## 26         7         0         0         1          0          0     1342.625    2751.012 0.0000000
 ## 428        0         1         1         1          0          1    13122.560   14148.827 0.6643891
-##     DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app
-## 1       42.41597       6955.00      1         1 2.995732           1            1     0   1       4
-## 26      73.35344       2849.66      0         0 2.079442           1            1     1   1       3
-## 428    109.25066       4634.20      0         0 0.000000           0            0     0   0       3
-##     LogEmploi AccOrdinal     PopHa
-## 1    8.883021          2  5.980923
-## 26   7.202382          2  2.751012
-## 428  9.482088          0 14.148827
+##     DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app LogEmploi
+## 1       42.41597       6955.00      1         1 2.995732           1            1     0   1       4  8.883021
+## 26      73.35344       2849.66      0         0 2.079442           1            1     1   1       3  7.202382
+## 428    109.25066       4634.20      0         0 0.000000           0            0     0   0       3  9.482088
+##     AccOrdinal     PopHa
+## 1            2  5.980923
+## 26           2  2.751012
+## 428          0 14.148827
 \end{verbatim}
 
 Les deux premiers cas sont des intersections avec de nombreux accidents (respectivement 19 et 7) qui risquent de perturber les estimations du modèle. Le troisième cas ne comprend en revanche aucun accident. Puisqu'il ne s'agit que de trois observations et que leurs distances de Cook sont très nettement supérieures aux autres, nous les retirons du modèle.
@@ -21159,21 +21146,21 @@ Nous observons, dans la figure \ref{fig:cookdistnb}, que quatre observations se 
 \end{Shaded}
 
 \begin{verbatim}
-##    Nbr_acci Feux_auto Feux_piet Pass_piet Terreplein Apaisement EmpTotBuffer Densite_pop  Entropie
-## 1        19         1         1         1          1          0     7208.538    5980.923 0.8073926
-## 5        12         1         0         1          0          0     8585.350    8655.430 0.7607852
-## 26        7         0         0         1          0          0     1342.625    2751.012 0.0000000
-## 34        6         0         0         1          0          0    12516.410    8950.942 0.4300549
-##    DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app
-## 1      42.41597       6955.00      1         1 2.995732           1            1     0   1       4
-## 5      89.11495       6412.27      0         0 2.564949           1            1     0   1       4
-## 26     73.35344       2849.66      0         0 2.079442           1            1     1   1       3
-## 34     74.91879       8443.01      1         0 1.945910           1            1     1   0       3
-##    LogEmploi AccOrdinal    PopHa
-## 1   8.883021          2 5.980923
-## 5   9.057813          2 8.655430
-## 26  7.202382          2 2.751012
-## 34  9.434796          2 8.950942
+##    Nbr_acci Feux_auto Feux_piet Pass_piet Terreplein Apaisement EmpTotBuffer Densite_pop  Entropie DensiteInter
+## 1        19         1         1         1          1          0     7208.538    5980.923 0.8073926     42.41597
+## 5        12         1         0         1          0          0     8585.350    8655.430 0.7607852     89.11495
+## 26        7         0         0         1          0          0     1342.625    2751.012 0.0000000     73.35344
+## 34        6         0         0         1          0          0    12516.410    8950.942 0.4300549     74.91879
+##    Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app LogEmploi AccOrdinal
+## 1        6955.00      1         1 2.995732           1            1     0   1       4  8.883021          2
+## 5        6412.27      0         0 2.564949           1            1     0   1       4  9.057813          2
+## 26       2849.66      0         0 2.079442           1            1     1   1       3  7.202382          2
+## 34       8443.01      1         0 1.945910           1            1     1   0       3  9.434796          2
+##       PopHa
+## 1  5.980923
+## 5  8.655430
+## 26 2.751012
+## 34 8.950942
 \end{verbatim}
 
 Il s'agit à nouveau de quatre observations avec un grand nombre d'accidents. Nous décidons de les retirer du jeu de données pour ne pas fausser les résultats concernant l'ensemble des autres intersections. Dans une analyse plus détaillée, il serait judicieux de chercher à comprendre pourquoi ces quatre observations sont particulièrement accidentogènes.
@@ -21637,18 +21624,18 @@ La figure \ref{fig:diagzip} indique deux problèmes importants dans le modèle~:
 ## 26         7         0         0         1          0          0     1342.625    2751.012 0.0000000
 ## 44         5         0         0         0          0          0     4998.519    8090.478 0.7879618
 ## 482        0         0         0         0          0          0     1813.911    8988.260 0.4486079
-##     DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app
-## 1       42.41597       6955.00      1         1 2.995732           1            1     0   1       4
-## 5       89.11495       6412.27      0         0 2.564949           1            1     0   1       4
-## 26      73.35344       2849.66      0         0 2.079442           1            1     1   1       3
-## 44      66.86856       4517.65      0         0 1.791759           1            1     1   1       4
-## 482     60.93742       3821.78      1         0 0.000000           0            0     0   0       3
-##     LogEmploi AccOrdinal    PopHa
-## 1    8.883021          2 5.980923
-## 5    9.057813          2 8.655430
-## 26   7.202382          2 2.751012
-## 44   8.516897          2 8.090478
-## 482  7.503240          0 8.988260
+##     DensiteInter Long_arterePS Artere NB_voies5 log_acci catego_acci catego_acci2 Arret VAG sum_app LogEmploi
+## 1       42.41597       6955.00      1         1 2.995732           1            1     0   1       4  8.883021
+## 5       89.11495       6412.27      0         0 2.564949           1            1     0   1       4  9.057813
+## 26      73.35344       2849.66      0         0 2.079442           1            1     1   1       3  7.202382
+## 44      66.86856       4517.65      0         0 1.791759           1            1     1   1       4  8.516897
+## 482     60.93742       3821.78      1         0 0.000000           0            0     0   0       3  7.503240
+##     AccOrdinal    PopHa
+## 1            2 5.980923
+## 5            2 8.655430
+## 26           2 2.751012
+## 44           2 8.090478
+## 482          0 8.988260
 \end{verbatim}
 
 Nous retirons des données les quelques observations pouvant avoir une trop forte influence sur le modèle. Après réajustement, la figure \ref{fig:diagzip2} nous informe que nous n'avons plus de valeurs aberrantes restantes ni de fort problème de dispersion. En revanche, le premier quantile des résidus tant à être plus faible que ce que nous aurions pu nous attendre d'une distribution uniforme. Ce constat laisse penser que le modèle a du mal à bien identifier les faux zéros. Ce résultat n'est pas étonnant, car aucune variable n'avait été identifiée à cette fin dans l'article original (\protect\hyperlink{ref-cloutier2014carrefours}{Cloutier et al. 2014}) qui utilisait un modèle binomial négatif.
@@ -22126,16 +22113,16 @@ La figure \ref{fig:gausscook} indique clairement que quatre observations sont tr
 \end{Shaded}
 
 \begin{verbatim}
-##      VegPct ArbPct V250Pct V500Pct A250Pct A500Pct      HABHA AgeMedian Pct_014 Pct_65P Pct_MV
-## 3374 10.481  5.478  18.987  13.744   2.908   2.704  74.835867       226    4.76   14.29  23.81
-## 3378  0.000  0.000  12.709  12.505   2.116   2.324  88.006946       206    6.25   12.50  25.00
-## 4446 23.162  5.209  31.437  31.535   8.672   9.108 313.142733       206   14.40   16.87  53.50
-## 9088 85.767 27.583  78.195  83.492  42.999  51.074   2.070472       207   12.00   24.00  12.00
-##      Pct_FR DistCBDkm   SDRNOM
-## 3374  14.29     0.748 Montréal
-## 3378  12.50     0.706 Montréal
-## 4446  42.39     8.678 Montréal
-## 9088  16.00    28.440 Montréal
+##      VegPct ArbPct V250Pct V500Pct A250Pct A500Pct      HABHA AgeMedian Pct_014 Pct_65P Pct_MV Pct_FR DistCBDkm
+## 3374 10.481  5.478  18.987  13.744   2.908   2.704  74.835867       226    4.76   14.29  23.81  14.29     0.748
+## 3378  0.000  0.000  12.709  12.505   2.116   2.324  88.006946       206    6.25   12.50  25.00  12.50     0.706
+## 4446 23.162  5.209  31.437  31.535   8.672   9.108 313.142733       206   14.40   16.87  53.50  42.39     8.678
+## 9088 85.767 27.583  78.195  83.492  42.999  51.074   2.070472       207   12.00   24.00  12.00  16.00    28.440
+##        SDRNOM
+## 3374 Montréal
+## 3378 Montréal
+## 4446 Montréal
+## 9088 Montréal
 \end{verbatim}
 
 Il s'agit de quatre îlots dans Montréal avec des logements très anciens~: plus de 200 ans, alors que la moyenne est de 52 ans pour le reste de la zone d'étude. Le fait que nous ayons dans le modèle une polynomiale d'ordre 2 pour cette variable intensifie l'influence de ces valeurs extrêmes. Par conséquent, nous décidons de simplement les supprimer. Nous verrons plus tard qu'une alternative envisageable est de changer la distribution du modèle pour une distribution de Student (plus robuste aux valeurs extrêmes).
@@ -23045,16 +23032,16 @@ Nous pouvons comparer graphiquement la variance observée dans les données et l
 
 \begin{verbatim}
 ## $`deviance expliquee`
-## [1] 0.05060841
+## [1] 0.05065878
 ## 
 ## $`McFadden ajuste`
-## [1] 0.0501608
+## [1] 0.0502111
 ## 
 ## $`Cox and Snell`
-## [1] 0.3326086
+## [1] 0.3328317
 ## 
 ## $Nagelkerke
-## [1] 0.3327213
+## [1] 0.3329446
 \end{verbatim}
 
 \begin{Shaded}
@@ -23066,7 +23053,7 @@ Nous pouvons comparer graphiquement la variance observée dans les données et l
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 13.39036
+## [1] 13.36145
 \end{verbatim}
 
 Le modèle n'explique que 5~\% de la déviance et obtient des valeurs de R\textsuperscript{2} ajusté de McFadden, de Cox et Snell et de Nagelkerke de respectivement 0,05, 0,33 et 0,33. La moyenne de l'erreur quadratique est de seulement 13,4 indiquant que le modèle se trompe en moyenne de seulement 13,4 minutes. La capacité de prédiction du modèle est donc limitée sans être catastrophique.
@@ -23187,27 +23174,27 @@ Le reste des coefficients (ainsi que le paramètre de forme) sont affichés dans
 \toprule
 Variable & Coeff. & Exp(Coeff.) & Val.p & IC 2,5 \% exp(Coeff.) & IC 97,5 \% exp(Coeff.) & Sign.\\
 \midrule
-Constante & 2,923 & 18,590 & 0,000 & 14,880 & 23,220 & ***\\
+Constante & 2,935 & 18,824 & 0,000 & 15,074 & 23,500 & ***\\
 \textit{Mode} &  &  &  &  &  & \\
 ref : pieton & -- & -- & -- & -- & -- & --\\
-transport collectif & 0,423 & 1,527 & 0,000 & 1,489 & 1,567 & ***\\
-vehicule individuel & -0,321 & 0,725 & 0,000 & 0,707 & 0,744 & ***\\
+transport collectif & 0,418 & 1,519 & 0,000 & 1,481 & 1,557 & ***\\
+vehicule individuel & -0,323 & 0,724 & 0,000 & 0,705 & 0,743 & ***\\
 \addlinespace
-velo & -0,260 & 0,771 & 0,000 & 0,751 & 0,791 & ***\\
+velo & -0,262 & 0,770 & 0,000 & 0,751 & 0,790 & ***\\
 \textit{Motif} &  &  &  &  &  & \\
 ref : education & -- & -- & -- & -- & -- & --\\
-loisir & -0,005 & 0,995 & 0,757 & 0,962 & 1,028 & \\
-magasinage & -0,107 & 0,899 & 0,000 & 0,868 & 0,930 & ***\\
+loisir & -0,009 & 0,991 & 0,581 & 0,958 & 1,024 & \\
+magasinage & -0,114 & 0,892 & 0,000 & 0,862 & 0,924 & ***\\
 \addlinespace
-travail & -0,061 & 0,941 & 0,000 & 0,913 & 0,969 & ***\\
-LogDist & 0,333 & 1,396 & 0,000 & 1,381 & 1,411 & ***\\
+travail & -0,063 & 0,939 & 0,000 & 0,911 & 0,968 & ***\\
+LogDist & 0,333 & 1,395 & 0,000 & 1,381 & 1,411 & ***\\
 \textit{MemeArrond} &  &  &  &  &  & \\
 ref : Different & -- & -- & -- & -- & -- & --\\
-Meme & -0,039 & 0,962 & 0,000 & 0,942 & 0,983 & ***\\
+Meme & -0,039 & 0,962 & 0,000 & 0,941 & 0,982 & ***\\
 \addlinespace
 \textit{Semaine} &  &  &  &  &  & \\
 ref : lundi au vendredi & -- & -- & -- & -- & -- & --\\
-samedi et dimanche & -0,002 & 0,998 & 0,858 & 0,977 & 1,019 & \\
+samedi et dimanche & 0,004 & 1,004 & 0,709 & 0,983 & 1,025 & \\
  &  &  &  &  &  & \\
 shape & 1,146 & 3,146 & 0,000 & 3,093 & 3,203 & ***\\
 \bottomrule
@@ -23461,12 +23448,12 @@ Nous pouvons observer à la figure \ref{fig:cookdistbeta} que seulement deux obs
 \end{Shaded}
 
 \begin{verbatim}
-##      A014Pct A65Pct PopFRPct PopMVPct      Km2    HabKm2 Shape_Leng Shape_Area   prt_hot  prt_veg
-## 1666   11.78  26.77     6.38    11.65 6.458460   72.3083  21153.055  6458456.6  1.824483 90.11691
-## 2803   15.54  31.07    24.17    52.17 0.134013 5283.0879   1651.471   134012.5 40.117994 60.15745
-##      dist_cntr     Arrond  hot
-## 1666 29.181345 Senneville 0.02
-## 2803  4.178823  Westmount 0.40
+##      A014Pct A65Pct PopFRPct PopMVPct      Km2    HabKm2 Shape_Leng Shape_Area   prt_hot  prt_veg dist_cntr
+## 1666   11.78  26.77     6.38    11.65 6.458460   72.3083  21153.055  6458456.6  1.824483 90.11691 29.181345
+## 2803   15.54  31.07    24.17    52.17 0.134013 5283.0879   1651.471   134012.5 40.117994 60.15745  4.178823
+##          Arrond  hot
+## 1666 Senneville 0.02
+## 2803  Westmount 0.40
 \end{verbatim}
 
 Ces deux observations n'ont pas de points communs marqués, et ne semblent pas avoir de valeurs particulièrement fortes sur les différentes variables indépendantes ou la variable dépendante. Nous décidons donc de les supprimer et de recalculer les distances de Cook.
@@ -24771,8 +24758,7 @@ Vous constaterez que nous avons centré-réduit les variables \texttt{Age} et \t
 \begin{verbatim}
 ## Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
 ##  Family: binomial  ( logit )
-## Formula: y ~ Sexe + Age2 + Education + StatutEmploi + Revenu + Residence +  
-##     Duree2 + ConsEnv + (1 | Pays)
+## Formula: y ~ Sexe + Age2 + Education + StatutEmploi + Revenu + Residence +      Duree2 + ConsEnv + (1 | Pays)
 ##    Data: dfenquete2
 ## Control: glmerControl(optimizer = "bobyqa")
 ## 
@@ -28849,14 +28835,10 @@ Pour calculer l'ACP, il suffit d'utiliser la fonction \texttt{PCA} de \texttt{Fa
 ## 
 ## 
 ## Eigenvalues
-##                        Dim.1   Dim.2   Dim.3   Dim.4   Dim.5   Dim.6   Dim.7   Dim.8   Dim.9
-## Variance               3.543   2.760   1.042   0.751   0.606   0.388   0.379   0.244   0.217
-## % of var.             35.425  27.596  10.422   7.511   6.059   3.880   3.788   2.441   2.167
-## Cumulative % of var.  35.425  63.021  73.443  80.954  87.013  90.893  94.681  97.122  99.289
-##                       Dim.10
-## Variance               0.071
-## % of var.              0.711
-## Cumulative % of var. 100.000
+##                        Dim.1   Dim.2   Dim.3   Dim.4   Dim.5   Dim.6   Dim.7   Dim.8   Dim.9  Dim.10
+## Variance               3.543   2.760   1.042   0.751   0.606   0.388   0.379   0.244   0.217   0.071
+## % of var.             35.425  27.596  10.422   7.511   6.059   3.880   3.788   2.441   2.167   0.711
+## Cumulative % of var.  35.425  63.021  73.443  80.954  87.013  90.893  94.681  97.122  99.289 100.000
 ## 
 ## Individuals (the 10 first)
 ##                Dist    Dim.1    ctr   cos2    Dim.2    ctr   cos2    Dim.3    ctr   cos2  
@@ -30680,14 +30662,14 @@ La syntaxe ci-dessous permet, dans un premier temps, de calculer l'ACM, puis de 
 ## 
 ## 
 ## Eigenvalues
-##                        Dim.1   Dim.2   Dim.3   Dim.4   Dim.5   Dim.6   Dim.7   Dim.8   Dim.9
-## Variance               0.248   0.156   0.135   0.127   0.126   0.123   0.114   0.107   0.101
-## % of var.             13.940   8.792   7.620   7.161   7.065   6.916   6.385   6.003   5.671
-## Cumulative % of var.  13.940  22.732  30.352  37.513  44.579  51.494  57.879  63.882  69.553
-##                       Dim.10  Dim.11  Dim.12  Dim.13  Dim.14  Dim.15  Dim.16
-## Variance               0.095   0.093   0.086   0.077   0.071   0.064   0.055
-## % of var.              5.327   5.234   4.822   4.340   4.011   3.619   3.094
-## Cumulative % of var.  74.880  80.115  84.937  89.277  93.288  96.906 100.000
+##                        Dim.1   Dim.2   Dim.3   Dim.4   Dim.5   Dim.6   Dim.7   Dim.8   Dim.9  Dim.10  Dim.11
+## Variance               0.248   0.156   0.135   0.127   0.126   0.123   0.114   0.107   0.101   0.095   0.093
+## % of var.             13.940   8.792   7.620   7.161   7.065   6.916   6.385   6.003   5.671   5.327   5.234
+## Cumulative % of var.  13.940  22.732  30.352  37.513  44.579  51.494  57.879  63.882  69.553  74.880  80.115
+##                       Dim.12  Dim.13  Dim.14  Dim.15  Dim.16
+## Variance               0.086   0.077   0.071   0.064   0.055
+## % of var.              4.822   4.340   4.011   3.619   3.094
+## Cumulative % of var.  84.937  89.277  93.288  96.906 100.000
 ## 
 ## Individuals (the 10 first)
 ##                                Dim.1    ctr   cos2    Dim.2    ctr   cos2    Dim.3    ctr   cos2  
@@ -30703,28 +30685,28 @@ La syntaxe ci-dessous permet, dans un premier temps, de calculer l'ACM, puis de 
 ## 26                          |  0.802  0.552  0.170 |  0.460  0.288  0.056 |  0.098  0.015  0.003 |
 ## 
 ## Categories (the 10 first)
-##                                 Dim.1     ctr    cos2  v.test     Dim.2     ctr    cos2  v.test  
-## Q3. Moins de 1 an           |  -0.731   2.704   0.068  -4.940 |   0.677   3.681   0.058   4.578 |
-## Q3. De 1 à 4 ans            |  -0.286   1.259   0.043  -3.921 |  -0.791  15.299   0.328 -10.855 |
-## Q3. De 5 à 9 ans            |   0.119   0.122   0.003   1.102 |   0.385   2.023   0.035   3.556 |
-## Q3. 10 ans ou plus          |   0.450   3.189   0.110   6.271 |   0.347   3.006   0.065   4.835 |
-## Q4. Moins de 10%            |  -0.562   7.874   0.395 -11.913 |   0.033   0.044   0.001   0.704 |
-## Q4. 10 à 25%                |   0.745   4.918   0.137   7.006 |  -0.765   8.220   0.144  -7.194 |
-## Q4. 26 à 50%                |   0.775   3.815   0.099   5.966 |   0.644   4.176   0.068   4.957 |
-## Q4. Plus de 50%             |   0.527   1.310   0.033   3.424 |   0.395   1.167   0.018   2.566 |
-## Q5. Oui                     |   0.950   9.194   0.265   9.760 |   0.557   5.008   0.091   5.720 |
-## Q5. Non                     |  -0.279   2.701   0.265  -9.760 |  -0.164   1.471   0.091  -5.720 |
-##                               Dim.3     ctr    cos2  v.test  
-## Q3. Moins de 1 an             0.627   3.636   0.050   4.236 |
-## Q3. De 1 à 4 ans              0.390   4.304   0.080   5.360 |
-## Q3. De 5 à 9 ans             -1.110  19.427   0.293 -10.261 |
-## Q3. 10 ans ou plus            0.023   0.016   0.000   0.327 |
-## Q4. Moins de 10%              0.070   0.221   0.006   1.477 |
-## Q4. 10 à 25%                 -0.109   0.191   0.003  -1.021 |
-## Q4. 26 à 50%                  0.154   0.276   0.004   1.187 |
-## Q4. Plus de 50%              -0.372   1.195   0.016  -2.417 |
-## Q5. Oui                      -0.126   0.294   0.005  -1.290 |
-## Q5. Non                       0.037   0.086   0.005   1.290 |
+##                                 Dim.1     ctr    cos2  v.test     Dim.2     ctr    cos2  v.test     Dim.3
+## Q3. Moins de 1 an           |  -0.731   2.704   0.068  -4.940 |   0.677   3.681   0.058   4.578 |   0.627
+## Q3. De 1 à 4 ans            |  -0.286   1.259   0.043  -3.921 |  -0.791  15.299   0.328 -10.855 |   0.390
+## Q3. De 5 à 9 ans            |   0.119   0.122   0.003   1.102 |   0.385   2.023   0.035   3.556 |  -1.110
+## Q3. 10 ans ou plus          |   0.450   3.189   0.110   6.271 |   0.347   3.006   0.065   4.835 |   0.023
+## Q4. Moins de 10%            |  -0.562   7.874   0.395 -11.913 |   0.033   0.044   0.001   0.704 |   0.070
+## Q4. 10 à 25%                |   0.745   4.918   0.137   7.006 |  -0.765   8.220   0.144  -7.194 |  -0.109
+## Q4. 26 à 50%                |   0.775   3.815   0.099   5.966 |   0.644   4.176   0.068   4.957 |   0.154
+## Q4. Plus de 50%             |   0.527   1.310   0.033   3.424 |   0.395   1.167   0.018   2.566 |  -0.372
+## Q5. Oui                     |   0.950   9.194   0.265   9.760 |   0.557   5.008   0.091   5.720 |  -0.126
+## Q5. Non                     |  -0.279   2.701   0.265  -9.760 |  -0.164   1.471   0.091  -5.720 |   0.037
+##                                 ctr    cos2  v.test  
+## Q3. Moins de 1 an             3.636   0.050   4.236 |
+## Q3. De 1 à 4 ans              4.304   0.080   5.360 |
+## Q3. De 5 à 9 ans             19.427   0.293 -10.261 |
+## Q3. 10 ans ou plus            0.016   0.000   0.327 |
+## Q4. Moins de 10%              0.221   0.006   1.477 |
+## Q4. 10 à 25%                  0.191   0.003  -1.021 |
+## Q4. 26 à 50%                  0.276   0.004   1.187 |
+## Q4. Plus de 50%               1.195   0.016  -2.417 |
+## Q5. Oui                       0.294   0.005  -1.290 |
+## Q5. Non                       0.086   0.005   1.290 |
 ## 
 ## Categorical variables (eta2)
 ##                               Dim.1 Dim.2 Dim.3  
