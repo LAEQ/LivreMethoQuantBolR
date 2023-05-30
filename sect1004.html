@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
+  <title>10.4 Exercices du chapitre 4 | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
   <meta name="description" content="Mettre le description du cours." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta property="og:title" content="10.4 Exercices du chapitre 4 | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Mettre le description du cours." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta name="twitter:title" content="10.4 Exercices du chapitre 4 | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   
   <meta name="twitter:description" content="Mettre le description du cours." />
   <meta name="twitter:image" content="/images/introduction/ImageCouverture.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sect015.html"/>
-<link rel="next" href="sect017.html"/>
+<link rel="prev" href="sect1003.html"/>
+<link rel="next" href="sect1005.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -451,379 +451,131 @@ Modélisation et analyse spatiale</a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sect016" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Quiz de révision du chapitre<a href="sect016.html#sect016" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="Chap01" class="card">
-<link type="text/javascript" src="libs/quizlib.1.0.1.min.js"/>
-<script>var Quiz=function(a,b){this.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),this.unansweredQuestionText="Question sans réponse !",this.container=document.getElementById(a),this.questions=[],this.result=new QuizResult,this.answers=b;for(var c=0;c<this.container.children.length;c++)this.container.children[c].classList.contains(Quiz.Classes.QUESTION)&&this.questions.push(this.container.children[c]);if(this.answers.length!=this.questions.length)throw new Error("Number of answers does not match number of questions!")};Quiz.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),Quiz.prototype.checkAnswers=function(a){void 0===a&&(a=!0);for(var b=[],c=[],d=0;d<this.questions.length;d++){var e=this.questions[d],f=this.answers[d],g=[];this.clearHighlights(e);for(var h,i=e.getElementsByClassName(Quiz.Classes.QUESTION_ANSWERS)[0].getElementsByTagName("input"),j=0;j<i.length;j++)h=i[j],"checkbox"===h.type||"radio"===h.type?h.checked&&g.push(h.value):""!==h.value&&g.push(h.value);1!=g.length||Array.isArray(f)?0===g.length&&b.push(e):g=g[0],c.push(Utils.compare(g,f))}if(0===b.length||!a)return this.result.setResults(c),!0;for(d=0;d<b.length;d++){var k=document.createElement("span");k.appendChild(document.createTextNode(this.unansweredQuestionText)),k.className=Quiz.Classes.QUESTION_WARNING,b[d].getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].appendChild(k)}return!1},Quiz.prototype.clearHighlights=function(a){for(var b=a.getElementsByClassName(Quiz.Classes.QUESTION_WARNING);b.length>0;)b[0].parentNode.removeChild(b[0]);var c,d=[a.getElementsByClassName(Quiz.Classes.CORRECT),a.getElementsByClassName(this.Classes.INCORRECT)];for(i=0;i<d.length;i++)for(;d[i].length>0;)c=d[i][0],c.classList.remove(Quiz.Classes.CORRECT),c.classList.remove(Quiz.Classes.INCORRECT);for(var e=a.getElementsByClassName(Quiz.Classes.TEMP);e.length>0;)e[0].parentNode.removeChild(e[0])},Quiz.prototype.highlightResults=function(a){for(var b,c=0;c<this.questions.length;c++)b=this.questions[c],b.getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].classList.add(this.result.results[c]?Quiz.Classes.CORRECT:Quiz.Classes.INCORRECT),void 0!==a&&a(this,b,c,this.result.results[c])};var QuizResult=function(){this.results=[],this.totalQuestions=0,this.score=0,this.scorePercent=0,this.scorePercentFormatted=0};QuizResult.prototype.setResults=function(a){this.results=a,this.totalQuestions=this.results.length,this.score=0;for(var b=0;b<this.results.length;b++)this.results[b]&&this.score++;this.scorePercent=this.score/this.totalQuestions,this.scorePercentFormatted=Math.floor(100*this.scorePercent)};var Utils=function(){};Utils.compare=function(a,b){if(a.length!=b.length)return!1;if(Array.isArray(a)&&Array.isArray(b)){for(var c=0;c<a.length;c++)if(a[c]!==b[c])return!1;return!0}return a===b};
-
-function showResults(quiz) {
-    // Check answers and continue if all questions have been answered
-    if (quiz.checkAnswers()) {
-        var quizScorePercent = quiz.result.scorePercentFormatted; // The unformatted percentage is a decimal in range 0 - 1
-        var quizResultElement = document.getElementById('quiz-result');
-        quizResultElement.style.display = 'block';
-        document.getElementById('quiz-percent').innerHTML = quizScorePercent.toString();
-
-        // Change background colour of results div according to score percent
-        if (quizScorePercent > 75) quizResultElement.style.backgroundColor = '#4caf50';
-        else if (quizScorePercent > 50) quizResultElement.style.backgroundColor = '#ffc107';
-        else if (quizScorePercent > 25) quizResultElement.style.backgroundColor = '#ff9800';
-        else if (quizScorePercent > 0) quizResultElement.style.backgroundColor = '#f44336';
-
-        // Highlight questions according to whether they were correctly answered. The callback allows us to highlight/show the correct answer
-        quiz.highlightResults(handleAnswers);
-    }
-}
-
-/** Callback for Quiz.highlightResults. Highlights the correct answers of incorrectly answered questions
- * Parameters are: the quiz object, the question element, question number, correctly answered flag
- */
-function handleAnswers(quiz, question, no, correct) {
-    if (!correct) {
-        var answers = question.getElementsByTagName('input');
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i].type === 'checkbox' || answers[i].type === 'radio'){
-                // If the current input element is part of the correct answer, highlight it
-                if (quiz.answers[no].indexOf(answers[i].value) > -1) {
-                    answers[i].parentNode.classList.add(Quiz.Classes.CORRECT);
-                }
-            } else {
-                // If the input is anything other than a checkbox or radio button, show the correct answer next to the element
-                var correctAnswer = document.createElement('span');
-                correctAnswer.classList.add(Quiz.Classes.CORRECT);
-                correctAnswer.classList.add(Quiz.Classes.TEMP); // quiz.checkAnswers will automatically remove elements with the temp class
-                correctAnswer.innerHTML = quiz.answers[no];
-                correctAnswer.style.marginLeft = '10px';
-                answers[i].parentNode.insertBefore(correctAnswer, answers[i].nextSibling);
-            }
-        }
-    }
-}
-
-  var quizz_Chap01;
-  window.onload = function() {
-    quizz_Chap01 = new Quiz('Chap01', [['1', '2', '3'],'2','2','2','1',['1', '2', '3', '4'],'2','2']);
-  };</script>
-<link rel="stylesheet" type="text/css" src="css/quizlib.min.css"/>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-La classe sf est composée de trois éléments :
+<div id="sect1004" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Exercices du chapitre 4<a href="sect1004.html#sect1004" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sect10041" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Exercice 1<a href="sect1004.html#sect10041" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sect1004.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb441-2"><a href="sect1004.html#cb441-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb441-3"><a href="sect1004.html#cb441-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbscan)</span>
+<span id="cb441-4"><a href="sect1004.html#cb441-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb441-5"><a href="sect1004.html#cb441-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation des données</span></span>
+<span id="cb441-6"><a href="sect1004.html#cb441-6" aria-hidden="true" tabindex="-1"></a>Collissions <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/chap04/collisions.gpkg&quot;</span>, </span>
+<span id="cb441-7"><a href="sect1004.html#cb441-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">layer =</span> <span class="st">&quot;CollisionsRoutieres&quot;</span>, </span>
+<span id="cb441-8"><a href="sect1004.html#cb441-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">quiet =</span> T)</span>
+<span id="cb441-9"><a href="sect1004.html#cb441-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Collisions impliquant au moins une personne à vélo en 2020 et 2021</span></span>
+<span id="cb441-10"><a href="sect1004.html#cb441-10" aria-hidden="true" tabindex="-1"></a>Coll.Velo <span class="ot">&lt;-</span> <span class="fu">subset</span>(Collissions,</span>
+<span id="cb441-11"><a href="sect1004.html#cb441-11" aria-hidden="true" tabindex="-1"></a>                    Collissions<span class="sc">$</span>NB_VICTIMES_VELO <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb441-12"><a href="sect1004.html#cb441-12" aria-hidden="true" tabindex="-1"></a>                      Collissions<span class="sc">$</span>AN <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>))</span>
+<span id="cb441-13"><a href="sect1004.html#cb441-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Coordonnées géographiques</span></span>
+<span id="cb441-14"><a href="sect1004.html#cb441-14" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(Coll.Velo)</span>
+<span id="cb441-15"><a href="sect1004.html#cb441-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Graphique pour la distance au quatrième voisin le plus proche</span></span>
+<span id="cb441-16"><a href="sect1004.html#cb441-16" aria-hidden="true" tabindex="-1"></a>DistKplusproche <span class="ot">&lt;-</span> <span class="fu">kNNdist</span>(xy, <span class="at">k =</span> <span class="dv">4</span>)</span>
+<span id="cb441-17"><a href="sect1004.html#cb441-17" aria-hidden="true" tabindex="-1"></a>DistKplusproche <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(DistKplusproche, <span class="at">decreasing =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb441-18"><a href="sect1004.html#cb441-18" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(DistKplusproche) <span class="ot">&lt;-</span> <span class="st">&quot;distance&quot;</span></span>
+<span id="cb441-19"><a href="sect1004.html#cb441-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DistKplusproche)<span class="sc">+</span></span>
+<span id="cb441-20"><a href="sect1004.html#cb441-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DistKplusproche), <span class="at">y =</span> distance), <span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb441-21"><a href="sect1004.html#cb441-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Points triés par ordre croissant selon la distance&quot;</span>,</span>
+<span id="cb441-22"><a href="sect1004.html#cb441-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Distance au quatrième point le plus proche&quot;</span>)<span class="sc">+</span></span>
+<span id="cb441-23"><a href="sect1004.html#cb441-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">250</span>, <span class="at">color =</span> <span class="st">&quot;#08306b&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb441-24"><a href="sect1004.html#cb441-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">500</span>, <span class="at">color =</span> <span class="st">&quot;#00441b&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb441-25"><a href="sect1004.html#cb441-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1000</span>, <span class="at">color =</span> <span class="st">&quot;#67000d&quot;</span>, <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb441-26"><a href="sect1004.html#cb441-26" aria-hidden="true" tabindex="-1"></a><span class="do">## DBSCAN avec les quatre distances</span></span>
+<span id="cb441-27"><a href="sect1004.html#cb441-27" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456789</span>)</span>
+<span id="cb441-28"><a href="sect1004.html#cb441-28" aria-hidden="true" tabindex="-1"></a>dbscan250  <span class="ot">&lt;-</span> <span class="fu">dbscan</span>(xy, <span class="at">eps =</span> <span class="dv">250</span>, <span class="at">minPts =</span> <span class="dv">4</span>)</span>
+<span id="cb441-29"><a href="sect1004.html#cb441-29" aria-hidden="true" tabindex="-1"></a>dbscan500  <span class="ot">&lt;-</span> <span class="fu">dbscan</span>(xy, <span class="at">eps =</span> <span class="dv">500</span>, <span class="at">minPts =</span> <span class="dv">4</span>)</span>
+<span id="cb441-30"><a href="sect1004.html#cb441-30" aria-hidden="true" tabindex="-1"></a>dbscan1000 <span class="ot">&lt;-</span> <span class="fu">dbscan</span>(xy, <span class="at">eps =</span> <span class="dv">1000</span>, <span class="at">minPts =</span> <span class="dv">4</span>)</span>
+<span id="cb441-31"><a href="sect1004.html#cb441-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Affichage des résultats</span></span>
+<span id="cb441-32"><a href="sect1004.html#cb441-32" aria-hidden="true" tabindex="-1"></a>dbscan250</span>
+<span id="cb441-33"><a href="sect1004.html#cb441-33" aria-hidden="true" tabindex="-1"></a>dbscan500</span>
+<span id="cb441-34"><a href="sect1004.html#cb441-34" aria-hidden="true" tabindex="-1"></a>dbscan1000</span>
+<span id="cb441-35"><a href="sect1004.html#cb441-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Enregistrement dans la couche de points sf Coll.Velo</span></span>
+<span id="cb441-36"><a href="sect1004.html#cb441-36" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan250 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(dbscan250<span class="sc">$</span>cluster)</span>
+<span id="cb441-37"><a href="sect1004.html#cb441-37" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan500 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(dbscan500<span class="sc">$</span>cluster)</span>
+<span id="cb441-38"><a href="sect1004.html#cb441-38" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan1000 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(dbscan1000<span class="sc">$</span>cluster)</span>
+<span id="cb441-39"><a href="sect1004.html#cb441-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-40"><a href="sect1004.html#cb441-40" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan250 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(Coll.Velo<span class="sc">$</span>dbscan250) <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb441-41"><a href="sect1004.html#cb441-41" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, Coll.Velo<span class="sc">$</span>dbscan250),</span>
+<span id="cb441-42"><a href="sect1004.html#cb441-42" aria-hidden="true" tabindex="-1"></a>                              Coll.Velo<span class="sc">$</span>dbscan250)</span>
+<span id="cb441-43"><a href="sect1004.html#cb441-43" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan500 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(Coll.Velo<span class="sc">$</span>dbscan500) <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb441-44"><a href="sect1004.html#cb441-44" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, Coll.Velo<span class="sc">$</span>dbscan500),</span>
+<span id="cb441-45"><a href="sect1004.html#cb441-45" aria-hidden="true" tabindex="-1"></a>                               Coll.Velo<span class="sc">$</span>dbscan500)</span>
+<span id="cb441-46"><a href="sect1004.html#cb441-46" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>dbscan1000 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(Coll.Velo<span class="sc">$</span>dbscan1000) <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb441-47"><a href="sect1004.html#cb441-47" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, Coll.Velo<span class="sc">$</span>dbscan1000),</span>
+<span id="cb441-48"><a href="sect1004.html#cb441-48" aria-hidden="true" tabindex="-1"></a>                               Coll.Velo<span class="sc">$</span>dbscan1000)</span>
+<span id="cb441-49"><a href="sect1004.html#cb441-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Extraction des agrégats</span></span>
+<span id="cb441-50"><a href="sect1004.html#cb441-50" aria-hidden="true" tabindex="-1"></a>Agregats.dbscan250  <span class="ot">&lt;-</span> <span class="fu">subset</span>(Coll.Velo, dbscan250 <span class="sc">!=</span> <span class="st">&quot;00&quot;</span>)</span>
+<span id="cb441-51"><a href="sect1004.html#cb441-51" aria-hidden="true" tabindex="-1"></a>Agregats.dbscan500  <span class="ot">&lt;-</span> <span class="fu">subset</span>(Coll.Velo, dbscan500 <span class="sc">!=</span> <span class="st">&quot;00&quot;</span>)</span>
+<span id="cb441-52"><a href="sect1004.html#cb441-52" aria-hidden="true" tabindex="-1"></a>Agregats.dbscan1000 <span class="ot">&lt;-</span> <span class="fu">subset</span>(Coll.Velo, dbscan1000 <span class="sc">!=</span> <span class="st">&quot;00&quot;</span>)</span>
+<span id="cb441-53"><a href="sect1004.html#cb441-53" aria-hidden="true" tabindex="-1"></a><span class="do">## Cartographie des résultats</span></span>
+<span id="cb441-54"><a href="sect1004.html#cb441-54" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span>
+<span id="cb441-55"><a href="sect1004.html#cb441-55" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Agregats.dbscan250)<span class="sc">+</span><span class="fu">tm_dots</span>(<span class="at">col=</span><span class="st">&quot;dbscan250&quot;</span>, <span class="at">size =</span> .<span class="dv">05</span>)</span>
+<span id="cb441-56"><a href="sect1004.html#cb441-56" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Agregats.dbscan500)<span class="sc">+</span><span class="fu">tm_dots</span>(<span class="at">col=</span><span class="st">&quot;dbscan500&quot;</span>, <span class="at">size =</span> .<span class="dv">05</span>)</span>
+<span id="cb441-57"><a href="sect1004.html#cb441-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Agregats.dbscan1000)<span class="sc">+</span><span class="fu">tm_dots</span>(<span class="at">col=</span><span class="st">&quot;dbscan1000&quot;</span>, <span class="at">size =</span> .<span class="dv">05</span>)</span></code></pre></div>
 </div>
-<div>
-Relisez au besoin la section <a href="sect011.html#sect011142">1.1.1.4.2</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>simple feature geometry (sfg) : géométrie d’une observation</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>simple feature column (sfc) : liste toutes les géométries d’une couche</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>data.fame : données attributaires</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>raster : données images</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="4"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions permet de reprojecter une couche géographique?
-</div>
-<div>
-Relisez au besoin le début de la section <a href="sect012.html#sect0121">1.2.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_crs(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_transform(x, crs)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_is_longlat(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions n’est pas une fonction géométrique sur une couche?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0122">1.2.2</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_bbox(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_point_on_surface(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_crop(x, y, xmin, ymin, xmax, ymax)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_centroid(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Comparativement à l’algorithme de Douglas et Peucker, que permet l’algorithme de Visvalingam lors de la simplification des contours?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01224">1.2.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Il est plus rapide.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Il permet de conserver les frontières.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Tous les points sont compris dans leur enveloppe convexe.
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01225">1.2.2.5</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Vrai</label>
-</td>
-<td>
-<input type="radio" name="q5" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Faux</label>
-</td>
-<td>
-<input type="radio" name="q5" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelles sont les quatre fonctions de mesures géométriques et de récupération des coordonnées géographiques?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0124">1.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_area(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_length(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_distance(x,y)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_coordinates(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelle est la différence entre les fonctions st_intersects(x, y) et st_intersection(x, y)?
-</div>
-<div>
-Relisez le deuxième encadré à la section <a href="sect012.html#sect0126">1.2.6</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Elles génèrent le même résultat.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première est une requête spatiale, la seconde renvoie l’intersection entre deux couches.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première renvoie l’intersection entre deux couches, la seconde est une requête spatiale.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle des fonctions sf permet d’exporter des données vectorielles?
-</div>
-<div>
-Relisez au besoin la section <a href="sect014.html#sect0141">1.4.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_read()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_write()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>writeRaster()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<button type="button" onclick="showResults(quizz_Chap01);">
-Vérifier votre résultat
-</button>
-<div id="quiz-result" class="card">
-<p><span id="quiz-percent"></span></p>
-</div>
+<div id="sect10042" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Exercice 2<a href="sect1004.html#sect10042" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="sect1004.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb442-2"><a href="sect1004.html#cb442-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb442-3"><a href="sect1004.html#cb442-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbscan)</span>
+<span id="cb442-4"><a href="sect1004.html#cb442-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb442-5"><a href="sect1004.html#cb442-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation des données</span></span>
+<span id="cb442-6"><a href="sect1004.html#cb442-6" aria-hidden="true" tabindex="-1"></a>Collissions <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/chap04/collisions.gpkg&quot;</span>, <span class="at">layer =</span> <span class="st">&quot;CollisionsRoutieres&quot;</span>)</span>
+<span id="cb442-7"><a href="sect1004.html#cb442-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Collisions impliquant au moins une personne à vélo en 2020 et 2021</span></span>
+<span id="cb442-8"><a href="sect1004.html#cb442-8" aria-hidden="true" tabindex="-1"></a>Coll.Velo <span class="ot">&lt;-</span> <span class="fu">subset</span>(Collissions,</span>
+<span id="cb442-9"><a href="sect1004.html#cb442-9" aria-hidden="true" tabindex="-1"></a>                    Collissions<span class="sc">$</span>NB_VICTIMES_VELO <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span></span>
+<span id="cb442-10"><a href="sect1004.html#cb442-10" aria-hidden="true" tabindex="-1"></a>                      Collissions<span class="sc">$</span>AN <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>))</span>
+<span id="cb442-11"><a href="sect1004.html#cb442-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coordonnées géographiques</span></span>
+<span id="cb442-12"><a href="sect1004.html#cb442-12" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(Coll.Velo)</span>
+<span id="cb442-13"><a href="sect1004.html#cb442-13" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>x <span class="ot">&lt;-</span> xy[,<span class="dv">1</span>]</span>
+<span id="cb442-14"><a href="sect1004.html#cb442-14" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>y <span class="ot">&lt;-</span> xy[,<span class="dv">2</span>]</span>
+<span id="cb442-15"><a href="sect1004.html#cb442-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Conversion du champ DT_ACCDN au format Date</span></span>
+<span id="cb442-16"><a href="sect1004.html#cb442-16" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>DT_ACCDN <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(Coll.Velo<span class="sc">$</span>DT_ACCDN)</span>
+<span id="cb442-17"><a href="sect1004.html#cb442-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ST-DBSCAN avec eps1 = 500, esp2 = 30 et minpts = 4</span></span>
+<span id="cb442-18"><a href="sect1004.html#cb442-18" aria-hidden="true" tabindex="-1"></a>Resultats.stdbscan <span class="ot">&lt;-</span> <span class="fu">stdbscan</span>(<span class="at">x =</span> Coll.Velo<span class="sc">$</span>x,</span>
+<span id="cb442-19"><a href="sect1004.html#cb442-19" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> Coll.Velo<span class="sc">$</span>y,</span>
+<span id="cb442-20"><a href="sect1004.html#cb442-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">time =</span> Coll.Velo<span class="sc">$</span>DT_ACCDN,</span>
+<span id="cb442-21"><a href="sect1004.html#cb442-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">eps1 =</span> <span class="dv">500</span>,</span>
+<span id="cb442-22"><a href="sect1004.html#cb442-22" aria-hidden="true" tabindex="-1"></a>                               <span class="at">eps2 =</span> <span class="dv">30</span>,</span>
+<span id="cb442-23"><a href="sect1004.html#cb442-23" aria-hidden="true" tabindex="-1"></a>                               <span class="at">minpts =</span> <span class="dv">4</span>)</span>
+<span id="cb442-24"><a href="sect1004.html#cb442-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Enregistrement des résultats ST-DBSCAN dans la couche de points sf</span></span>
+<span id="cb442-25"><a href="sect1004.html#cb442-25" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>stdbscan <span class="ot">&lt;-</span> <span class="fu">as.character</span>(Resultats.stdbscan<span class="sc">$</span>cluster)</span>
+<span id="cb442-26"><a href="sect1004.html#cb442-26" aria-hidden="true" tabindex="-1"></a>Coll.Velo<span class="sc">$</span>stdbscan <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(Coll.Velo<span class="sc">$</span>stdbscan) <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb442-27"><a href="sect1004.html#cb442-27" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, Coll.Velo<span class="sc">$</span>stdbscan),</span>
+<span id="cb442-28"><a href="sect1004.html#cb442-28" aria-hidden="true" tabindex="-1"></a>                             Coll.Velo<span class="sc">$</span>stdbscan)</span>
+<span id="cb442-29"><a href="sect1004.html#cb442-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Nombre de points par agrégat avec la fonction table</span></span>
+<span id="cb442-30"><a href="sect1004.html#cb442-30" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Coll.Velo<span class="sc">$</span>stdbscan)</span>
+<span id="cb442-31"><a href="sect1004.html#cb442-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Sélection des points appartenant à un agrégat avec la fonction subset</span></span>
+<span id="cb442-32"><a href="sect1004.html#cb442-32" aria-hidden="true" tabindex="-1"></a>Agregats <span class="ot">&lt;-</span> <span class="fu">subset</span>(Coll.Velo, stdbscan <span class="sc">!=</span> <span class="st">&quot;00&quot;</span>)</span>
+<span id="cb442-33"><a href="sect1004.html#cb442-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Conversion de la date au format POSIXct</span></span>
+<span id="cb442-34"><a href="sect1004.html#cb442-34" aria-hidden="true" tabindex="-1"></a>Agregats<span class="sc">$</span>dtPOSIXct <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(Agregats<span class="sc">$</span>DT_ACCDN, <span class="at">format =</span> <span class="st">&quot;%Y/%m/%d&quot;</span>)</span>
+<span id="cb442-35"><a href="sect1004.html#cb442-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Tableau récapitulatif</span></span>
+<span id="cb442-36"><a href="sect1004.html#cb442-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)  </span>
+<span id="cb442-37"><a href="sect1004.html#cb442-37" aria-hidden="true" tabindex="-1"></a>Tableau.stdbscan <span class="ot">&lt;-</span></span>
+<span id="cb442-38"><a href="sect1004.html#cb442-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>(Agregats) <span class="sc">%&gt;%</span></span>
+<span id="cb442-39"><a href="sect1004.html#cb442-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(stdbscan) <span class="sc">%&gt;%</span> </span>
+<span id="cb442-40"><a href="sect1004.html#cb442-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">points =</span> <span class="fu">n</span>(),</span>
+<span id="cb442-41"><a href="sect1004.html#cb442-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">date.min =</span> <span class="fu">min</span>(DT_ACCDN),</span>
+<span id="cb442-42"><a href="sect1004.html#cb442-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">date.max =</span> <span class="fu">max</span>(DT_ACCDN),</span>
+<span id="cb442-43"><a href="sect1004.html#cb442-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">intervalle.jours =</span> <span class="fu">as.numeric</span>(<span class="fu">max</span>(DT_ACCDN)<span class="sc">-</span><span class="fu">min</span>(DT_ACCDN)))</span>
+<span id="cb442-44"><a href="sect1004.html#cb442-44" aria-hidden="true" tabindex="-1"></a><span class="do">## Affichage du tableau</span></span>
+<span id="cb442-45"><a href="sect1004.html#cb442-45" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Tableau.stdbscan, <span class="at">n =</span> <span class="fu">nrow</span>(Tableau.stdbscan))</span>
+<span id="cb442-46"><a href="sect1004.html#cb442-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Construction du graphique</span></span>
+<span id="cb442-47"><a href="sect1004.html#cb442-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Agregats) <span class="sc">+</span> </span>
+<span id="cb442-48"><a href="sect1004.html#cb442-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> dtPOSIXct, </span>
+<span id="cb442-49"><a href="sect1004.html#cb442-49" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> stdbscan, </span>
+<span id="cb442-50"><a href="sect1004.html#cb442-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> stdbscan),</span>
+<span id="cb442-51"><a href="sect1004.html#cb442-51" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb442-52"><a href="sect1004.html#cb442-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_datetime</span>(<span class="at">date_labels =</span> <span class="st">&quot;%Y/%m&quot;</span>)<span class="sc">+</span></span>
+<span id="cb442-53"><a href="sect1004.html#cb442-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Temps&quot;</span>,</span>
+<span id="cb442-54"><a href="sect1004.html#cb442-54" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">&quot;Identifiant de l&#39;agrégat&quot;</span>,</span>
+<span id="cb442-55"><a href="sect1004.html#cb442-55" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;ST-DBSCAN avec Esp1 = 1000, Esp2 = 21 et MinPts = 4&quot;</span>)</span>
+<span id="cb442-56"><a href="sect1004.html#cb442-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Création d&#39;une couche pour les agrégats</span></span>
+<span id="cb442-57"><a href="sect1004.html#cb442-57" aria-hidden="true" tabindex="-1"></a>stdbcan.Agregats <span class="ot">&lt;-</span> <span class="fu">subset</span>(Coll.Velo, stdbscan <span class="sc">!=</span> <span class="st">&quot;00&quot;</span>)</span>
+<span id="cb442-58"><a href="sect1004.html#cb442-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Cartographie</span></span>
+<span id="cb442-59"><a href="sect1004.html#cb442-59" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span>
+<span id="cb442-60"><a href="sect1004.html#cb442-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(stdbcan.Agregats)<span class="sc">+</span></span>
+<span id="cb442-61"><a href="sect1004.html#cb442-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_dots</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">col=</span><span class="st">&quot;stdbscan&quot;</span>, <span class="at">size=</span>.<span class="dv">025</span>, <span class="at">title =</span> <span class="st">&quot;Agrégat&quot;</span>)</span></code></pre></div>
 </div>
 </div>
             </section>
@@ -831,8 +583,8 @@ Vérifier votre résultat
           </div>
         </div>
       </div>
-<a href="sect015.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sect017.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sect1003.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sect1005.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

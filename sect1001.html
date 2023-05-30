@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
+  <title>10.1 Exercices du chapitre 1 | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
   <meta name="description" content="Mettre le description du cours." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta property="og:title" content="10.1 Exercices du chapitre 1 | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Mettre le description du cours." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta name="twitter:title" content="10.1 Exercices du chapitre 1 | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   
   <meta name="twitter:description" content="Mettre le description du cours." />
   <meta name="twitter:image" content="/images/introduction/ImageCouverture.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sect015.html"/>
-<link rel="next" href="sect017.html"/>
+<link rel="prev" href="chap10.html"/>
+<link rel="next" href="sect1002.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -451,379 +451,93 @@ Modélisation et analyse spatiale</a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sect016" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Quiz de révision du chapitre<a href="sect016.html#sect016" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="Chap01" class="card">
-<link type="text/javascript" src="libs/quizlib.1.0.1.min.js"/>
-<script>var Quiz=function(a,b){this.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),this.unansweredQuestionText="Question sans réponse !",this.container=document.getElementById(a),this.questions=[],this.result=new QuizResult,this.answers=b;for(var c=0;c<this.container.children.length;c++)this.container.children[c].classList.contains(Quiz.Classes.QUESTION)&&this.questions.push(this.container.children[c]);if(this.answers.length!=this.questions.length)throw new Error("Number of answers does not match number of questions!")};Quiz.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),Quiz.prototype.checkAnswers=function(a){void 0===a&&(a=!0);for(var b=[],c=[],d=0;d<this.questions.length;d++){var e=this.questions[d],f=this.answers[d],g=[];this.clearHighlights(e);for(var h,i=e.getElementsByClassName(Quiz.Classes.QUESTION_ANSWERS)[0].getElementsByTagName("input"),j=0;j<i.length;j++)h=i[j],"checkbox"===h.type||"radio"===h.type?h.checked&&g.push(h.value):""!==h.value&&g.push(h.value);1!=g.length||Array.isArray(f)?0===g.length&&b.push(e):g=g[0],c.push(Utils.compare(g,f))}if(0===b.length||!a)return this.result.setResults(c),!0;for(d=0;d<b.length;d++){var k=document.createElement("span");k.appendChild(document.createTextNode(this.unansweredQuestionText)),k.className=Quiz.Classes.QUESTION_WARNING,b[d].getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].appendChild(k)}return!1},Quiz.prototype.clearHighlights=function(a){for(var b=a.getElementsByClassName(Quiz.Classes.QUESTION_WARNING);b.length>0;)b[0].parentNode.removeChild(b[0]);var c,d=[a.getElementsByClassName(Quiz.Classes.CORRECT),a.getElementsByClassName(this.Classes.INCORRECT)];for(i=0;i<d.length;i++)for(;d[i].length>0;)c=d[i][0],c.classList.remove(Quiz.Classes.CORRECT),c.classList.remove(Quiz.Classes.INCORRECT);for(var e=a.getElementsByClassName(Quiz.Classes.TEMP);e.length>0;)e[0].parentNode.removeChild(e[0])},Quiz.prototype.highlightResults=function(a){for(var b,c=0;c<this.questions.length;c++)b=this.questions[c],b.getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].classList.add(this.result.results[c]?Quiz.Classes.CORRECT:Quiz.Classes.INCORRECT),void 0!==a&&a(this,b,c,this.result.results[c])};var QuizResult=function(){this.results=[],this.totalQuestions=0,this.score=0,this.scorePercent=0,this.scorePercentFormatted=0};QuizResult.prototype.setResults=function(a){this.results=a,this.totalQuestions=this.results.length,this.score=0;for(var b=0;b<this.results.length;b++)this.results[b]&&this.score++;this.scorePercent=this.score/this.totalQuestions,this.scorePercentFormatted=Math.floor(100*this.scorePercent)};var Utils=function(){};Utils.compare=function(a,b){if(a.length!=b.length)return!1;if(Array.isArray(a)&&Array.isArray(b)){for(var c=0;c<a.length;c++)if(a[c]!==b[c])return!1;return!0}return a===b};
-
-function showResults(quiz) {
-    // Check answers and continue if all questions have been answered
-    if (quiz.checkAnswers()) {
-        var quizScorePercent = quiz.result.scorePercentFormatted; // The unformatted percentage is a decimal in range 0 - 1
-        var quizResultElement = document.getElementById('quiz-result');
-        quizResultElement.style.display = 'block';
-        document.getElementById('quiz-percent').innerHTML = quizScorePercent.toString();
-
-        // Change background colour of results div according to score percent
-        if (quizScorePercent > 75) quizResultElement.style.backgroundColor = '#4caf50';
-        else if (quizScorePercent > 50) quizResultElement.style.backgroundColor = '#ffc107';
-        else if (quizScorePercent > 25) quizResultElement.style.backgroundColor = '#ff9800';
-        else if (quizScorePercent > 0) quizResultElement.style.backgroundColor = '#f44336';
-
-        // Highlight questions according to whether they were correctly answered. The callback allows us to highlight/show the correct answer
-        quiz.highlightResults(handleAnswers);
-    }
-}
-
-/** Callback for Quiz.highlightResults. Highlights the correct answers of incorrectly answered questions
- * Parameters are: the quiz object, the question element, question number, correctly answered flag
- */
-function handleAnswers(quiz, question, no, correct) {
-    if (!correct) {
-        var answers = question.getElementsByTagName('input');
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i].type === 'checkbox' || answers[i].type === 'radio'){
-                // If the current input element is part of the correct answer, highlight it
-                if (quiz.answers[no].indexOf(answers[i].value) > -1) {
-                    answers[i].parentNode.classList.add(Quiz.Classes.CORRECT);
-                }
-            } else {
-                // If the input is anything other than a checkbox or radio button, show the correct answer next to the element
-                var correctAnswer = document.createElement('span');
-                correctAnswer.classList.add(Quiz.Classes.CORRECT);
-                correctAnswer.classList.add(Quiz.Classes.TEMP); // quiz.checkAnswers will automatically remove elements with the temp class
-                correctAnswer.innerHTML = quiz.answers[no];
-                correctAnswer.style.marginLeft = '10px';
-                answers[i].parentNode.insertBefore(correctAnswer, answers[i].nextSibling);
-            }
-        }
-    }
-}
-
-  var quizz_Chap01;
-  window.onload = function() {
-    quizz_Chap01 = new Quiz('Chap01', [['1', '2', '3'],'2','2','2','1',['1', '2', '3', '4'],'2','2']);
-  };</script>
-<link rel="stylesheet" type="text/css" src="css/quizlib.min.css"/>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-La classe sf est composée de trois éléments :
+<div id="sect1001" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Exercices du chapitre 1<a href="sect1001.html#sect1001" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sect10011" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Exercice 1<a href="sect1001.html#sect10011" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sect1001.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb431-2"><a href="sect1001.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation des deux couches</span></span>
+<span id="cb431-3"><a href="sect1001.html#cb431-3" aria-hidden="true" tabindex="-1"></a>Arrond <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shp/Arrondissements.shp&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb431-4"><a href="sect1001.html#cb431-4" aria-hidden="true" tabindex="-1"></a>Rues <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shp/Segments_de_rue.shp&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb431-5"><a href="sect1001.html#cb431-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Création d&#39;un objet sf pour l&#39;arrondissement des Nations : requête attributive</span></span>
+<span id="cb431-6"><a href="sect1001.html#cb431-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Arrondissements<span class="sc">$</span>NOM)</span>
+<span id="cb431-7"><a href="sect1001.html#cb431-7" aria-hidden="true" tabindex="-1"></a>Arrond.DesNations <span class="ot">&lt;-</span> <span class="fu">subset</span>(Arrondissements, </span>
+<span id="cb431-8"><a href="sect1001.html#cb431-8" aria-hidden="true" tabindex="-1"></a>                            NOM <span class="sc">==</span> <span class="st">&quot;Arrondissement des Nations&quot;</span>)</span>
+<span id="cb431-9"><a href="sect1001.html#cb431-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Découper les rues avec le polygone de l&#39;arrondissement des nations</span></span>
+<span id="cb431-10"><a href="sect1001.html#cb431-10" aria-hidden="true" tabindex="-1"></a>Rues.DesNations <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(Rues, Arrond.DesNations)</span></code></pre></div>
 </div>
-<div>
-Relisez au besoin la section <a href="sect011.html#sect011142">1.1.1.4.2</a>.
+<div id="sect10012" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Exercice 2<a href="sect1001.html#sect10012" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="sect1001.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb432-2"><a href="sect1001.html#cb432-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb432-3"><a href="sect1001.html#cb432-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation des deux couches</span></span>
+<span id="cb432-4"><a href="sect1001.html#cb432-4" aria-hidden="true" tabindex="-1"></a>AD.RMRSherb <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/gpkg/Recen2021Sherbrooke.gpkg&quot;</span>, </span>
+<span id="cb432-5"><a href="sect1001.html#cb432-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">layer =</span> <span class="st">&quot;SherbAD&quot;</span>, <span class="at">quiet =</span> T)</span>
+<span id="cb432-6"><a href="sect1001.html#cb432-6" aria-hidden="true" tabindex="-1"></a>HotelVille <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span>, <span class="at">Nom =</span> <span class="st">&quot;Hotel de Ville&quot;</span>,</span>
+<span id="cb432-7"><a href="sect1001.html#cb432-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">lon =</span> <span class="sc">-</span><span class="fl">71.89306</span>, <span class="at">lat =</span> <span class="fl">45.40417</span>)</span>
+<span id="cb432-8"><a href="sect1001.html#cb432-8" aria-hidden="true" tabindex="-1"></a>HotelVille <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(HotelVille, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>,<span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb432-9"><a href="sect1001.html#cb432-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Changement de projection avant de s&#39;assurer que les deux couches aient la même</span></span>
+<span id="cb432-10"><a href="sect1001.html#cb432-10" aria-hidden="true" tabindex="-1"></a>HotelVille <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(HotelVille, <span class="fu">st_crs</span>(AD.RMRSherb))</span>
+<span id="cb432-11"><a href="sect1001.html#cb432-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Ajout d&#39;un champ pour la distance en km à l&#39;hôtel de Ville pour les secteurs de recensement</span></span>
+<span id="cb432-12"><a href="sect1001.html#cb432-12" aria-hidden="true" tabindex="-1"></a>AD.RMRSherb<span class="sc">$</span>DistHVKM <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">st_distance</span>(AD.RMRSherb,HotelVille)) <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb432-13"><a href="sect1001.html#cb432-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Cartographie en quatre classes selon les quantiles</span></span>
+<span id="cb432-14"><a href="sect1001.html#cb432-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;plot&quot;</span>)</span>
+<span id="cb432-15"><a href="sect1001.html#cb432-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(AD.RMRSherb)<span class="sc">+</span></span>
+<span id="cb432-16"><a href="sect1001.html#cb432-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col=</span> <span class="st">&quot;DistHVKM&quot;</span>, </span>
+<span id="cb432-17"><a href="sect1001.html#cb432-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">&quot;Reds&quot;</span>,</span>
+<span id="cb432-18"><a href="sect1001.html#cb432-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">n=</span><span class="dv">4</span>,</span>
+<span id="cb432-19"><a href="sect1001.html#cb432-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;quantile&quot;</span>,</span>
+<span id="cb432-20"><a href="sect1001.html#cb432-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span><span class="st">&quot;Distance à l&#39;hôtel de Ville (km)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb432-21"><a href="sect1001.html#cb432-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 </div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>simple feature geometry (sfg) : géométrie d’une observation</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>simple feature column (sfc) : liste toutes les géométries d’une couche</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>data.fame : données attributaires</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>raster : données images</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="4"/>
-</td>
-</tr>
-</table>
+<div id="sect10013" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> Exercice 3<a href="sect1001.html#sect10013" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sect1001.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb433-2"><a href="sect1001.html#cb433-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation de la couche des divisions de recensement du Québec</span></span>
+<span id="cb433-3"><a href="sect1001.html#cb433-3" aria-hidden="true" tabindex="-1"></a>DR.Qc <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/gpkg/Recen2021Sherbrooke.gpkg&quot;</span>, </span>
+<span id="cb433-4"><a href="sect1001.html#cb433-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">layer =</span> <span class="st">&quot;DivisionsRecens2021&quot;</span>, <span class="at">quiet =</span> T)</span>
+<span id="cb433-5"><a href="sect1001.html#cb433-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation du fichier csv des division de recensement</span></span>
+<span id="cb433-6"><a href="sect1001.html#cb433-6" aria-hidden="true" tabindex="-1"></a>DR.Data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/tables/DRQC2021.csv&quot;</span>)</span>
+<span id="cb433-7"><a href="sect1001.html#cb433-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Jointure attributive avec le champ IDUGD</span></span>
+<span id="cb433-8"><a href="sect1001.html#cb433-8" aria-hidden="true" tabindex="-1"></a>DR.Qc <span class="ot">&lt;-</span> <span class="fu">merge</span>(DR.Qc, DR.Data, <span class="at">by=</span><span class="st">&quot;IDUGD&quot;</span>)</span>
+<span id="cb433-9"><a href="sect1001.html#cb433-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Il y a déja deux champs dans la table pour calculer la densité de population :</span></span>
+<span id="cb433-10"><a href="sect1001.html#cb433-10" aria-hidden="true" tabindex="-1"></a><span class="do">## SUPTERRE : superficie en km2</span></span>
+<span id="cb433-11"><a href="sect1001.html#cb433-11" aria-hidden="true" tabindex="-1"></a><span class="do">## DRpop_2021 : population en 2021</span></span>
+<span id="cb433-12"><a href="sect1001.html#cb433-12" aria-hidden="true" tabindex="-1"></a>DR.Qc<span class="sc">$</span>HabKm2 <span class="ot">&lt;-</span> DR.Qc<span class="sc">$</span>DRpop_2021 <span class="sc">/</span> DR.Qc<span class="sc">$</span>SUPTERRE</span>
+<span id="cb433-13"><a href="sect1001.html#cb433-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DR.Qc, <span class="at">n=</span><span class="dv">2</span>)</span>
+<span id="cb433-14"><a href="sect1001.html#cb433-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(DR.Qc<span class="sc">$</span>HabKm2)</span></code></pre></div>
 </div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions permet de reprojecter une couche géographique?
-</div>
-<div>
-Relisez au besoin le début de la section <a href="sect012.html#sect0121">1.2.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_crs(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_transform(x, crs)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_is_longlat(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions n’est pas une fonction géométrique sur une couche?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0122">1.2.2</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_bbox(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_point_on_surface(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_crop(x, y, xmin, ymin, xmax, ymax)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_centroid(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Comparativement à l’algorithme de Douglas et Peucker, que permet l’algorithme de Visvalingam lors de la simplification des contours?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01224">1.2.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Il est plus rapide.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Il permet de conserver les frontières.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Tous les points sont compris dans leur enveloppe convexe.
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01225">1.2.2.5</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Vrai</label>
-</td>
-<td>
-<input type="radio" name="q5" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Faux</label>
-</td>
-<td>
-<input type="radio" name="q5" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelles sont les quatre fonctions de mesures géométriques et de récupération des coordonnées géographiques?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0124">1.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_area(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_length(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_distance(x,y)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_coordinates(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelle est la différence entre les fonctions st_intersects(x, y) et st_intersection(x, y)?
-</div>
-<div>
-Relisez le deuxième encadré à la section <a href="sect012.html#sect0126">1.2.6</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Elles génèrent le même résultat.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première est une requête spatiale, la seconde renvoie l’intersection entre deux couches.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première renvoie l’intersection entre deux couches, la seconde est une requête spatiale.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle des fonctions sf permet d’exporter des données vectorielles?
-</div>
-<div>
-Relisez au besoin la section <a href="sect014.html#sect0141">1.4.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_read()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_write()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>writeRaster()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<button type="button" onclick="showResults(quizz_Chap01);">
-Vérifier votre résultat
-</button>
-<div id="quiz-result" class="card">
-<p><span id="quiz-percent"></span></p>
-</div>
+<div id="sect10014" class="section level3 hasAnchor" number="10.1.4">
+<h3><span class="header-section-number">10.1.4</span> Exercice 4<a href="sect1001.html#sect10014" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="sect1001.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb434-2"><a href="sect1001.html#cb434-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importation du réseau de rues</span></span>
+<span id="cb434-3"><a href="sect1001.html#cb434-3" aria-hidden="true" tabindex="-1"></a>Rues <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shp/Segments_de_rue.shp&quot;</span>, <span class="at">quiet=</span>T)</span>
+<span id="cb434-4"><a href="sect1001.html#cb434-4" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(Rues<span class="sc">$</span>TYPESEGMEN)</span>
+<span id="cb434-5"><a href="sect1001.html#cb434-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Sélection des tronçons autoroutiers</span></span>
+<span id="cb434-6"><a href="sect1001.html#cb434-6" aria-hidden="true" tabindex="-1"></a>Autoroutes <span class="ot">&lt;-</span> <span class="fu">subset</span>(Rues, TYPESEGMEN <span class="sc">==</span> <span class="st">&quot;Autoroute&quot;</span>)</span>
+<span id="cb434-7"><a href="sect1001.html#cb434-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Création d&#39;une couche sf pour le point avec les coordonnées</span></span>
+<span id="cb434-8"><a href="sect1001.html#cb434-8" aria-hidden="true" tabindex="-1"></a><span class="do">## en degrés (WGS84, EPSG : 4326) : -71.91688, 45.37579</span></span>
+<span id="cb434-9"><a href="sect1001.html#cb434-9" aria-hidden="true" tabindex="-1"></a>Point1_sf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span>,</span>
+<span id="cb434-10"><a href="sect1001.html#cb434-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">lon =</span> <span class="sc">-</span><span class="fl">71.91688</span>, <span class="at">lat =</span> <span class="fl">45.37579</span>)</span>
+<span id="cb434-11"><a href="sect1001.html#cb434-11" aria-hidden="true" tabindex="-1"></a>Point1_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(Point1_sf, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lon&quot;</span>,<span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb434-12"><a href="sect1001.html#cb434-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Changement de projection avant de s&#39;assurer que les deux couches aient la même</span></span>
+<span id="cb434-13"><a href="sect1001.html#cb434-13" aria-hidden="true" tabindex="-1"></a>Point1_sf <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(Point1_sf, <span class="fu">st_crs</span>(Autoroutes))</span>
+<span id="cb434-14"><a href="sect1001.html#cb434-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Trouver le tronçon autoroutier le plus proche</span></span>
+<span id="cb434-15"><a href="sect1001.html#cb434-15" aria-hidden="true" tabindex="-1"></a>PlusProche <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(Point1_sf, Autoroutes)</span>
+<span id="cb434-16"><a href="sect1001.html#cb434-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PlusProche)</span>
+<span id="cb434-17"><a href="sect1001.html#cb434-17" aria-hidden="true" tabindex="-1"></a>Point1_sf<span class="sc">$</span>AutoroutePlusProche <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">st_distance</span>(Point1_sf,</span>
+<span id="cb434-18"><a href="sect1001.html#cb434-18" aria-hidden="true" tabindex="-1"></a>                                                        Autoroutes[PlusProche,]))</span>
+<span id="cb434-19"><a href="sect1001.html#cb434-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Distance à l&#39;autoroute la plus proche :&quot;</span>, Point1_sf<span class="sc">$</span>AutoroutePlusProche, <span class="st">&quot;m.&quot;</span>)</span>
+<span id="cb434-20"><a href="sect1001.html#cb434-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Zone tampon </span></span>
+<span id="cb434-21"><a href="sect1001.html#cb434-21" aria-hidden="true" tabindex="-1"></a>ZoneTampon <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(Point1_sf, Point1_sf<span class="sc">$</span>AutoroutePlusProche)</span>
+<span id="cb434-22"><a href="sect1001.html#cb434-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Cartographie</span></span>
+<span id="cb434-23"><a href="sect1001.html#cb434-23" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span>
+<span id="cb434-24"><a href="sect1001.html#cb434-24" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(ZoneTampon)<span class="sc">+</span></span>
+<span id="cb434-25"><a href="sect1001.html#cb434-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col=</span> <span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
+<span id="cb434-26"><a href="sect1001.html#cb434-26" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Autoroutes)<span class="sc">+</span></span>
+<span id="cb434-27"><a href="sect1001.html#cb434-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb434-28"><a href="sect1001.html#cb434-28" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(Point1_sf)<span class="sc">+</span></span>
+<span id="cb434-29"><a href="sect1001.html#cb434-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col=</span> <span class="st">&quot;blue&quot;</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">size =</span> .<span class="dv">2</span>)</span></code></pre></div>
 </div>
 </div>
             </section>
@@ -831,8 +545,8 @@ Vérifier votre résultat
           </div>
         </div>
       </div>
-<a href="sect015.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sect017.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chap10.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sect1002.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

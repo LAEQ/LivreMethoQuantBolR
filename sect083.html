@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
+  <title>8.3 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
   <meta name="description" content="Mettre le description du cours." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta property="og:title" content="8.3 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/introduction/ImageCouverture.png" />
   <meta property="og:description" content="Mettre le description du cours." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.6 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta name="twitter:title" content="8.3 Quiz de révision du chapitre | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
   
   <meta name="twitter:description" content="Mettre le description du cours." />
   <meta name="twitter:image" content="/images/introduction/ImageCouverture.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sect015.html"/>
-<link rel="next" href="sect017.html"/>
+<link rel="prev" href="sect082.html"/>
+<link rel="next" href="sect084.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -451,388 +451,16 @@ Modélisation et analyse spatiale</a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sect016" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Quiz de révision du chapitre<a href="sect016.html#sect016" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="Chap01" class="card">
-<link type="text/javascript" src="libs/quizlib.1.0.1.min.js"/>
-<script>var Quiz=function(a,b){this.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),this.unansweredQuestionText="Question sans réponse !",this.container=document.getElementById(a),this.questions=[],this.result=new QuizResult,this.answers=b;for(var c=0;c<this.container.children.length;c++)this.container.children[c].classList.contains(Quiz.Classes.QUESTION)&&this.questions.push(this.container.children[c]);if(this.answers.length!=this.questions.length)throw new Error("Number of answers does not match number of questions!")};Quiz.Classes=Object.freeze({QUESTION:"quizlib-question",QUESTION_TITLE:"quizlib-question-title",QUESTION_ANSWERS:"quizlib-question-answers",QUESTION_WARNING:"quizlib-question-warning",CORRECT:"quizlib-correct",INCORRECT:"quizlib-incorrect",TEMP:"quizlib-temp"}),Quiz.prototype.checkAnswers=function(a){void 0===a&&(a=!0);for(var b=[],c=[],d=0;d<this.questions.length;d++){var e=this.questions[d],f=this.answers[d],g=[];this.clearHighlights(e);for(var h,i=e.getElementsByClassName(Quiz.Classes.QUESTION_ANSWERS)[0].getElementsByTagName("input"),j=0;j<i.length;j++)h=i[j],"checkbox"===h.type||"radio"===h.type?h.checked&&g.push(h.value):""!==h.value&&g.push(h.value);1!=g.length||Array.isArray(f)?0===g.length&&b.push(e):g=g[0],c.push(Utils.compare(g,f))}if(0===b.length||!a)return this.result.setResults(c),!0;for(d=0;d<b.length;d++){var k=document.createElement("span");k.appendChild(document.createTextNode(this.unansweredQuestionText)),k.className=Quiz.Classes.QUESTION_WARNING,b[d].getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].appendChild(k)}return!1},Quiz.prototype.clearHighlights=function(a){for(var b=a.getElementsByClassName(Quiz.Classes.QUESTION_WARNING);b.length>0;)b[0].parentNode.removeChild(b[0]);var c,d=[a.getElementsByClassName(Quiz.Classes.CORRECT),a.getElementsByClassName(this.Classes.INCORRECT)];for(i=0;i<d.length;i++)for(;d[i].length>0;)c=d[i][0],c.classList.remove(Quiz.Classes.CORRECT),c.classList.remove(Quiz.Classes.INCORRECT);for(var e=a.getElementsByClassName(Quiz.Classes.TEMP);e.length>0;)e[0].parentNode.removeChild(e[0])},Quiz.prototype.highlightResults=function(a){for(var b,c=0;c<this.questions.length;c++)b=this.questions[c],b.getElementsByClassName(Quiz.Classes.QUESTION_TITLE)[0].classList.add(this.result.results[c]?Quiz.Classes.CORRECT:Quiz.Classes.INCORRECT),void 0!==a&&a(this,b,c,this.result.results[c])};var QuizResult=function(){this.results=[],this.totalQuestions=0,this.score=0,this.scorePercent=0,this.scorePercentFormatted=0};QuizResult.prototype.setResults=function(a){this.results=a,this.totalQuestions=this.results.length,this.score=0;for(var b=0;b<this.results.length;b++)this.results[b]&&this.score++;this.scorePercent=this.score/this.totalQuestions,this.scorePercentFormatted=Math.floor(100*this.scorePercent)};var Utils=function(){};Utils.compare=function(a,b){if(a.length!=b.length)return!1;if(Array.isArray(a)&&Array.isArray(b)){for(var c=0;c<a.length;c++)if(a[c]!==b[c])return!1;return!0}return a===b};
-
-function showResults(quiz) {
-    // Check answers and continue if all questions have been answered
-    if (quiz.checkAnswers()) {
-        var quizScorePercent = quiz.result.scorePercentFormatted; // The unformatted percentage is a decimal in range 0 - 1
-        var quizResultElement = document.getElementById('quiz-result');
-        quizResultElement.style.display = 'block';
-        document.getElementById('quiz-percent').innerHTML = quizScorePercent.toString();
-
-        // Change background colour of results div according to score percent
-        if (quizScorePercent > 75) quizResultElement.style.backgroundColor = '#4caf50';
-        else if (quizScorePercent > 50) quizResultElement.style.backgroundColor = '#ffc107';
-        else if (quizScorePercent > 25) quizResultElement.style.backgroundColor = '#ff9800';
-        else if (quizScorePercent > 0) quizResultElement.style.backgroundColor = '#f44336';
-
-        // Highlight questions according to whether they were correctly answered. The callback allows us to highlight/show the correct answer
-        quiz.highlightResults(handleAnswers);
-    }
-}
-
-/** Callback for Quiz.highlightResults. Highlights the correct answers of incorrectly answered questions
- * Parameters are: the quiz object, the question element, question number, correctly answered flag
- */
-function handleAnswers(quiz, question, no, correct) {
-    if (!correct) {
-        var answers = question.getElementsByTagName('input');
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i].type === 'checkbox' || answers[i].type === 'radio'){
-                // If the current input element is part of the correct answer, highlight it
-                if (quiz.answers[no].indexOf(answers[i].value) > -1) {
-                    answers[i].parentNode.classList.add(Quiz.Classes.CORRECT);
-                }
-            } else {
-                // If the input is anything other than a checkbox or radio button, show the correct answer next to the element
-                var correctAnswer = document.createElement('span');
-                correctAnswer.classList.add(Quiz.Classes.CORRECT);
-                correctAnswer.classList.add(Quiz.Classes.TEMP); // quiz.checkAnswers will automatically remove elements with the temp class
-                correctAnswer.innerHTML = quiz.answers[no];
-                correctAnswer.style.marginLeft = '10px';
-                answers[i].parentNode.insertBefore(correctAnswer, answers[i].nextSibling);
-            }
-        }
-    }
-}
-
-  var quizz_Chap01;
-  window.onload = function() {
-    quizz_Chap01 = new Quiz('Chap01', [['1', '2', '3'],'2','2','2','1',['1', '2', '3', '4'],'2','2']);
-  };</script>
-<link rel="stylesheet" type="text/css" src="css/quizlib.min.css"/>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-La classe sf est composée de trois éléments :
-</div>
-<div>
-Relisez au besoin la section <a href="sect011.html#sect011142">1.1.1.4.2</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>simple feature geometry (sfg) : géométrie d’une observation</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>simple feature column (sfc) : liste toutes les géométries d’une couche</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>data.fame : données attributaires</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>raster : données images</label>
-</td>
-<td>
-<input type="checkbox" name="q1" value="4"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions permet de reprojecter une couche géographique?
-</div>
-<div>
-Relisez au besoin le début de la section <a href="sect012.html#sect0121">1.2.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_crs(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_transform(x, crs)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_is_longlat(x)</label>
-</td>
-<td>
-<input type="radio" name="q2" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle de ces fonctions n’est pas une fonction géométrique sur une couche?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0122">1.2.2</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_bbox(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_point_on_surface(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_crop(x, y, xmin, ymin, xmax, ymax)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_centroid(x)</label>
-</td>
-<td>
-<input type="radio" name="q3" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Comparativement à l’algorithme de Douglas et Peucker, que permet l’algorithme de Visvalingam lors de la simplification des contours?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01224">1.2.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Il est plus rapide.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Il permet de conserver les frontières.</label>
-</td>
-<td>
-<input type="radio" name="q4" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Tous les points sont compris dans leur enveloppe convexe.
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect01225">1.2.2.5</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Vrai</label>
-</td>
-<td>
-<input type="radio" name="q5" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>Faux</label>
-</td>
-<td>
-<input type="radio" name="q5" value="2"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelles sont les quatre fonctions de mesures géométriques et de récupération des coordonnées géographiques?
-</div>
-<div>
-Relisez au besoin la section <a href="sect012.html#sect0124">1.2.4</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_area(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_length(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_distance(x,y)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="3"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_coordinates(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="4"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_union(x)</label>
-</td>
-<td>
-<input type="checkbox" name="q6" value="5"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Quelle est la différence entre les fonctions st_intersects(x, y) et st_intersection(x, y)?
-</div>
-<div>
-Relisez le deuxième encadré à la section <a href="sect012.html#sect0126">1.2.6</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>Elles génèrent le même résultat.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première est une requête spatiale, la seconde renvoie l’intersection entre deux couches.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>La première renvoie l’intersection entre deux couches, la seconde est une requête spatiale.</label>
-</td>
-<td>
-<input type="radio" name="q7" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="card quizlib-question">
-<div class="quizlib-question-title">
-Laquelle des fonctions sf permet d’exporter des données vectorielles?
-</div>
-<div>
-Relisez au besoin la section <a href="sect014.html#sect0141">1.4.1</a>.
-</div>
-<div class="quizlib-question-answers">
-<table>
-<tr>
-<td>
-<label>st_read()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="1"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>st_write()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="2"/>
-</td>
-</tr>
-<tr>
-<td>
-<label>writeRaster()</label>
-</td>
-<td>
-<input type="radio" name="q8" value="3"/>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<button type="button" onclick="showResults(quizz_Chap01);">
-Vérifier votre résultat
-</button>
-<div id="quiz-result" class="card">
-<p><span id="quiz-percent"></span></p>
-</div>
-</div>
+<div id="sect083" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Quiz de révision du chapitre<a href="sect083.html#sect083" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="sect015.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sect017.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sect082.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sect084.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
