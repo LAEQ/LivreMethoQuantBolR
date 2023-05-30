@@ -54,7 +54,7 @@ h1.title {
 
 /* forme generale d'un bloc */
 
-.bloc_notes, .bloc_aller_loin, .bloc_astuce, .bloc_attention, .bloc_package, .bloc_objectif{
+.bloc_notes, .bloc_aller_loin, .bloc_astuce, .bloc_attention, .bloc_package, .bloc_objectif, .bloc_exercice{
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
   background: #f5f5f5 5px center/3em no-repeat;
@@ -97,6 +97,10 @@ h1.title {
   background-image: url("../images/package.png");
 }
 
+/* pour les exercices */
+.bloc_exercice{
+  background-image: url("../images/exercice.png");
+}
 
 /* pour les revision */
 .revision_rem{
