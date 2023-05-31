@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Manipulation de données raster | Notes de cours GMQ405 : Modélisation et analyse spatiale</title>
-  <meta name="description" content="Mettre le description du cours." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <title>1.3 Bases du langage R | Méthodes quantitatives en sciences sociales : un grand bol d’R</title>
+  <meta name="description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Manipulation de données raster | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta property="og:title" content="1.3 Bases du langage R | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/images/introduction/ImageCouverture.png" />
-  <meta property="og:description" content="Mettre le description du cours." />
-  
+  <meta property="og:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
+  <meta property="og:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="github-repo" content="LAEQ/livre_statistique_Phil_Jere" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Manipulation de données raster | Notes de cours GMQ405 : Modélisation et analyse spatiale" />
+  <meta name="twitter:title" content="1.3 Bases du langage R | Méthodes quantitatives en sciences sociales : un grand bol d’R" />
   
-  <meta name="twitter:description" content="Mettre le description du cours." />
-  <meta name="twitter:image" content="/images/introduction/ImageCouverture.png" />
+  <meta name="twitter:description" content="Ce livre vise à décrire une panoplie de méthodes quantitatives utilisées en sciences sociales avec le logiciel ouvert R. Il a d’ailleurs été écrit intégralement dans R avec rmarkdown. Le contenu est pensé pour être accessible à tous et toutes, même à ceux et celles n’ayant presque aucune base en statistique ou en programmation. Les personnes plus expérimentées y découvriront des sections sur des méthodes plus avancées comme les modèles à effets mixtes, les modèles multiniveaux, les modèles généralisés additifs ainsi que les méthodes factorielles et de classification. Ceux et celles souhaitant migrer progressivement d’un autre logiciel statistique vers R trouveront dans cet ouvrage les éléments pour une transition en douceur. La philosophie de ce livre est de donner toutes les clefs de compréhension et de mise en œuvre des méthodes abordées dans R. La présentation des méthodes est basée sur une approche compréhensive et intuitive plutôt que mathématique, sans pour autant que la rigueur statistique ne soit négligée." />
+  <meta name="twitter:image" content="https://laeq.github.io/LivreStatistique_website/images/introduction/ImageCouverture.png" />
 
-<meta name="author" content="Philippe Apparicio, département de géomatique appliquée, Université de Sherbrooke" />
+<meta name="author" content="Philippe Apparicio et Jérémy Gelb" />
 
 
 
@@ -51,16 +51,11 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/d3-4.13.0/d3.min.js"></script>
+<script src="libs/d3-tip-0.8.1/index.js"></script>
+<link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet" />
+<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -167,272 +162,401 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">GMQ405 : modélisation et analyse spatiale</a></li>
+<li><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d'R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a></li>
 <li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
 <ul>
 <li class="chapter" data-level="" data-path="sect001.html"><a href="sect001.html"><i class="fa fa-check"></i>Un manuel sous la forme d’une ressource éducative libre</a></li>
-<li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Comment lire ce manuel?</a></li>
-<li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment utiliser les données du livre pour reproduire les exemples?</a></li>
+<li class="chapter" data-level="" data-path="sect002.html"><a href="sect002.html"><i class="fa fa-check"></i>Un manuel conçu comme un projet collaboratif</a></li>
+<li class="chapter" data-level="" data-path="sect003.html"><a href="sect003.html"><i class="fa fa-check"></i>Comment lire ce livre?</a></li>
+<li class="chapter" data-level="" data-path="sect003B.html"><a href="sect003B.html"><i class="fa fa-check"></i>Comment utiliser les données du livre pour reproduire les exemples?</a></li>
 <li class="chapter" data-level="" data-path="sect004.html"><a href="sect004.html"><i class="fa fa-check"></i>Structure du livre</a></li>
-<li class="chapter" data-level="" data-path="sect005.html"><a href="sect005.html"><i class="fa fa-check"></i>Pourquoi faut-il programmer en géomatique appliquée et utiliser R?</a></li>
+<li class="chapter" data-level="" data-path="sect005.html"><a href="sect005.html"><i class="fa fa-check"></i>Pourquoi faut-il programmer en sciences sociales?</a></li>
 <li class="chapter" data-level="" data-path="sect006.html"><a href="sect006.html"><i class="fa fa-check"></i>Remerciements</a></li>
+<li class="chapter" data-level="" data-path="sect007.html"><a href="sect007.html"><i class="fa fa-check"></i>Dédicace toute spéciale à Cargo et Ambrée</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="auteurs.html"><a href="auteurs.html"><i class="fa fa-check"></i>À propos des auteurs</a></li>
 <li class="part"><span><b>I Découverte de R</b></span></li>
-<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Manipulation des données spatiales dans R</a>
+<li class="chapter" data-level="1" data-path="chap01.html"><a href="chap01.html"><i class="fa fa-check"></i><b>1</b> Prise en main de R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Importation de données géographiques</a>
+<li class="chapter" data-level="1.1" data-path="sect011.html"><a href="sect011.html"><i class="fa fa-check"></i><b>1.1</b> Histoire et philosophie de R</a></li>
+<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Environnement de travail</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="sect011.html"><a href="sect011.html#sect0111"><i class="fa fa-check"></i><b>1.1.1</b> Importation de données vectorielles</a></li>
-<li class="chapter" data-level="1.1.2" data-path="sect011.html"><a href="sect011.html#sect0112"><i class="fa fa-check"></i><b>1.1.2</b> Importation de données <em>raster</em></a></li>
+<li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Installation de R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Environnement RStudio</a></li>
+<li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect0123"><i class="fa fa-check"></i><b>1.2.3</b> Installation et chargement un <em>package</em></a></li>
+<li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#aide-disponible"><i class="fa fa-check"></i><b>1.2.4</b> Aide disponible</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="sect012.html"><a href="sect012.html"><i class="fa fa-check"></i><b>1.2</b> Manipulation de données vectorielles</a>
+<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Bases du langage R</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="sect012.html"><a href="sect012.html#sect0121"><i class="fa fa-check"></i><b>1.2.1</b> Fonctions relatives à la projection cartographique</a></li>
-<li class="chapter" data-level="1.2.2" data-path="sect012.html"><a href="sect012.html#sect0122"><i class="fa fa-check"></i><b>1.2.2</b> Fonctions d’opérations géométriques sur une couche</a></li>
-<li class="chapter" data-level="1.2.3" data-path="sect012.html"><a href="sect012.html#sect01213"><i class="fa fa-check"></i><b>1.2.3</b> Fonctions d’opérations géométriques entre deux couches</a></li>
-<li class="chapter" data-level="1.2.4" data-path="sect012.html"><a href="sect012.html#sect0124"><i class="fa fa-check"></i><b>1.2.4</b> Fonctions de mesures géométriques et de récupération des coordonnées géographiques</a></li>
-<li class="chapter" data-level="1.2.5" data-path="sect012.html"><a href="sect012.html#sect0125"><i class="fa fa-check"></i><b>1.2.5</b> Jointures spatiales</a></li>
-<li class="chapter" data-level="1.2.6" data-path="sect012.html"><a href="sect012.html#sect0126"><i class="fa fa-check"></i><b>1.2.6</b> Requêtes spatiales</a></li>
-<li class="chapter" data-level="1.2.7" data-path="sect012.html"><a href="sect012.html#sect0127"><i class="fa fa-check"></i><b>1.2.7</b> Manipulation des données attributaires</a></li>
+<li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> <em>Hello World</em>!</a></li>
+<li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Objets et expressions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="sect013.html"><a href="sect013.html#sect0_133"><i class="fa fa-check"></i><b>1.3.3</b> Fonctions et arguments</a></li>
+<li class="chapter" data-level="1.3.4" data-path="sect013.html"><a href="sect013.html#sect0134"><i class="fa fa-check"></i><b>1.3.4</b> Principaux types de données</a></li>
+<li class="chapter" data-level="1.3.5" data-path="sect013.html"><a href="sect013.html#sect0135"><i class="fa fa-check"></i><b>1.3.5</b> Opérateurs</a></li>
+<li class="chapter" data-level="1.3.6" data-path="sect013.html"><a href="sect013.html#sect0136"><i class="fa fa-check"></i><b>1.3.6</b> Structures de données</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="sect013.html"><a href="sect013.html"><i class="fa fa-check"></i><b>1.3</b> Manipulation de données <em>raster</em></a>
+<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Manipulation de données</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="sect013.html"><a href="sect013.html#sect0131"><i class="fa fa-check"></i><b>1.3.1</b> Mosaïquage et découpage d’images</a></li>
-<li class="chapter" data-level="1.3.2" data-path="sect013.html"><a href="sect013.html#sect0132"><i class="fa fa-check"></i><b>1.3.2</b> Requêtes attributaires sur des images</a></li>
+<li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Chargement d’un <em>DataFrame</em> depuis un fichier</a></li>
+<li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Manipulation d’un <em>DataFrame</em></a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="sect014.html"><a href="sect014.html"><i class="fa fa-check"></i><b>1.4</b> Exportation de données spatiales de R vers des formats géographiques</a>
+<li class="chapter" data-level="1.5" data-path="sect016.html"><a href="sect016.html"><i class="fa fa-check"></i><b>1.5</b> Code R bien structuré</a></li>
+<li class="chapter" data-level="1.6" data-path="sect017.html"><a href="sect017.html"><i class="fa fa-check"></i><b>1.6</b> Enregistrement des résultats</a></li>
+<li class="chapter" data-level="1.7" data-path="sect018.html"><a href="sect018.html"><i class="fa fa-check"></i><b>1.7</b> Session de travail</a></li>
+<li class="chapter" data-level="1.8" data-path="sect019.html"><a href="sect019.html"><i class="fa fa-check"></i><b>1.8</b> Conclusion et ressources pertinentes</a></li>
+<li class="chapter" data-level="1.9" data-path="sect0110.html"><a href="sect0110.html"><i class="fa fa-check"></i><b>1.9</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>II Analyses univariées et graphiques dans R</b></span></li>
+<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives univariées</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="sect014.html"><a href="sect014.html#sect0141"><i class="fa fa-check"></i><b>1.4.1</b> Exportation de données vectorielles <code>sf</code></a></li>
-<li class="chapter" data-level="1.4.2" data-path="sect014.html"><a href="sect014.html#sect0142"><i class="fa fa-check"></i><b>1.4.2</b> Exportation de données <em>raster</em></a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="sect015.html"><a href="sect015.html"><i class="fa fa-check"></i><b>1.5</b> Cartographie avec R</a>
+<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion et types de variable</a>
 <ul>
-<li class="chapter" data-level="1.5.1" data-path="sect015.html"><a href="sect015.html#sect0151"><i class="fa fa-check"></i><b>1.5.1</b> Manipulation des couches géométriques</a></li>
-<li class="chapter" data-level="1.5.2" data-path="sect015.html"><a href="sect015.html#sect0152"><i class="fa fa-check"></i><b>1.5.2</b> Cartes interactives</a></li>
-<li class="chapter" data-level="1.5.3" data-path="sect015.html"><a href="sect015.html#sect0153"><i class="fa fa-check"></i><b>1.5.3</b> Mise en page d’une carte</a></li>
-<li class="chapter" data-level="1.5.4" data-path="sect015.html"><a href="sect015.html#sect0154"><i class="fa fa-check"></i><b>1.5.4</b> Exportation d’une carte</a></li>
+<li class="chapter" data-level="2.1.1" data-path="sect021.html"><a href="sect021.html#sect0211"><i class="fa fa-check"></i><b>2.1.1</b> Notion de variable</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sect021.html"><a href="sect021.html#sect0212"><i class="fa fa-check"></i><b>2.1.2</b> Types de variables</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="sect016.html"><a href="sect016.html"><i class="fa fa-check"></i><b>1.6</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="1.7" data-path="sect017.html"><a href="sect017.html"><i class="fa fa-check"></i><b>1.7</b> Exercices de révision</a></li>
-</ul></li>
-<li class="part"><span><b>II Autocorrélation spatiale</b></span></li>
-<li class="chapter" data-level="2" data-path="chap02.html"><a href="chap02.html"><i class="fa fa-check"></i><b>2</b> Autocorrélation spatiale</a>
+<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Types de données</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="sect021.html"><a href="sect021.html"><i class="fa fa-check"></i><b>2.1</b> Notion d’autocorrélation spatiale</a></li>
-<li class="chapter" data-level="2.2" data-path="sect022.html"><a href="sect022.html"><i class="fa fa-check"></i><b>2.2</b> Matrices de pondération spatiale</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Matrices de contiguïté</a></li>
-<li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Matrices de proximité spatiale</a></li>
-<li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Standardisation des matrices de pondération spatiale en ligne</a></li>
-<li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Construction de matrices de pondération spatiale dans R</a></li>
+<li class="chapter" data-level="2.2.1" data-path="sect022.html"><a href="sect022.html#sect0221"><i class="fa fa-check"></i><b>2.2.1</b> Données secondaires <em>versus</em> données primaires</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sect022.html"><a href="sect022.html#sect0222"><i class="fa fa-check"></i><b>2.2.2</b> Données transversales <em>versus</em> données longitudinales</a></li>
+<li class="chapter" data-level="2.2.3" data-path="sect022.html"><a href="sect022.html#sect0223"><i class="fa fa-check"></i><b>2.2.3</b> Données spatiales versus données aspatiales</a></li>
+<li class="chapter" data-level="2.2.4" data-path="sect022.html"><a href="sect022.html#sect0224"><i class="fa fa-check"></i><b>2.2.4</b> Données individuelles <em>versus</em> données agrégées</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Autocorrélation spatiale globale</a>
+<li class="chapter" data-level="2.3" data-path="sect023.html"><a href="sect023.html"><i class="fa fa-check"></i><b>2.3</b> Statistique descriptive et statistique inférentielle</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Statistique du <em>I</em> de Moran</a></li>
-<li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="2.3.1" data-path="sect023.html"><a href="sect023.html#sect0231"><i class="fa fa-check"></i><b>2.3.1</b> Population, échantillon et inférence</a></li>
+<li class="chapter" data-level="2.3.2" data-path="sect023.html"><a href="sect023.html#sect0232"><i class="fa fa-check"></i><b>2.3.2</b> Deux grandes familles de méthodes statistiques</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Autocorrélation spatiale locale</a>
+<li class="chapter" data-level="2.4" data-path="sect024.html"><a href="sect024.html"><i class="fa fa-check"></i><b>2.4</b> Notion de distribution</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#sect0241"><i class="fa fa-check"></i><b>2.4.1</b> Statistiques locales de Getis et Ord : repérer les points chauds et froids</a></li>
-<li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#sect0242"><i class="fa fa-check"></i><b>2.4.2</b> Version locale du <em>I</em> de Moran</a></li>
-<li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#sect0243"><i class="fa fa-check"></i><b>2.4.3</b> Nuage de points du <em>I</em> de Moran d’Anselin</a></li>
+<li class="chapter" data-level="2.4.1" data-path="sect024.html"><a href="sect024.html#définition-générale"><i class="fa fa-check"></i><b>2.4.1</b> Définition générale</a></li>
+<li class="chapter" data-level="2.4.2" data-path="sect024.html"><a href="sect024.html#anatomie-dune-distribution"><i class="fa fa-check"></i><b>2.4.2</b> Anatomie d’une distribution</a></li>
+<li class="chapter" data-level="2.4.3" data-path="sect024.html"><a href="sect024.html#principales-distributions"><i class="fa fa-check"></i><b>2.4.3</b> Principales distributions</a></li>
+<li class="chapter" data-level="2.4.4" data-path="sect024.html"><a href="sect024.html#conclusion-sur-les-distributions"><i class="fa fa-check"></i><b>2.4.4</b> Conclusion sur les distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Exercices de révision</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Méthodes de répartition ponctuelle</a>
+<li class="chapter" data-level="2.5" data-path="sect025.html"><a href="sect025.html"><i class="fa fa-check"></i><b>2.5</b> Statistiques descriptives sur des variables quantitatives</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Fréquence et densité des points dans l’espace d’étude</a></li>
-<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Analyse centrographique</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0311"><i class="fa fa-check"></i><b>3.2.1</b> Paramètres de tendance centrale d’un semis de points</a></li>
-<li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0312"><i class="fa fa-check"></i><b>3.2.2</b> Paramètres de dispersion d’un semis de points</a></li>
-<li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0313"><i class="fa fa-check"></i><b>3.2.3</b> Mise en œuvre de l’analyse centrographique dans R</a></li>
+<li class="chapter" data-level="2.5.1" data-path="sect025.html"><a href="sect025.html#sect0251"><i class="fa fa-check"></i><b>2.5.1</b> Paramètres de tendance centrale</a></li>
+<li class="chapter" data-level="2.5.2" data-path="sect025.html"><a href="sect025.html#sect0252"><i class="fa fa-check"></i><b>2.5.2</b> Paramètres de position</a></li>
+<li class="chapter" data-level="2.5.3" data-path="sect025.html"><a href="sect025.html#sect0253"><i class="fa fa-check"></i><b>2.5.3</b> Paramètres de dispersion</a></li>
+<li class="chapter" data-level="2.5.4" data-path="sect025.html"><a href="sect025.html#sect0254"><i class="fa fa-check"></i><b>2.5.4</b> Paramètres de forme</a></li>
+<li class="chapter" data-level="2.5.5" data-path="sect025.html"><a href="sect025.html#sect0255"><i class="fa fa-check"></i><b>2.5.5</b> Transformation des variables</a></li>
+<li class="chapter" data-level="2.5.6" data-path="sect025.html"><a href="sect025.html#sect0256"><i class="fa fa-check"></i><b>2.5.6</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Forme d’un semis de points</a>
+<li class="chapter" data-level="2.6" data-path="sect026.html"><a href="sect026.html"><i class="fa fa-check"></i><b>2.6</b> Statistiques descriptives sur des variables qualitatives et semi-qualitatives</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Méthode du plus proche voisin</a></li>
-<li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Méthode des quadrats</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sect026.html"><a href="sect026.html#sect0261"><i class="fa fa-check"></i><b>2.6.1</b> Fréquences</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sect026.html"><a href="sect026.html#sect0262"><i class="fa fa-check"></i><b>2.6.2</b> Mise en œuvre dans R</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="sect034.html"><a href="sect034.html"><i class="fa fa-check"></i><b>3.4</b> Identification des agrégats spatiaux</a>
+<li class="chapter" data-level="2.7" data-path="sect027.html"><a href="sect027.html"><i class="fa fa-check"></i><b>2.7</b> Statistiques descriptives pondérées : pour aller plus loin</a></li>
+<li class="chapter" data-level="2.8" data-path="sect028.html"><a href="sect028.html"><i class="fa fa-check"></i><b>2.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap03.html"><a href="chap03.html"><i class="fa fa-check"></i><b>3</b> Magie des graphiques</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="sect034.html"><a href="sect034.html#sect0341"><i class="fa fa-check"></i><b>3.4.1</b> Cartographie de la densité dans une maille irrégulière</a></li>
-<li class="chapter" data-level="3.4.2" data-path="sect034.html"><a href="sect034.html#sect0342"><i class="fa fa-check"></i><b>3.4.2</b> Cartographie de la densité dans une maille régulière</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="sect035.html"><a href="sect035.html"><i class="fa fa-check"></i><b>3.5</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Exercices de révision</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Méthodes de détection d’agrégats spatiaux et spatio-temporels</a>
+<li class="chapter" data-level="3.1" data-path="sect031.html"><a href="sect031.html"><i class="fa fa-check"></i><b>3.1</b> Philosophie du ggplot2</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Agrégats d’entités spatiales ponctuelles</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="sect041.html"><a href="sect041.html#sect0411"><i class="fa fa-check"></i><b>4.1.1</b> DBSCAN : agrégats spatiaux</a></li>
-<li class="chapter" data-level="4.1.2" data-path="sect041.html"><a href="sect041.html#sect0412"><i class="fa fa-check"></i><b>4.1.2</b> ST-DBSCAN : agrégats spatio-temporels</a></li>
-<li class="chapter" data-level="4.1.3" data-path="sect041.html"><a href="sect041.html#sect0414"><i class="fa fa-check"></i><b>4.1.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="3.1.1" data-path="sect031.html"><a href="sect031.html#sect0311"><i class="fa fa-check"></i><b>3.1.1</b> Grammaire</a></li>
+<li class="chapter" data-level="3.1.2" data-path="sect031.html"><a href="sect031.html#sect0312"><i class="fa fa-check"></i><b>3.1.2</b> Types de géométries</a></li>
+<li class="chapter" data-level="3.1.3" data-path="sect031.html"><a href="sect031.html#sect0313"><i class="fa fa-check"></i><b>3.1.3</b> Habillage</a></li>
+<li class="chapter" data-level="3.1.4" data-path="sect031.html"><a href="sect031.html#utilisation-des-thèmes"><i class="fa fa-check"></i><b>3.1.4</b> Utilisation des thèmes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="sect031.html"><a href="sect031.html#sect0314"><i class="fa fa-check"></i><b>3.1.5</b> Composition d’une figure avec plusieurs graphiques</a></li>
+<li class="chapter" data-level="3.1.6" data-path="sect031.html"><a href="sect031.html#sect0315"><i class="fa fa-check"></i><b>3.1.6</b> Couleur</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Méthodes de balayage de Kulldorff</a>
+<li class="chapter" data-level="3.2" data-path="sect032.html"><a href="sect032.html"><i class="fa fa-check"></i><b>3.2</b> Principaux graphiques</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Objectifs de la méthode, types d’analyses, de modèles et d’agrégats</a></li>
-<li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Principes de base de la méthode</a></li>
-<li class="chapter" data-level="4.2.3" data-path="sect042.html"><a href="sect042.html#sect043"><i class="fa fa-check"></i><b>4.2.3</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="3.2.1" data-path="sect032.html"><a href="sect032.html#sect0321"><i class="fa fa-check"></i><b>3.2.1</b> Histogramme</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sect032.html"><a href="sect032.html#sect0322"><i class="fa fa-check"></i><b>3.2.2</b> Graphique de densité</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sect032.html"><a href="sect032.html#sect0323"><i class="fa fa-check"></i><b>3.2.3</b> Nuage de points</a></li>
+<li class="chapter" data-level="3.2.4" data-path="sect032.html"><a href="sect032.html#sect0324"><i class="fa fa-check"></i><b>3.2.4</b> Graphique en ligne</a></li>
+<li class="chapter" data-level="3.2.5" data-path="sect032.html"><a href="sect032.html#sect0325"><i class="fa fa-check"></i><b>3.2.5</b> Boîte à moustaches</a></li>
+<li class="chapter" data-level="3.2.6" data-path="sect032.html"><a href="sect032.html#sect0326"><i class="fa fa-check"></i><b>3.2.6</b> Graphique en violon</a></li>
+<li class="chapter" data-level="3.2.7" data-path="sect032.html"><a href="sect032.html#sect0327"><i class="fa fa-check"></i><b>3.2.7</b> Graphique en barre</a></li>
+<li class="chapter" data-level="3.2.8" data-path="sect032.html"><a href="sect032.html#sect0328"><i class="fa fa-check"></i><b>3.2.8</b> Graphique circulaire</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.3</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="4.4" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.4</b> Exercices de révision</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Mesures d’accessibilité spatiale selon les différents de modes de transport</a>
+<li class="chapter" data-level="3.3" data-path="sect033.html"><a href="sect033.html"><i class="fa fa-check"></i><b>3.3</b> Graphiques spéciaux</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Notions relatives à l’analyse de réseau</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="sect051.html"><a href="sect051.html#sect0511"><i class="fa fa-check"></i><b>5.1.1</b> Définition d’un réseau</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sect051.html"><a href="sect051.html#sect0512"><i class="fa fa-check"></i><b>5.1.2</b> Principaux problèmes résolus en analyse de réseau</a></li>
-<li class="chapter" data-level="5.1.3" data-path="sect051.html"><a href="sect051.html#sect0513"><i class="fa fa-check"></i><b>5.1.3</b> Analyse de réseau et entités polygonales</a></li>
+<li class="chapter" data-level="3.3.1" data-path="sect033.html"><a href="sect033.html#sect0331"><i class="fa fa-check"></i><b>3.3.1</b> Graphique en radar</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sect033.html"><a href="sect033.html#sect0332"><i class="fa fa-check"></i><b>3.3.2</b> Diagramme d’accord</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sect033.html"><a href="sect033.html#sect0333"><i class="fa fa-check"></i><b>3.3.3</b> Nuage de mots</a></li>
+<li class="chapter" data-level="3.3.4" data-path="sect033.html"><a href="sect033.html#sect0334"><i class="fa fa-check"></i><b>3.3.4</b> Carte proportionnelle</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Construction d’un réseau avec R5R</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="sect052.html"><a href="sect052.html#sect0521"><i class="fa fa-check"></i><b>5.2.1</b> Extraction des données spatiales pour R5R</a></li>
-<li class="chapter" data-level="5.2.2" data-path="sect052.html"><a href="sect052.html#sect0522"><i class="fa fa-check"></i><b>5.2.2</b> Construction du réseau avec R5R</a></li>
-<li class="chapter" data-level="5.2.3" data-path="sect052.html"><a href="sect052.html#sect0523"><i class="fa fa-check"></i><b>5.2.3</b> Calcul d’itinéraires avec R5R selon le mode de transport</a></li>
-<li class="chapter" data-level="5.2.4" data-path="sect052.html"><a href="sect052.html#sect0524"><i class="fa fa-check"></i><b>5.2.4</b> Calcul de matrices OD selon différents modes de transport</a></li>
+<li class="chapter" data-level="3.4" data-path="sect034.html"><a href="sect034.html"><i class="fa fa-check"></i><b>3.4</b> Cartes</a></li>
+<li class="chapter" data-level="3.5" data-path="sect035.html"><a href="sect035.html"><i class="fa fa-check"></i><b>3.5</b> Exportation des graphiques</a></li>
+<li class="chapter" data-level="3.6" data-path="sect036.html"><a href="sect036.html"><i class="fa fa-check"></i><b>3.6</b> Conclusion sur les graphiques</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mesures d’accessibilité</a>
+<li class="part"><span><b>III Analyses bivariées</b></span></li>
+<li class="chapter" data-level="4" data-path="chap04.html"><a href="chap04.html"><i class="fa fa-check"></i><b>4</b> Relation linéaire entre deux variables quantitatives</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="sect053.html"><a href="sect053.html#sect0531"><i class="fa fa-check"></i><b>5.3.1</b> Notion d’accessibilité</a></li>
-<li class="chapter" data-level="5.3.2" data-path="sect053.html"><a href="sect053.html#sect0532"><i class="fa fa-check"></i><b>5.3.2</b> Accessibilité spatiale potentielle</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Mesures d’accessibilité spatiale potentielle dans R</a>
+<li class="chapter" data-level="4.1" data-path="sect041.html"><a href="sect041.html"><i class="fa fa-check"></i><b>4.1</b> Bref retour sur le postulat de la relation linéaire</a></li>
+<li class="chapter" data-level="4.2" data-path="sect042.html"><a href="sect042.html"><i class="fa fa-check"></i><b>4.2</b> Covariance</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="sect054.html"><a href="sect054.html#sect0541"><i class="fa fa-check"></i><b>5.4.1</b> Accessibilité spatiale potentielle aux supermarchés</a></li>
-<li class="chapter" data-level="5.4.2" data-path="sect054.html"><a href="sect054.html#sect0542"><i class="fa fa-check"></i><b>5.4.2</b> Accessibilité spatiale potentielle aux patinoires extérieures</a></li>
+<li class="chapter" data-level="4.2.1" data-path="sect042.html"><a href="sect042.html#sect0421"><i class="fa fa-check"></i><b>4.2.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sect042.html"><a href="sect042.html#sect0422"><i class="fa fa-check"></i><b>4.2.2</b> Interprétation</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="sect043.html"><a href="sect043.html"><i class="fa fa-check"></i><b>4.3</b> Corrélation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="sect043.html"><a href="sect043.html#sect0431"><i class="fa fa-check"></i><b>4.3.1</b> Formulation</a></li>
+<li class="chapter" data-level="4.3.2" data-path="sect043.html"><a href="sect043.html#sect0432"><i class="fa fa-check"></i><b>4.3.2</b> Interprétation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="sect043.html"><a href="sect043.html#sect0433"><i class="fa fa-check"></i><b>4.3.3</b> Corrélations pour des variables anormalement distribuées (coefficient de Spearman, tau de Kendall)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="sect043.html"><a href="sect043.html#sect0434"><i class="fa fa-check"></i><b>4.3.4</b> Corrélations robustes (<em>Biweight midcorrelation</em>, <em>Percentage bend correlation</em> et la corrélation <em>pi</em> de Shepherd)</a></li>
+<li class="chapter" data-level="4.3.5" data-path="sect043.html"><a href="sect043.html#sect0435"><i class="fa fa-check"></i><b>4.3.5</b> Significativité des coefficients de corrélation</a></li>
+<li class="chapter" data-level="4.3.6" data-path="sect043.html"><a href="sect043.html#sect0436"><i class="fa fa-check"></i><b>4.3.6</b> Corrélation partielle</a></li>
+<li class="chapter" data-level="4.3.7" data-path="sect043.html"><a href="sect043.html#sect0437"><i class="fa fa-check"></i><b>4.3.7</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.3.8" data-path="sect043.html"><a href="sect043.html#sect0438"><i class="fa fa-check"></i><b>4.3.8</b> Comment rapporter des valeurs de corrélations?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="sect044.html"><a href="sect044.html"><i class="fa fa-check"></i><b>4.4</b> Régression linéaire simple</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="sect044.html"><a href="sect044.html#sect0441"><i class="fa fa-check"></i><b>4.4.1</b> Principe de base de la régression linéaire simple</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sect044.html"><a href="sect044.html#sect0442"><i class="fa fa-check"></i><b>4.4.2</b> Formulation de la droite de régression des moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sect044.html"><a href="sect044.html#sect0443"><i class="fa fa-check"></i><b>4.4.3</b> Mesure de la qualité d’ajustement du modèle</a></li>
+<li class="chapter" data-level="4.4.4" data-path="sect044.html"><a href="sect044.html#sect0444"><i class="fa fa-check"></i><b>4.4.4</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="4.4.5" data-path="sect044.html"><a href="sect044.html#sect0445"><i class="fa fa-check"></i><b>4.4.5</b> Comment rapporter une régression linéaire simple</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="sect045.html"><a href="sect045.html"><i class="fa fa-check"></i><b>4.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap05.html"><a href="chap05.html"><i class="fa fa-check"></i><b>5</b> Relation entre deux variables qualitatives</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sect051.html"><a href="sect051.html"><i class="fa fa-check"></i><b>5.1</b> Construction de tableau de contingence</a></li>
+<li class="chapter" data-level="5.2" data-path="sect052.html"><a href="sect052.html"><i class="fa fa-check"></i><b>5.2</b> Test du khi-deux</a></li>
+<li class="chapter" data-level="5.3" data-path="sect053.html"><a href="sect053.html"><i class="fa fa-check"></i><b>5.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="5.4" data-path="sect054.html"><a href="sect054.html"><i class="fa fa-check"></i><b>5.4</b> Interprétation d’un tableau de contingence</a></li>
 <li class="chapter" data-level="5.5" data-path="sect055.html"><a href="sect055.html"><i class="fa fa-check"></i><b>5.5</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Introduction aux modèles de régression spatiale</a>
+<li class="chapter" data-level="6" data-path="chap06.html"><a href="chap06.html"><i class="fa fa-check"></i><b>6</b> Relation entre une variable qualitative et une variable quantitative</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Modèles spatiaux autorégressifs</a>
+<li class="chapter" data-level="6.1" data-path="sect061.html"><a href="sect061.html"><i class="fa fa-check"></i><b>6.1</b> Relation entre une variable quantitative et une variable qualitative à deux modalités</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Les différents modèles</a></li>
-<li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Quel modèle choisir?</a></li>
+<li class="chapter" data-level="6.1.1" data-path="sect061.html"><a href="sect061.html#sect0611"><i class="fa fa-check"></i><b>6.1.1</b> Test <em>t</em> et ses différentes variantes</a></li>
+<li class="chapter" data-level="6.1.2" data-path="sect061.html"><a href="sect061.html#sect0612"><i class="fa fa-check"></i><b>6.1.2</b> Test non paramétrique de Wilcoxon</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Autres approches de modélisation</a>
+<li class="chapter" data-level="6.2" data-path="sect062.html"><a href="sect062.html"><i class="fa fa-check"></i><b>6.2</b> Relation entre une variable quantitative et une variable qualitative à plus de deux modalités</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Modèles généralisées additifs (GAM) avec une <em>spline</em> bivariée sur les coordonnées géographiques</a></li>
-<li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> GAM avec <em>random markov field</em></a></li>
-<li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Modèle SEVM (<em>Spatial eigenvector mapping</em>)</a></li>
+<li class="chapter" data-level="6.2.1" data-path="sect062.html"><a href="sect062.html#sect0621"><i class="fa fa-check"></i><b>6.2.1</b> Analyse de variance</a></li>
+<li class="chapter" data-level="6.2.2" data-path="sect062.html"><a href="sect062.html#sect0622"><i class="fa fa-check"></i><b>6.2.2</b> Test non paramétrique de Kruskal-Wallis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="sect062.html"><a href="sect062.html#sect0623"><i class="fa fa-check"></i><b>6.2.3</b> Mise en œuvre dans R</a></li>
+<li class="chapter" data-level="6.2.4" data-path="sect062.html"><a href="sect062.html#sect0624"><i class="fa fa-check"></i><b>6.2.4</b> Comment rapporter les résultats d’une ANOVA et du test de Kruskal-Wallis</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sect063.html"><a href="sect063.html"><i class="fa fa-check"></i><b>6.3</b> Modèles géographiquement pondérées</a>
+<li class="chapter" data-level="6.3" data-path="sect063.html"><a href="sect063.html"><i class="fa fa-check"></i><b>6.3</b> Conclusion sur la troisième partie</a></li>
+<li class="chapter" data-level="6.4" data-path="sect064.html"><a href="sect064.html"><i class="fa fa-check"></i><b>6.4</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>IV Modèles de régression</b></span></li>
+<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Régression linéaire multiple</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="sect063.html"><a href="sect063.html#sect0631"><i class="fa fa-check"></i><b>6.3.1</b> Modèles GWR classique</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sect063.html"><a href="sect063.html#sect0632"><i class="fa fa-check"></i><b>6.3.2</b> Modèles GWR mixte</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sect063.html"><a href="sect063.html#sect0633"><i class="fa fa-check"></i><b>6.3.3</b> Modèle MGWR</a></li>
-<li class="chapter" data-level="6.3.4" data-path="sect063.html"><a href="sect063.html#sect0634"><i class="fa fa-check"></i><b>6.3.4</b> Modèles MGWR avec autocorrélation spatiale (MGWRSAR)</a></li>
-<li class="chapter" data-level="6.3.5" data-path="sect063.html"><a href="sect063.html#sect0635"><i class="fa fa-check"></i><b>6.3.5</b> Extension des modèles GWR pour des variables binaires et de comptages</a></li>
-<li class="chapter" data-level="6.3.6" data-path="sect063.html"><a href="sect063.html#sect0636"><i class="fa fa-check"></i><b>6.3.6</b> Autres extensions de la GWR : un aperçu</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="chap07.html"><a href="chap07.html"><i class="fa fa-check"></i><b>7</b> Introduction aux méthodes de classification spatiale</a>
+<li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Objectifs de la régression linéaire multiple et construction d’un modèle de régression</a></li>
+<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Principes de base de la régression linéaire multiple</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="sect071.html"><a href="sect071.html"><i class="fa fa-check"></i><b>7.1</b> Bref retour sur les méthodes de classification non-supervisées</a>
+<li class="chapter" data-level="7.2.1" data-path="sect072.html"><a href="sect072.html#sect0721"><i class="fa fa-check"></i><b>7.2.1</b> Un peu d’équations…</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sect072.html"><a href="sect072.html#sect0722"><i class="fa fa-check"></i><b>7.2.2</b> Hypothèses de la régression linéaire multiple</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Évaluation de la qualité d’ajustement du modèle</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="sect071.html"><a href="sect071.html#sect0711"><i class="fa fa-check"></i><b>7.1.1</b> Classification ascendante hiérarchique</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sect071.html"><a href="sect071.html#sect0712"><i class="fa fa-check"></i><b>7.1.2</b> <em>K-means</em></a></li>
-<li class="chapter" data-level="7.1.3" data-path="sect071.html"><a href="sect071.html#sect0713"><i class="fa fa-check"></i><b>7.1.3</b> <em>Fuzzy c-means</em></a></li>
+<li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Mesures de la qualité d’un modèle</a></li>
+<li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> Comparaison des modèles incrémentiels</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sect072.html"><a href="sect072.html"><i class="fa fa-check"></i><b>7.2</b> Méthodes de classification par agrégation intégrant une constrainte spatiale</a></li>
-<li class="chapter" data-level="7.3" data-path="sect073.html"><a href="sect073.html"><i class="fa fa-check"></i><b>7.3</b> Classifications spatiales</a>
+<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Différentes mesures pour les coefficients de régression</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="sect073.html"><a href="sect073.html#sect0731"><i class="fa fa-check"></i><b>7.3.1</b> Classification ascendante hiérarchique spatiale (<em>ClustGeo</em>)</a></li>
-<li class="chapter" data-level="7.3.2" data-path="sect073.html"><a href="sect073.html#sect0732"><i class="fa fa-check"></i><b>7.3.2</b> <em>Spatial fuzzy c-means</em> (SFCM)</a></li>
+<li class="chapter" data-level="7.4.1" data-path="sect074.html"><a href="sect074.html#sect0741"><i class="fa fa-check"></i><b>7.4.1</b> Coefficients de régression : évaluer l’effet des variables indépendantes</a></li>
+<li class="chapter" data-level="7.4.2" data-path="sect074.html"><a href="sect074.html#sect0742"><i class="fa fa-check"></i><b>7.4.2</b> Coefficients de régression standardisés : repérer les variables les plus importantes du modèle</a></li>
+<li class="chapter" data-level="7.4.3" data-path="sect074.html"><a href="sect074.html#sect0743"><i class="fa fa-check"></i><b>7.4.3</b> Significativité des coefficients de régression : valeurs de <em>t</em> et de <em>p</em></a></li>
+<li class="chapter" data-level="7.4.4" data-path="sect074.html"><a href="sect074.html#sect0744"><i class="fa fa-check"></i><b>7.4.4</b> Intervalle de confiance des coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="sect074.html"><a href="sect074.html"><i class="fa fa-check"></i><b>7.4</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Exercices de révision</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Méthodes d’interpolation spatiale</a>
+<li class="chapter" data-level="7.5" data-path="sect075.html"><a href="sect075.html"><i class="fa fa-check"></i><b>7.5</b> Introduction de variables explicatives particulières</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Méthodes déterministes</a>
+<li class="chapter" data-level="7.5.1" data-path="sect075.html"><a href="sect075.html#sect0751"><i class="fa fa-check"></i><b>7.5.1</b> Exploration des relations non linéaires</a></li>
+<li class="chapter" data-level="7.5.2" data-path="sect075.html"><a href="sect075.html#sect0752"><i class="fa fa-check"></i><b>7.5.2</b> Variable indépendante qualitative dichotomique</a></li>
+<li class="chapter" data-level="7.5.3" data-path="sect075.html"><a href="sect075.html#sect0753"><i class="fa fa-check"></i><b>7.5.3</b> Variable indépendante qualitative polytomique</a></li>
+<li class="chapter" data-level="7.5.4" data-path="sect075.html"><a href="sect075.html#sect0754"><i class="fa fa-check"></i><b>7.5.4</b> Variables d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="sect076.html"><a href="sect076.html"><i class="fa fa-check"></i><b>7.6</b> Diagnostics de la régression</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Interpolation polynomiale locale</a></li>
-<li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Interpolation de l’inverse à la distance - <em>IDW</em></a></li>
+<li class="chapter" data-level="7.6.1" data-path="sect076.html"><a href="sect076.html#sect0761"><i class="fa fa-check"></i><b>7.6.1</b> Nombre d’observations</a></li>
+<li class="chapter" data-level="7.6.2" data-path="sect076.html"><a href="sect076.html#sect0762"><i class="fa fa-check"></i><b>7.6.2</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.6.3" data-path="sect076.html"><a href="sect076.html#sect0763"><i class="fa fa-check"></i><b>7.6.3</b> Linéarité et homoscédasticité des résidus</a></li>
+<li class="chapter" data-level="7.6.4" data-path="sect076.html"><a href="sect076.html#sect0764"><i class="fa fa-check"></i><b>7.6.4</b> Absence de multicolinéarité excessive</a></li>
+<li class="chapter" data-level="7.6.5" data-path="sect076.html"><a href="sect076.html#sect0766"><i class="fa fa-check"></i><b>7.6.5</b> Absence d’observations aberrantes</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Méthodes géostatistiques</a>
+<li class="chapter" data-level="7.7" data-path="sect077.html"><a href="sect077.html"><i class="fa fa-check"></i><b>7.7</b> Mise en œuvre dans R</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Krigeage simple</a></li>
-<li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Krigeage universel</a></li>
-<li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Co-krigeage</a></li>
-<li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Krigeage résiduel</a></li>
+<li class="chapter" data-level="7.7.1" data-path="sect077.html"><a href="sect077.html#sect0771"><i class="fa fa-check"></i><b>7.7.1</b> Fonctions <code>lm</code>, <code>summary()</code> et <code>confint()</code></a></li>
+<li class="chapter" data-level="7.7.2" data-path="sect077.html"><a href="sect077.html#sect0772"><i class="fa fa-check"></i><b>7.7.2</b> Comparaison des modèles</a></li>
+<li class="chapter" data-level="7.7.3" data-path="sect077.html"><a href="sect077.html#sect0773"><i class="fa fa-check"></i><b>7.7.3</b> Diagnostic sur un modèle</a></li>
+<li class="chapter" data-level="7.7.4" data-path="sect077.html"><a href="sect077.html#sect0774"><i class="fa fa-check"></i><b>7.7.4</b> Graphiques pour les effets marginaux</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="sect083.html"><a href="sect083.html"><i class="fa fa-check"></i><b>8.3</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="8.4" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.4</b> Exercices de révision</a></li>
+<li class="chapter" data-level="7.8" data-path="sect078.html"><a href="sect078.html"><i class="fa fa-check"></i><b>7.8</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Analyse spatiale par l’analyse d’images</a>
+<li class="chapter" data-level="8" data-path="chap08.html"><a href="chap08.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires généralisées (GLM)</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Fonctions mathématiques, booléennes, relationnelles et conditionnelles sur les images</a>
+<li class="chapter" data-level="8.1" data-path="sect081.html"><a href="sect081.html"><i class="fa fa-check"></i><b>8.1</b> Qu’est qu’un modèle GLM?</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Fonctions mathématiques</a></li>
-<li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Fonctions booléennes</a></li>
-<li class="chapter" data-level="9.1.3" data-path="sect091.html"><a href="sect091.html#sect0913"><i class="fa fa-check"></i><b>9.1.3</b> Fonctions relationnelles</a></li>
-<li class="chapter" data-level="9.1.4" data-path="sect091.html"><a href="sect091.html#sect0914"><i class="fa fa-check"></i><b>9.1.4</b> Fonctions conditionnelles</a></li>
+<li class="chapter" data-level="8.1.1" data-path="sect081.html"><a href="sect081.html#sect0811"><i class="fa fa-check"></i><b>8.1.1</b> Formulation d’un GLM</a></li>
+<li class="chapter" data-level="8.1.2" data-path="sect081.html"><a href="sect081.html#sect0812"><i class="fa fa-check"></i><b>8.1.2</b> Autres distributions et rôle de la fonction de lien</a></li>
+<li class="chapter" data-level="8.1.3" data-path="sect081.html"><a href="sect081.html#sect0813"><i class="fa fa-check"></i><b>8.1.3</b> Conditions d’application</a></li>
+<li class="chapter" data-level="8.1.4" data-path="sect081.html"><a href="sect081.html#sect0814"><i class="fa fa-check"></i><b>8.1.4</b> Résidus et déviance</a></li>
+<li class="chapter" data-level="8.1.5" data-path="sect081.html"><a href="sect081.html#sect0815"><i class="fa fa-check"></i><b>8.1.5</b> Vérification l’ajustement</a></li>
+<li class="chapter" data-level="8.1.6" data-path="sect081.html"><a href="sect081.html#sect0816"><i class="fa fa-check"></i><b>8.1.6</b> Comparaison de deux modèles GLM</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Fonctions locales, focales, zonales et globales sur les images</a>
+<li class="chapter" data-level="8.2" data-path="sect082.html"><a href="sect082.html"><i class="fa fa-check"></i><b>8.2</b> Modèles GLM pour des variables qualitatives</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> Fonctions locales</a></li>
-<li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0922"><i class="fa fa-check"></i><b>9.2.2</b> Fonctions focales</a></li>
-<li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.3</b> Fonctions zonales</a></li>
-<li class="chapter" data-level="9.2.4" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.4</b> Fonctions globales</a></li>
+<li class="chapter" data-level="8.2.1" data-path="sect082.html"><a href="sect082.html#sect0821"><i class="fa fa-check"></i><b>8.2.1</b> Modèle logistique binomial</a></li>
+<li class="chapter" data-level="8.2.2" data-path="sect082.html"><a href="sect082.html#sect0822"><i class="fa fa-check"></i><b>8.2.2</b> Modèle probit binomial</a></li>
+<li class="chapter" data-level="8.2.3" data-path="sect082.html"><a href="sect082.html#sect0823"><i class="fa fa-check"></i><b>8.2.3</b> Modèle logistique des cotes proportionnelles</a></li>
+<li class="chapter" data-level="8.2.4" data-path="sect082.html"><a href="sect082.html#sect0824"><i class="fa fa-check"></i><b>8.2.4</b> Modèle logistique multinomial</a></li>
+<li class="chapter" data-level="8.2.5" data-path="sect082.html"><a href="sect082.html#conclusion-sur-les-modèles-pour-des-variables-qualitatives"><i class="fa fa-check"></i><b>8.2.5</b> Conclusion sur les modèles pour des variables qualitatives</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Fonctions de surface</a>
+<li class="chapter" data-level="8.3" data-path="sect084.html"><a href="sect084.html"><i class="fa fa-check"></i><b>8.3</b> Modèles GLM pour des variables de comptage</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Élevation</a></li>
-<li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Pente</a></li>
-<li class="chapter" data-level="9.3.3" data-path="sect093.html"><a href="sect093.html#sect0933"><i class="fa fa-check"></i><b>9.3.3</b> Ombrage</a></li>
-<li class="chapter" data-level="9.3.4" data-path="sect093.html"><a href="sect093.html#sect0934"><i class="fa fa-check"></i><b>9.3.4</b> Visibilité</a></li>
-<li class="chapter" data-level="9.3.5" data-path="sect093.html"><a href="sect093.html#sect0935"><i class="fa fa-check"></i><b>9.3.5</b> Sky-view factor Index</a></li>
+<li class="chapter" data-level="8.3.1" data-path="sect084.html"><a href="sect084.html#sect0841"><i class="fa fa-check"></i><b>8.3.1</b> Modèle de Poisson</a></li>
+<li class="chapter" data-level="8.3.2" data-path="sect084.html"><a href="sect084.html#sect0842"><i class="fa fa-check"></i><b>8.3.2</b> Modèle binomial négatif</a></li>
+<li class="chapter" data-level="8.3.3" data-path="sect084.html"><a href="sect084.html#sect0843"><i class="fa fa-check"></i><b>8.3.3</b> Modèle de Poisson avec excès fixe de zéros</a></li>
+<li class="chapter" data-level="8.3.4" data-path="sect084.html"><a href="sect084.html#sect0844"><i class="fa fa-check"></i><b>8.3.4</b> Modèle de Poisson avec excès ajusté de zéros</a></li>
+<li class="chapter" data-level="8.3.5" data-path="sect084.html"><a href="sect084.html#sect0845"><i class="fa fa-check"></i><b>8.3.5</b> Conclusion sur les modèles destinés à des variables de comptage</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Données spatiotemporelles en mode image</a>
+<li class="chapter" data-level="8.4" data-path="sect085.html"><a href="sect085.html"><i class="fa fa-check"></i><b>8.4</b> Modèles GLM pour des variables continues</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#fichier-netcdf"><i class="fa fa-check"></i><b>9.4.1</b> Fichier <em>netCDF</em></a></li>
-<li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#exemples-applicatifs"><i class="fa fa-check"></i><b>9.4.2</b> Exemples applicatifs</a></li>
+<li class="chapter" data-level="8.4.1" data-path="sect085.html"><a href="sect085.html#sect0851"><i class="fa fa-check"></i><b>8.4.1</b> Modèle GLM gaussien</a></li>
+<li class="chapter" data-level="8.4.2" data-path="sect085.html"><a href="sect085.html#sect0852"><i class="fa fa-check"></i><b>8.4.2</b> Modèle GLM avec une distribution de Student</a></li>
+<li class="chapter" data-level="8.4.3" data-path="sect085.html"><a href="sect085.html#sect0853"><i class="fa fa-check"></i><b>8.4.3</b> Modèle GLM avec distribution Gamma</a></li>
+<li class="chapter" data-level="8.4.4" data-path="sect085.html"><a href="sect085.html#sect0854"><i class="fa fa-check"></i><b>8.4.4</b> Modèle GLM avec une distribution bêta</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Quiz de révision du chapitre</a></li>
-<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Exercices de révision</a></li>
+<li class="chapter" data-level="8.5" data-path="sect086.html"><a href="sect086.html"><i class="fa fa-check"></i><b>8.5</b> Conclusion sur les modèles linéaires généralisés</a></li>
+<li class="chapter" data-level="8.6" data-path="sect087.html"><a href="sect087.html"><i class="fa fa-check"></i><b>8.6</b> Quiz de révision du chapitre</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Correction des exercices</a>
+<li class="chapter" data-level="9" data-path="chap09.html"><a href="chap09.html"><i class="fa fa-check"></i><b>9</b> Régressions à effets mixtes (GLMM)</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="sect1001.html"><a href="sect1001.html"><i class="fa fa-check"></i><b>10.1</b> Exercices du chapitre 1</a>
+<li class="chapter" data-level="9.1" data-path="sect091.html"><a href="sect091.html"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="sect1001.html"><a href="sect1001.html#sect10011"><i class="fa fa-check"></i><b>10.1.1</b> Exercice 1</a></li>
-<li class="chapter" data-level="10.1.2" data-path="sect1001.html"><a href="sect1001.html#sect10012"><i class="fa fa-check"></i><b>10.1.2</b> Exercice 2</a></li>
-<li class="chapter" data-level="10.1.3" data-path="sect1001.html"><a href="sect1001.html#sect10013"><i class="fa fa-check"></i><b>10.1.3</b> Exercice 3</a></li>
-<li class="chapter" data-level="10.1.4" data-path="sect1001.html"><a href="sect1001.html#sect10014"><i class="fa fa-check"></i><b>10.1.4</b> Exercice 4</a></li>
+<li class="chapter" data-level="9.1.1" data-path="sect091.html"><a href="sect091.html#sect0911"><i class="fa fa-check"></i><b>9.1.1</b> Indépendance des observations et effets de groupes</a></li>
+<li class="chapter" data-level="9.1.2" data-path="sect091.html"><a href="sect091.html#sect0912"><i class="fa fa-check"></i><b>9.1.2</b> Terminologie: effets fixes et effets aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="sect1002.html"><a href="sect1002.html"><i class="fa fa-check"></i><b>10.2</b> Exercices du chapitre 2</a>
+<li class="chapter" data-level="9.2" data-path="sect092.html"><a href="sect092.html"><i class="fa fa-check"></i><b>9.2</b> Principes de base des GLMM</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="sect1002.html"><a href="sect1002.html#sect10021"><i class="fa fa-check"></i><b>10.2.1</b> Exercice 1</a></li>
-<li class="chapter" data-level="10.2.2" data-path="sect1002.html"><a href="sect1002.html#sect10022"><i class="fa fa-check"></i><b>10.2.2</b> Exercice 2</a></li>
-<li class="chapter" data-level="10.2.3" data-path="sect1002.html"><a href="sect1002.html#sect10023"><i class="fa fa-check"></i><b>10.2.3</b> Exercice 3</a></li>
-<li class="chapter" data-level="10.2.4" data-path="sect1002.html"><a href="sect1002.html#sect10024"><i class="fa fa-check"></i><b>10.2.4</b> Exercice 4</a></li>
+<li class="chapter" data-level="9.2.1" data-path="sect092.html"><a href="sect092.html#sect0921"><i class="fa fa-check"></i><b>9.2.1</b> GLMM avec constantes aléatoires</a></li>
+<li class="chapter" data-level="9.2.2" data-path="sect092.html"><a href="sect092.html#sect0923"><i class="fa fa-check"></i><b>9.2.2</b> GLMM avec pentes aléatoires</a></li>
+<li class="chapter" data-level="9.2.3" data-path="sect092.html"><a href="sect092.html#sect0924"><i class="fa fa-check"></i><b>9.2.3</b> GLMM avec constantes et pentes aléatoires</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="sect1003.html"><a href="sect1003.html"><i class="fa fa-check"></i><b>10.3</b> Exercices du chapitre 3</a>
+<li class="chapter" data-level="9.3" data-path="sect093.html"><a href="sect093.html"><i class="fa fa-check"></i><b>9.3</b> Conditions d’application des GLMM</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="sect1003.html"><a href="sect1003.html#sect10031"><i class="fa fa-check"></i><b>10.3.1</b> Exercice 1</a></li>
-<li class="chapter" data-level="10.3.2" data-path="sect1003.html"><a href="sect1003.html#sect10032"><i class="fa fa-check"></i><b>10.3.2</b> Exercice 2</a></li>
-<li class="chapter" data-level="10.3.3" data-path="sect1003.html"><a href="sect1003.html#sect10033"><i class="fa fa-check"></i><b>10.3.3</b> Exercice 3</a></li>
+<li class="chapter" data-level="9.3.1" data-path="sect093.html"><a href="sect093.html#sect0931"><i class="fa fa-check"></i><b>9.3.1</b> Vérification de la distribution des effets aléatoires</a></li>
+<li class="chapter" data-level="9.3.2" data-path="sect093.html"><a href="sect093.html#sect0932"><i class="fa fa-check"></i><b>9.3.2</b> Homogénéité des variances au sein des groupes</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="sect1004.html"><a href="sect1004.html"><i class="fa fa-check"></i><b>10.4</b> Exercices du chapitre 4</a>
+<li class="chapter" data-level="9.4" data-path="sect094.html"><a href="sect094.html"><i class="fa fa-check"></i><b>9.4</b> Inférence dans les modèles GLMM</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="sect1004.html"><a href="sect1004.html#sect10041"><i class="fa fa-check"></i><b>10.4.1</b> Exercice 1</a></li>
-<li class="chapter" data-level="10.4.2" data-path="sect1004.html"><a href="sect1004.html#sect10042"><i class="fa fa-check"></i><b>10.4.2</b> Exercice 2</a></li>
+<li class="chapter" data-level="9.4.1" data-path="sect094.html"><a href="sect094.html#sect0941"><i class="fa fa-check"></i><b>9.4.1</b> Inférence pour les effets fixes</a></li>
+<li class="chapter" data-level="9.4.2" data-path="sect094.html"><a href="sect094.html#sect0942"><i class="fa fa-check"></i><b>9.4.2</b> Inférence pour les effets aléatoires, effet global</a></li>
+<li class="chapter" data-level="9.4.3" data-path="sect094.html"><a href="sect094.html#sect0943"><i class="fa fa-check"></i><b>9.4.3</b> Inférence pour les effets aléatoires, des constantes et des pentes</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="sect1005.html"><a href="sect1005.html"><i class="fa fa-check"></i><b>10.5</b> Exercices du chapitre 5</a></li>
-<li class="chapter" data-level="10.6" data-path="sect1006.html"><a href="sect1006.html"><i class="fa fa-check"></i><b>10.6</b> Exercices du chapitre 6</a></li>
-<li class="chapter" data-level="10.7" data-path="sect1007.html"><a href="sect1007.html"><i class="fa fa-check"></i><b>10.7</b> Exercices du chapitre 7</a></li>
-<li class="chapter" data-level="10.8" data-path="sect1008.html"><a href="sect1008.html"><i class="fa fa-check"></i><b>10.8</b> Exercices du chapitre 8</a></li>
-<li class="chapter" data-level="10.9" data-path="sect1009.html"><a href="sect1009.html"><i class="fa fa-check"></i><b>10.9</b> Exercices du chapitre 9</a></li>
-<li class="chapter" data-level="10.10" data-path="sect1011.html"><a href="sect1011.html"><i class="fa fa-check"></i><b>10.10</b> Exercices du chapitre 11</a></li>
-<li class="chapter" data-level="10.11" data-path="sect1012.html"><a href="sect1012.html"><i class="fa fa-check"></i><b>10.11</b> Excercice du chapitre 12</a></li>
+<li class="chapter" data-level="9.5" data-path="sect095.html"><a href="sect095.html"><i class="fa fa-check"></i><b>9.5</b> Conclusion sur les GLMM</a></li>
+<li class="chapter" data-level="9.6" data-path="sect096.html"><a href="sect096.html"><i class="fa fa-check"></i><b>9.6</b> Mise en œuvre des GLMM dans R</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="sect096.html"><a href="sect096.html#sect0961"><i class="fa fa-check"></i><b>9.6.1</b> Ajustement du modèle avec uniquement une constante aléatoire</a></li>
+<li class="chapter" data-level="9.6.2" data-path="sect096.html"><a href="sect096.html#sect0962"><i class="fa fa-check"></i><b>9.6.2</b> Ajustement du modèle avec constantes et pentes aléatoires</a></li>
 </ul></li>
+<li class="chapter" data-level="9.7" data-path="sect097.html"><a href="sect097.html"><i class="fa fa-check"></i><b>9.7</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Régressions multiniveaux</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sect101.html"><a href="sect101.html"><i class="fa fa-check"></i><b>10.1</b> Modèles multiniveaux : deux intérêts majeurs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="sect101.html"><a href="sect101.html#sect1011"><i class="fa fa-check"></i><b>10.1.1</b> Répartition de la variance entre les différents niveaux</a></li>
+<li class="chapter" data-level="10.1.2" data-path="sect101.html"><a href="sect101.html#sect1012"><i class="fa fa-check"></i><b>10.1.2</b> Estimation des coefficients aux différents niveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="sect102.html"><a href="sect102.html"><i class="fa fa-check"></i><b>10.2</b> Différents types de modèles multiniveaux</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="sect102.html"><a href="sect102.html#sect1021"><i class="fa fa-check"></i><b>10.2.1</b> Description du jeu de données utilisé</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sect102.html"><a href="sect102.html#sect1022"><i class="fa fa-check"></i><b>10.2.2</b> Démarche classique pour les modèles multiniveaux</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="sect103.html"><a href="sect103.html"><i class="fa fa-check"></i><b>10.3</b> Conditions d’application des régressions multiniveaux</a></li>
+<li class="chapter" data-level="10.4" data-path="sect104.html"><a href="sect104.html"><i class="fa fa-check"></i><b>10.4</b> Mise en œuvre dans R</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="sect104.html"><a href="sect104.html#sect1041"><i class="fa fa-check"></i><b>10.4.1</b> Le modèle vide</a></li>
+<li class="chapter" data-level="10.4.2" data-path="sect104.html"><a href="sect104.html#sect1042"><i class="fa fa-check"></i><b>10.4.2</b> Modèle avec les variables indépendantes du niveau 1</a></li>
+<li class="chapter" data-level="10.4.3" data-path="sect104.html"><a href="sect104.html#sect1043"><i class="fa fa-check"></i><b>10.4.3</b> Modèle avec les variables indépendantes aux niveaux 1 et 2</a></li>
+<li class="chapter" data-level="10.4.4" data-path="sect104.html"><a href="sect104.html#sect10414"><i class="fa fa-check"></i><b>10.4.4</b> Modèle complet avec une interaction</a></li>
+<li class="chapter" data-level="10.4.5" data-path="sect104.html"><a href="sect104.html#sect1045"><i class="fa fa-check"></i><b>10.4.5</b> Comparaison des quatre modèles</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="sect105.html"><a href="sect105.html"><i class="fa fa-check"></i><b>10.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap11.html"><a href="chap11.html"><i class="fa fa-check"></i><b>11</b> Modèles généralisés additifs</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sect111.html"><a href="sect111.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="sect111.html"><a href="sect111.html#sect1111"><i class="fa fa-check"></i><b>11.1.1</b> Non linéarité fonctionnelle</a></li>
+<li class="chapter" data-level="11.1.2" data-path="sect111.html"><a href="sect111.html#sect1112"><i class="fa fa-check"></i><b>11.1.2</b> Non linéarité avec des polynomiales</a></li>
+<li class="chapter" data-level="11.1.3" data-path="sect111.html"><a href="sect111.html#sect1113"><i class="fa fa-check"></i><b>11.1.3</b> Non linéarité par segments</a></li>
+<li class="chapter" data-level="11.1.4" data-path="sect111.html"><a href="sect111.html#sect1114"><i class="fa fa-check"></i><b>11.1.4</b> Non linéarité avec des <em>splines</em></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="sect112.html"><a href="sect112.html"><i class="fa fa-check"></i><b>11.2</b> <em>Spline</em> de régression et <em>spline</em> de lissage</a></li>
+<li class="chapter" data-level="11.3" data-path="sect113.html"><a href="sect113.html"><i class="fa fa-check"></i><b>11.3</b> Interprétation d’une <em>spline</em></a></li>
+<li class="chapter" data-level="11.4" data-path="sect114.html"><a href="sect114.html"><i class="fa fa-check"></i><b>11.4</b> Multicolinéarité non linéaire</a></li>
+<li class="chapter" data-level="11.5" data-path="sect115.html"><a href="sect115.html"><i class="fa fa-check"></i><b>11.5</b> <em>Splines</em> avancées</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="sect115.html"><a href="sect115.html#sect1151"><i class="fa fa-check"></i><b>11.5.1</b> <em>Splines</em> cycliques</a></li>
+<li class="chapter" data-level="11.5.2" data-path="sect115.html"><a href="sect115.html#sect1152"><i class="fa fa-check"></i><b>11.5.2</b> Splines par groupe</a></li>
+<li class="chapter" data-level="11.5.3" data-path="sect115.html"><a href="sect115.html#sect1153"><i class="fa fa-check"></i><b>11.5.3</b> <em>Splines</em> multivariées et <em>splines</em> d’interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="sect116.html"><a href="sect116.html"><i class="fa fa-check"></i><b>11.6</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="11.7" data-path="sect117.html"><a href="sect117.html"><i class="fa fa-check"></i><b>11.7</b> GAMM</a></li>
+<li class="chapter" data-level="11.8" data-path="sect118.html"><a href="sect118.html"><i class="fa fa-check"></i><b>11.8</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>V Analyses exploratoires multivariées</b></span></li>
+<li class="chapter" data-level="12" data-path="chap12.html"><a href="chap12.html"><i class="fa fa-check"></i><b>12</b> Méthodes factorielles</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="sect121.html"><a href="sect121.html"><i class="fa fa-check"></i><b>12.1</b> Aperçu des méthodes factorielles</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="sect121.html"><a href="sect121.html#sect1211"><i class="fa fa-check"></i><b>12.1.1</b> Méthodes factorielles et types de données</a></li>
+<li class="chapter" data-level="12.1.2" data-path="sect121.html"><a href="sect121.html#sect1212"><i class="fa fa-check"></i><b>12.1.2</b> Bref historique des méthodes factorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="sect122.html"><a href="sect122.html"><i class="fa fa-check"></i><b>12.2</b> Analyses en composantes principales (ACP)</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="sect122.html"><a href="sect122.html#sect1221"><i class="fa fa-check"></i><b>12.2.1</b> Recherche d’une simplification</a></li>
+<li class="chapter" data-level="12.2.2" data-path="sect122.html"><a href="sect122.html#sect1222"><i class="fa fa-check"></i><b>12.2.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="sect122.html"><a href="sect122.html#sect1223"><i class="fa fa-check"></i><b>12.2.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="sect123.html"><a href="sect123.html"><i class="fa fa-check"></i><b>12.3</b> Analyse factorielle des correspondances (AFC)</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="sect123.html"><a href="sect123.html#sect1231"><i class="fa fa-check"></i><b>12.3.1</b> Recherche d’une simplification basée sur la distance du khi-deux</a></li>
+<li class="chapter" data-level="12.3.2" data-path="sect123.html"><a href="sect123.html#sect1232"><i class="fa fa-check"></i><b>12.3.2</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.3.3" data-path="sect123.html"><a href="sect123.html#sect1233"><i class="fa fa-check"></i><b>12.3.3</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="sect124.html"><a href="sect124.html"><i class="fa fa-check"></i><b>12.4</b> Analyse de correspondances multiples (ACM)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="sect124.html"><a href="sect124.html#sect1241"><i class="fa fa-check"></i><b>12.4.1</b> Aides à l’interprétation</a></li>
+<li class="chapter" data-level="12.4.2" data-path="sect124.html"><a href="sect124.html#sect1242"><i class="fa fa-check"></i><b>12.4.2</b> Mise en œuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="sect125.html"><a href="sect125.html"><i class="fa fa-check"></i><b>12.5</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap13.html"><a href="chap13.html"><i class="fa fa-check"></i><b>13</b> Méthodes de classification non supervisée</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="sect131.html"><a href="sect131.html"><i class="fa fa-check"></i><b>13.1</b> Méthodes de classification : un aperçu</a></li>
+<li class="chapter" data-level="13.2" data-path="sect132.html"><a href="sect132.html"><i class="fa fa-check"></i><b>13.2</b> Notions essentielles en classification</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="sect132.html"><a href="sect132.html#sect1321"><i class="fa fa-check"></i><b>13.2.1</b> Distance</a></li>
+<li class="chapter" data-level="13.2.2" data-path="sect132.html"><a href="sect132.html#sect1322"><i class="fa fa-check"></i><b>13.2.2</b> Inertie</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="sect133.html"><a href="sect133.html"><i class="fa fa-check"></i><b>13.3</b> Classification ascendante hiérarchique</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="sect133.html"><a href="sect133.html#sect1331"><i class="fa fa-check"></i><b>13.3.1</b> Fonctionnement de l’algorithme</a></li>
+<li class="chapter" data-level="13.3.2" data-path="sect133.html"><a href="sect133.html#sect1332"><i class="fa fa-check"></i><b>13.3.2</b> Choisir le bon nombre de groupes</a></li>
+<li class="chapter" data-level="13.3.3" data-path="sect133.html"><a href="sect133.html#sect1333"><i class="fa fa-check"></i><b>13.3.3</b> Limites de la classification ascendante hiérarchique</a></li>
+<li class="chapter" data-level="13.3.4" data-path="sect133.html"><a href="sect133.html#sect1334"><i class="fa fa-check"></i><b>13.3.4</b> Mise en oeuvre dans R</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="sect134.html"><a href="sect134.html"><i class="fa fa-check"></i><b>13.4</b> Nuées dynamiques</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="sect134.html"><a href="sect134.html#sect1341"><i class="fa fa-check"></i><b>13.4.1</b> <em>K-means</em></a></li>
+<li class="chapter" data-level="13.4.2" data-path="sect134.html"><a href="sect134.html#sect1342"><i class="fa fa-check"></i><b>13.4.2</b> K-médianes</a></li>
+<li class="chapter" data-level="13.4.3" data-path="sect134.html"><a href="sect134.html#sect1343"><i class="fa fa-check"></i><b>13.4.3</b> K-médoïds</a></li>
+<li class="chapter" data-level="13.4.4" data-path="sect134.html"><a href="sect134.html#sect1344"><i class="fa fa-check"></i><b>13.4.4</b> Mise en oeuvre dans R</a></li>
+<li class="chapter" data-level="13.4.5" data-path="sect134.html"><a href="sect134.html#sect1346"><i class="fa fa-check"></i><b>13.4.5</b> Extensions en logique floue : <em>c-means</em>, <em>c-medoids</em></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="sect135.html"><a href="sect135.html"><i class="fa fa-check"></i><b>13.5</b> Conclusion sur la cinquième partie</a></li>
+<li class="chapter" data-level="13.6" data-path="sect136.html"><a href="sect136.html"><i class="fa fa-check"></i><b>13.6</b> Quiz de révision du chapitre</a></li>
+</ul></li>
+<li class="part"><span><b>VI Annexes</b></span></li>
+<li class="chapter" data-level="14" data-path="annexe1.html"><a href="annexe1.html"><i class="fa fa-check"></i><b>14</b> Table des valeurs critiques de khi-deux</a></li>
+<li class="chapter" data-level="15" data-path="annexe2.html"><a href="annexe2.html"><i class="fa fa-check"></i><b>15</b> Table des valeurs critiques de Fisher</a></li>
+<li class="chapter" data-level="16" data-path="annexe3.html"><a href="annexe3.html"><i class="fa fa-check"></i><b>16</b> Table des valeurs critiques de <em>t</em></a></li>
 </ul>
 
       </nav>
@@ -442,8 +566,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes de cours GMQ405 :
-Modélisation et analyse spatiale</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Méthodes quantitatives en sciences sociales : un grand bol d’R</a>
           </h1>
         </div>
 
@@ -452,113 +575,757 @@ Modélisation et analyse spatiale</a>
 
             <section class="normal" id="section-">
 <div id="sect013" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Manipulation de données <em>raster</em><a href="sect013.html#sect013" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">1.3</span> Bases du langage R<a href="sect013.html#sect013" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R est un langage de programmation. Il vous permet de communiquer avec votre ordinateur pour lui donner des tâches à accomplir. Dans cette section, nous abordons les bases du langage. Ce type de section introductive à R est présente dans tous les manuels sur R; elle est donc incontournable. À la première lecture, elle vous semblera probablement aride, et ce, d’autant plus que nous ne réalisons pas d’analyse à proprement parler. Gardez en tête que l’analyse de données requiert au préalable une phase de structuration de ces dernières, opération qui nécessite la maîtrise des notions abordées dans cette section. Nous vous recommandons une première lecture de ce chapitre pour comprendre les manipulations que vous pouvez effectuer avec R, avant de poursuivre avec de la lecture des chapitres suivants dédiés aux analyses statistiques. Vous pourrez revenir consulter cette section au besoin. Notez aussi que la maîtrise des différents objets et des différentes opérations de base de R ne s’acquiert qu’en pratiquant. Vous gagnerez cette expertise au fil de vos prochains codes R, période durant laquelle vous pourrez consulter ce chapitre tel un guide de référence des objets et des notions fondamentales de R.</p>
 <div id="sect0131" class="section level3 hasAnchor" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Mosaïquage et découpage d’images<a href="sect013.html#sect0131" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dans cette section, nous abordons uniquement des fonctions simples de manipulation de données raster puisqu’un chapitre est dédié à l’analyse spatiale par l’analyse d’images.</p>
-<p>Une fois plusieurs images importées, il est fréquent de vouloir les fusionner. Pour ce faire, nous utilisons deux méthodes de <code>terra</code> :</p>
-<ul>
-<li><p><code>terra::merge</code> fusionne plusieurs images (<code>SpatRasters</code>) pour former un nouvel objet <code>SpatRasters</code> dont l’étendue est recalculée en fonction des images fusionnées. Par contre, si les images se chevauchent, les valeurs des pixels dans les zones de chevauchement seront prises dans le même ordre que les images.</p></li>
-<li><p><code>terra::mosaic</code> fusionne aussi plusieurs images. Toutefois, dans les zones de chevauchement, les moyennes des pixels sont calculées. Selon la documentation de <code>terra</code>, cette méthode serait plus rapide que la précédente. Dans le code ci-dessous, nous fusionnons les quatre feuillets de modèles numériques d’altitude (MNA) importés dans la section <a href="sect011.html#sect0112">1.1.2</a>.</p></li>
-</ul>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="sect013.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Les GeoTIFF importés avec terra sont bien des SpatRaster</span></span>
-<span id="cb145-2"><a href="sect013.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(f21e05_101)</span></code></pre></div>
-<pre><code>## [1] &quot;SpatRaster&quot;
-## attr(,&quot;package&quot;)
-## [1] &quot;terra&quot;</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sect013.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Création d&#39;une liste pour les cinq feuillets SpatRaster</span></span>
-<span id="cb147-2"><a href="sect013.html#cb147-2" aria-hidden="true" tabindex="-1"></a>rlist <span class="ot">&lt;-</span> <span class="fu">list</span>(f21e05_101, f21e05_201, f31h08_102,</span>
-<span id="cb147-3"><a href="sect013.html#cb147-3" aria-hidden="true" tabindex="-1"></a>              f31h08_202, f21e12_101)</span>
-<span id="cb147-4"><a href="sect013.html#cb147-4" aria-hidden="true" tabindex="-1"></a>rsrc <span class="ot">&lt;-</span> <span class="fu">sprc</span>(rlist)</span>
-<span id="cb147-5"><a href="sect013.html#cb147-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Création de la mosaïque</span></span>
-<span id="cb147-6"><a href="sect013.html#cb147-6" aria-hidden="true" tabindex="-1"></a>MosaicSherb <span class="ot">&lt;-</span> <span class="fu">mosaic</span>(rsrc)</span>
-<span id="cb147-7"><a href="sect013.html#cb147-7" aria-hidden="true" tabindex="-1"></a>MosaicSherb</span></code></pre></div>
-<pre><code>## class       : SpatRaster 
-## dimensions  : 4187, 5575, 1  (nrow, ncol, nlyr)
-## resolution  : 9e-05, 9e-05  (x, y)
-## extent      : -72.25087, -71.74913, 45.24907, 45.6259  (xmin, xmax, ymin, ymax)
-## coord. ref. : lon/lat NAD83 (EPSG:4269) 
-## source(s)   : memory
-## name        : f21e05_101 
-## min value   :   123.7184 
-## max value   :   845.0474</code></pre>
-<p>Vous constatez ci-dessous que la projection des images est lon/lat NAD83 (EPSG:4269).</p>
-<p>D’autres fonctions permettent de découper une image en fonction d’une autre image (objet <code>SpatRaster</code> de <code>terra</code>)) ou d’un objet <code>terra</code> vectoriel (<code>SpatVector</code>) :</p>
-<ul>
-<li><p><code>crop(x, y)</code> découpe une image <code>x</code> en prenant l’étendue de <code>y</code>.</p></li>
-<li><p><code>mask(x, y)</code> découpe une image <code>x</code> en prenant la zone (pixels avec des valeurs non nulles ou objets vectoriels) de <code>y</code>. Les pixels en dehors de cette zone auront nulle comme valeur (<code>NA</code> dans R).</p></li>
-</ul>
-<p>En guise d’exemple, découpons la mosaïque avec le polygone de la ville de Sherbrooke en utilisant la méthode <code>mask</code>. Attention, les deux sources de données doivent avoir la même projection et il faut préalablement convertir l’objet <code>sf</code> en objet <code>terra</code>.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="sect013.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Changement de projection pour le polygone de la ville de Sherbrooke</span></span>
-<span id="cb149-2"><a href="sect013.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Application de la même projection que celle de la mosaïque</span></span>
-<span id="cb149-3"><a href="sect013.html#cb149-3" aria-hidden="true" tabindex="-1"></a>VilleSherb.EPSG4269 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(Arrond.Union, <span class="fu">crs</span>(MosaicSherb))</span>
-<span id="cb149-4"><a href="sect013.html#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir l&#39;objet sf en un objet SpatVector de terra</span></span>
-<span id="cb149-5"><a href="sect013.html#cb149-5" aria-hidden="true" tabindex="-1"></a>VilleSherb.SpatVector <span class="ot">=</span> <span class="fu">vect</span>(VilleSherb.EPSG4269)</span>
-<span id="cb149-6"><a href="sect013.html#cb149-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Découpage de la mosaïque avec le polygone de la ville de Sherbrooke</span></span>
-<span id="cb149-7"><a href="sect013.html#cb149-7" aria-hidden="true" tabindex="-1"></a>MosaicSherbCrop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mask</span>(MosaicSherb, VilleSherb.SpatVector)</span>
-<span id="cb149-8"><a href="sect013.html#cb149-8" aria-hidden="true" tabindex="-1"></a>MosaicSherbCrop</span></code></pre></div>
-<pre><code>## class       : SpatRaster 
-## dimensions  : 4187, 5575, 1  (nrow, ncol, nlyr)
-## resolution  : 9e-05, 9e-05  (x, y)
-## extent      : -72.25087, -71.74913, 45.24907, 45.6259  (xmin, xmax, ymin, ymax)
-## coord. ref. : lon/lat NAD83 (EPSG:4269) 
-## source(s)   : memory
-## name        : f21e05_101 
-## min value   :        126 
-## max value   :        390</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="sect013.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Constastez ci-dessus que le nom de l&#39;image est f21e05_101.</span></span>
-<span id="cb151-2"><a href="sect013.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Pour le changer, utilisez la fonction names()</span></span>
-<span id="cb151-3"><a href="sect013.html#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(MosaicSherbCrop) <span class="ot">=</span> <span class="st">&quot;Elevation&quot;</span></span>
-<span id="cb151-4"><a href="sect013.html#cb151-4" aria-hidden="true" tabindex="-1"></a>MosaicSherbCrop</span></code></pre></div>
-<pre><code>## class       : SpatRaster 
-## dimensions  : 4187, 5575, 1  (nrow, ncol, nlyr)
-## resolution  : 9e-05, 9e-05  (x, y)
-## extent      : -72.25087, -71.74913, 45.24907, 45.6259  (xmin, xmax, ymin, ymax)
-## coord. ref. : lon/lat NAD83 (EPSG:4269) 
-## source(s)   : memory
-## name        : Elevation 
-## min value   :       126 
-## max value   :       390</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="sect013.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualisation du résultat</span></span>
-<span id="cb153-2"><a href="sect013.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(MosaicSherbCrop)</span></code></pre></div>
-<p><img src="GMQ405_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<h3><span class="header-section-number">1.3.1</span> <em>Hello World</em>!<a href="sect013.html#sect0131" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une introduction à un langage de programmation se doit de commencer par le rite de passage <em>Hello World</em>. Il s’agit d’une forme de tradition consistant à montrer aux néophites comment afficher le message <code>Hello World</code> à l’écran avec le langage en question.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sect013.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Hello World&quot;</code></pre>
+<p>Bravo! Vous venez officiellement de faire votre premier pas dans R!</p>
 </div>
 <div id="sect0132" class="section level3 hasAnchor" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> Requêtes attributaires sur des images<a href="sect013.html#sect0132" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Avant d’effectuer une requête, il est judicieux d’explorer les valeurs des pixels de l’image avec un histogramme et la fonction <code>summary(Nom de l'image)</code> (valeurs minimales, maximales, quartiles, moyenne et valeurs nulles – <code>NA</code>).</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="sect013.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sommaire statistique des valeurs</span></span>
-<span id="cb154-2"><a href="sect013.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MosaicSherbCrop)</span></code></pre></div>
-<pre><code>##    Elevation    
-##  Min.   :126.0  
-##  1st Qu.:197.7  
-##  Median :227.6  
-##  Mean   :225.4  
-##  3rd Qu.:251.4  
-##  Max.   :389.9  
-##  NA&#39;s   :78040</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sect013.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Histogramme</span></span>
-<span id="cb156-2"><a href="sect013.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(MosaicSherbCrop,</span>
-<span id="cb156-3"><a href="sect013.html#cb156-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Mosaïque du MNA pour la ville de Sherbrooke&quot;</span>,</span>
-<span id="cb156-4"><a href="sect013.html#cb156-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Élévation (mètres)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Fréquence&quot;</span>,</span>
-<span id="cb156-5"><a href="sect013.html#cb156-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;lightgreen&quot;</span>)</span></code></pre></div>
-<p><img src="GMQ405_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="sect013.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Histogramme en barre de 125 à 400 avec un saut de 25 mètres </span></span>
-<span id="cb157-2"><a href="sect013.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(MosaicSherbCrop,</span>
-<span id="cb157-3"><a href="sect013.html#cb157-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Mosaïque du MNA pour la ville de Sherbrooke&quot;</span>,</span>
-<span id="cb157-4"><a href="sect013.html#cb157-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Élévation (mètres)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Fréquence&quot;</span>,</span>
-<span id="cb157-5"><a href="sect013.html#cb157-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">125</span>, <span class="at">to =</span> <span class="dv">400</span>, <span class="at">by =</span> <span class="dv">25</span>),</span>
-<span id="cb157-6"><a href="sect013.html#cb157-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;lightgreen&quot;</span>)</span></code></pre></div>
-<p><img src="GMQ405_files/figure-html/unnamed-chunk-61-2.png" width="672" /></p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="sect013.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sélection des pixels avec une élévation d&#39;au moins 300 mètres</span></span>
-<span id="cb158-2"><a href="sect013.html#cb158-2" aria-hidden="true" tabindex="-1"></a>MosaicSherbCrop300 <span class="ot">=</span> <span class="fu">clamp</span>(MosaicSherbCrop, <span class="at">lower =</span> <span class="dv">300</span>)</span>
-<span id="cb158-3"><a href="sect013.html#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(MosaicSherbCrop300, </span>
-<span id="cb158-4"><a href="sect013.html#cb158-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Pixels avec une élévation d&#39;au moins 300 mètres&quot;</span>)</span></code></pre></div>
-<p><img src="GMQ405_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="sect013.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sélection des pixels avec une élévation de 200 à 300 mètres</span></span>
-<span id="cb159-2"><a href="sect013.html#cb159-2" aria-hidden="true" tabindex="-1"></a>MosaicSherbCrop200_300 <span class="ot">=</span> <span class="fu">clamp</span>(MosaicSherbCrop, <span class="at">lower =</span> <span class="dv">200</span>, <span class="at">upper =</span> <span class="dv">300</span>)</span>
-<span id="cb159-3"><a href="sect013.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(MosaicSherbCrop200_300,</span>
-<span id="cb159-4"><a href="sect013.html#cb159-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Pixels avec une élévation de 200 à 300 mètres&quot;</span>)</span></code></pre></div>
-<p><img src="GMQ405_files/figure-html/unnamed-chunk-62-2.png" width="672" /></p>
+<h3><span class="header-section-number">1.3.2</span> Objets et expressions<a href="sect013.html#sect0132" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans R, nous passons notre temps à manipuler des <strong>objets</strong> à l’aide d’<strong>expressions</strong>. Prenons un exemple concret : si vous tapez la syntaxe <code>4 + 3</code>, vous manipulez deux objets (4 et 3) avec une expression indiquant que vous souhaitez obtenir la somme des deux objets.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sect013.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>Cette expression est correcte, R comprend vos indications et effectue le calcul.</p>
+<p>Il est possible d’enregistrer le résultat d’une expression et de le conserver dans un nouvel objet. On appelle cette opération : « déclarer une variable ».</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sect013.html#cb15-1" aria-hidden="true" tabindex="-1"></a>ma_somme <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<p>Concrètement, nous venons de demander à R d’enregistrer le résultat de <code>4 + 3</code> dans un espace spécifique de notre mémoire vive. Si vous regardez dans votre fenêtre <strong>Environment</strong>, vous verrez en effet qu’un objet appelé ma_somme est actuellement en mémoire et a pour valeur 7.</p>
+<p>Notez ici que le nom des variables ne peut être composé que de lettres, de chiffres, de points (.) et de tirets bas (_) et doit commencer par une lettre. R est sensible à la casse; en d’autres termes, les variables <code>Ma_somme</code>, <code>ma_sommE</code>, <code>ma_SOMME</code>, et <code>MA_SOMME</code> renvoient toutes à un objet différent. Attention donc aux fautes de frappe. Si vous déclarez une variable en utilisant le nom d’une variable existante, la première est écrasée par la seconde :</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sect013.html#cb16-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb16-2"><a href="sect013.html#cb16-2" aria-hidden="true" tabindex="-1"></a>age</span></code></pre></div>
+<pre><code>## [1] 35</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sect013.html#cb18-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">45</span></span>
+<span id="cb18-2"><a href="sect013.html#cb18-2" aria-hidden="true" tabindex="-1"></a>age</span></code></pre></div>
+<pre><code>## [1] 45</code></pre>
+<p>Portez alors attention aux noms de variables que vous utilisez et réutilisez. Réutilisons notre objet <code>ma_somme</code> dans une nouvelle expression :</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sect013.html#cb20-1" aria-hidden="true" tabindex="-1"></a>ma_somme2 <span class="ot">&lt;-</span> ma_somme <span class="sc">+</span> ma_somme</span></code></pre></div>
+<p>Avec cette nouvelle expression, nous indiquons à R que nous souhaitons déclarer une nouvelle variable appelée <code>ma_somme2</code>, et que cette variable aura pour valeur <code>ma_somme + ma_somme</code>, soit <code>7 + 7</code>. Sans surprise, <code>ma_somme2</code> a pour valeur 14.</p>
+<p>Notez que la mémoire vive (l’environnement) est vidée lorsque vous fermez R. Autrement dit, R perd complètement la mémoire lorsque vous le fermez. Vous pouvez bien sûr recréer vos objets en relançant les mêmes syntaxes. C’est pourquoi vous devez conserver vos feuilles de codes et ne pas seulement travailler dans la console. La console ne garde aucune trace de votre travail. Pensez donc à bien enregistrer votre code!</p>
+<p>Nous verrons dans une prochaine section comment sauvegarder des objets et les recharger dans une session ultérieure de R (section <a href="sect017.html#sect017">1.6</a>). Ce type d’opération est pertinent quand le temps de calcul nécessaire à la production de certains objets est très long.</p>
+</div>
+<div id="sect0_133" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Fonctions et arguments<a href="sect013.html#sect0_133" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans R, nous manipulons le plus souvent nos objets avec des <strong>fonctions</strong>. Une fonction est elle-même un objet, mais qui a la particularité de pouvoir effectuer des opérations sur d’autres objets. Par exemple, déclarons l’objet <code>taille</code> avec une valeur de 175,897 :</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sect013.html#cb21-1" aria-hidden="true" tabindex="-1"></a>taille <span class="ot">&lt;-</span> <span class="fl">175.897</span></span></code></pre></div>
+<p>Nous utilisons la fonction <code>round</code>, dont l’objectif est d’arrondir un nombre avec décimales pour obtenir un nombre entier.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sect013.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(taille)</span></code></pre></div>
+<pre><code>## [1] 176</code></pre>
+<p>Pour effectuer leurs opérations, les fonctions ont généralement besoin d’<strong>arguments</strong>. Ici, <code>taille</code> est un argument passé à la fonction <code>round</code>. Si nous regardons la documentation de <code>round</code> avec <code>help(round)</code> (figure <a href="sect013.html#fig:fig011">1.11</a>), nous constatons que cette fonction prend en réalité deux arguments : <em>x</em> et <em>digits</em>. Le premier est le nombre que nous souhaitons arrondir et le second est le nombre de décimales à conserver. Nous pouvons lire dans la documentation que la valeur par défaut de <em>digits</em> est 0, ce qui explique que <code>round(taille)</code> a produit le résultat de 176.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig011"></span>
+<img src="images/introduction/help_round.jpeg" alt="Arguments de la fonction round" width="45%" />
+<p class="caption">
+Figure 1.11: Arguments de la fonction round
+</p>
+</div>
+<p>Réutilisons maintenant la fonction <code>round</code>, mais en gardant une décimale :</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sect013.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(taille, <span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 175.9</code></pre>
+<p>Il est aussi possible que certaines fonctions ne requièrent pas d’argument. Par exemple, la fonction <code>now</code> indique la date précise (avec l’heure) et n’a besoin d’aucun argument pour le faire :</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="sect013.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;2023-02-24 22:07:46 EST&quot;</code></pre>
+<p>Par contre, si nous essayons de lancer la fonction <code>round</code> sans argument, nous obtenons une erreur :</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sect013.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>()</span></code></pre></div>
+<p><span class="error_message">Erreur : 0 argument passé à ‘round’ qui en exige 1 ou 2</span></p>
+<p>Le message est très clair, <code>round</code> a besoin d’au moins un argument pour fonctionner. Si, au lieu d’un nombre, nous avions donné du texte à la fonction <code>round</code>, nous aurions aussi obtenu une erreur :</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sect013.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="st">&quot;Hello World&quot;</span>)</span></code></pre></div>
+<p><span class="error_message">Erreur dans round(“Hello World”) : argument non numérique pour une fonction mathématique</span></p>
+<p>À nouveau le message est très explicite : nous avons passé un argument non numérique à une fonction mathématique. Lisez toujours vos messages d’erreurs : ils permettent de repérer les coquilles et de corriger votre code!</p>
+<p>Nous terminons cette section avec une fonction essentielle, <code>print</code>, qui permet d’afficher la valeur d’une variable.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sect013.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ma_somme)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="sect0134" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Principaux types de données<a href="sect013.html#sect0134" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Depuis le début de ce chapitre, nous avons déclaré plusieurs variables et essentiellement des données numériques. Dans R, il existe trois principaux types de données de base :</p>
+<ul>
+<li>Les données numériques qui peuvent être des nombres entiers (appelés <em>integers</em>) ou des nombres décimaux (appelés <em>floats</em> ou <em>doubles</em>), par exemple <code>15</code> et <code>15.3</code>.</li>
+<li>Les données de type texte qui sont des chaînes de caractères (appelées <em>strings</em>) et déclarées entre guillemets <code>"abcdefg"</code>.</li>
+<li>Les données booléennes (<em>booleans</em>) qui peuvent n’avoir que deux valeurs : vrai (<code>TRUE</code>) ou faux (<code>FALSE</code>).</li>
+</ul>
+<p>Déclarons une variable pour chacun de ces types :</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sect013.html#cb32-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb32-2"><a href="sect013.html#cb32-2" aria-hidden="true" tabindex="-1"></a>taille <span class="ot">&lt;-</span> <span class="fl">175.5</span></span>
+<span id="cb32-3"><a href="sect013.html#cb32-3" aria-hidden="true" tabindex="-1"></a>adresse <span class="ot">&lt;-</span> <span class="st">&#39;4225 rue de la gauchetiere&#39;</span></span>
+<span id="cb32-4"><a href="sect013.html#cb32-4" aria-hidden="true" tabindex="-1"></a>proprietaire <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div>
+<div class="bloc_notes">
+<p><strong>Simples ou doubles quotes?</strong></p>
+<p>Pour déclarer des données de type texte, il est possible d’utiliser des quotes simples <code>'</code> (apostrophe) ou des quotes doubles <code>"</code> (guillemets), cela ne fait aucune différence pour R. Cependant, si la chaîne de caractères que vous créez contient une apostrophe, il est nécessaire d’utiliser des quotes doubles et inversement si votre chaîne de caractère contient des guillemets.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sect013.html#cb33-1" aria-hidden="true" tabindex="-1"></a>phrase1 <span class="ot">&lt;-</span> <span class="st">&quot;J&#39;adore le langage R!&quot;</span></span>
+<span id="cb33-2"><a href="sect013.html#cb33-2" aria-hidden="true" tabindex="-1"></a>phrase2 <span class="ot">&lt;-</span> <span class="st">&#39;Je cite : &quot;il est le meilleur langage de statistique&quot;.&#39;</span></span></code></pre></div>
+<p>Si la chaîne de caractère contient des guillemets et des apostrophes, il est nécessaire d’utiliser la barre oblique inversée <code>\</code> pour indiquer à R que ces apostrophes ou ces guillemets ne doivent pas être considérés comme la fin de la chaîne de caractère.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sect013.html#cb34-1" aria-hidden="true" tabindex="-1"></a>phrase3 <span class="ot">&lt;-</span> <span class="st">&quot;Je cite : </span><span class="sc">\&quot;</span><span class="st">j&#39;en rêve la nuit</span><span class="sc">\&quot;</span><span class="st">.&quot;</span></span>
+<span id="cb34-2"><a href="sect013.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(phrase3)</span></code></pre></div>
+<pre><code>## Je cite : &quot;j&#39;en rêve la nuit&quot;.</code></pre>
+<p>Les barres obliques inversées ne font pas partie de la chaîne de caractère, ils sont là pour “échapper” les guillemets qui doivent rester dans la chaîne de caractère. Si une chaîne de caractère doit contenir une barre oblique inversée, alors il faut l’échapper également en utilisant une deuxième barre oblique inversée.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sect013.html#cb36-1" aria-hidden="true" tabindex="-1"></a>phrase4 <span class="ot">&lt;-</span> <span class="st">&quot;Une phrase avec une barre oblique inversée : </span><span class="sc">\\</span><span class="st">&quot;</span></span>
+<span id="cb36-2"><a href="sect013.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(phrase4)</span></code></pre></div>
+<pre><code>## Une phrase avec une barre oblique inversée : \</code></pre>
+<p>Faites attention à la coloration syntaxique de RStudio! Elle peut vous aider à repérer facilement une chaîne de caractère qui aurait été interrompue par un guillemet ou une apostrophe mal placés.</p>
+</div>
+<p>Si vous avez un doute sur le type de données stockées dans une variable, vous pouvez utiliser la fonction <code>typeof</code>. Par exemple, cela permet de repérer si des données qui sont censées être numériques sont en fait stockées sous forme de texte comme dans l’exemple ci-dessous.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sect013.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sect013.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(taille)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sect013.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici tailletxt est définie comme une chaîne de caractère car la valeur est </span></span>
+<span id="cb42-2"><a href="sect013.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># définie entre des guillemets.</span></span>
+<span id="cb42-3"><a href="sect013.html#cb42-3" aria-hidden="true" tabindex="-1"></a>tailletxt <span class="ot">&lt;-</span> <span class="st">&quot;175.5&quot;</span></span>
+<span id="cb42-4"><a href="sect013.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(tailletxt)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Notez également qu’il existe des types pour représenter l’absence de données :</p>
+<ul>
+<li>pour représenter un objet vide, nous utilisons l’objet <code>NULL</code>,</li>
+<li>pour représenter une donnée manquante, nous utilisons l’objet <code>NA</code>,</li>
+<li>pour représenter un texte vide, nous utilisons une chaîne de caractère de longueur 0, soit <code>""</code>.</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sect013.html#cb44-1" aria-hidden="true" tabindex="-1"></a>age2 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb44-2"><a href="sect013.html#cb44-2" aria-hidden="true" tabindex="-1"></a>taille2 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb44-3"><a href="sect013.html#cb44-3" aria-hidden="true" tabindex="-1"></a>adresse2 <span class="ot">&lt;-</span> <span class="st">&#39;&#39;</span></span></code></pre></div>
+</div>
+<div id="sect0135" class="section level3 hasAnchor" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Opérateurs<a href="sect013.html#sect0135" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nous avons vu que les fonctions permettent de manipuler des objets. Nous pouvons également effectuer un grand nombre d’opérations avec les opérateurs.</p>
+<div id="sect01351" class="section level4 hasAnchor" number="1.3.5.1">
+<h4><span class="header-section-number">1.3.5.1</span> Opérateurs mathématiques<a href="sect013.html#sect01351" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Les opérateurs mathématiques (tableau <a href="sect013.html#tab:tableOperateurMath">1.1</a>) permettent d’effectuer des calculs avec des données de type numérique.</p>
+<table>
+<caption>
+<span id="tab:tableOperateurMath">Tableau 1.1: </span>Opérateurs mathématiques
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Opérateur
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Syntaxe
+</th>
+<th style="text-align:right;">
+Résultat
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>+</code>
+</td>
+<td style="text-align:left;">
+Addition
+</td>
+<td style="text-align:left;">
+<code>4 + 4</code>
+</td>
+<td style="text-align:right;">
+8,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>-</code>
+</td>
+<td style="text-align:left;">
+Soustraction
+</td>
+<td style="text-align:left;">
+<code>4 - 3</code>
+</td>
+<td style="text-align:right;">
+1,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>*</code>
+</td>
+<td style="text-align:left;">
+Multiplication
+</td>
+<td style="text-align:left;">
+<code>4 * 3</code>
+</td>
+<td style="text-align:right;">
+12,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>/</code>
+</td>
+<td style="text-align:left;">
+Division
+</td>
+<td style="text-align:left;">
+<code>12 / 4</code>
+</td>
+<td style="text-align:right;">
+3,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>^</code>
+</td>
+<td style="text-align:left;">
+Exponentiel
+</td>
+<td style="text-align:left;">
+<code>4 ^ 3</code>
+</td>
+<td style="text-align:right;">
+64,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>**</code>
+</td>
+<td style="text-align:left;">
+Exponentiel
+</td>
+<td style="text-align:left;">
+<code>4 ** 3</code>
+</td>
+<td style="text-align:right;">
+64,0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%%</code>
+</td>
+<td style="text-align:left;">
+Reste de division
+</td>
+<td style="text-align:left;">
+<code>15,5 %% 2</code>
+</td>
+<td style="text-align:right;">
+1,5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%/%</code>
+</td>
+<td style="text-align:left;">
+Division entière
+</td>
+<td style="text-align:left;">
+<code>15,5 %/% 2</code>
+</td>
+<td style="text-align:right;">
+7,0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sect01352" class="section level4 hasAnchor" number="1.3.5.2">
+<h4><span class="header-section-number">1.3.5.2</span> Opérateurs relationnels<a href="sect013.html#sect01352" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Les opérateurs relationnels (tableau <a href="sect013.html#tab:tableOperateurRela">1.2</a>) permettent de vérifier des conditions dans R. Ils renvoient un booléen, <code>TRUE</code> si la condition est vérifiée et <code>FALSE</code> si ce n’est pas le cas.</p>
+<table>
+<caption>
+<span id="tab:tableOperateurRela">Tableau 1.2: </span>Opérateurs relationnels
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Opérateur
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Syntaxe
+</th>
+<th style="text-align:left;">
+Résultat
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>==</code>
+</td>
+<td style="text-align:left;">
+Égalité
+</td>
+<td style="text-align:left;">
+<code>4 == 4</code>
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>!=</code>
+</td>
+<td style="text-align:left;">
+Différence
+</td>
+<td style="text-align:left;">
+<code>4 != 4</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>&gt;</code>
+</td>
+<td style="text-align:left;">
+Est supérieur
+</td>
+<td style="text-align:left;">
+<code>5 &gt; 4</code>
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>&lt;</code>
+</td>
+<td style="text-align:left;">
+Est inférieur
+</td>
+<td style="text-align:left;">
+<code>5 &lt; 4</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>&gt;=</code>
+</td>
+<td style="text-align:left;">
+Est supérieur ou égal
+</td>
+<td style="text-align:left;">
+<code>5 &gt;= 4</code>
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>&lt;=</code>
+</td>
+<td style="text-align:left;">
+Est inférieur ou égal
+</td>
+<td style="text-align:left;">
+<code>5 &lt;= 4</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sect01353" class="section level4 hasAnchor" number="1.3.5.3">
+<h4><span class="header-section-number">1.3.5.3</span> Opérateurs logiques<a href="sect013.html#sect01353" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Les opérateurs logiques (tableau <a href="sect013.html#tab:tableOperateurLogi">1.3</a>) permettent de combiner plusieurs conditions :</p>
+<ul>
+<li><p>L’opérateur <strong>ET</strong> (<code>&amp;</code>) permet de vérifier que deux conditions (l’une ET l’autre) sont TRUE. Si l’une des deux est FALSE, il renvoie FALSE.</p></li>
+<li><p>L’opérateur <strong>OU</strong> (<code>|</code>) permet de vérifier que l’une des deux conditions est TRUE (l’une OU l’autre). Si les deux sont FALSE, alors il renvoie FALSE.</p></li>
+<li><p>L’opérateur <strong>NOT</strong> (<code>!</code>) permet d’inverser une condition. Ainsi, NOT TRUE donne FALSE et NOT FALSE donne TRUE.</p></li>
+</ul>
+<table>
+<caption>
+<span id="tab:tableOperateurLogi">Tableau 1.3: </span>Opérateurs logiques
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Opérateur
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Syntaxe
+</th>
+<th style="text-align:left;">
+Résultat
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>&amp;</code>
+</td>
+<td style="text-align:left;">
+ET
+</td>
+<td style="text-align:left;">
+<code>TRUE &amp; FALSE</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>|</code>
+</td>
+<td style="text-align:left;">
+OU
+</td>
+<td style="text-align:left;">
+<code>TRUE | FALSE</code>
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>!</code>
+</td>
+<td style="text-align:left;">
+NOT
+</td>
+<td style="text-align:left;">
+<code>! TRUE</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+<p>Prenons le temps pour un rapide exemple :</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sect013.html#cb45-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
+<span id="cb45-2"><a href="sect013.html#cb45-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-3"><a href="sect013.html#cb45-3" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span></span>
+<span id="cb45-4"><a href="sect013.html#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="sect013.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Produit TRUE car A est bien plus petit que B et C est bien plus petit que A</span></span>
+<span id="cb45-6"><a href="sect013.html#cb45-6" aria-hidden="true" tabindex="-1"></a>A <span class="sc">&lt;</span> B <span class="sc">&amp;</span> C <span class="sc">&lt;</span> A</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sect013.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produit FALSE car si A est bien plus petit que B, </span></span>
+<span id="cb47-2"><a href="sect013.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># B est en revanche plus grand que c</span></span>
+<span id="cb47-3"><a href="sect013.html#cb47-3" aria-hidden="true" tabindex="-1"></a>A <span class="sc">&lt;</span> B <span class="sc">&amp;</span> B <span class="sc">&lt;</span> C</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sect013.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produit TRUE car la seconde condition est inversée</span></span>
+<span id="cb49-2"><a href="sect013.html#cb49-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">&lt;</span> B <span class="sc">&amp;</span>  <span class="sc">!</span> B <span class="sc">&lt;</span> C</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sect013.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produit TRUE car au moins une des deux conditions est juste</span></span>
+<span id="cb51-2"><a href="sect013.html#cb51-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">&lt;</span> B <span class="sc">|</span>  B <span class="sc">&lt;</span> C</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Notez que l’opérateur <strong>ET</strong> est prioritaire sur l’opérateur <strong>OU</strong> et que les parenthèses sont prioritaires sur tous les opérateurs :</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sect013.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produit TRUE car nous commençons par tester A &lt; B puis B &lt; C ce qui donne FALSE</span></span>
+<span id="cb53-2"><a href="sect013.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># On obtient ensuite</span></span>
+<span id="cb53-3"><a href="sect013.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># FALSE |  A &gt; C</span></span>
+<span id="cb53-4"><a href="sect013.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enfin, A est bien supérieur à C, donc l&#39;une des deux conditions est vraie</span></span>
+<span id="cb53-5"><a href="sect013.html#cb53-5" aria-hidden="true" tabindex="-1"></a>A <span class="sc">&lt;</span> B <span class="sc">&amp;</span> B <span class="sc">&lt;</span> C <span class="sc">|</span>  A <span class="sc">&gt;</span> C</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Notez qu’en arrière-plan, les opérateurs sont en réalité des fonctions déguisées. Il est donc possible de définir de nouveaux comportements pour les opérateurs. Il est par exemple possible d’additionner ou de comparer des objets spéciaux comme des dates, des géométries, des graphes, etc.</p>
+</div>
+</div>
+<div id="sect0136" class="section level3 hasAnchor" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Structures de données<a href="sect013.html#sect0136" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Jusqu’à présent, nous avons utilisé des objets ne comprenant qu’une seule valeur. Or, des analyses statistiques nécessitent de travailler avec des volumes de données bien plus grands. Pour stocker des valeurs, nous travaillons avec différentes structures de données : les vecteurs, les matrices, les tableaux de données et les listes.</p>
+<div id="sect01361" class="section level4 hasAnchor" number="1.3.6.1">
+<h4><span class="header-section-number">1.3.6.1</span> Vecteurs<a href="sect013.html#sect01361" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Les vecteurs sont la brique élémentaire de R. Ils permettent de stocker une série de valeurs <strong>du même type</strong> dans une seule variable. Pour déclarer un vecteur, nous utilisons la fonction <code>c()</code> :</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="sect013.html#cb55-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">72</span>,<span class="dv">56</span>,<span class="dv">62</span>)</span>
+<span id="cb55-2"><a href="sect013.html#cb55-2" aria-hidden="true" tabindex="-1"></a>tailles <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">175.5</span>,<span class="fl">180.3</span>,<span class="fl">168.2</span>,<span class="fl">172.8</span>,<span class="fl">167.6</span>)</span>
+<span id="cb55-3"><a href="sect013.html#cb55-3" aria-hidden="true" tabindex="-1"></a>adresses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;4225 rue de la gauchetiere&#39;</span>,</span>
+<span id="cb55-4"><a href="sect013.html#cb55-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;4223 rue de la gauchetiere&#39;</span>,</span>
+<span id="cb55-5"><a href="sect013.html#cb55-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;4221 rue de la gauchetiere&#39;</span>,</span>
+<span id="cb55-6"><a href="sect013.html#cb55-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;4219 rue de la gauchetiere&#39;</span>,</span>
+<span id="cb55-7"><a href="sect013.html#cb55-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;4217 rue de la gauchetiere&#39;</span>)</span>
+<span id="cb55-8"><a href="sect013.html#cb55-8" aria-hidden="true" tabindex="-1"></a>proprietaires <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Nous venons ainsi de déclarer quatre nouvelles variables étant chacune un vecteur de longueur cinq (comprenant chacun cinq valeurs). Ces vecteurs représentent, par exemple, les réponses de plusieurs personnes à un questionnaire.</p>
+<div class="bloc_attention">
+<p>Il existe dans R une subtilité à l’origine de nombreux malentendus : la distinction entre un vecteur de type <strong>texte</strong> et un vecteur de type <strong>facteur</strong>. Dans l’exemple précédent, le vecteur <em>adresses</em> est un vecteur de type texte. Chaque nouvelle valeur ajoutée dans le vecteur peut être n’importe quelle nouvelle adresse. Déclarons un nouveau vecteur qui contient cette fois-ci la couleur des yeux de personnes ayant répondu au questionnaire.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="sect013.html#cb56-1" aria-hidden="true" tabindex="-1"></a>couleurs_yeux <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;marron&#39;</span>,<span class="st">&#39;marron&#39;</span>,<span class="st">&#39;bleu&#39;</span>,<span class="st">&#39;bleu&#39;</span>,<span class="st">&#39;marron&#39;</span>,<span class="st">&#39;vert&#39;</span>)</span></code></pre></div>
+<p>Contrairement aux adresses, il y a un nombre limité de couleurs que nous pouvons mettre dans ce vecteur. Il est donc intéressant de fixer les valeurs possibles du vecteur pour éviter d’en ajouter de nouvelles par erreur. Pour cela, nous devons convertir ce vecteur texte en vecteur de type facteur, ci-après nommé simplement facteur, avec la fonction <code>as.factor</code>.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sect013.html#cb57-1" aria-hidden="true" tabindex="-1"></a>couleurs_yeux_facteur <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(couleurs_yeux)</span></code></pre></div>
+<p>Notez qu’à présent, nous pouvons ajouter une nouvelle couleur dans le premier vecteur, mais pas dans le second.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="sect013.html#cb58-1" aria-hidden="true" tabindex="-1"></a>couleurs_yeux[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="st">&quot;rouge&quot;</span></span>
+<span id="cb58-2"><a href="sect013.html#cb58-2" aria-hidden="true" tabindex="-1"></a>couleurs_yeux_facteur[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="st">&quot;rouge&quot;</span></span></code></pre></div>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, 7, value = &quot;rouge&quot;): niveau de facteur incorrect, NAs générés</code></pre>
+<p>Le message d’erreur nous informe que nous avons tenté d’introduire une valeur invalide dans le facteur.</p>
+<p>Les facteurs peuvent sembler restrictifs et, très régulièrement, nous préférons travailler avec de simples vecteurs de type texte plutôt que des facteurs. Cependant, de nombreuses fonctions d’analyse nécessitent d’utiliser des facteurs, car ils assurent une certaine cohérence dans les données. Il est donc essentiel de savoir passer du texte au facteur avec la fonction <code>as.factor</code>. À l’inverse, il est parfois nécessaire de revenir à une variable de type texte avec la fonction <code>as.character</code>.</p>
+<p>Notez que des vecteurs numériques peuvent aussi être convertis en facteurs :</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sect013.html#cb60-1" aria-hidden="true" tabindex="-1"></a>tailles_facteur <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(tailles)</span></code></pre></div>
+<p>Cependant, si vous souhaitez reconvertir ce facteur en format numérique, il faudra passer dans un premier temps par le format texte :</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="sect013.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(tailles_facteur)</span></code></pre></div>
+<pre><code>## [1] 4 5 2 3 1</code></pre>
+<p>Comme vous pouvez le voir, convertir un facteur en valeur numérique renvoie des nombres entiers. Ceci est dû au fait que les valeurs dans un facteur sont recodées sous forme de nombres entiers, chaque nombre correspondant à une des valeurs originales (appelées niveaux). Si nous convertissons un facteur en valeurs numériques, nous obtenons donc ces nombres entiers.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sect013.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(tailles_facteur))</span></code></pre></div>
+<pre><code>## [1] 175.5 180.3 168.2 172.8 167.6</code></pre>
+<p>Morale de l’histoire : ne confondez pas les données de type texte et de type facteur. Dans le doute, vous pouvez demander à R quel est le type d’un vecteur avec la fonction <code>class</code>.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sect013.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tailles)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sect013.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tailles_facteur)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="sect013.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(couleurs_yeux)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="sect013.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(couleurs_yeux_facteur)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+</div>
+<p>Quasiment toutes les fonctions utilisent des vecteurs. Par exemple, nous pouvons calculer la moyenne du vecteur <em>ages</em> en utilisant la fonction <code>mean</code> présente de base dans R.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="sect013.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code></pre></div>
+<pre><code>## [1] 54</code></pre>
+<p>Cela démontre bien que le vecteur est la brique élémentaire de R! Toutes les variables que nous avons déclarées dans les sections précédentes sont aussi des vecteurs, mais de longueur 1.</p>
+</div>
+<div id="sect01362" class="section level4 hasAnchor" number="1.3.6.2">
+<h4><span class="header-section-number">1.3.6.2</span> Matrices<a href="sect013.html#sect01362" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Il est possible de combiner des vecteurs pour former des matrices. Une matrice est un tableau en deux dimensions (colonnes et lignes) et est généralement utilisée pour représenter certaines structures de données comme des images (pixels), effectuer du calcul matriciel ou plus simplement présenter des matrices de corrélations. Vous aurez rarement à travailler directement avec des matrices, mais il est bon de savoir ce qu’elles sont. Créons deux matrices à partir de nos précédents vecteurs.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sect013.html#cb75-1" aria-hidden="true" tabindex="-1"></a>matrice1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ages,tailles)</span>
+<span id="cb75-2"><a href="sect013.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher la matrice 1</span></span>
+<span id="cb75-3"><a href="sect013.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrice1)</span></code></pre></div>
+<pre><code>##      ages tailles
+## [1,]   35   175.5
+## [2,]   45   180.3
+## [3,]   72   168.2
+## [4,]   56   172.8
+## [5,]   62   167.6</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="sect013.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher les dimensions de la matrice 1 (1er chiffre : lignes; 2e chiffre : colonnes)</span></span>
+<span id="cb77-2"><a href="sect013.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(matrice1))</span></code></pre></div>
+<pre><code>## [1] 5 2</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="sect013.html#cb79-1" aria-hidden="true" tabindex="-1"></a>matrice2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ages, tailles)</span>
+<span id="cb79-2"><a href="sect013.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher la matrice 2</span></span>
+<span id="cb79-3"><a href="sect013.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrice2)</span></code></pre></div>
+<pre><code>##          [,1]  [,2]  [,3]  [,4]  [,5]
+## ages     35.0  45.0  72.0  56.0  62.0
+## tailles 175.5 180.3 168.2 172.8 167.6</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sect013.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher les dimensions de la matrice 2</span></span>
+<span id="cb81-2"><a href="sect013.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(matrice2))</span></code></pre></div>
+<pre><code>## [1] 2 5</code></pre>
+<p>Comme vous pouvez le constater, la fonction <code>cbind</code> permet de concaténer des vecteurs comme s’ils étaient les colonnes d’une matrice, alors que <code>rbind</code> les combine comme s’ils étaient les lignes d’une matrice. La figure <a href="sect013.html#fig:fig012">1.12</a> présente graphiquement le passage du vecteur à la matrice.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig012"></span>
+<img src="images/introduction/vecteur_to_matrix.png" alt="Du vecteur à la matrice" width="30%" />
+<p class="caption">
+Figure 1.12: Du vecteur à la matrice
+</p>
+</div>
+<p>Notez que vous pouvez transposer une matrice avec la fonction <code>t</code>. Si nous essayons maintenant de comparer la matrice 1 à la matrice 2 nous allons avoir une erreur, car elles n’ont pas les mêmes dimensions.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sect013.html#cb83-1" aria-hidden="true" tabindex="-1"></a>matrice1 <span class="sc">==</span> matrice2</span></code></pre></div>
+<p><span class="error_message">Erreur dans matrice1 == matrice2 : tableaux de tailles inadéquates</span></p>
+<p>En revanche, nous pouvons transposer la matrice 1 et refaire cette comparaison :</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sect013.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(matrice1) <span class="sc">==</span> matrice2</span></code></pre></div>
+<pre><code>##         [,1] [,2] [,3] [,4] [,5]
+## ages    TRUE TRUE TRUE TRUE TRUE
+## tailles TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p>Le résultat souligne bien que nous avons les mêmes valeurs dans les deux matrices. Il est aussi possible de construire des matrices directement avec la fonction <code>matrix</code>, ce que nous montrons dans la prochaine section.</p>
+</div>
+<div id="sect01363" class="section level4 hasAnchor" number="1.3.6.3">
+<h4><span class="header-section-number">1.3.6.3</span> <em>Arrays</em><a href="sect013.html#sect01363" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>S’il est rare de travailler avec des matrices, il est encore plus rare de manipuler des <em>arrays</em>. Un <em>array</em> est une matrice spéciale qui peut avoir plus que deux dimensions. Un cas simple serait un <em>array</em> en trois dimensions : lignes, colonnes, profondeur, que nous pourrions représenter comme un cube, ou une série de matrices de mêmes dimensions et empilées. Au-delà de trois dimensions, il devient difficile de les représenter mentalement. Cette structure de données peut être utilisée pour représenter les différentes bandes spectrales d’une image satellitaire. Les lignes et les colonnes délimiteraient les pixels de l’image et la profondeur délimiterait les différentes bandes composant l’image (figure <a href="sect013.html#fig:fig012">1.12</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig013"></span>
+<img src="images/introduction/array.png" alt="Un array avec trois dimensions" width="15%" />
+<p class="caption">
+Figure 1.13: Un array avec trois dimensions
+</p>
+</div>
+<p>Créons un <em>array</em> en combinant trois matrices avec la fonction <code>array</code>. Chacune de ces matrices est composée respectivement de 1, de 2 et de 3 et a une dimension de 5 x 5. L’<em>array</em> final a donc une dimension de 5 x 5 x 3.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sect013.html#cb86-1" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb86-2"><a href="sect013.html#cb86-2" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb86-3"><a href="sect013.html#cb86-3" aria-hidden="true" tabindex="-1"></a>mat3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb86-4"><a href="sect013.html#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-5"><a href="sect013.html#cb86-5" aria-hidden="true" tabindex="-1"></a>mon_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">c</span>(mat1, mat2, mat3), <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">3</span>))</span>
+<span id="cb86-6"><a href="sect013.html#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-7"><a href="sect013.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mon_array)</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    1    1    1    1
+## [2,]    1    1    1    1    1
+## [3,]    1    1    1    1    1
+## [4,]    1    1    1    1    1
+## [5,]    1    1    1    1    1
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    2    2    2    2    2
+## [2,]    2    2    2    2    2
+## [3,]    2    2    2    2    2
+## [4,]    2    2    2    2    2
+## [5,]    2    2    2    2    2
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    3    3    3    3    3
+## [2,]    3    3    3    3    3
+## [3,]    3    3    3    3    3
+## [4,]    3    3    3    3    3
+## [5,]    3    3    3    3    3</code></pre>
+</div>
+<div id="sect01364" class="section level4 hasAnchor" number="1.3.6.4">
+<h4><span class="header-section-number">1.3.6.4</span> <em>DataFrames</em><a href="sect013.html#sect01364" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>S’il est rare de manipuler des matrices et des <em>arrays</em>, le <em>DataFrame</em> (tableau de données en français) est la structure de données la plus souvent utilisée. Dans cette structure, chaque ligne du tableau représente un individu et chaque colonne représente une caractéristique de cet individu. Ces colonnes ont des noms qui permettent facilement d’accéder à leurs valeurs. Créons un <em>DataFrame</em> (tableau <a href="sect013.html#tab:tabfirsttable">1.4</a>) à partir de nos quatre vecteurs et de la fonction <code>data.frame</code>.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="sect013.html#cb88-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb88-2"><a href="sect013.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;age&quot;</span> <span class="ot">=</span> ages,</span>
+<span id="cb88-3"><a href="sect013.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;taille&quot;</span> <span class="ot">=</span> tailles,</span>
+<span id="cb88-4"><a href="sect013.html#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;adresse&quot;</span> <span class="ot">=</span> adresses,</span>
+<span id="cb88-5"><a href="sect013.html#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;proprietaire&quot;</span> <span class="ot">=</span> proprietaires</span>
+<span id="cb88-6"><a href="sect013.html#cb88-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:tabfirsttable">Tableau 1.4: </span>Premier DataFrame
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+age
+</th>
+<th style="text-align:center;">
+taille
+</th>
+<th style="text-align:left;">
+adresse
+</th>
+<th style="text-align:left;">
+proprietaire
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+175,5
+</td>
+<td style="text-align:left;">
+4225 rue de la gauchetiere
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+45
+</td>
+<td style="text-align:center;">
+180,3
+</td>
+<td style="text-align:left;">
+4223 rue de la gauchetiere
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+72
+</td>
+<td style="text-align:center;">
+168,2
+</td>
+<td style="text-align:left;">
+4221 rue de la gauchetiere
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+56
+</td>
+<td style="text-align:center;">
+172,8
+</td>
+<td style="text-align:left;">
+4219 rue de la gauchetiere
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+62
+</td>
+<td style="text-align:center;">
+167,6
+</td>
+<td style="text-align:left;">
+4217 rue de la gauchetiere
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table>
+<p>Dans RStudio, vous pouvez visualiser votre tableau de données avec la fonction <code>View(df)</code>. Comme vous pouvez le constater, chaque vecteur est devenu une colonne de votre tableau de données <em>df</em>. La figure <a href="sect013.html#fig:fig014">1.14</a> résume ce passage d’une simple donnée à un <em>DataFrame</em> en passant par un vecteur.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig014"></span>
+<img src="images/introduction/vecteur_to_dataframe.png" alt="De la donnée au DataFrame" width="25%" />
+<p class="caption">
+Figure 1.14: De la donnée au DataFrame
+</p>
+</div>
+<p>Plusieurs fonctions de base de R fournissent des informations importantes sur un <em>DataFrame</em> :</p>
+<ul>
+<li><code>names</code> renvoie les noms des colonnes du <em>DataFrame</em>;</li>
+<li><code>nrow</code> renvoie le nombre de lignes;</li>
+<li><code>ncol</code> renvoie le nombre de colonnes.</li>
+</ul>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="sect013.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre><code>## [1] &quot;age&quot;          &quot;taille&quot;       &quot;adresse&quot;      &quot;proprietaire&quot;</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sect013.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="sect013.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Vous pouvez accéder à chaque colonne de <em>df</em> en utilisant le symbole <code>$</code> ou <code>[["nom_de_la_colonne"]]</code>. Recalculons ainsi la moyenne des âges :</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sect013.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code></pre></div>
+<pre><code>## [1] 54</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="sect013.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df[[<span class="st">&quot;age&quot;</span>]])</span></code></pre></div>
+<pre><code>## [1] 54</code></pre>
+</div>
+<div id="sect01365" class="section level4 hasAnchor" number="1.3.6.5">
+<h4><span class="header-section-number">1.3.6.5</span> Listes<a href="sect013.html#sect01365" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La dernière structure de données à connaître est la liste. Elle ressemble à un vecteur, au sens où elle permet de stocker un ensemble d’objets les uns à la suite des autres. Cependant, une liste peut contenir n’importe quel type d’objets. Vous pouvez ainsi construire des listes de matrices, des listes d’<em>arrays</em>, des listes mixant des vecteurs, des graphiques, des <em>DataFrames</em>, des listes de listes…</p>
+<p>Créons ensemble une liste qui va contenir des vecteurs et des matrices à l’aide de la fonction <code>list.</code></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="sect013.html#cb99-1" aria-hidden="true" tabindex="-1"></a>ma_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb99-2"><a href="sect013.html#cb99-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">5</span>),</span>
+<span id="cb99-3"><a href="sect013.html#cb99-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">matrix</span>(<span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">7</span>),</span>
+<span id="cb99-4"><a href="sect013.html#cb99-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;A&#39;</span></span>
+<span id="cb99-5"><a href="sect013.html#cb99-5" aria-hidden="true" tabindex="-1"></a>                 )</span></code></pre></div>
+<p>Il est possible d’accéder aux éléments de la liste par leur position dans cette dernière en utilisant les doubles crochets <code>[[ ]]</code> :</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="sect013.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ma_liste[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sect013.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ma_liste[[<span class="dv">4</span>]])</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot;</code></pre>
+<p>Il est aussi possible de donner des noms aux éléments de la liste et d’utiliser le symbole <code>$</code> pour y accéder. Créons une nouvelle liste de vecteurs et donnons-leur des noms avec la fonction <code>names</code>.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sect013.html#cb104-1" aria-hidden="true" tabindex="-1"></a>liste2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">72</span>,<span class="dv">56</span>,<span class="dv">62</span>), </span>
+<span id="cb104-2"><a href="sect013.html#cb104-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="fl">175.5</span>,<span class="fl">180.3</span>,<span class="fl">168.2</span>,<span class="fl">172.8</span>,<span class="fl">167.6</span>),</span>
+<span id="cb104-3"><a href="sect013.html#cb104-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)</span>
+<span id="cb104-4"><a href="sect013.html#cb104-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb104-5"><a href="sect013.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(liste2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;age&quot;</span>,<span class="st">&#39;taille&#39;</span>,<span class="st">&#39;proprietaire&#39;</span>)</span>
+<span id="cb104-6"><a href="sect013.html#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-7"><a href="sect013.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(liste2<span class="sc">$</span>age)</span></code></pre></div>
+<pre><code>## [1] 35 45 72 56 62</code></pre>
+<p>Si vous avez bien suivi, vous devriez avoir compris qu’un <em>DataFrame</em> n’est en fait rien d’autre qu’une liste de vecteurs avec des noms!</p>
+<p>Bravo! Vous venez de faire le tour des bases du langage R. Vous allez apprendre désormais à manipuler des données dans des <em>DataFrames</em>!</p>
+</div>
 </div>
 </div>
             </section>
@@ -609,7 +1376,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["GMQ405.pdf"],
+"download": ["MethodesQuantitScSocialesBolR.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
